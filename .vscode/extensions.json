@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "formulahendry.auto-rename-tag",
+    "mgmcdermott.vscode-language-babel",
+    "oderwat.indent-rainbow",
+    "cweijan.vscode-mysql-client2",
+    "esbenp.prettier-vscode",
+    "fabiospampinato.vscode-todo-plus",
+    "streetsidesoftware.code-spell-checker",
+    "mhutchie.git-graph"
+  ]
+}
