@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+.btn {
+  display: flex;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  /* font-weight: bold; */
+  font-family: 'Zen Maru Gothic', sans-serif;
+  /* font-family: 'Poetsen One', sans-serif; */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  gap: 5px;
+}
+
+/* .btn:hover {
+  background-color: #45a049;
+} */
+
+/* 地區 */
+.btn-reg1 {
+  color: #698d65;
+  border: 1px solid #698d65;
+  background-color: transparent;
+}
+.btn-reg2 {
+  background-color: #698d65;
+}
+
+/* 篩選器 */
+.btn-search {
+  background-color: #fc9a84;
+}
+.btn-search2 {
+  width: 60px;
+  background-color: #fc9a84;
+}
+
+/* 卡片 */
+.btn-go {
+  background-color: #fc9a84;
+  padding: 2px 5px;
+  font-size: 12px;
+  /* margin-top: 3px; */
+}
