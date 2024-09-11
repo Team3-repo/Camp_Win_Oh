@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 export default function Navbar() {
   return (
     <>
@@ -11,16 +10,16 @@ export default function Navbar() {
         <div className="navbar">
           <ul>
             <li>
-              <a href="">尋找空位</a>
+              <a>尋找空位</a>
             </li>
             <li>
-              <a href="">露營用具</a>
+              <a>露營用具</a>
             </li>
             <li>
-              <a href="">活動情報</a>
+              <a>活動情報</a>
             </li>
             <li>
-              <a href="">客服中心</a>
+              <a>客服中心</a>
             </li>
           </ul>
         </div>
