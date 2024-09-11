@@ -5,32 +5,33 @@ export default function Navbar() {
     <>
       <header>
         <div className="logo">
-          <a href="#">會營ㄛ</a>
+          <p>會營ㄛ</p>
         </div>
         <div className="navbar">
           <ul>
             <li>
-              <a>尋找空位</a>
+              <p>尋找空位</p>
             </li>
             <li>
-              <a>露營用具</a>
+              <p>露營用具</p>
             </li>
             <li>
-              <a>活動情報</a>
+              <p>活動情報</p>
             </li>
             <li>
-              <a>客服中心</a>
+              <p>客服中心</p>
             </li>
           </ul>
         </div>
-        <div className="user">
-          <div className="userpic">
-            <a href="#">
-              <img src="/imgs/usagi.jpg" alt="" />
-            </a>
+          <div className='user'>
+            <div className="userpic">
+              <img
+                src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+                alt=""
+              />
+            </div>
+            <p>兔兔</p>
           </div>
-          <p>兔兔</p>
-        </div>
       </header>
     </>
   )
