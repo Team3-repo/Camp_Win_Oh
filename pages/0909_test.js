@@ -2,10 +2,12 @@ import React from 'react'
 import Button from '../components/book/button'
 import Card from '@/components/book/card'
 import { IoSearch } from 'react-icons/io5'
+import Navbar from '@/components/layout/default-layout/navbar'
 
 export default function Test() {
   return (
     <>
+      <Navbar />
       <div>
         <h1>共用元件-按鈕/Card</h1>
         <div style={{ display: 'flex', gap: '10px' }}>
