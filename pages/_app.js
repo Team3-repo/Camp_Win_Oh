@@ -5,6 +5,7 @@ import '@/styles/Card.css'
 import '@/styles/Navbar.css'
 import '@/styles/Pagi.css'
 import '@/styles/Footer.css'
+import '@/styles/styled.css'
 
 export default function MyApp({ Component, pageProps }) {
   // 使用自訂在頁面層級的版面(layout)
