@@ -10,16 +10,16 @@ export default function Navbar() {
         <div className="navbar">
           <ul>
             <li>
-              <p>尋找空位</p>
+              <h5>尋找空位</h5>
             </li>
             <li>
-              <p>露營用具</p>
+              <h5>露營用具</h5>
             </li>
             <li>
-              <p>活動情報</p>
+              <h5>活動情報</h5>
             </li>
             <li>
-              <p>客服中心</p>
+              <h5>客服中心</h5>
             </li>
           </ul>
         </div>
@@ -30,7 +30,7 @@ export default function Navbar() {
                 alt=""
               />
             </div>
-            <p>兔兔</p>
+            <h5>兔兔</h5>
           </div>
       </header>
     </>

@@ -8,7 +8,7 @@
   display: inline;
   text-align: center;
 }
-.pagination a {
+.pagination h5 {
   float: left;
   display: block;
   font-size: 16px;
@@ -18,14 +18,15 @@
   margin-left: -1px;
   border: 1px solid transparent;
   line-height: 1.5;
+  font-weight: 500;
 }
-.pagination a.active {
-  cursor: default;
+.pagination h5 {
+  cursor: pointer;
 }
-.pagination a:active {
+.pagination h5:active {
   outline: none;
 }
-.modal-4 a {
+.modal-4 h5 {
   margin: 0 5px;
   padding: 0;
   width: 30px;
@@ -36,15 +37,15 @@
   background-color: #ada752;
   color: white;
 }
-.modal-4 a.prev {
+.modal-4 h5.prev {
   border-radius: 50px 0 0 50px;
   width: 100px;
 }
-.modal-4 a.next {
+.modal-4 h5.next {
   border-radius: 0 50px 50px 0;
   width: 100px;
 }
-.modal-4 a:hover {
+.modal-4 h5:hover {
   background-color: #fff579;
   color: black;
 }
