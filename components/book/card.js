@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from './button'
-import { IoMdHeartEmpty } from 'react-icons/io'
+// import { IoMdHeartEmpty } from 'react-icons/io'
 
 export default function Card({
   title,
@@ -14,7 +14,7 @@ export default function Card({
   label,
   price,
   showIcon = false, // 新增的屬性來控制是否顯示圖標
-  icon = <IoMdHeartEmpty />,
+  // icon = <IoMdHeartEmpty />,
   CardLike,
   CardLikeIcon,
   PCol,
