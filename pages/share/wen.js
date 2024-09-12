@@ -1,15 +1,13 @@
 import Button from '../../components/book/button'
 import Card from '@/components/book/card'
-import Navbar from '@/components/layout/default-layout/navbar'
 import { IoSearch } from 'react-icons/io5'
 import { FaArrowCircleRight } from 'react-icons/fa'
 
 export default function Test() {
   return (
     <>
-      <Navbar />
+      <h1>共用元件-按鈕/Card</h1>
       <div>
-        <h1>共用元件-按鈕/Card</h1>
         <h3>大按鈕</h3>
         {/* book */}
         <div style={{ display: 'flex', gap: '10px' }}>
@@ -302,6 +300,9 @@ export default function Test() {
           />
         </div>
       </div>
+
+      {/* 麵包屑 */}
+
     </>
   )
 }
