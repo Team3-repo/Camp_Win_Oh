@@ -1,25 +1,31 @@
-footer {
+.footer1 {
   display: flex;
+  height: 250px;
   background-color: #98d293;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
-footer h3 {
+.footer1 h5 {
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: none;
+}
+.footer1 p {
   display: flex;
   justify-content: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: none;
 }
-footer p {
-  display: flex;
-  justify-content: center;
-}
-footer .contact {
+.footer1 .contact {
   margin-right: 150px;
 }
 .container {
   display: flex;
   flex-direction: row;
 }
-footer .container p {
+.footer1 .container p {
   display: flex;
   justify-content: flex-start;
 }
