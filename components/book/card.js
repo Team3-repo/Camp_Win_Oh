@@ -43,7 +43,6 @@ export default function Card({
           <Button
             label={label}
             onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
           />
         </div>
       </div>

@@ -1,0 +1,38 @@
+.btn {
+  display: flex;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #fc9a84;
+  
+  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #4282b7;
+  color: #fff579;
+  border: none;
+}
+
+/* 地區 */
+.btn-reg {
+  color: #fff;
+  background-color: #698d65;
+}
+.btn-reg:hover {
+  background-color: #fff579;
+  font-weight: bold;
+  color: #4c3a30;
+}
+
+/* 一般按鈕 */
+.btn-coup{
+  background-color: #198Ea6;
+}
+

@@ -1,0 +1,21 @@
+.searchContainer {
+  position: relative;
+  width: 50%;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 10px 10px 40px; /* 右側空間用來放置圖示 */
+  border-radius: 3.79px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px; /* 圖示大小 */
+  height: 16px; /* 圖示大小 */
+}
