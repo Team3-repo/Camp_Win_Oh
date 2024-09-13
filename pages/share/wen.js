@@ -3,6 +3,8 @@ import Card from '@/components/book/card'
 import Navbar from '@/components/layout/default-layout/navbar'
 import { IoSearch } from 'react-icons/io5'
 import { FaArrowCircleRight } from 'react-icons/fa'
+import Footer from '@/components/layout/default-layout/footer'
+import Form from '@/components/form/Form'
 
 export default function Test() {
   return (
@@ -302,6 +304,10 @@ export default function Test() {
           />
         </div>
       </div>
+      <Form />
+     <Footer/> 
+
+
     </>
   )
 }
