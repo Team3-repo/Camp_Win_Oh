@@ -5,10 +5,9 @@ import { FaFacebookSquare } from 'react-icons/fa'
 import { FaInstagramSquare } from 'react-icons/fa'
 import { FaYoutube } from 'react-icons/fa'
 
-export default function Footer() {
+export default function Footer1() {
   return (
     <>
-      <>
         <footer className="footer1">
           <h3>Contact Us</h3>
           <div className="footer1_container">
