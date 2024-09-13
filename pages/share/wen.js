@@ -1,0 +1,313 @@
+import Button from '../../components/book/button'
+import Card from '@/components/book/card'
+import Navbar from '@/components/layout/default-layout/navbar'
+import { IoSearch } from 'react-icons/io5'
+import { FaArrowCircleRight } from 'react-icons/fa'
+import Footer from '@/components/layout/default-layout/footer'
+import Form from '@/components/form/Form'
+
+export default function Test() {
+  return (
+    <>
+      <Navbar />
+      <div>
+        <h1>共用元件-按鈕/Card</h1>
+        <h3>大按鈕</h3>
+        {/* book */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            label={
+              <>
+                <IoSearch />
+                &nbsp;搜索
+              </>
+            }
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search"
+          />
+          <Button
+            label="搜索"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search2"
+          />
+          <Button
+            label="前往預約"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-goto"
+          />
+          <Button
+            label="確認付款"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search2"
+          />
+          <Button
+            label="前往付款"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search2"
+          />
+          <Button
+            label="套用優惠券"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-coup"
+          />
+        </div>
+        <br />
+        {/* product */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            label="加入購物車"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-addcart"
+          />
+          <Button
+            label="前往結帳"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-addcart"
+          />
+          <Button
+            label="繼續選購"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-addcart"
+          />
+        </div>
+        <br />
+        {/* event */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            label="+建立活動"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search2"
+          />
+          <Button
+            label="查看更多"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-goto"
+          />
+          <Button
+            label="加入活動"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search"
+          />
+          <Button
+            label="退出活動"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search"
+          />
+          <Button
+            label="探索更多"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search"
+          />
+          <Button
+            label={
+              <>
+                舉辦活動&nbsp;
+                <FaArrowCircleRight />
+              </>
+            }
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search"
+          />
+        </div>
+        <br />
+        {/* login */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            label="Log in"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search"
+          />
+          <Button
+            label="Continue"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-search"
+          />
+        </div>
+        <hr />
+
+        <h3>小按鈕</h3>
+        {/* book */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            label="立即前往預訂"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+          <Button
+            label="使用"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+        </div>
+        <br />
+        {/* product */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            label="查看購物車"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+          <Button
+            label="回上一頁"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+          <Button
+            label="前往付款"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+        </div>
+        <br />
+        {/* event */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            label="探索更多"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-more"
+          />
+          <Button
+            label="上傳"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+          <Button
+            label="更新"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+          <Button
+            label="建立活動"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+        </div>
+        <br />
+        {/* login */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            label="Log in"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+          <Button
+            label="Continue"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-go"
+          />
+        </div>
+        <hr />
+
+        {/* 標籤:地區篩選 */}
+        <div style={{ display: 'flex', gap: '5px' }}>
+          <Button
+            label="全部地區"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-reg"
+          />
+          <Button
+            label="北部"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-reg"
+          />
+          <Button
+            label="中部"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-reg"
+          />
+          <Button
+            label="南部"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-reg"
+          />
+          <Button
+            label="東部"
+            onClick={() => alert('Button clicked!')}
+            className="btn btn-reg"
+          />
+        </div>
+        <hr />
+
+        <h3>イ~ Book-card</h3>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Card
+            PCol="card-price"
+            price="NT$ 1344/晚"
+            CardLike="card-like"
+            CardLikeIcon="card-like-icon"
+            showIcon={true}
+            title="標準營位"
+            content="場地區域： A區"
+            content2="房型： 小木屋"
+            content3="適合人數： 2-6人"
+            imageUrl="https://i.postimg.cc/Xq9nC33y/4.jpg"
+            label="立即前往預訂"
+            onClick={() => alert('Button Clicked!')}
+          />
+        </div>
+        <br />
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Card
+            PCol="card-price"
+            price="NT$ 12344/晚"
+            CardLike="card-like"
+            CardLikeIcon="card-like-icon"
+            showIcon={true}
+            title="山林樂活露營區"
+            content="房型： 小木屋"
+            content2="容納人數： 最多可容納8人"
+            imageUrl="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+            label="立即前往預訂"
+            onClick={() => alert('Button Clicked!')}
+          />
+        </div>
+        <hr />
+
+        <h3>ヤ~ Event-card</h3>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Card
+            ESCol="card-e-state e-s-col1"
+            Estate="報名中"
+            title="原始森林探險"
+            content="活動人數：6人"
+            content2="報名期限：2024-09-20"
+            imageUrl="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+            label="立即參加"
+            onClick={() => alert('Button Clicked!')}
+          />
+          <Card
+            ESCol="card-e-state e-s-col2"
+            Estate="已截止"
+            title="夏日狂歡派對"
+            content="活動人數：4人 "
+            content3="報名期限：2024-08-26"
+            imageUrl="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+            label="立即參加"
+            onClick={() => alert('Button Clicked!')}
+          />
+        </div>
+        <hr />
+
+        <h3>ハ~ Product-card</h3>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Card
+            CardLike="card-like"
+            CardLikeIcon="card-like-icon"
+            showIcon={true}
+            PCol="card-price"
+            price="NT$ 300"
+            title="睡袋"
+            content="標準帳篷營位位於開闊的草地上，適合喜愛戶外露營的個人或小型團體。這裡提供基本的露營設施，讓您在大自然中享受最純粹的露營體驗。"
+            imageUrl="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+            label="立即選購"
+            onClick={() => alert('Button Clicked!')}
+          />
+        </div>
+      </div>
+      <Form />
+     <Footer/> 
+
+
+    </>
+  )
+}

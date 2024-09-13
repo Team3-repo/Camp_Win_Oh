@@ -21,7 +21,7 @@ export default function Card({
 }) {
   return (
     <>
-      <div className="card" style={{ width: '200px' }}>
+      <div className="card">
         {showIcon && ( 
           <div className={CardLike}>
             <div className={CardLikeIcon}>{icon}</div>
