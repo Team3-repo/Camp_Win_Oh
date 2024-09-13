@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '@/components/layout/default-layout/navbar'
+import Navbar from '@/components/event/navbar'
 import Form from '@/components/form/Form'
 import SearchInput from '@/components/SearchInput'
 

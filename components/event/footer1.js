@@ -20,13 +20,13 @@ export default function Footer() {
                 </li>
                 <li>
                   <h5>
-                    <FaPhoneAlt style={{ paddingTop: '6px' }} />
+                    <FaPhoneAlt style={{ paddingTop: '5px' }} />
                     &ensp;(049) 1234-5678
                   </h5>
                 </li>
                 <li>
                   <h5>
-                    <FaEnvelopeOpen style={{ paddingTop: '6px' }} />
+                    <FaEnvelopeOpen style={{ paddingTop: '5px' }} />
                     &ensp;info@campwinoh.com
                   </h5>
                 </li>
@@ -39,25 +39,26 @@ export default function Footer() {
               <div className="socialMedia_icon">
                 <h5>
                   <FaFacebookSquare
+                    className="FB"
                     style={{ color: '#3b5998', fontSize: '30px' }}
                   />
                 </h5>
                 <h5>
                   <FaInstagramSquare
+                    className="IG"
                     style={{ color: '#e1306c', fontSize: '30px' }}
                   />
                 </h5>
                 <h5>
-                  <FaYoutube style={{ color: '#fd1d1d', fontSize: '30px' }} />
+                  <FaYoutube
+                    className="YT"
+                    style={{ color: '#fd1d1d', fontSize: '30px' }}
+                  />
                 </h5>
               </div>
             </div>
           </div>
-          <p>Copyright©2024 會營ㄛ | Campwinoh Campground</p>
-        </footer>
-        <br />
-        <footer className="footer2">
-          <h6>Copyright © 2024 會營ㄛ | Campwinoh Campground</h6>
+          <p>Copyright © 2024 會營ㄛ | CampWinOh Campground</p>
         </footer>
       </>
     </>

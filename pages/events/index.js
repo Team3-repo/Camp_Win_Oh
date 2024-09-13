@@ -1,14 +1,13 @@
 import Footer from '@/components/event/footer1'
 import Navbar from '@/components/event/navbar'
-import Pagi from '@/components/event/pagi'
 import React from 'react'
 
-export default function Fen() {
+export default function EIndex() {
   return (
     <>
       <Navbar />
-      <Pagi/>
-      <Footer/>
+      
+      <Footer />
     </>
   )
 }
