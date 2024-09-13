@@ -1,6 +1,4 @@
 import '@/styles/globals.css'
-// import '@/styles/text.css'
-import '@/styles/Card.css'
 import '@/styles/Navbar.css'
 import '@/styles/Pagi.css'
 import '@/styles/Footer.css'

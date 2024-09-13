@@ -129,10 +129,10 @@ export default function Test() {
         <h3>イ~ Book-card</h3>
         <div style={{ display: 'flex', gap: '10px' }}>
           <Card
-            PCol="card-price"
-            price="NT$ 1344/晚"
-            CardLike="card-like"
-            CardLikeIcon="card-like-icon"
+            PCol="cardPrice"
+            price="NT$ 137/晚"
+            cardLike="cardLike"
+            cardLikeIcon="cardLikeIcon" // 確保這裡使用的名稱與 CSS 模組中的 class 名稱一致
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"
@@ -143,13 +143,14 @@ export default function Test() {
             onClick={() => alert('Button Clicked!')}
           />
         </div>
+
         <br />
         <div style={{ display: 'flex', gap: '10px' }}>
           <Card
-            PCol="card-price"
+            PCol="cardPrice"
             price="NT$ 12344/晚"
-            CardLike="card-like"
-            CardLikeIcon="card-like-icon"
+            cardLike="cardLike"
+            cardLikeIcon="cardLikeIcon"
             showIcon={true}
             title="山林樂活露營區"
             content="房型： 小木屋"
@@ -164,7 +165,6 @@ export default function Test() {
         <h3>ヤ~ Event-card</h3>
         <div style={{ display: 'flex', gap: '10px' }}>
           <Card
-            ESCol="card-e-state e-s-col1"
             Estate="報名中"
             title="原始森林探險"
             content="活動人數：6人"
@@ -174,7 +174,7 @@ export default function Test() {
             onClick={() => alert('Button Clicked!')}
           />
           <Card
-            ESCol="card-e-state e-s-col2"
+            ESCol="e-s-col2"
             Estate="已截止"
             title="夏日狂歡派對"
             content="活動人數：4人 "
@@ -189,10 +189,10 @@ export default function Test() {
         <h3>ハ~ Product-card</h3>
         <div style={{ display: 'flex', gap: '10px' }}>
           <Card
-            CardLike="card-like"
-            CardLikeIcon="card-like-icon"
+            cardLike="cardLike"
+            cardLikeIcon="cardLikeIcon"
             showIcon={true}
-            PCol="card-price"
+            PCol="cardPrice"
             price="NT$ 300"
             title="睡袋"
             content="標準帳篷營位位於開闊的草地上，適合喜愛戶外露營的個人或小型團體。這裡提供基本的露營設施，讓您在大自然中享受最純粹的露營體驗。"
@@ -205,7 +205,7 @@ export default function Test() {
 
       {/* step-by-step */}
       <ProgressBar />
-      <Form/>
+      <Form />
     </>
   )
 }
