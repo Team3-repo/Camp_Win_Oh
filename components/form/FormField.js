@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormField = ({ label, id, type, placeholder, required = false }) => (
+const FormField = ({ width = '50%', label, id, type, placeholder, required = false }) => (
   <>
     <h2 style={{ fontSize: '1.3rem' }}>
       {label}
@@ -12,7 +12,7 @@ const FormField = ({ label, id, type, placeholder, required = false }) => (
         type={type}
         placeholder={placeholder}
         style={{
-          width: '50%',
+          width: width, // 使用傳入的 width prop 或預設值
           borderRadius: '3.79px',
           border: '1px solid #ccc', // 可選的邊框顏色
           padding: '8px', // 可選的內邊距
