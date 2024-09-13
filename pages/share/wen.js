@@ -1,7 +1,9 @@
-import Button from '../../components/book/button'
+import Button from '@/components/book/button'
 import Card from '@/components/book/card'
 import { IoSearch } from 'react-icons/io5'
 import { FaArrowCircleRight } from 'react-icons/fa'
+import ProgressBar from '@/components/book/ProgressBar'
+import Form from '@/components/form/Form'
 
 export default function Test() {
   return (
@@ -19,81 +21,31 @@ export default function Test() {
               </>
             }
             onClick={() => alert('Button clicked!')}
-            className="btn btn-search"
           />
-          <Button
-            label="搜索"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search2"
-          />
-          <Button
-            label="前往預約"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-goto"
-          />
-          <Button
-            label="確認付款"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search2"
-          />
-          <Button
-            label="前往付款"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search2"
-          />
+          <Button label="搜索" onClick={() => alert('Button clicked!')} />
+          <Button label="前往預約" onClick={() => alert('Button clicked!')} />
+          <Button label="確認付款" onClick={() => alert('Button clicked!')} />
+          <Button label="前往付款" onClick={() => alert('Button clicked!')} />
           <Button
             label="套用優惠券"
             onClick={() => alert('Button clicked!')}
-            className="btn btn-coup"
+            type="btn-coup"
           />
         </div>
         <br />
         {/* product */}
         <div style={{ display: 'flex', gap: '10px' }}>
-          <Button
-            label="加入購物車"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-addcart"
-          />
-          <Button
-            label="前往結帳"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-addcart"
-          />
-          <Button
-            label="繼續選購"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-addcart"
-          />
+          <Button label="加入購物車" onClick={() => alert('Button clicked!')} />
+          <Button label="前往結帳" onClick={() => alert('Button clicked!')} />
+          <Button label="繼續選購" onClick={() => alert('Button clicked!')} />
         </div>
         <br />
         {/* event */}
         <div style={{ display: 'flex', gap: '10px' }}>
-          <Button
-            label="+建立活動"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search2"
-          />
-          <Button
-            label="查看更多"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-goto"
-          />
-          <Button
-            label="加入活動"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search"
-          />
-          <Button
-            label="退出活動"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search"
-          />
-          <Button
-            label="探索更多"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search"
-          />
+          <Button label="+建立活動" onClick={() => alert('Button clicked!')} />
+          <Button label="加入活動" onClick={() => alert('Button clicked!')} />
+          <Button label="退出活動" onClick={() => alert('Button clicked!')} />
+          <Button label="探索更多" onClick={() => alert('Button clicked!')} />
           <Button
             label={
               <>
@@ -102,22 +54,13 @@ export default function Test() {
               </>
             }
             onClick={() => alert('Button clicked!')}
-            className="btn btn-search"
           />
         </div>
         <br />
         {/* login */}
         <div style={{ display: 'flex', gap: '10px' }}>
-          <Button
-            label="Log in"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search"
-          />
-          <Button
-            label="Continue"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-search"
-          />
+          <Button label="Log in" onClick={() => alert('Button clicked!')} />
+          <Button label="Continue" onClick={() => alert('Button clicked!')} />
         </div>
         <hr />
 
@@ -127,70 +70,29 @@ export default function Test() {
           <Button
             label="立即前往預訂"
             onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
           />
-          <Button
-            label="使用"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
+          <Button label="使用" onClick={() => alert('Button clicked!')} />
         </div>
         <br />
         {/* product */}
         <div style={{ display: 'flex', gap: '10px' }}>
-          <Button
-            label="查看購物車"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
-          <Button
-            label="回上一頁"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
-          <Button
-            label="前往付款"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
+          <Button label="查看購物車" onClick={() => alert('Button clicked!')} />
+          <Button label="回上一頁" onClick={() => alert('Button clicked!')} />
+          <Button label="前往付款" onClick={() => alert('Button clicked!')} />
         </div>
         <br />
         {/* event */}
         <div style={{ display: 'flex', gap: '10px' }}>
-          <Button
-            label="探索更多"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-more"
-          />
-          <Button
-            label="上傳"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
-          <Button
-            label="更新"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
-          <Button
-            label="建立活動"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
+          <Button label="探索更多" onClick={() => alert('Button clicked!')} />
+          <Button label="上傳" onClick={() => alert('Button clicked!')} />
+          <Button label="更新" onClick={() => alert('Button clicked!')} />
+          <Button label="建立活動" onClick={() => alert('Button clicked!')} />
         </div>
         <br />
         {/* login */}
         <div style={{ display: 'flex', gap: '10px' }}>
-          <Button
-            label="Log in"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
-          <Button
-            label="Continue"
-            onClick={() => alert('Button clicked!')}
-            className="btn btn-go"
-          />
+          <Button label="Log in" onClick={() => alert('Button clicked!')} />
+          <Button label="Continue" onClick={() => alert('Button clicked!')} />
         </div>
         <hr />
 
@@ -199,27 +101,27 @@ export default function Test() {
           <Button
             label="全部地區"
             onClick={() => alert('Button clicked!')}
-            className="btn btn-reg"
+            type="btn-reg"
           />
           <Button
             label="北部"
             onClick={() => alert('Button clicked!')}
-            className="btn btn-reg"
+            type="btn-reg"
           />
           <Button
             label="中部"
             onClick={() => alert('Button clicked!')}
-            className="btn btn-reg"
+            type="btn-reg"
           />
           <Button
             label="南部"
             onClick={() => alert('Button clicked!')}
-            className="btn btn-reg"
+            type="btn-reg"
           />
           <Button
             label="東部"
             onClick={() => alert('Button clicked!')}
-            className="btn btn-reg"
+            type="btn-reg"
           />
         </div>
         <hr />
@@ -301,8 +203,9 @@ export default function Test() {
         </div>
       </div>
 
-      {/* 麵包屑 */}
-
+      {/* step-by-step */}
+      <ProgressBar />
+      <Form/>
     </>
   )
 }
