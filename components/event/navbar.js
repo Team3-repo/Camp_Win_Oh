@@ -5,7 +5,7 @@ export default function Navbar() {
     <>
       <header>
         <div className="logo">
-          <p>會營ㄛ</p>
+          <p>待補圖</p>
         </div>
         <div className="navbar">
           <ul>
