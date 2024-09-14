@@ -206,6 +206,8 @@ export default function Test() {
       {/* step-by-step */}
       <ProgressBar />
       <Form />
+      <SearchInput placeholder="請輸入搜尋關鍵字"/>
+      <SearchInput placeholder="請輸入優惠券"/>
     </>
   )
 }
