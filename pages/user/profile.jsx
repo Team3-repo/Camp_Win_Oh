@@ -74,7 +74,7 @@ export default function profile() {
           />
         </section>
 
-        <section style={{ display: 'flex', gap: '5px' }}>
+        <section style={{ display: 'flex', gap: '5px', justifyContent: 'flex-end',margin:'20px 0' }}>
           <Button label="取消" onClick={() => alert('Button clicked!')} />
           <Button
             label="儲存變更"
