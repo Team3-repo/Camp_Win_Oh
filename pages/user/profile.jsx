@@ -4,10 +4,11 @@ import Button from '@/components/book/button'
 import Navbar from '@/components/event/navbar'
 import Footer1 from '@/components/event/footer1'
 import styles from '@/styles/user/profile.module.css'
+import customBody from '@/styles/user/customBody.module.css'
 
 export default function profile() {
   return (
-    <div className={styles.myComponent}>
+    <div className={customBody.noGlobal}>
       <Navbar />
       <div className={styles.container}>
         <h1 className="nav">設定</h1>
