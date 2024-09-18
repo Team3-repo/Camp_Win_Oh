@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/Button.module.css'; // 導入 CSS 模組
+import styles from '../../styles/component_style/Button.module.css'; // 導入 CSS 模組
 
 export default function Button({ label, onClick, className, type = 'btn' }) {
   // 始終應用 styles.btn，再根據 type 添加其他樣式

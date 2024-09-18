@@ -1,5 +1,4 @@
 import '@/styles/globals.css'
-import '@/styles/Navbar.css'
 import '@/styles/Pagi.css'
 import '@/styles/Footer.css'
 import '@/styles/EventStyle.css'

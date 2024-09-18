@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './button';
 import { IoMdHeartEmpty } from 'react-icons/io';
-import styles from '../../styles/Card.module.css'; // 导入 CSS 模块
+import styles from '../../styles/component_style/Card.module.css'; 
 
 export default function Card({
   title,
@@ -11,7 +11,7 @@ export default function Card({
   imageUrl,
   Estate,
   alt,
-  ESCol = 'e-s-col1', // 设置默认值为 'e-s-col1'
+  ESCol = 'e-s-col1', // default color
   label,
   price,
   showIcon = false,
@@ -19,9 +19,9 @@ export default function Card({
   cardLike,
   cardLikeIcon,
   PCol,
-  className = '' // 默认值为空字符串
+  className = ''
 }) {
-  // 始终应用 e-s-col1 样式，再根据 ESCol 添加其他样式
+  // 預設使用 e-s-col1 樣式，若要更改於 ESCol 添加其他樣式名稱
   const ESColClass = `${styles['e-s-col1']} ${styles[ESCol] || ''}`;
 
   return (
