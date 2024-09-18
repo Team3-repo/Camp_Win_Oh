@@ -3,12 +3,6 @@ import Card from '@/components/book/card'
 import { IoSearch } from 'react-icons/io5'
 import { FaArrowCircleRight } from 'react-icons/fa'
 import ProgressBar from '@/components/book/ProgressBar'
-<<<<<<< HEAD
-import Form from '@/components/form/Form'
-import FormField from '@/components/form/FormField'
-import SearchInput from '@/components/SearchInput'
-=======
->>>>>>> origin/wen_0914
 
 export default function Test() {
   return (
