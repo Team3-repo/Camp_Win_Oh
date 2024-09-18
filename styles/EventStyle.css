@@ -9,86 +9,77 @@ html {
   height: 100%;
   font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 }
-
-.evt {
-  justify-content: center;
-  align-items: center;
-}
-.eIndexContainer1 {
-  background-image: url('https://i.postimg.cc/m2wGJm16/camp-2650359-1280.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+.ehot-topics {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 20px;
 }
-
-.eIndexContent {
-  text-align: center;
-}
-
-.esearch-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.9); 
-  border-radius: 50px; 
-  padding: 10px 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
-  max-width: 500px;
-}
-
-.esearch-container input {
-  border: none;
-  padding: 10px;
-  width: 300px;
-  border-radius: 20px;
-  outline: none;
-  font-size: 16px;
-  color: #333;
-}
-
-.esearch-container button {
-  border: none;
-  padding: 10px 20px;
-  background-color: #a4d497;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-left: 10px;
+.esection-title {
   color: #4c3a30;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.efilter-buttons {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+  /* border-bottom: 1px solid #4c3a30; */
+}
+.ehilight-topics {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.ehilight-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  flex: 1 1 calc(33.333% - 16px);
+  border-top: 1px solid #4c3a30;
+  padding: 20px;
+}
+.feature-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #fffbf6;
+  padding: 58px 64px;
 }
 
-.esearch-container button:hover {
-  background-color: #92c389;
+.feature-section .section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #4c3a30;
 }
 
-.ebutton-container {
+.title-icon {
+  width: 42px;
+  height: 58px;
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 31px;
   margin-top: 20px;
 }
 
-.ecreate-event-btn {
-  padding: 10px 20px;
-  background-color: #ffeb66;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 16px;
+.feature-item {
+  flex: 1;
 }
 
-.ecreate-event-btn:hover {
-  background-color: #e6d65a;
+.feature-title {
+  font-size: 28px;
+  color: #ff82d2;
+  margin-bottom: 10px;
 }
-.eIndexContainer2 {
-  display: flex;
-  height: 673px;
-  padding: 22px 100px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  flex-shrink: 0;
-  align-self: stretch;
+
+.feature-description {
+  font-size: 20px;
 }
