@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../components/book/button'
 import Card from '@/components/book/card'
-import { IoSearch } from 'react-icons/io5'
+// import { IoSearch } from 'react-icons/io5'
 
 export default function Test() {
   return (
@@ -12,7 +12,7 @@ export default function Test() {
           <Button
             label={
               <>
-                <IoSearch />
+                {/* <IoSearch /> */}
                 搜索
               </>
             }
