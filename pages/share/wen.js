@@ -5,6 +5,7 @@ import { IoSearch } from 'react-icons/io5'
 import { FaArrowCircleRight } from 'react-icons/fa'
 import Footer from '@/components/layout/default-layout/footer'
 import Form from '@/components/form/Form'
+import Pagi from '@/components/layout/default-layout/pagi'
 
 export default function Test() {
   return (
@@ -304,7 +305,10 @@ export default function Test() {
           />
         </div>
       </div>
+      <hr/>
       <Form />
+      <hr/>
+      <Pagi/>
      <Footer/> 
 
 
