@@ -4,6 +4,8 @@ import { IoSearch } from 'react-icons/io5'
 import { FaArrowCircleRight } from 'react-icons/fa'
 import ProgressBar from '@/components/book/ProgressBar'
 import Form from '@/components/form/Form'
+import FormField from '@/components/form/FormField'
+import SearchInput from '@/components/SearchInput'
 
 export default function Test() {
   return (
@@ -207,7 +209,28 @@ export default function Test() {
       <ProgressBar />
       <Form />
       <SearchInput placeholder="請輸入搜尋關鍵字"/>
-      <SearchInput placeholder="請輸入優惠券"/>
+      <SearchInput placeholder="請輸入優惠券" />
+      <FormField
+          label="姓名"
+          id="name"
+          type="text"
+          placeholder="請輸入姓名"
+          required={true}
+        />
+        <FormField
+          label="Email"
+          id="email"
+          type="email"
+          placeholder="請輸入email"
+          required={true}
+        />
+        <FormField
+          label="手機號碼"
+          id="phone"
+          type="tel"
+          placeholder="請輸入手機號碼"
+          required={true}
+        />
     </>
   )
 }
