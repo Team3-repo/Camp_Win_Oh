@@ -3,6 +3,7 @@ import Card from '@/components/book/card'
 import { IoSearch } from 'react-icons/io5'
 import { FaArrowCircleRight } from 'react-icons/fa'
 import ProgressBar from '@/components/book/ProgressBar'
+import SearchInput from '@/components/SearchInput'
 import Form from '@/components/form/Form'
 
 export default function Test() {

@@ -3,7 +3,7 @@
  */
 import React from "react";
 
-function Footer() {
+function Footer2() {
   return (
     <footer className="site-footer">
       <p className="copyright">© 2024123 會營ㄛ | Campwinoh Campground</p>
@@ -31,4 +31,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default Footer2;
