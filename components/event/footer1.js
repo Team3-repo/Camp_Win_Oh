@@ -57,7 +57,7 @@ export default function Footer1() {
             </div>
           </div>
         </div>
-        <p>Copyright © 2024 會營ㄛ | CampWinOh Campground</p>
+        <p>Copyright © 2024 會營お | CampWinOh Campground</p>
       </footer>
     </>
   )
