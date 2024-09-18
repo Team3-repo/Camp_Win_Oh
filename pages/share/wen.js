@@ -3,7 +3,6 @@ import Card from '@/components/book/card'
 import { IoSearch } from 'react-icons/io5'
 import { FaArrowCircleRight } from 'react-icons/fa'
 import ProgressBar from '@/components/book/ProgressBar'
-import Form from '@/components/form/Form'
 
 export default function Test() {
   return (
@@ -202,12 +201,12 @@ export default function Test() {
           />
         </div>
       </div>
-
+      <hr />
+      <br />
+      <h1>HomePage+Book元件</h1>
       {/* step-by-step */}
       <ProgressBar />
-      <Form />
-      <SearchInput placeholder="請輸入搜尋關鍵字"/>
-      <SearchInput placeholder="請輸入優惠券"/>
+      <br />
     </>
   )
 }
