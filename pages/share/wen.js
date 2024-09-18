@@ -131,7 +131,7 @@ export default function Test() {
             PCol="cardPrice"
             price="NT$ 137/晚"
             cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon" // 確保這裡使用的名稱與 CSS 模組中的 class 名稱一致
+            cardLikeIcon="cardLikeIcon" 
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"

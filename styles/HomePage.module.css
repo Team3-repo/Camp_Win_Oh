@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 }
 .filterContainer {
   position: relative;
@@ -95,5 +96,50 @@
 /* card */
 .bookCard {
   display: 'flex';
-  gap: '10px';
+  justify-content: center;
+}
+
+/* CarouseCard */
+.regSearch {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 0;
+}
+
+.carolContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 50px;
+  border-top: 1px solid #333;
+}
+.carolCard {
+  position: relative;
+  width: 28%;
+  height: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  margin: 0 10px;
+}
+.carolCard:hover {
+  transform: scale(1.05);
+}
+.carolCard img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  text-align: center;
 }
