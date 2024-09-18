@@ -5,15 +5,13 @@ export default function CarouseBanner() {
   return (
     <section className={styles.carouseBanner}>
       <img
-        src=''
+        src='https://i.postimg.cc/9f7MBgC9/camp-2650359-1280-0.jpg'
         alt="Camping scenery"
         className={styles.carouseImage}
       />
       <div className={styles.carouseContent}>
         <h2 className={styles.carouseTitle}>
-          一緒にキャンプに
-          <br />
-          いきましょう!
+          一緒にキャンプにいきましょう!
         </h2>
         <div className={styles.pageDots}>
           {[...Array(5)].map((_, index) => (
