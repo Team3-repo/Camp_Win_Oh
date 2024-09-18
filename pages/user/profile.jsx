@@ -5,6 +5,7 @@ import Navbar from '@/components/event/navbar'
 import Footer1 from '@/components/event/footer1'
 import styles from '@/styles/user/profile.module.css'
 import customBody from '@/styles/user/customBody.module.css'
+import Image from 'next/image'
 
 export default function profile() {
   return (
@@ -32,11 +33,12 @@ export default function profile() {
         {/* 個人圖片 */}
         <section className={styles.outsideAvatar}>
           <div className={styles.avatarWrapper}>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+            {/* <img
+              src="/pics/avatar-1.png"
               alt="avatar"
               width={70}
-            />
+            /> */}
+            <Image src="/pics/avatar-1.png" alt="Avatar" width={500} height={500} />
           </div>
           <div>
             <h4>個人資料圖片</h4>
