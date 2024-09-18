@@ -3,7 +3,7 @@ import Footer from '@/components/event/footer1'
 import Navbar from '@/components/event/navbar'
 import Button from '@/components/book/button'
 import Card from '@/components/book/card'
-import FeatureSection from '@/components/event/featureSection'
+import FeatureSection1 from '@/components/event/featureSection1'
 
 export default function EIndex() {
   return (
@@ -68,7 +68,7 @@ export default function EIndex() {
         </div>
       </section>
       <section>
-        <FeatureSection />
+        <FeatureSection1 />
       </section>
       <section className="ehilight-topics">
         <h3 className="esection-title">精選活動</h3>
@@ -146,7 +146,11 @@ export default function EIndex() {
             onClick={() => alert('Button Clicked!')}
           />
         </div>
-        <Button label="探索更多" onClick={() => alert('Button clicked!')} />
+        <Button
+          label="探索更多"
+          type="btn-more"
+          onClick={() => alert('Button clicked!')}
+        />
       </section>
       <Footer />
     </>
