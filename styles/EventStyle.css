@@ -25,7 +25,14 @@ html {
   gap: 5px;
   margin-bottom: 10px;
 }
-.ehilight-topics {
+.ehilight-topics1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.ehilight-topics2 {
   display: flex;
   flex-direction: column;
   justify-content: center;

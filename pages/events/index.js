@@ -70,7 +70,7 @@ export default function EIndex() {
       <section>
         <FeatureSection1 />
       </section>
-      <section className="ehilight-topics">
+      <section className="ehilight-topics1">
         <h3 className="esection-title">精選活動</h3>
         <div className="ehilight-cards">
           <Card

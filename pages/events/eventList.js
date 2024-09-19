@@ -25,7 +25,7 @@ export default function EventList() {
           />
         </div>
       </section>
-      <section className="ehilight-topics">
+      <section className="ehilight-topics2">
         <h3 className="esection-title">活動報名中</h3>
         <div className="ehilight-cards">
           <Card

@@ -125,13 +125,14 @@ export default function Test() {
         </div>
         <hr />
 
+{/* 卡片 */}
         <h3>イ~ Book-card</h3>
         <div style={{ display: 'flex', gap: '10px' }}>
           <Card
             PCol="cardPrice"
             price="NT$ 137/晚"
             cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon" // 確保這裡使用的名稱與 CSS 模組中的 class 名稱一致
+            cardLikeIcon="cardLikeIcon" 
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"
