@@ -3,14 +3,13 @@ import FormField from '@/components/form/FormField'
 import Button from '@/components/book/button'
 import Navbar from '@/components/event/navbar'
 import Footer1 from '@/components/event/footer1'
-import styles from '@/styles/user/profile.module.css'
+import styles from '@/styles/user/settings.module.css'
 import customBody from '@/styles/user/customBody.module.css'
 import Image from 'next/image'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { render } from 'react-dom'
 
-export default function Profile() {
+export default function Settings() {
   // 定義 state 來控制表單值
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -80,21 +79,23 @@ export default function Profile() {
 
         <div className={styles.buttonGroup}>
           <Button
-            label="個人資料"
+            label="個人資料" // profile
             onClick={() => toast.info('Button clicked!')}
           />
           <Button
-            label="付款方式"
+            label="安全性" //security
             onClick={() => toast.info('Button clicked!')}
             type="btn-reg"
           />
           <Button
-            label="安全性"
+            label="付款方式" //billing
             onClick={() => toast.info('Button clicked!')}
             type="btn-reg"
           />
         </div>
-        <div className="wrapper" style={{border:'green,2px,solid'}}>
+        <div className="profile" style={{ border: 'green,2px,solid' }}>
+
+
           <section className={styles.outsideAvatar}>
             <div className={styles.avatarWrapper}>
               <Image
