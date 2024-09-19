@@ -10,6 +10,11 @@ import Navbar from "@/components/event/navbar";
 import Pagination from "@/components/CampingStore/Pagination";
 import Footer2 from "@/components/Footer2";
 import Navbar2 from "@/components/CampingStore/Navbar2";
+import HotTopics from "@/components/CampingStore/HotTopics";
+// import HeroSection from "@/components/CampingStore/Invi";
+// import HeroContent from "@/components/CampingStore/PD";
+import ImageComponent from "@/components/CampingStore/BigImage";
+import UncontrolledExample from "@/components/CampingStore/Carousels";
 
 export default function CampingStore() {
 const products = [
@@ -121,8 +126,13 @@ const products = [
   return (
     <div className="camping-store">
       <Header />
-      <Navbar2 />
+      {/* <Navbar2 /> */}
       <main>
+      {/* <HeroSection />
+      <HeroContent /> */}
+      <ImageComponent />
+      <UncontrolledExample />
+      <HotTopics />
        <ProductCategories />
        <Navbar />
         <SearchBar />
