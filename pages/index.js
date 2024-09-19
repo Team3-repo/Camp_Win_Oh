@@ -5,15 +5,33 @@ import Navbar from '@/components/event/navbar'
 import styles from '@/styles/HomePage.module.css'
 import Button from '@/components/book/button'
 import CarouselCards from '@/components/book/carouselCard'
-import CarouseBanner from '@/components/book/CarouselBanner'
 import Pagi from '@/components/event/pagi'
 import NewActivity from '@/components/book/NewActivity'
+import CarouselBanner from '@/components/book/CarouselBanner'
 
 export default function Index() {
+  const images = [
+    'https://i.postimg.cc/9f7MBgC9/camp-2650359-1280-0.jpg',
+    'https://i.postimg.cc/Gmgdjy70/camping-6882479-1280-0.jpg',
+    'https://i.postimg.cc/xdkYp1hX/istockphoto-1148431349-1024x1024-0.jpg',
+  ]
+
+  const titles = [
+    '一緒にキャンプにいきましょう!',
+    '大自然でリラックスしましょう',
+    '忘れられない思い出を作りましょう',
+  ]
+
   return (
     <>
       <Navbar />
-      <CarouseBanner />
+
+      {/* 輪播圖 */}
+      <div>
+        <CarouselBanner images={images} titles={titles} interval={5000} />
+        {/* 可以傳入不同的圖片和標題 */}
+      </div>
+
       {/* 篩選搜尋 */}
       <SearchBox />
 
@@ -46,16 +64,17 @@ export default function Index() {
         />
       </div>
       <CarouselCards />
+
       <Pagi />
 
-      <section className="ehilight-topics">
+      {/* <section className="ehilight-topics">
         <h3 className="esection-title">精選活動</h3>
         <div className="ehilight-cards">
-        <Card
+          <Card
             PCol="cardPrice"
             price="NT$ 137/晚"
             cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon" 
+            cardLikeIcon="cardLikeIcon"
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"
@@ -69,7 +88,7 @@ export default function Index() {
             PCol="cardPrice"
             price="NT$ 137/晚"
             cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon" 
+            cardLikeIcon="cardLikeIcon"
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"
@@ -83,7 +102,7 @@ export default function Index() {
             PCol="cardPrice"
             price="NT$ 137/晚"
             cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon" 
+            cardLikeIcon="cardLikeIcon"
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"
@@ -97,7 +116,7 @@ export default function Index() {
             PCol="cardPrice"
             price="NT$ 137/晚"
             cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon" 
+            cardLikeIcon="cardLikeIcon"
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"
@@ -111,7 +130,7 @@ export default function Index() {
             PCol="cardPrice"
             price="NT$ 137/晚"
             cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon" 
+            cardLikeIcon="cardLikeIcon"
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"
@@ -125,7 +144,7 @@ export default function Index() {
             PCol="cardPrice"
             price="NT$ 137/晚"
             cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon" 
+            cardLikeIcon="cardLikeIcon"
             showIcon={true}
             title="標準營位"
             content="場地區域： A區"
@@ -136,11 +155,15 @@ export default function Index() {
             onClick={() => alert('Button Clicked!')}
           />
         </div>
-        <Button label="探索更多" type="btn-more" onClick={() => alert('Button clicked!')} />
-      </section>
+        <Button
+          label="探索更多"
+          type="btn-more"
+          onClick={() => alert('Button clicked!')}
+        />
+      </section> */}
 
       {/* 熱門活動 */}
-      
+
       {/* 最新消息 */}
       <NewActivity />
       <Footer1 />

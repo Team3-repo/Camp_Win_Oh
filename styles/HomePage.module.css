@@ -170,9 +170,6 @@
   height: auto;
   display: block;
 }
-.carolCardNews img:hover {
-  opacity: 0.8;
-}
 .carolNewsH4 {
   display: flex;
   justify-content: center;
