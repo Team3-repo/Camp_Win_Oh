@@ -6,6 +6,8 @@ import Footer1 from '@/components/event/footer1'
 import styles from '@/styles/user/profile.module.css'
 import customBody from '@/styles/user/customBody.module.css'
 import Image from 'next/image'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Profile() {
   // 定義 state 來控制表單值
@@ -54,10 +56,10 @@ export default function Profile() {
   // 儲存變更按鈕的處理邏輯
   const handleSaveChanges = () => {
     if (validateForm()) {
-      alert('表單驗證成功，可以提交！')
+      toast.success('表單驗證成功，可以提交！')
       // 在此處理提交表單的邏輯，例如發送 API 請求等
     } else {
-      alert('表單有錯誤，請檢查！')
+      toast.error('表單有錯誤，請檢查！')
     }
   }
 
@@ -76,19 +78,19 @@ export default function Profile() {
         <h1 className="nav">設定</h1>
 
         <div className={styles.buttonGroup}>
-          <Button label="個人資料" onClick={() => alert('Button clicked!')} />
+          <Button label="個人資料" onClick={() => toast.info('Button clicked!')} />
           <Button
             label="付款方式"
-            onClick={() => alert('Button clicked!')}
+            onClick={() => toast.info('Button clicked!')}
             type="btn-reg"
           />
           <Button
             label="安全性"
-            onClick={() => alert('Button clicked!')}
+            onClick={() => toast.info('Button clicked!')}
             type="btn-reg"
           />
         </div>
-<div></div>
+        <div></div>
         <section className={styles.outsideAvatar}>
           <div className={styles.avatarWrapper}>
             <Image src="/pics/avatar-1.png" alt="Avatar" width={500} height={500} />
@@ -151,6 +153,7 @@ export default function Profile() {
       </div>
 
       <Footer1 />
+      <ToastContainer /> {/* 設定 ToastContainer */}
     </div>
   )
 }
