@@ -4,7 +4,7 @@ import Footer1 from '@/components/event/footer1'
 import Navbar from '@/components/event/navbar'
 import styles from '@/styles/HomePage.module.css'
 import Button from '@/components/book/button'
-import CarouselCards from '@/components/book/carouselCard'
+import CarouselCard from '@/components/book/carouselCard'
 import Pagi from '@/components/event/pagi'
 import NewActivity from '@/components/book/NewActivity'
 import CarouselBanner from '@/components/book/CarouselBanner'
@@ -22,6 +22,24 @@ export default function Index() {
     '忘れられない思い出を作りましょう',
   ]
 
+  const capeImages = [
+    'https://i.postimg.cc/9f7MBgC9/camp-2650359-1280-0.jpg',
+    'https://i.postimg.cc/Gmgdjy70/camping-6882479-1280-0.jpg',
+    'https://i.postimg.cc/xdkYp1hX/istockphoto-1148431349-1024x1024-0.jpg',
+    'https://i.postimg.cc/9f7MBgC9/camp-2650359-1280-0.jpg',
+    'https://i.postimg.cc/Gmgdjy70/camping-6882479-1280-0.jpg',
+    'https://i.postimg.cc/xdkYp1hX/istockphoto-1148431349-1024x1024-0.jpg',
+  ]
+
+  const campTitles = [
+    '一緒にキャンプにいきましょう!',
+    '大自然でリラックスしましょう',
+    '忘れられない思い出を作りましょう',
+    'a',
+    'b',
+    'c',
+  ]
+
   return (
     <>
       <Navbar />
@@ -29,7 +47,6 @@ export default function Index() {
       {/* 輪播圖 */}
       <div>
         <CarouselBanner images={images} titles={titles} interval={5000} />
-        {/* 可以傳入不同的圖片和標題 */}
       </div>
 
       {/* 篩選搜尋 */}
@@ -63,9 +80,8 @@ export default function Index() {
           type="btn-reg"
         />
       </div>
-      <CarouselCards />
-
-      <Pagi />
+      {/* 輪播圖:篩選結果 */}
+      <CarouselCard images={capeImages} titles={campTitles} interval={null} />
 
       {/* <section className="ehilight-topics">
         <h3 className="esection-title">精選活動</h3>

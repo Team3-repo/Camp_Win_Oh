@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../../styles/component_style/CarouselBanner.module.css';
+import styles from '../../styles/component_style/Carousel.module.css';
 
 export default function CarouselBanner({ images, titles, interval = 1500 }) {
   const totalSlides = images.length; // 根據圖片數量決定總頁數
