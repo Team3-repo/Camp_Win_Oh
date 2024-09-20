@@ -21,32 +21,13 @@ export default function Index() {
     '大自然でリラックスしましょう',
     '忘れられない思い出を作りましょう',
   ]
-
-  const capeImages = [
-    'https://i.postimg.cc/9f7MBgC9/camp-2650359-1280-0.jpg',
-    'https://i.postimg.cc/Gmgdjy70/camping-6882479-1280-0.jpg',
-    'https://i.postimg.cc/xdkYp1hX/istockphoto-1148431349-1024x1024-0.jpg',
-    'https://i.postimg.cc/9f7MBgC9/camp-2650359-1280-0.jpg',
-    'https://i.postimg.cc/Gmgdjy70/camping-6882479-1280-0.jpg',
-    'https://i.postimg.cc/xdkYp1hX/istockphoto-1148431349-1024x1024-0.jpg',
-  ]
-
-  const campTitles = [
-    '一緒にキャンプにいきましょう!',
-    '大自然でリラックスしましょう',
-    '忘れられない思い出を作りましょう',
-    'a',
-    'b',
-    'c',
-  ]
-
   return (
     <>
       <Navbar />
 
       {/* 輪播圖 */}
       <div>
-        <CarouselBanner images={images} titles={titles} interval={5000} />
+        <CarouselBanner images={images} titles={titles} />
       </div>
 
       {/* 篩選搜尋 */}
@@ -81,53 +62,14 @@ export default function Index() {
         />
       </div>
       {/* 輪播圖:篩選結果 */}
-      <CarouselCard images={capeImages} titles={campTitles} interval={null} />
+      <CarouselCard />
 
-      {/* <section className="ehilight-topics">
+      {/* 熱門推薦活動 */}
+
+      {/* 熱門推薦活動 */}
+      <section className="ehilight-topics">
         <h3 className="esection-title">精選活動</h3>
         <div className="ehilight-cards">
-          <Card
-            PCol="cardPrice"
-            price="NT$ 137/晚"
-            cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon"
-            showIcon={true}
-            title="標準營位"
-            content="場地區域： A區"
-            content2="房型： 小木屋"
-            content3="適合人數： 2-6人"
-            imageUrl="https://i.postimg.cc/Xq9nC33y/4.jpg"
-            label="立即前往預訂"
-            onClick={() => alert('Button Clicked!')}
-          />
-          <Card
-            PCol="cardPrice"
-            price="NT$ 137/晚"
-            cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon"
-            showIcon={true}
-            title="標準營位"
-            content="場地區域： A區"
-            content2="房型： 小木屋"
-            content3="適合人數： 2-6人"
-            imageUrl="https://i.postimg.cc/Xq9nC33y/4.jpg"
-            label="立即前往預訂"
-            onClick={() => alert('Button Clicked!')}
-          />
-          <Card
-            PCol="cardPrice"
-            price="NT$ 137/晚"
-            cardLike="cardLike"
-            cardLikeIcon="cardLikeIcon"
-            showIcon={true}
-            title="標準營位"
-            content="場地區域： A區"
-            content2="房型： 小木屋"
-            content3="適合人數： 2-6人"
-            imageUrl="https://i.postimg.cc/Xq9nC33y/4.jpg"
-            label="立即前往預訂"
-            onClick={() => alert('Button Clicked!')}
-          />
           <Card
             PCol="cardPrice"
             price="NT$ 137/晚"
@@ -176,12 +118,11 @@ export default function Index() {
           type="btn-more"
           onClick={() => alert('Button clicked!')}
         />
-      </section> */}
-
-      {/* 熱門活動 */}
+      </section>
 
       {/* 最新消息 */}
       <NewActivity />
+
       <Footer1 />
     </>
   )
