@@ -1,72 +1,72 @@
-import React, { useState } from 'react';
-import FormField from '@/components/form/FormField';
-import Button from '@/components/book/button';
-import Image from 'next/image';
-import styles from '@/styles/user/profile.module.css';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from 'react'
+import FormField from '@/components/form/FormField'
+import Button from '@/components/book/button'
+import Image from 'next/image'
+import styles from '@/styles/user/profile.module.css'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Profile = () => {
   // 定義 state 來控制表單值
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [address, setAddress] = useState('')
 
   // 新增錯誤訊息的 state
   const [errors, setErrors] = useState({
     name: '',
     email: '',
     address: '',
-  });
+  })
 
   // 表單驗證的處理邏輯
   const validateForm = () => {
-    let formIsValid = true;
-    const newErrors = { name: '', email: '', address: '' };
+    let formIsValid = true
+    const newErrors = { name: '', email: '', address: '' }
 
     // 驗證姓名
     if (!name.trim()) {
-      newErrors.name = '姓名不能為空';
-      formIsValid = false;
+      newErrors.name = '姓名不能為空'
+      formIsValid = false
     }
 
     // 驗證 Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email 格式正則表達式
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/ // Email 格式正則表達式
     if (!email.trim()) {
-      newErrors.email = 'Email 不能為空';
-      formIsValid = false;
+      newErrors.email = 'Email 不能為空'
+      formIsValid = false
     } else if (!emailRegex.test(email)) {
-      newErrors.email = '無效的 Email 格式';
-      formIsValid = false;
+      newErrors.email = '無效的 Email 格式'
+      formIsValid = false
     }
 
     // 驗證地址
     if (!address.trim()) {
-      newErrors.address = '地址不能為空';
-      formIsValid = false;
+      newErrors.address = '地址不能為空'
+      formIsValid = false
     }
 
-    setErrors(newErrors);
-    return formIsValid;
-  };
+    setErrors(newErrors)
+    return formIsValid
+  }
 
   // 儲存變更按鈕的處理邏輯
   const handleSaveChanges = () => {
     if (validateForm()) {
-      toast.success('表單驗證成功，可以提交！');
+      toast.success('表單驗證成功，可以提交！')
       // 在此處理提交表單的邏輯，例如發送 API 請求等
     } else {
-      toast.error('表單有錯誤，請檢查！');
+      toast.error('表單有錯誤，請檢查！')
     }
-  };
+  }
 
   // 取消按鈕的處理邏輯
   const handleCancel = () => {
-    setName(''); // 重置姓名輸入框
-    setEmail(''); // 重置 Email 輸入框
-    setAddress(''); // 重置地址輸入框
-    setErrors({ name: '', email: '', address: '' }); // 清空錯誤訊息
-  };
+    setName('') // 重置姓名輸入框
+    setEmail('') // 重置 Email 輸入框
+    setAddress('') // 重置地址輸入框
+    setErrors({ name: '', email: '', address: '' }) // 清空錯誤訊息
+  }
 
   return (
     <div className={styles.container}>
@@ -143,7 +143,7 @@ const Profile = () => {
       </div>
       <ToastContainer /> {/* 設定 ToastContainer */}
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

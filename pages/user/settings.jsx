@@ -41,6 +41,7 @@ export default function Settings() {
               toast.info('顯示個人資料');
               setActiveSection('Profile');
             }}
+            type={activeSection === 'Profile'  ? undefined : 'btn-reg'}
           />
           <Button
             label="安全性" // Security
@@ -48,7 +49,7 @@ export default function Settings() {
               toast.info('顯示安全性設定');
               setActiveSection('Security');
             }}
-            type="btn-reg"
+            type={activeSection === 'Security' ? undefined : 'btn-reg'}
           />
           <Button
             label="付款方式" // Billing
@@ -56,7 +57,7 @@ export default function Settings() {
               toast.info('顯示付款方式');
               setActiveSection('Billing');
             }}
-            type="btn-reg"
+            type={activeSection === 'Billing' ? undefined : 'btn-reg'}
           />
         </div>
 
