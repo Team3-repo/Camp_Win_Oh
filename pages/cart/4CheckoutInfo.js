@@ -6,12 +6,16 @@ import Header from "@/components/Header";
 import StepIndicator from "@/components/CheckoutInfo/StepIndicator";
 import CheckoutForm from "@/components/CheckoutInfo/CheckoutForm";
 import OrderSummary from "@/components/CheckoutInfo/OrderSummary";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
+import Footer from '@/components/event/footer2'
+import Navbar from '@/components/event/navbar'
 
 const CheckoutInfo = () => {
   return (
+    <>
+     <Navbar />
     <div className="checkout-body">
-      <Header />
+      {/* <Header /> */}
       <StepIndicator />
       <main className="main-content">
         <div className="content-wrapper">
@@ -25,7 +29,7 @@ const CheckoutInfo = () => {
           </div>
         </div>
       </main>
-      <Footer />
+     
       <style jsx>{`
         .checkout-body {
           background-color: #cfe9c6;
@@ -33,6 +37,7 @@ const CheckoutInfo = () => {
           flex-direction: column;
           align-items: center;
           overflow: hidden;
+          margin-bottom:50px;
         }
         .main-content {
           display: flex;
@@ -92,6 +97,8 @@ const CheckoutInfo = () => {
         }
       `}</style>
     </div>
+    <Footer />
+    </>
   );
 };
 

@@ -19,7 +19,7 @@ function TotalSection() {
           align-items: center;
           margin-top: 47px;
           width: 100%;
-          max-width: 1198px;
+          max-width: 1440px;
         }
         .continueShoppingButton {
           border-radius: 11px;

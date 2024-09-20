@@ -35,6 +35,7 @@ function ProductInfo() {
           display: flex;
           flex-direction: column;
           width: 77%;
+          {/* margin-right: 30px; */}
         }
         .product-image {
           aspect-ratio: 1.12;

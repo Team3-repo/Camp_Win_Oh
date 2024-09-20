@@ -33,6 +33,7 @@ function CouponSection() {
           font-family: Zen Maru Gothic, -apple-system, Roboto, Helvetica,
             sans-serif;
           margin-top: 46px;
+          width:100%;
         }
         .sectionTitle {
           margin-top:0px;
