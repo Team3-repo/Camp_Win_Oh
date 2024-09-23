@@ -2,15 +2,9 @@
   list-style: none;
   display: inline-block;
   padding: 0;
-<<<<<<< HEAD
-  margin-top: 10px;
-  justify-content: center;
-  align-items: center;
-=======
   margin: 10px 0;
   display: flex;
   justify-content: center;
->>>>>>> 744d312f8a74f609053257b0ffcc08ce04933840
 }
 .pagination li {
   display: inline;
