@@ -1,11 +1,20 @@
 import React from 'react'
-import Header from '../../components/Header'
+// import Header from '../../components/Header'
 import SearchBar from '@/components/CampingStore/SearchBar'
 import ProductFilter2 from '@/components/CampingStore/ProductFilter2'
 import ProductCategories from '@/components/CampingStore/ProductCategories'
 import ProductGrid from '@/components/CampingStore/ProductGrid'
-import Pagination from '@/components/CampingStore/Pagination'
-import Footer from '@/components/Footer'
+import Pagi from '@/components/event/pagi'
+import Footer from '@/components/event/footer2'
+import Navbar from '@/components/event/navbar'
+// import Pagination from '@/components/CampingStore/Pagination'
+// import Footer2 from '@/components/Footer2'
+import Navbar2 from '@/components/CampingStore/Navbar2'
+// import HotTopics from "@/components/CampingStore/HotTopics";
+// import HeroSection from "@/components/CampingStore/Invi";
+// import HeroContent from "@/components/CampingStore/PD";
+// import ImageComponent from "@/components/CampingStore/BigImage";
+// import UncontrolledExample from "@/components/CampingStore/Carousels";
 
 export default function CampingStore() {
   const products = [
@@ -114,22 +123,42 @@ export default function CampingStore() {
 
   // const CampingStore = () => {
   return (
-    <div className="camping-store">
-      <Header />
-      <main>
+    <div >
+      {/* <Header /> */}
+      {/* <Navbar2 /> */}
+      
+        {/* <HeroSection />
+      <HeroContent /> */}
+        {/* <ImageComponent />
+      <UncontrolledExample /> */}
+        {/* <HotTopics /> */}
+        <Navbar />
         <ProductCategories />
         <SearchBar />
         <ProductFilter2 />
+        <main className="camping-store">
         <ProductGrid products={products} />
-        <Pagination />
-      </main>
-      <Footer />
+          </main>
+        <div className="store-pagi">
+        <Pagi />
+        {/* <Pagination /> */}
+        </div>
+        <Footer />
+        {/* <Footer2 /> */}
+      
       <style jsx>{`
         .camping-store {
           display: flex;
           flex-direction: column;
           align-items: center;
           overflow: hidden;
+          margin-bottom: 50px;
+        }
+        .store-pagi{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 60px;
         }
       `}</style>
     </div>

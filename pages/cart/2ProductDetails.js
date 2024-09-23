@@ -1,15 +1,18 @@
 import React from "react";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import ProductInfo from "@/components/ProductDetails/ProductInfo";
 import OrderSummary from "@/components/ProductDetails/OrderSummary";
 import Description from "@/components/ProductDetails/Description";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
+import Footer from '@/components/event/footer2'
+import Navbar from '@/components/event/navbar'
 
 function ProductDetails() {
   return (
     <>
+    <Navbar />
       <div className="product-details-body">
-        <Header />
+        {/* <Header /> */}
         <main className="product-content">
           <div className="product-layout">
             <ProductInfo />
@@ -17,8 +20,9 @@ function ProductDetails() {
           </div>
           <Description />
         </main>
-        <Footer />
+       
       </div>
+       <Footer />
       <style jsx>{`
         .product-details-body {
           background-color: #cfe9c6;
@@ -26,7 +30,7 @@ function ProductDetails() {
           flex-direction: column;
           align-items: center;
           overflow: hidden;
-
+          margin-bottom:50px;
         }
         .product-content {
           align-self: center;

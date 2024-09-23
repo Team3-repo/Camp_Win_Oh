@@ -7,7 +7,7 @@ const OrderSummary = () => {
   return (
     <div className="order-summary">
       <div className="order-details">
-        <div className="order-title">您的訂單</div>
+        <div className="order-title">結帳訂單</div>
         <div className="order-item">
           <div className="item-row">
             <div className="item-label">日期</div>
@@ -58,6 +58,7 @@ const OrderSummary = () => {
             sans-serif;
           justify-content: center;
           width: 387px;
+          padding:30px;
         }
         .order-details {
           border-radius: 5px;
@@ -69,7 +70,7 @@ const OrderSummary = () => {
           align-items: center;
           font-size: 20px;
           justify-content: center;
-          padding: 20px 5px 20px 6px;
+          padding: 20px 20px 20px 20px;
         }
         .order-title {
           padding-bottom: 10px;
@@ -154,7 +155,7 @@ const OrderSummary = () => {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 6px 12px;
+          padding: 10px 12px 10px 12px;
         }
         .price-details {
           display: flex;

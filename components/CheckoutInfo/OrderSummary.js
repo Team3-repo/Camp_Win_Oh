@@ -55,8 +55,9 @@ const OrderSummary = () => {
               className="coupon-code-input"
             />
           </div>
-          <button className="btn-use-coupon">使用</button>
+          
         </div>
+        <button className="btn-use-coupon">使用</button>
         <div className="coupon-card">
           <div className="coupon-card-header">
             <span className="coupon-label">COUPON</span>

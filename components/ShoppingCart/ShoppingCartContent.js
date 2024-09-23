@@ -18,7 +18,7 @@ function ShoppingCartContent() {
       <style jsx>{`
         .content {
           display: flex;
-          margin-top: 118px;
+          margin-top: 80px;
           width: 90%;
           flex-direction: column;
           padding: 0 44px;
@@ -28,10 +28,11 @@ function ShoppingCartContent() {
           margin-left: 78px;
           color: var(--black, #000);
           font: 400 24px Inter, sans-serif;
+          margin-bottom: -10px;
         }
         .divider {
-          margin-top: 11px;
-          width: 1315px;
+          margin-top: 20px;
+          width: 1440px;
           max-width: 100%;
           height: 1px;
           border: 1px solid #9c9c9c;
