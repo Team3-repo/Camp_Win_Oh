@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import styles from '../../styles/component_style/CarouselCard.module.css'
-import PaginationDots from '../event/pagi'
+import styles from '../../styles/component_style/SuggestCard.module.css'
+import PaginationDots from '../book/pagi'
 
 const images = [
   {
@@ -43,17 +43,12 @@ const images = [
     alt: '營地8',
     text: '森林探險',
   },
-
 ]
 
-export default function CarouselCards({title}) {
+export default function SuggestCard() {
   const slidesToShow = 3
   const totalSlides = Math.ceil(images.length / slidesToShow)
   const [currentIndex, setCurrentIndex] = useState(0)
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index)
-  }
 
   const goToPrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + totalSlides) % totalSlides)
@@ -70,26 +65,19 @@ export default function CarouselCards({title}) {
 
   return (
     <>
-      <h5 className={styles.campCardH5}>
-        找到<strong style={{ color: '#ff82d2' }}> {images.length} </strong>
-        個符合篩選條件的{title}
-      </h5>
-      <div className={styles.carouselContainer}>
-        <div className={styles.carouselWrapper}>
-          {getVisibleSlides().map((image, index) => (
-            <div key={index} className={styles.carolCard}>
-              <img src={image.src} alt={image.alt} />
-              <div className={styles.overlay}>{image.text}</div>
-            </div>
-          ))}
+      <h4 className={styles.campCardH4}>熱門推薦營區</h4>
+      <div className={styles.btnCard}>
+        <div className={styles.carouselContainer}>
+          <div className={styles.carouselWrapper}>
+            {getVisibleSlides().map((image, index) => (
+              <div key={index} className={styles.carolCard}>
+                <img src={image.src} alt={image.alt} />
+                <div className={styles.overlay}>{image.text}</div>
+              </div>
+            ))}
+          </div>
+          <PaginationDots onPrev={goToPrev} onNext={goToNext} />
         </div>
-        <PaginationDots
-          currentIndex={currentIndex}
-          totalSlides={totalSlides}
-          onDotClick={goToSlide}
-          onPrev={goToPrev}
-          onNext={goToNext}
-        />
       </div>
     </>
   )

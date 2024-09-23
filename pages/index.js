@@ -5,9 +5,9 @@ import Navbar from '@/components/event/navbar'
 import styles from '@/styles/HomePage.module.css'
 import Button from '@/components/book/button'
 import CarouselCard from '@/components/book/carouselCard'
-import Pagi from '@/components/event/pagi'
 import NewActivity from '@/components/book/NewActivity'
 import CarouselBanner from '@/components/book/CarouselBanner'
+import QuickBooking from '@/components/book/QuickBooking'
 
 export default function Index() {
   const images = [
@@ -62,9 +62,15 @@ export default function Index() {
         />
       </div>
       {/* 輪播圖:篩選結果 */}
-      <CarouselCard />
+      <div className={styles.carolCard}>
+        {' '}
+        <CarouselCard title="營區" />
+      </div>
 
-      {/* 熱門推薦活動 */}
+      {/* 懶人包 */}
+      <QuickBooking />
+
+      {/* 熱門推薦營地 */}
 
       {/* 熱門推薦活動 */}
       <section className="ehilight-topics">

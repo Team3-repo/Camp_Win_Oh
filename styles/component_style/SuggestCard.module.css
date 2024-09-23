@@ -1,0 +1,86 @@
+.carouselContainer {
+  margin: 0 auto;
+  max-width: 900px;
+  position: relative;
+}
+
+.carouselWrapper {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carolCard {
+  position: relative;
+  margin: 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 280px;
+  height: 180px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.carolCard img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  font-size: 23px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.campCardH4 {
+  margin: 0 auto;
+  max-width: 945px;
+  padding: 10px;
+  text-align: center;
+}
+
+.btnCard {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 43%;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  color: #000;
+  border: none;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.prev {
+  left: -25px;
+}
+
+.next {
+  right: -25px;
+}

@@ -1,0 +1,118 @@
+.accordion {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.accordionItem {
+  margin-bottom: 10px;
+}
+
+.accordionButton {
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  background-color: #4caf50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.accordionButton:hover {
+  background-color: #45a049;
+}
+
+.accordionContent {
+  padding: 15px;
+  background-color: #f9f9f9;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.subAccordionButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  background-color: #f9f9f9;
+  color: #8bc34a;
+  font-size: 14px;
+  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subAccordionButton:hover {
+  background-color: #7cb342;
+  color: #fff;
+}
+
+.subAccordionContent {
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 4px 4px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.accordionContent,
+.subAccordionContent {
+  max-height: auto;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.accordionContent.show,
+.subAccordionContent.show {
+  max-height: 500px; 
+}
+
+.accordionContent p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.subAccordionContent p {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #666;
+}
+
+/* icon */
+.accordionIcon {
+  font-size: 20px; 
+  transition: transform 0.3s ease; 
+}
+.accordionIcon.rotate {
+  transform: rotate(180deg); 
+}
+
+.subAccordionIcon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+.subAccordionIcon.rotate {
+  transform: rotate(180deg);
+}
