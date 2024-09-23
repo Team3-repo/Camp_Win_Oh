@@ -29,8 +29,6 @@ export default function SearchBox() {
         </div>
       </div>
 
-
-
       {/* 進階搜尋區塊，根據狀態顯示或隱藏 */}
       {showAdvancedSearch && <SearchFilter />}
     </>
