@@ -8,18 +8,40 @@ import CartPay from '@/components/book/cartpay'
 import Cartsuccess from '@/components/book/cartsuccess'
 
 export default function BookCart() {
+  // 使用狀態來追蹤當前的步驟
+  const [step, setStep] = useState(1)
+
+  // 渲染購物車頁面
+  const renderCart = () => (
+    <div>
+      {/* 傳遞 setStep 給 CartData */}
+      <CartData setStep={setStep} />
+    </div>
+  );
+
+  const renderPayment = () => (
+    <div>
+      <CartPay setStep={setStep}/>
+    </div>
+  )
+
+  const renderConfirmation = () => (
+    <div>
+      <Cartsuccess setStep={setStep}/>
+      <button onClick={() => alert('付款成功！')}></button>
+    </div>
+  )
 
   return (
     <>
       <Navbar />
-
       {/* step-by-step */}
       <ProgressBar />
-
-      {/* <CartData /> */}
-      <CartPay/>
-      {/* <Cartsuccess/> */}
-
+      <div>
+        {step === 1 && renderCart()}
+        {step === 2 && renderPayment()}
+        {step === 3 && renderConfirmation()}
+      </div>
       <Footer2 />
     </>
   )

@@ -141,28 +141,43 @@
   margin: -20px -20px 20px -20px;
 }
 
-.dateFilter {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.dateSection,
-.guestsSection,
+.dateFilter,
 .typeSection,
-.areaSection {
+.typeOption {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
+  gap:5px;
+}
+.typeSection{
+  padding-top: 10px;
+}
+.guestSection{
+  align-items: center;
+  text-align: left;
+  width: 35%;
+}
+.combineCol{
+  display: flex;
+  flex-direction: column;
 }
 
 .dateSection label,
 .guestSection label,
 .typeSection label,
-.areaSection label {
+.typeOption label {
   font-size: 14px;
+  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
   font-weight: bold;
   color: #2c3e50;
+}
+
+.dateSection {
+  align-items: center;
+  width: 25%;
+  text-align: left;
 }
 
 .regInput,
@@ -172,11 +187,6 @@
   border-radius: 5px;
   font-size: 14px;
   width: 60%;
-}
-
-.calendarIcon {
-  margin-left: -30px;
-  font-size: 16px;
 }
 
 .radioGroup {

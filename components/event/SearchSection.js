@@ -1,4 +1,4 @@
-import styles from '@/styles/EventStyle.module.css'
+
 import React, { useEffect } from 'react'
 import flatpickr from 'flatpickr'
 import 'flatpickr/dist/flatpickr.min.css'
@@ -27,12 +27,12 @@ export default function SearchSection() {
   }, [])
 
   return (
-    <div className={styles.esearchContainer}>
-      <div className={styles.esearchTitle}>
-        <h2 className={styles.esearchTitleh2}>探索活動</h2>
+    <div className='esearch-container'>
+      <div className='esearch-title'>
+        <h2 className='esearch-titleh2'>探索活動</h2>
       </div>
-      <div className={styles.esearchFilters}>
-        <div className={styles.edateFilter}>
+      <div className='esearch-filters'>
+        <div className='edate-filter'>
           <label htmlFor="edate-range">開始及結束日期</label>
           <input
             type="text"
@@ -40,7 +40,7 @@ export default function SearchSection() {
             placeholder="08/24 (Sat) - 08/25 (Sun), 1晚"
           />
         </div>
-        <div className={styles.eregionFilter}>
+        <div className='eregion-filter'>
           <label htmlFor="eregion">區域</label>
           <select id="eregion">
             <option value="北部">北部</option>

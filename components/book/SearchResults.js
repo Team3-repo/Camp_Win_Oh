@@ -46,7 +46,7 @@ const SearchResult = ({
 
           .result-number {
             font-weight: 400;
-            color: var(--secondary-dark);
+            color: #4c3a30;
             display: flex;
             align-items: center;
           }
