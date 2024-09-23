@@ -59,6 +59,63 @@ export default function Footer1() {
         </div>
         <p>Copyright © 2024 會營お | CampWinOh Campground</p>
       </footer>
+      <style jsx>
+        {`
+          .footer1 {
+            display: flex;
+            height: 250px;
+            background-color: #98d293;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            font-weight: normal;
+          }
+          .footer1 h3 {
+            font-family: 'Zen Maru Gothic', sans-serif;
+          }
+          .footer1 h5 {
+            display: flex;
+            justify-content: flex-start;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-weight: normal;
+          }
+          .footer1 p {
+            display: flex;
+            justify-content: center;
+            font-family: 'Zen Maru Gothic', sans-serif;
+          }
+          .footer1 .contact {
+            margin-right: 150px;
+          }
+          .contact ul {
+            list-style-type: none;
+          }
+          .footer1_container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+          }
+          .footer1_container p {
+            display: flex;
+            justify-content: flex-start;
+          }
+          .socialMedia {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+          }
+          .socialMedia_icon {
+            display: flex;
+            flex-direction: row;
+            padding: 15px;
+          }
+          .FB:hover,
+          .IG:hover,
+          .YT:hover {
+            cursor: pointer;
+          }
+        `}
+      </style>
     </>
   )
 }
