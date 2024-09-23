@@ -62,11 +62,11 @@ const ReviewCard = ({ rating, reviewer, date, comment, images }) => {
           }
 
           .reviewer {
-            color: var(--secondary-dark);
+            color: #4c3a30;
           }
 
           .review-date {
-            color: var(--secondary-dark);
+            color: #4c3a30;
           }
 
           .review-comment {
@@ -140,8 +140,7 @@ const Reviews = () => {
       <section className="reviews-section">
         <div className="reviews-summary">
           <div className="overall-rating">
-            <span className="rating-number">4.5</span>
-            <span className="rating-total">/5</span>
+            <span className="rating-number"><h3>4.5/5</h3></span>
           </div>
           <div className="rating-stars">
             <img
@@ -175,8 +174,8 @@ const Reviews = () => {
               alt="Half-filled star"
             />
           </div>
-          <div className="review-count">109 則評價</div>
-          <button className="view-all-reviews">查看全部評價</button>
+          <div className="review-count"><h4>109 則評價</h4></div>
+          <button className="view-all-reviews"><p>查看全部評價</p></button>
         </div>
         
         <div className="review-list">
@@ -202,7 +201,7 @@ const Reviews = () => {
         }
 
         .overall-rating {
-          color: var(--secondary);
+          color: #4c3a30;
         }
 
         .rating-number {
@@ -211,6 +210,7 @@ const Reviews = () => {
 
         .rating-total {
           line-height: 1.625rem;
+          color:#000
         }
 
         .rating-stars {
@@ -224,13 +224,15 @@ const Reviews = () => {
         }
 
         .review-count {
-          color: var(--black);
+          color: #000;
+          
+          font-weight:normal;
         }
 
         .view-all-reviews {
           background-color: transparent;
           border: none;
-          color: var(--black);
+          color: #4c3a30;
           cursor: pointer;
           position:absolute;
           right:10px;

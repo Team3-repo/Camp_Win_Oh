@@ -1,12 +1,12 @@
 import styles from '@/styles/BookCart.module.css'
 import Button from '@/components/book/button'
+import { IoIosArrowDown } from 'react-icons/io'
 import { useState } from 'react'
-import SearchFilter from '@/components/book/SearchFilter'
 
 const accordionData = [
   {
-    title: '填寫資料',
-    content: (
+    title: '已填寫資料',
+    content: (<>
       <div className={styles.formSection}>
         <h4>預訂資訊</h4>
         <div className={styles.bookingInfo}>
@@ -20,12 +20,25 @@ const accordionData = [
             <p>大人: 2人, 小孩: 2人</p>
           </div>
         </div>
-      </div>
-    ),
+      </div><div className={styles.formSection}>
+        <h4>預訂資訊</h4>
+        <div className={styles.bookingInfo}>
+          <img src="https://i.postimg.cc/Z5CgZDBY/4.jpg" alt="Campsite Image" />
+          <div className={styles.bookingDetails}>
+            <p>
+              [山林樂活露營區]
+              <br />
+              標準營位 | 經典區露營 | A區
+            </p>
+            <p>大人: 2人, 小孩: 2人</p>
+          </div>
+        </div>
+      </div></>
+    )
   },
 ]
 
-export default function CartPay() {
+export default function CartPay({ setStep }) {
   const [activeIndex, setActiveIndex] = useState(null)
   const [selectedOption, setSelectedOption] = useState('')
 
@@ -36,24 +49,26 @@ export default function CartPay() {
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value)
   }
+
   return (
     <>
-      <div className="accordion">
+      <div className={styles.accordionPay}>
         {accordionData.map((item, index) => (
-          <div className="accordion-item" key={index}>
+          <div className={styles.accordionItem} key={index}>
             <div
-              className="accordion-header"
+              className={styles.accordionHeader}
               onClick={() => handleToggle(index)}
             >
-              {item.title}
+              <h3>{item.title}</h3>
+              <IoIosArrowDown
+                className={`${styles.accordionIcon} ${
+                  activeIndex === index ? styles.rotate : ''
+                }`}
+              />
             </div>
-            <div
-              className={`accordion-content ${
-                activeIndex === index ? 'open' : ''
-              }`}
-            >
-              {item.content}
-            </div>
+            {activeIndex === index && (
+              <div className={styles.accordionContent}>{item.content}</div>
+            )}
           </div>
         ))}
       </div>
@@ -87,18 +102,23 @@ export default function CartPay() {
               </div>
             </form>
           </div>
+
+          <h5 className={styles.notice}>
+            點擊「確認付款」，即表示您以確認訂單無誤且同意右方顯示的總金額，亦同意
+            服務條款 和取消政策
+          </h5>
+
           <div className={styles.combinePay}>
-            <h5 className={styles.notice}>
-              點擊「確認付款」，即表示您以確認訂單無誤且同意右方顯示的總金額，亦同意
-              服務條款 和取消政策
-            </h5>
             <div className={styles.paybtn}>
-              <Button label="確認付款" />
+              <Button label="返回上頁" onClick={() => setStep(1)} />
+            </div>
+            <div className={styles.paybtn}>
+              <Button label="確認付款" onClick={() => setStep(3)} />
             </div>
           </div>
         </div>
         <div className={styles.orderSummary}>
-          <h2>山林樂活露營區 | 標準營位 | 經典區露營 | A區</h2>
+          <h4>山林樂活露營區 | 標準營位 | 經典區露營 | A區</h4>
           <p>大人: 2人, 小孩: 2人</p>
           <p>日期: 2024年10月15日 - 2024年10月16日</p>
           <p>數量: 1</p>
@@ -107,44 +127,6 @@ export default function CartPay() {
           <p>付款金額: NT$1,050</p>
         </div>
       </div>
-      <style jsx>
-        {`
-          .accordion {
-            width: 80%;
-            margin: 0 auto;
-            padding-bottom: 10px;
-          }
-
-          .accordion-item {
-            border-bottom: 1px solid #ddd;
-          }
-
-          .accordion-header {
-            padding: 15px;
-            cursor: pointer;
-            background-color: #f5f5f5;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-          }
-
-          .accordion-header:hover {
-            background-color: #e0e0e0;
-          }
-
-          .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            padding: 0 15px;
-            background-color: #fafafa;
-            transition: max-height 0.3s ease;
-          }
-
-          .accordion-content.open {
-            max-height: 200px; /* 根據內容的大小調整 */
-            padding: 15px;
-          }
-        `}
-      </style>
     </>
   )
 }

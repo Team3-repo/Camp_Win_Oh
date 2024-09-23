@@ -3,7 +3,7 @@ import Button from '@/components/book/button'
 import { useState } from 'react'
 import SearchFilter from '@/components/book/SearchFilter'
 
-export default function CartData() {
+export default function CartData({ setStep }) {
   // 優惠券
   const [showCoupon, setShowCoupon] = useState(false)
 
@@ -46,7 +46,7 @@ export default function CartData() {
                   type="text"
                   id="phone"
                   name="phone"
-                  maxlength="10"
+                  maxLength="10"
                   required=""
                 />
               </div>
@@ -74,7 +74,7 @@ export default function CartData() {
             </label>
           </div>
           <div className={styles.paybtn}>
-            <Button label="前往付款" />
+            <Button label="前往付款" onClick={() => setStep(2)} />
           </div>
         </div>
         <div className={styles.orderSummary}>

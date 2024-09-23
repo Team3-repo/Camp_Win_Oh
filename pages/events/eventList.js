@@ -6,6 +6,7 @@ import { FaArrowCircleRight } from 'react-icons/fa'
 import FeatureSection2 from '@/components/event/featureSection2'
 import Card from '@/components/book/card'
 import Pagi from '@/components/event/pagi'
+import SearchSection from '@/components/event/SearchSection'
 
 export default function EventList() {
   return (
@@ -25,6 +26,7 @@ export default function EventList() {
           />
         </div>
       </section>
+      <SearchSection />
       <section className="ehilight-topics2">
         <h3 className="esection-title">活動報名中</h3>
         <div className="ehilight-cards">
