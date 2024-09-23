@@ -1,5 +1,5 @@
 import '@/styles/globals.css'
-import '@/styles/component_style/Pagi.css'
+import '@/styles/component_style/pagi.css'
 import '@/styles/component_style/Footer.css'
 import '@/styles/EventStyle.css'
 

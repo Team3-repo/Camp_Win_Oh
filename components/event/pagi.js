@@ -1,41 +1,19 @@
-import React from 'react'
+import React from 'react';
 
-export default function Pagi() {
+export default function PaginationDots({ currentIndex, totalSlides, onDotClick, onPrev, onNext }) {
   return (
-    <>
-      <ul className="pagination modal-4">
-        <li>
-          <h5 href="#" className="prev">
-            <i className="fa fa-chevron-left" />
-            上一頁
-          </h5>
-          <h5>1</h5>
-        </li>
-        <li>
-          <h5>2</h5>
-        </li>
-        <li>
-          <h5>3</h5>
-        </li>
-        <li>
-          <h5>4</h5>
-        </li>
-        <li>
-          <h5>5</h5>
-        </li>
-        <li>
-          <h5>6</h5>
-        </li>
-        <li>
-          <h5>7</h5>
-        </li>
-        <li>
-          <h5 className="next">
-            下一頁
-            <i className="fa fa-chevron-right" />
-          </h5>
-        </li>
-      </ul>
-    </>
-  )
+    <div className="pagination modal-4">
+      <h5 className="prev" onClick={onPrev}>上一頁</h5>
+      {[...Array(totalSlides)].map((_, index) => (
+        <h5
+          key={index}
+          className={index === currentIndex ? 'activeDot' : ''}
+          onClick={() => onDotClick(index)}
+        >
+          {index + 1}
+        </h5>
+      ))}
+      <h5 className="next" onClick={onNext}>下一頁</h5>
+    </div>
+  );
 }

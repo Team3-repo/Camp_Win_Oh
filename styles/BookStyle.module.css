@@ -1,3 +1,143 @@
-body{
-  background-color: black;
+/* SearchBox */
+.SearchContainer {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 10px;
+  justify-content: center;
+  gap: 5px;
+}
+.AdvancedSearchBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* 設定為手型圖標 */
+}
+.AdvancedSearchBtn:hover {
+  color: #4282b7;
+}
+
+/* SearchFilter */
+.AdvancedSearchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.filterContainer {
+  position: relative;
+  border-radius: 4px;
+  width: 70%;
+
+  background-color: #d7ead3;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filterContainer h2 {
+  background-color: #a3d69c;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  margin: -20px -20px 20px -20px;
+}
+
+.dateFilter {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.dateSection,
+.guestsSection,
+.typeSection,
+.areaSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dateSection label,
+.guestSection label,
+.typeSection label,
+.areaSection label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.regInput,
+.select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 60%;
+}
+
+.calendarIcon {
+  margin-left: -30px;
+  font-size: 16px;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.bedType {
+  margin-right: 5px;
+}
+
+/* region */
+.regSearch {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 0;
+}
+
+/* campCard */
+.campCard {
+  display: flex;
+  justify-content: center;
+  color: #4c3a30;
+  padding-top: 10px;
+  font-weight: normal;
+  margin: 0 55px;
+  border-top: 1px solid #333;
+}
+
+/* news */
+.carolCardNews {
+  position: relative;
+  width: 28%;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0 10px;
+}
+.carolNewsContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 50px;
+  cursor: pointer;
+}
+.carolCardNews:hover {
+  transform: scale(1.05);
+}
+.carolCardNews img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.carolNewsH4 {
+  display: flex;
+  justify-content: center;
 }

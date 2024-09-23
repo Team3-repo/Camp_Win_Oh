@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 }
 .filterContainer {
   position: relative;
@@ -92,8 +93,51 @@
   margin-right: 5px;
 }
 
-/* card */
-.bookCard {
-  display: 'flex';
-  gap: '10px';
+/* region */
+.regSearch {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 0;
+}
+
+/* campCard */
+.campCard {
+  display: flex;
+  justify-content: center;
+  color: #4c3a30;
+  padding-top: 10px;
+  font-weight: normal;
+  margin: 0 55px;
+  border-top: 1px solid #333;
+}
+
+/* news */
+.carolCardNews {
+  position: relative;
+  width: 28%;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0 10px;
+}
+.carolNewsContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 50px;
+  cursor: pointer;
+}
+.carolCardNews:hover {
+  transform: scale(1.05);
+}
+.carolCardNews img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.carolNewsH4 {
+  display: flex;
+  justify-content: center;
 }
