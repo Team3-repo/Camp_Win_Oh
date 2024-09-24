@@ -1,7 +1,8 @@
 /**
  **
  */
-import React from "react";
+import React from "react"
+import Counter from "./Counter/Counter";
 
 function ProductInfo() {
   return (
@@ -19,7 +20,8 @@ function ProductInfo() {
           {/* <p className="price-separator">_</p> */}
         </div>
         {/* <h2>NT$1300</h2> */}
-        <div className="quantity-selector">
+        <Counter />
+        {/* <div className="quantity-selector">
           <button className="quantity-btn" aria-label="Decrease quantity">
             -
           </button>
@@ -27,7 +29,7 @@ function ProductInfo() {
           <button className="quantity-btn" aria-label="Increase quantity">
             +
           </button>
-        </div>
+        </div> */}
         <button className="add-to-cart-btn">加入購物車</button>
       </div>
       <style jsx>{`

@@ -4,8 +4,8 @@ import ProductInfo from "@/components/ProductDetails/ProductInfo";
 import OrderSummary from "@/components/ProductDetails/OrderSummary";
 import Description from "@/components/ProductDetails/Description";
 // import Footer from "@/components/Footer";
-import Footer from '@/components/event/footer2'
-import Navbar from '@/components/event/navbar'
+import Footer from '@/components/event/footer2';
+import Navbar from '@/components/event/navbar';
 
 function ProductDetails() {
   return (
@@ -17,10 +17,10 @@ function ProductDetails() {
           <div className="product-layout">
             <ProductInfo />
             <OrderSummary />
+            
           </div>
           <Description />
         </main>
-       
       </div>
        <Footer />
       <style jsx>{`
