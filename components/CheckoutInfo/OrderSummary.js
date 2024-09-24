@@ -134,6 +134,7 @@ const OrderSummary = () => {
           font-size: 16px;
           cursor: pointer;
           margin-top: 16px;
+          {/* font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif; */}
         }
         .coupon-input {
           display: flex;
