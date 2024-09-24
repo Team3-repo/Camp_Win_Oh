@@ -98,7 +98,7 @@ const Profile = () => {
             required={true}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            width="100%"
+            width="80%"
           />
           {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
           <FormField
@@ -109,7 +109,7 @@ const Profile = () => {
             required={true}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            width="100%"
+            width="80%"
           />
           {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
           <FormField
@@ -120,7 +120,7 @@ const Profile = () => {
             required={true}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            width="100%"
+            width="80%"
           />
           {errors.address && <p style={{ color: 'red' }}>{errors.address}</p>}
         </section>
@@ -129,13 +129,13 @@ const Profile = () => {
           style={{
             display: 'flex',
             gap: '5px',
-            justifyContent: 'flex-end',
+            // justifyContent: 'flex-end',
             margin: '20px 0',
           }}
         >
           <Button label="取消" onClick={handleCancel} />
           <Button
-            label="儲存變更"
+            label="提交"
             onClick={handleSaveChanges} // 呼叫儲存變更的處理邏輯
             type="btn-reg"
           />
