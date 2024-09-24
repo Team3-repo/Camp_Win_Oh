@@ -82,19 +82,20 @@ function CartItem() {
           gap: 16px;
         }
         .quantityButton {
-          background-color: rgba(217, 217, 217, 0);
           font-size: 28px;
           font-weight: 700;
           width: 39px;
           height: 39px;
-          border: 1px solid #626262;
           cursor: pointer;
+          border: 1px solid #626262;
+          background-color: #fc9a84;
         }
         .quantity {
           font-size: 24px;
           font-weight: 400;
           padding: 5px 27px;
-          border: 1px solid #626262;
+          {/* background-color: #fc9a84; */}
+          {/* border: 1px solid #626262; */}
         }
         @media (max-width: 991px) {
           .cartItem {
