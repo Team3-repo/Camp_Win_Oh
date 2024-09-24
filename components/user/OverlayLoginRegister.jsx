@@ -94,18 +94,28 @@ const OverlayLoginRegister = ({ onClose }) => {
               </div>
             )}
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <button type="submit">{isLogin ? '登錄' : '註冊'}</button>
+            
+            {/* 將兩個按鈕放入同一個容器 */}
+            <div className="button-container">
+              <button label={isLogin ? '登錄' : '註冊'} type="submit">
+                {isLogin ? '登錄' : '註冊'}
+              </button>
+              <button
+              type='button'
+                label={`切換到${isLogin ? '註冊' : '登錄'}`}
+                onClick={() => {
+                  setIsLogin(!isLogin)
+                  setError('') // 切換時清除錯誤
+                }}
+              >
+                切換到{isLogin ? '註冊' : '登錄'}
+              </button>
+            </div>
           </form>
-          <button
-            onClick={() => {
-              setIsLogin(!isLogin)
-              setError('') // 切換時清除錯誤
-            }}
-          >
-            切換到{isLogin ? '註冊' : '登錄'}
+
+          <button className="closeBtn" label={`X`} onClick={onClose}>
+            X
           </button>
-          <br />
-          <button onClick={onClose}>關閉</button>
         </div>
       </div>
 
@@ -121,15 +131,54 @@ const OverlayLoginRegister = ({ onClose }) => {
           justify-content: center;
           align-items: center;
           z-index: 1000; /* 確保在最上面 */
+          backdrop-filter: blur(5px);
         }
         .overlay-content {
+          position: relative; /* 確保 closeBtn 相對於此元素定位 */
           background: white;
           padding: 20px;
           border-radius: 8px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        .button-container {
+          display: flex; /* 使用 Flexbox 排列 */
+          gap: 10px; /* 按鈕之間的間距 */
+          justify-content: center; /* 將按鈕置中 */
+          margin-top: 10px; /* 與上方元素的間距 */
+        }
         button {
-          margin-top: 10px;
+          padding: 8px 16px; /* 按鈕內部間距 */
+          background-color: #4caf50; /* 預設按鈕背景色 */
+          color: white; /* 按鈕字體顏色 */
+          border: none; /* 去除按鈕邊框 */
+          cursor: pointer; /* 滑鼠樣式 */
+          border-radius: 4px; /* 按鈕圓角 */
+          transition: background-color 0.3s; /* 背景色轉換效果 */
+        }
+        button:hover {
+          background-color: #000000; /* 按鈕 hover 背景色 */
+        }
+        .closeBtn {
+          display: block;
+          position: absolute;
+          top: -20px; /* 調整至上方 */
+          right: -10px; /* 調整至右側 */
+          color: black; /* 測試用的字體顏色 */
+          border: none; /* 去掉邊框 */
+          cursor: pointer; /* 游標變為手指形狀 */
+          padding: 10px;
+          background-color: #fc9a84;
+          border-radius: 30%;
+          width: 30px;
+          height: 30px;
+          text-align: center;
+          font-weight: bold;
+          line-height: 13px;
+          font-size: 16px;
+        }
+        .closeBtn:hover {
+          background-color: black;
+          color: white;
         }
       `}</style>
     </>
