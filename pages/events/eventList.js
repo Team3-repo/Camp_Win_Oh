@@ -26,7 +26,9 @@ export default function EventList() {
           />
         </div>
       </section>
+      <section className='searchsection'>
       <SearchSection />
+      </section>
       <section className="ehilight-topics2">
         <h3 className="esection-title">活動報名中</h3>
         <div className="ehilight-cards">

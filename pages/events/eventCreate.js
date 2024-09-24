@@ -7,26 +7,49 @@ import Button from '@/components/book/button'
 
 export default function EventCreate() {
   useEffect(() => {
+    // 僅允許選擇今天或之後的日期
     flatpickr('#start-date', {
       dateFormat: 'Y-m-d',
+      minDate: new Date(),
+      onChange: function (selectedDates, dateStr, instance) {
+        // 當開始日期改變時，更新結束日期的 minDate
+        const endDateInput = document.getElementById('end-date')
+        if (selectedDates.length > 0) {
+          endDateInput._flatpickr.set('minDate', selectedDates[0])
+        } else {
+          endDateInput._flatpickr.set('minDate', new Date())
+        }
+      },
     })
+
+    // 初始化 end-date，限制只能選擇開始日期之後的日期
     flatpickr('#end-date', {
       dateFormat: 'Y-m-d',
+      minDate: new Date(), // 默認為今天或之後的日期
     })
   }, [])
+
+  // 驗證輸入的數字是否為負數
+  const validateECNumber = (e) => {
+    const value = e.target.value
+    if (value < 0) {
+      e.target.value = 0 // 輸入負數，自動設置0
+      alert('填入數值不得為負數')
+    }
+  }
 
   return (
     <>
       <Navbar />
-      <section className="ecsection-title">
+      <div className="ecsection-title">
         <h2>創建活動</h2>
-      </section>
+      </div>
       <section className="ecsectionall">
         <div className="ecsection-form">
           {/* 上傳圖片 */}
-          <section className="ecsection">
+          <div className="ecsection">
             <div className="ectitle">
-              <h3 className="ech2">上傳圖片</h3>
+              <h3 className="ech3">上傳圖片</h3>
             </div>
             <div className="ecupload-wrapper">
               <img id="ecuploaded-image" src="" alt="uploaded-image" />
@@ -43,10 +66,24 @@ export default function EventCreate() {
                 </button>
               </div>
             </div>
-
+            {/* 活動簡介 */}
+            <div className="ectitle">
+              <h3 className="ech3">活動簡介</h3>
+            </div>
+            <div className="ecform-group">
+              <label htmlFor="notes">請簡述活動的背景、行程安排</label>
+              <textarea id="notes" rows={4} defaultValue={''} />
+            </div>
+            {/* 報名截止日 */}
+            <div className="ecdate-group">
+              <div className="ecform-group">
+                <label htmlFor="start-date">報名截止日期</label>
+                <input type="text" id="start-date" placeholder="選擇開始日期" />
+              </div>
+            </div>
             {/* 活動資訊 */}
             <div className="ectitle">
-              <h3 className="ech2">活動資訊</h3>
+              <h3 className="ech3">活動資訊</h3>
             </div>
             {/* 主辦人（自動帶入會員名稱） */}
             <div className="ecform-group">
@@ -66,12 +103,22 @@ export default function EventCreate() {
             {/* 人數限制 */}
             <div className="ecform-group">
               <label htmlFor="ecpeople-limit">人數限制</label>
-              <input type="number" id="ecpeople-limit" required />
+              <input
+                type="number"
+                id="ecpeople-limit"
+                onChange={validateECNumber}
+                required
+              />
             </div>
             {/* 費用 */}
             <div className="ecform-group">
-              <label htmlFor="ecfee">費用（單位：每人）</label>
-              <input type="number" id="ecfee" required />
+              <label htmlFor="ecfee">費用（每人）</label>
+              <input
+                type="number"
+                id="ecfee"
+                onChange={validateECNumber} // 添加 onChange 事件處理程序
+                required
+              />
             </div>
             {/* 日期選擇 */}
             <div className="ecdate-group">
@@ -84,6 +131,7 @@ export default function EventCreate() {
                 <input type="text" id="end-date" placeholder="選擇結束日期" />
               </div>
             </div>
+
             {/* 區域和營地 */}
             <div className="eclocation-group">
               <div className="ecform-group">
@@ -108,9 +156,9 @@ export default function EventCreate() {
               <label htmlFor="notes">備註</label>
               <textarea id="notes" rows={4} defaultValue={''} />
             </div>
-          </section>
+          </div>
           {/* 主辦人聲明 */}
-          <section className="ecsection">
+          <div className="ecsection">
             <div className="ectitle">
               <h3 className="ech3">揪團主辦人聲明</h3>
             </div>
@@ -122,12 +170,40 @@ export default function EventCreate() {
             <div className="eccheckbox">
               <input type="checkbox" id="ecagree" /> 我已閱讀並同意上述聲明
             </div>
-          </section>
+          </div>
+          <div className="joinbtn">
+            {/* 提交按鈕 */}
+            <Button label="建立活動" onClick={() => alert('Button clicked!')} />
+          </div>
         </div>
-        {/* 提交按鈕 */}
-        <Button label="建立活動" onClick={() => alert('Button clicked!')} />
+        <div className="eventSummary">
+          <div className="ectitle">
+            <h3 className="ech3">活動預覽</h3>
+          </div>
+          <p>
+            <strong>主辦人：</strong>兔兔
+          </p>
+          <p>
+            <strong>活動名稱：</strong>夏日狂歡派對
+          </p>
+          <p>
+            <strong>成員數量：</strong>4人/6人
+          </p>
+          <p>
+            <strong>每人費用：</strong>1200
+          </p>
+          <p>
+            <strong>活動時間：</strong>2024年09月23日 - 2024年09月24日
+          </p>
+          <p>
+            <strong>活動地點：</strong>山林營地第20號
+          </p>
+          <p>
+            <strong>備註：</strong>
+            儲存所有垃圾並帶走，參加者請自備帳篷等裝備，避免攜帶過量行李。
+          </p>
+        </div>
       </section>
-
       <Footer2 />
     </>
   )

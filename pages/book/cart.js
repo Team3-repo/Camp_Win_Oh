@@ -42,6 +42,11 @@ export default function BookCart() {
         {step === 2 && renderPayment()}
         {step === 3 && renderConfirmation()}
       </div>
+
+      <CartData />
+      {/* <CartPay/> */}
+      {/* <Cartsuccess/> */}
+
       <Footer2 />
     </>
   )

@@ -22,21 +22,21 @@ export default function FeatureSection1() {
         <div className="feature-item1">
           <h3 className="feature-title1">輕鬆揪團 快速出發</h3>
           <p className="feature-description1">
-            輕鬆找到適合你的露營夥伴，馬上出發吧！
+            輕鬆找到適合你的露營夥伴，馬上出發
           </p>
         </div>
 
         <div className="feature-item1">
           <h3 className="feature-title1">豐富活動選擇</h3>
           <p className="feature-description1">
-            本站提供多樣化的揪團活動選擇，滿足不同需求，讓每個人都能享受到屬於自己的露營時光
+          找到適合你的揪團，享受獨特露營時光
           </p>
         </div>
 
         <div className="feature-item1">
           <h3 className="feature-title1">探索新地點</h3>
           <p className="feature-description1">
-            透過揪團功能，發現那些隱藏的露營寶地，讓你每次都有新的驚喜
+          揪團探索隱藏露營地，每次都有新驚喜
           </p>
         </div>
       </div>
