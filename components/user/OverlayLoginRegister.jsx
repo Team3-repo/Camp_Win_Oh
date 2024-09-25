@@ -135,7 +135,7 @@ const OverlayLoginRegister = ({ onClose }) => {
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+                    {/* background-color: rgba(0, 0, 0, 0.001); /* 半透明背景 */ */}
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -144,9 +144,9 @@ const OverlayLoginRegister = ({ onClose }) => {
                     opacity: 0; /* 初始狀態為透明 */
                 }
                 .overlay.color-changed {
-                    backdrop-filter: blur(5px); /* 初始狀態為無模糊 */
+                    backdrop-filter: blur(100px); /* 初始狀態為無模糊 */
                     opacity: 1; /* 初始狀態為透明 */
-                    transition: backdrop-filter 1s ease, opacity 1s ease; /* 設定過渡效果 */
+                    transition: backdrop-filter 10000ms  linear, opacity 200ms  linear; /* 設定過渡效果 */
                 }
                 .overlay-content {
                     position: relative; /* 確保 closeBtn 相對於此元素定位 */

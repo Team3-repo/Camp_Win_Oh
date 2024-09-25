@@ -18,6 +18,8 @@ function Billing() {
             {isOverlayOpen && (
                 <OverlayLoginRegister onClose={() => setIsOverlayOpen(false)} />
             )}
+            <br />
+            <a href="http://localhost:3000/"><span style={{color: 'red'}}>http://localhost:3000/</span></a>
         </div>
     );
 }
