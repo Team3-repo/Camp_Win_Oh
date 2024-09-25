@@ -1,16 +1,15 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "../../../styles/CounterStyles.module.css";
 
-function Counter({ initialCount = 1 }) {
-  const [count, setCount] = useState(initialCount);
-
+function Counter({ quantity, updateQuantity }) {
   const increment = () => {
-    setCount((prevCount) => prevCount + 1);
+    updateQuantity(quantity + 1);
   };
 
   const decrement = () => {
-    setCount((prevCount) => prevCount - 1);
+    if (quantity > 1) {
+      updateQuantity(quantity - 1);
+    }
   };
 
   return (
@@ -18,7 +17,7 @@ function Counter({ initialCount = 1 }) {
       <button className={styles.btn} onClick={decrement}>
         -
       </button>
-      <span className={styles.count}>{count}</span>
+      <span className={styles.count}>{quantity}</span>
       <button className={styles.btn} onClick={increment}>
         +
       </button>

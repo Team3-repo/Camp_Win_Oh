@@ -13,7 +13,7 @@ export default function ShowData({ products }) {
             <p>價格: ${product.product_price}</p>
             <p>數量: {product.product_num}</p>
             <p>描述: {product.product_desc}</p>
-            <img src={`/images/${product.product_pic}`} alt={product.product_name} width={100} height={100} />
+            <img src={`/uploads/${product.product_pic}`} alt={product.product_name} width={100} height={100} />
           </li>
         ))}
       </ul>

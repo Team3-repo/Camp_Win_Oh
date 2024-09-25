@@ -2,9 +2,10 @@
  **
  */
 import React from "react"
-import Counter from "./Counter/Counter";
+import Counter from "../../components/ProductDetails/Counter/Counter";
+// import OrderSummary from "../../components/ProductDetails/OrderSummary";
 
-function ProductInfo() {
+function ProductInfo({ quantity, updateQuantity, addToCart, pricePerItem }) {
   return (
     <section className="product-info">
       <img
@@ -16,11 +17,11 @@ function ProductInfo() {
       <div className="product-details">
         <h2 className="product-title">露營帳篷</h2>
         <div className="price-container">
-          <p className="storeproduct-price">NT$1300</p>
-          {/* <p className="price-separator">_</p> */}
+        <p className="storeproduct-price">NT${pricePerItem}</p>
+        {/* <p className="price-separator">_</p> */}
         </div>
         {/* <h2>NT$1300</h2> */}
-        <Counter />
+        <Counter quantity={quantity} updateQuantity={updateQuantity} />
         {/* <div className="quantity-selector">
           <button className="quantity-btn" aria-label="Decrease quantity">
             -
@@ -30,8 +31,9 @@ function ProductInfo() {
             +
           </button>
         </div> */}
-        <button className="add-to-cart-btn">加入購物車</button>
+        <button className="add-to-cart-btn" onClick={addToCart}>加入購物車</button>
       </div>
+      
       <style jsx>{`
         .product-info {
           display: flex;

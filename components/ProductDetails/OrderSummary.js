@@ -2,7 +2,9 @@ import React from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 import { MdArrowDropUp } from 'react-icons/md'
 
-function OrderSummary() {
+function OrderSummary({ cartItems }) {
+    const totalAmount = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+
   return (
     <aside className="order-summary">
       <div className="summary-icon">
@@ -22,7 +24,8 @@ function OrderSummary() {
       </div>
         <h3 className="summary-title">目前訂單</h3>
         <div className="summary-details">
-          <div className="product-row">
+        {cartItems.map((item, index) => (
+          <div className="product-row" key={index}>
             <span className="product-label">商品</span>
             <img
               loading="lazy"
@@ -30,11 +33,12 @@ function OrderSummary() {
               className="product-thumbnail"
               alt="Camping Tent Thumbnail"
             />
-            <span className="product-name">露營帳篷*1</span>
-          </div>
-          <div className="subtotal-row">
+            <span className="product-name">{item.name} * {item.quantity}</span>
+            </div>
+          ))}
+            <div className="subtotal-row">
             <span className="subtotal-label">小計</span>
-            <span className="subtotal-amount">NT$ 1,300</span>
+            <span className="subtotal-amount">NT$ {totalAmount}</span>
           </div>
         </div>
         <button className="view-cart-btn">查看購物車</button>

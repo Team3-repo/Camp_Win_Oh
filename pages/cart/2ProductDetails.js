@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react'; // 確保這行存在
 // import Header from "@/components/Header";
 import ProductInfo from "@/components/ProductDetails/ProductInfo";
 import OrderSummary from "@/components/ProductDetails/OrderSummary";
@@ -8,6 +8,19 @@ import Footer from '@/components/event/footer2';
 import Navbar from '@/components/event/navbar';
 
 function ProductDetails() {
+
+  const [quantity, setQuantity] = useState(1);
+  const [cartItems, setCartItems] = useState([]); // 用於儲存購物車項目
+  const pricePerItem = 1300;
+  
+  const updateQuantity = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
+
+  const addToCart = () => {
+    setCartItems([{ name: '露營帳篷', quantity, price: pricePerItem }]);
+  };
+
   return (
     <>
     <Navbar />
@@ -15,8 +28,8 @@ function ProductDetails() {
         {/* <Header /> */}
         <main className="product-content">
           <div className="product-layout">
-            <ProductInfo />
-            <OrderSummary />
+          <ProductInfo quantity={quantity} updateQuantity={updateQuantity} addToCart={addToCart} pricePerItem={pricePerItem} />
+          <OrderSummary cartItems={cartItems} />
             
           </div>
           <Description />
