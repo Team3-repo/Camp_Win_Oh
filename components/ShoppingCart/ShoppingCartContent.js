@@ -1,17 +1,22 @@
-/**
- **
- */
 import React from "react";
 import CartItem from "./CartItem";
 import CouponSection from "./CouponSection";
 import TotalSection from "./TotalSection";
 
-function ShoppingCartContent() {
+function ShoppingCartContent({ cartItems, setCartItems }) {
   return (
     <main className="content">
       <h1 className="pageTitle">商品</h1>
       <div className="divider" />
-      <CartItem />
+      {cartItems.map((item, index) => (
+        <CartItem 
+          key={index} 
+          item={item} 
+          cartItems={cartItems} 
+          setCartItems={setCartItems} 
+        /> 
+        /* 傳遞 item 和狀態管理函數 */
+      ))}
       <div className="divider" />
       <CouponSection />
       <TotalSection />

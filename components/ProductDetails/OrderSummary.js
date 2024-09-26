@@ -1,11 +1,11 @@
-import React from 'react'
-import { FaShoppingCart } from 'react-icons/fa'
-import { MdArrowDropUp } from 'react-icons/md'
-import { useRouter } from 'next/router' // 引入 useRouter
+import React from 'react';
+import { FaShoppingCart } from 'react-icons/fa';
+import { MdArrowDropUp } from 'react-icons/md';
+import { useRouter } from 'next/router'; // 引入 useRouter
 
-function OrderSummary({ cartItems }) {
+function OrderSummary({ cartItems, setCartItems }) {
     const router = useRouter(); // 初始化 useRouter
-    const totalAmount = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+    const totalAmount = (cartItems || []).reduce((total, item) => total + item.quantity * item.price, 0); // 計算總金額
 
     // 定義 handleViewCart 函數來處理按鈕點擊
     const handleViewCart = () => {
@@ -31,7 +31,7 @@ function OrderSummary({ cartItems }) {
           </div>
           <h3 className="summary-title">目前訂單</h3>
           <div className="summary-details">
-            {cartItems.map((item, index) => (
+            {(cartItems || []).map((item, index) => (
               <div className="product-row" key={index}>
                 <span className="product-label">商品</span>
                 <img
@@ -68,7 +68,6 @@ function OrderSummary({ cartItems }) {
             left: 50%;
             transform: translate(-50%, -50%);
           }
-
           .summary-image {
             width: 64px;
             height: 64px;
@@ -84,7 +83,7 @@ function OrderSummary({ cartItems }) {
             position: relative;
             align-self: flex-end;
           }
-          .arrow-icon{
+          .arrow-icon {
             position: absolute;
             transform: translate(200%, -80%);
           }
@@ -133,7 +132,7 @@ function OrderSummary({ cartItems }) {
           }
         `}</style>
       </aside>
-    )
+    );
 }
 
-export default OrderSummary
+export default OrderSummary;
