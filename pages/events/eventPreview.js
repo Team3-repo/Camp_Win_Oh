@@ -127,46 +127,14 @@ export default function EventDetail() {
               </dl>
             </div>
           </div>
-          {/* 參與者聲明 */}
-          <div className="ecsection">
-            <div className="ectitle">
-              <h3 className="ech3">活動參與條款</h3>
-            </div>
-            <div className="ecdeclaragree">
-              <p>
-                我了解並同意，作為參與活動者，我必須遵守所有活動規範及安全指引，並尊重主辦人及其他參與者的權利。在活動過程中，我需自行評估活動的風險，並對自己的行為負責。任何因我不當行為造成的損害或傷害，均由我自行承擔。本網站對於因參與該活動所引起的任何事故、損失或法律責任不承擔任何連帶責任。
-              </p>
-            </div>
-            <div className="eccheckbox">
-              <input type="checkbox" id="ecagree" /> 我已閱讀並同意上述聲明
-            </div>
-          </div>
-          <div className="joinbtn">
+          <div className="joinbtn1">
             {/* 提交按鈕 */}
-            <Button label="參加活動" onClick={() => alert('Button clicked!')} />
+            <Button label="回上一頁" onClick={() => alert('Button clicked!')} />
+            <Button label="確認送出" onClick={() => alert('Button clicked!')} />
           </div>
         </div>
 
         <div className="memfea">
-          <div className="eventMember">
-            <div className="ectitle">
-              <h3 className="ech3">
-                參與成員（{eventDetails.participants.length}/
-                {eventDetails.maxPeople}人）
-              </h3>
-            </div>
-            <div className="eparticipant-list">
-              {eventDetails.participants.map((participant) => (
-                <div key={participant.id} className="eparticipant-item">
-                  <img
-                    src={participant.avatar}
-                    alt={`${participant.name}的大頭貼`}
-                    className="eparticipant-avatar"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
           <CampingFeatures />
         </div>
       </section>

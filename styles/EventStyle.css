@@ -366,7 +366,6 @@
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 50px;
-
   border-left: 10px solid #ff5833;
   padding-left: 15px;
   left: 30%;
@@ -378,6 +377,12 @@
   align-items: flex-start;
   margin: 20px;
   gap: 30px;
+}
+
+.ecsection-form{
+  display: flex;
+  flex-direction: column;
+
 }
 .ecsectionall2 {
   display: flex;
@@ -392,6 +397,15 @@
 .ech3 {
   color: #ff5833;
   font-size: 24px;
+}
+.ech4 {
+  color: white;
+  font-size: 16px;
+}
+legend {
+  background-color: #ff5833;
+  padding: 3px 6px;
+  border-radius: 4px;
 }
 
 .ecform-group label::after {
@@ -417,6 +431,11 @@
   padding: 10px 0px;
   margin-bottom: 20px;
   border-bottom: 2px solid #ff5833;
+}
+
+.ectitle2 {
+  margin-bottom: 10px;
+  /* border-bottom: 2px solid #ff5833; */
 }
 
 .ecupload-wrapper {
@@ -475,6 +494,8 @@
   padding-bottom: 20px;
 }
 
+
+
 .ecform-group label {
   font-weight: bold;
   color: #4c3a30;
@@ -494,10 +515,26 @@
 .ecform-group p {
   font-size: 16px;
 }
-.ecdate-group,
+.ecdate-group {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.ecaboutuser {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.exaboutno {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
 .eclocation-group {
   display: flex;
-  gap: 20px;
+  flex-direction: row;
+  gap: 40px;
 }
 
 .ecdeclaragree {
@@ -521,16 +558,23 @@
   display: flex;
   justify-content: flex-end;
 }
+.joinbtn1 {
+  display: flex;
+  justify-content: space-between;
+}
 .eventSummary {
-  background-color: #fff;
-  padding: 20px;
+  border: 1px solid #e74c3c;
+  padding: 10px;
+  margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 30%;
+  display: flex;
+  flex-direction: column;
 }
 .eventSummary p {
   margin-bottom: 10px;
-  color: #333;
+  color: #ff5833;
+  font-size: 14px;
 }
 
 .memfea {
@@ -697,4 +741,53 @@
 }
 option {
   font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
+/* eventCSuccess.js */
+.ecssuccess-message {
+  background-color: #ffe6e6;
+  color: #e74c3c;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ecsevent-list h2 {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.ecsevent-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f9f4;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 20px auto;
+  /* margin-bottom: 20px; */
+}
+
+.ecsevent-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.ecsevent-details {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.ecsevent-details p {
+  margin: 5px 0;
+}
+.entmorebtn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
