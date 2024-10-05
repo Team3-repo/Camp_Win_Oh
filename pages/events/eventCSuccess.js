@@ -8,7 +8,7 @@ export default function eventCSuccess() {
     <>
       <Navbar />
       <section className="ecssuccess-message">
-        <h3>活動建立成功！</h3>
+        <h3>活動建立成功</h3>
       </section>
       <section className="ecsevent-list">
         <div className="ecsevent-card">
@@ -32,10 +32,6 @@ export default function eventCSuccess() {
             </p>
             <p>
               <strong>活動日期:</strong> 2024年9月28日 - 2024年9月29日
-            </p>
-            <p>
-              <strong>詳細說明:</strong>{' '}
-              請帶自己的烤肉器具與食材，建議攜帶野營椅
             </p>
           </div>
         </div>

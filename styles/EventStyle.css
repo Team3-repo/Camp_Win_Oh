@@ -248,7 +248,7 @@
 }
 .einfo-label {
   color: #6f8e62;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   width: 64px;
   font-weight: bold;
 }
@@ -379,10 +379,9 @@
   gap: 30px;
 }
 
-.ecsection-form{
+.ecsection-form {
   display: flex;
   flex-direction: column;
-
 }
 .ecsectionall2 {
   display: flex;
@@ -494,8 +493,6 @@ legend {
   padding-bottom: 20px;
 }
 
-
-
 .ecform-group label {
   font-weight: bold;
   color: #4c3a30;
@@ -605,6 +602,56 @@ legend {
   margin-right: 8px; /* 右邊距離 */
   object-fit: cover; /* 確保圖片不變形 */
 }
+
+/* -----庫存顯示start----- */
+.ecamping-options {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.ecamping-options table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
+.ecamping-options th,
+.ecamping-options td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  color: #4c3a30;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ecamping-options th {
+  background-color: #f2f2f2;
+}
+
+.ecamping-options td {
+  vertical-align: middle;
+}
+
+.ecamping-options button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 3px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  cursor: pointer;
+}
+
+.ecamping-options table tbody td input {
+  width: 70%;
+}
+.ecamping-options input[type='radio'] {
+  transform: scale(1.5);
+  cursor: pointer;
+}
+/* -----庫存顯示end----- */
 
 /* eventUpdate.js */
 .eusectionall {
@@ -745,8 +792,8 @@ option {
 
 /* eventCSuccess.js */
 .ecssuccess-message {
-  background-color: #ffe6e6;
-  color: #e74c3c;
+  background-color: #e74c3c;
+  color: #ffe6e6;
   padding: 10px;
   text-align: center;
   font-weight: bold;
@@ -755,6 +802,7 @@ option {
 .ecsevent-list h2 {
   margin: 20px 0;
   text-align: center;
+  color: #4c3a30;
 }
 
 .ecsevent-card {
@@ -785,6 +833,7 @@ option {
 
 .ecsevent-details p {
   margin: 5px 0;
+  color: #4c3a30;
 }
 .entmorebtn {
   display: flex;

@@ -6,76 +6,38 @@ import Footer2 from '@/components/event/footer2'
 import Button from '@/components/book/button'
 import CampingFeatures from '@/components/event/CampingFeatures'
 
-// 模擬 API 請求（用於示範，請替換為實際 API 調用）
-const fetchEventDetails = async () => {
-  // 模擬後端 API 回應的資料
-  return {
-    id: 1, // 活動 ID
-    title: '夏日狂歡派對',
-    description:
-      '這是一場充滿歡笑和活力的夏日派對活動，讓我們一起盡情享受夏日的陽光和大自然的美好。',
-    imageUrl:
-      'https://cdn.builder.io/api/v1/image/assets/TEMP/2c4f42695911ec327af3315bd4e177bdf625338dc60fd9748e07ebb6fc9deab6?placeholderIfAbsent=true&apiKey=917a01bb4dc8469db872546ae2709b5f',
-    memberid: '兔兔',
-    registrationDeadline: '2024-09-22', // 報名截止日期
-    maxPeople: 6,
-    fee: 1200,
-    startDate: '2024-09-23',
-    endDate: '2024-09-24',
-    area: '東部',
-    camp: '山Chill',
-    campAdd: '台灣花蓮縣秀林鄉太魯閣村200號',
-    notes: '儲存所有垃圾並帶走，參加者請自備帳篷等裝備，避免攜帶過量行李。',
-    participants: [
-      // 模擬參與者資料
-      {
-        id: 1,
-        name: '小明',
-        avatar:
-          'https://i.postimg.cc/3Rs3YT9M/DALL-E-2024-08-20-23-37-48-A-cute-chibi-style-illustration-of-a-camping-theme-similar-to-the-pro.webp',
-      },
-      {
-        id: 2,
-        name: '小華',
-        avatar:
-          'https://i.postimg.cc/3Rs3YT9M/DALL-E-2024-08-20-23-37-48-A-cute-chibi-style-illustration-of-a-camping-theme-similar-to-the-pro.webp',
-      },
-      {
-        id: 3,
-        name: '小強',
-        avatar:
-          'https://i.postimg.cc/3Rs3YT9M/DALL-E-2024-08-20-23-37-48-A-cute-chibi-style-illustration-of-a-camping-theme-similar-to-the-pro.webp',
-      },
-    ],
-  }
-}
-
 export default function EventDetail() {
   const [eventDetails, setEventDetails] = useState(null)
 
-  // 在組件載入時調用 API 並設置資料
+  // 在組件載入時從 localStorage 獲取資料
   useEffect(() => {
-    fetchEventDetails().then((data) => setEventDetails(data))
+    const storedData = localStorage.getItem('eventPreviewData')
+    if (storedData) {
+      const eventData = JSON.parse(storedData)
+      setEventDetails(eventData)
+    }
   }, [])
 
   // 如果資料尚未載入，顯示 Loading...
   if (!eventDetails) {
-    return <p>Loading...</p>
+    return <h2>Loading...</h2>
   }
 
   return (
     <>
       <Navbar />
       <div className="ecsection-title">
-        <h2>{eventDetails.title}</h2>
+        <h2>預覽</h2>
       </div>
       <section className="ecsectionall2">
         <div className="ecsection-form">
-          {/* 圖片 */}
+          {/* 圖片（此處未使用圖片上傳功能，因此不顯示） */}
           <div className="ecsection">
             <div className="event-content">
               <img
-                src={eventDetails.imageUrl}
+                src={
+                  eventDetails.imageUrl || 'https://via.placeholder.com/400x200'
+                }
                 alt="Event image"
                 className="event-image"
               />
@@ -94,18 +56,21 @@ export default function EventDetail() {
             </div>
             <div className="event-info">
               <dl className="einfo-list">
+                <dt className="einfo-label">活動名稱</dt>
+                <dd className="einfo-value">{eventDetails.title}</dd>
                 <dt className="einfo-label">主辦人</dt>
-                <dd className="einfo-value">{eventDetails.memberid}</dd>
+                <dd className="einfo-value">{eventDetails.organizerNick}</dd>
 
                 <dt className="einfo-label">報名截止</dt>
                 <dd className="einfo-value">
-                  {eventDetails.registrationDeadline}
+                  {eventDetails.registrationDeadline || 'N/A'}
                 </dd>
 
-                <dt className="einfo-label">活動日期</dt>
-                <dd className="einfo-value">
-                  {eventDetails.startDate} - {eventDetails.endDate}
-                </dd>
+                <dt className="einfo-label">開始日期</dt>
+                <dd className="einfo-value">{eventDetails.startDate}</dd>
+
+                <dt className="einfo-label">結束日期</dt>
+                <dd className="einfo-value">{eventDetails.endDate}</dd>
 
                 <dt className="einfo-label">區域</dt>
                 <dd className="einfo-value">{eventDetails.area}</dd>
@@ -116,11 +81,25 @@ export default function EventDetail() {
                 <dt className="einfo-label">營地地址</dt>
                 <dd className="einfo-value">{eventDetails.campAdd}</dd>
 
-                <dt className="einfo-label">人數限制</dt>
-                <dd className="einfo-value">{eventDetails.maxPeople} 人</dd>
+                <dt className="einfo-label">住宿類型</dt>
+                <dd className="einfo-value">
+                  {eventDetails.selectedAccommodation?.name || '尚未選擇住宿'}
+                </dd>
 
-                <dt className="einfo-label">每人費用</dt>
-                <dd className="einfo-value">{eventDetails.fee} 元</dd>
+                <dt className="einfo-label">活動人數</dt>
+                <dd className="einfo-value">{eventDetails.eventPeople} 人</dd>
+
+                <dt className="einfo-label">
+                  負擔費用<p>（每人）</p>
+                </dt>
+                <dd className="einfo-value">
+                  {parseInt(eventDetails.costPerPerson)} 元
+                </dd>
+
+                <dt className="einfo-label">其他支出</dt>
+                <dd className="einfo-value">
+                  {parseInt(eventDetails.otherFees)} 元
+                </dd>
 
                 <dt className="einfo-label">備註</dt>
                 <dd className="einfo-value">{eventDetails.notes}</dd>
@@ -129,8 +108,14 @@ export default function EventDetail() {
           </div>
           <div className="joinbtn1">
             {/* 提交按鈕 */}
-            <Button label="回上一頁" onClick={() => alert('Button clicked!')} />
-            <Button label="確認送出" onClick={() => alert('Button clicked!')} />
+            <Button
+              label="回上一頁"
+              onClick={() => (window.location.href = '/create.html')}
+            />
+            <Button
+              label="確認送出"
+              onClick={() => alert('活動已確認送出！')}
+            />
           </div>
         </div>
 
