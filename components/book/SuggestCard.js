@@ -50,6 +50,8 @@ export default function SuggestCard() {
   const totalSlides = Math.ceil(images.length / slidesToShow)
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
+
   const goToPrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + totalSlides) % totalSlides)
   }
@@ -72,7 +74,14 @@ export default function SuggestCard() {
             {getVisibleSlides().map((image, index) => (
               <div key={index} className={styles.carolCard}>
                 <img src={image.src} alt={image.alt} />
-                <div className={styles.overlay}>{image.text}</div>
+                <div
+                  className={styles.overlay}
+                  onClick={() => {
+                    window.location.href = `${baseURL}/book`
+                  }}
+                >
+                  {image.text}
+                </div>
               </div>
             ))}
           </div>

@@ -2,6 +2,7 @@ import styles from '@/styles/BookCart.module.css'
 import Button from '@/components/book/button'
 import { useState } from 'react'
 import SearchFilter from '@/components/book/SearchFilter'
+import ProgressBar from './ProgressBar'
 
 export default function CartData({ setStep }) {
   // 優惠券
@@ -12,6 +13,8 @@ export default function CartData({ setStep }) {
   }
   return (
     <>
+      {/* step-by-step */}
+      <ProgressBar />
       <div className={styles.BCartContainer}>
         <div className={styles.bookingForm}>
           <h3>填寫資料</h3>
@@ -23,11 +26,8 @@ export default function CartData({ setStep }) {
                 alt="Campsite Image"
               />
               <div className={styles.bookingDetails}>
-                <p>
-                  [山林樂活露營區]
-                  <br />
-                  標準營位 | 經典區露營 | A區
-                </p>
+                <h5>山林樂活露營區</h5>
+                <p>標準營位 | 經典區露營 | A區</p>
                 <p>大人: 2人, 小孩: 2人</p>
               </div>
             </div>
@@ -67,24 +67,65 @@ export default function CartData({ setStep }) {
             {/* 優惠券搜尋區塊，根據狀態顯示或隱藏 */}
             {showCoupon && <SearchFilter />}
           </div>
-          <div className={styles.formSection}>
-            <label htmlFor="terms">
-              <input type="checkbox" id="terms" required="" />
-              我已了解並同意 <a href="#">服務條款</a> 與<a href="#">隱私政策</a>
-            </label>
+          <div htmlFor="terms" className={styles.checkContainer2}>
+            <input
+              type="checkbox"
+              id="terms"
+              required=""
+              className={styles.checkContainer}
+            />
+            我已了解並同意 <a href="#">服務條款</a> 與<a href="#">隱私政策</a>
           </div>
-          <div className={styles.paybtn}>
-            <Button label="前往付款" onClick={() => setStep(2)} />
+          <div className={styles.combinePay}>
+            <div className={styles.paybtn}>
+              <Button label="返回上頁" onClick={() => setStep(1)} />
+            </div>
+            <div className={styles.paybtn}>
+              <Button label="前往付款" onClick={() => setStep(2)} />
+            </div>
           </div>
         </div>
-        <div className={styles.orderSummary}>
-          <h2>山林樂活露營區 | 標準營位 | 經典區露營 | A區</h2>
-          <p>大人: 2人, 小孩: 2人</p>
-          <p>日期: 2024年10月15日 - 2024年10月16日</p>
-          <p>數量: 1</p>
-          <p>小計: NT$1,500</p>
-          <p>折扣: 七折折扣</p>
-          <p>付款金額: NT$1,050</p>
+        {/* order detail */}
+        <div className={styles.orderContainer}>
+          <div className={styles.orderSummary}>
+            <h4>山林樂活露營區</h4>
+            <h5>標準營位 ｜ 帳篷區露營 ｜ A 區</h5>
+            <h5>
+              日期: <p>2024年10月15日 - 2024年10月16日</p>
+            </h5>
+            <hr />
+            <h5>
+              大人: <p>2人</p>
+            </h5>
+            <h5>
+              小孩: <p>2人</p>
+            </h5>
+            <hr />
+            <h5>
+              房型: <p>帳篷</p>
+            </h5>
+            <h5>
+              單價: <p>NT$1,500</p>
+            </h5>
+            <h5>
+              數量: <p>1</p>
+            </h5>
+            <hr />
+            <h5>
+              小計: <p>NT$1,500</p>
+            </h5>
+          </div>
+          <div className={styles.orderSummary2}>
+            <h5>
+              總金額: <p>NT$1,500</p>
+            </h5>
+            <h5>
+              優惠券: <p className={styles.couponP}>七折折扣</p>
+            </h5>
+            <h5>
+              付款金額: <p className={styles.totalP}>NT$1,050</p>
+            </h5>
+          </div>
         </div>
       </div>
     </>

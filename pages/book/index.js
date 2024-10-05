@@ -11,13 +11,16 @@ import CampInfo from '@/components/book/CampInfo'
 import QuickBooking from '@/components/book/QuickBooking'
 import SearchResults from '@/components/book/SearchResults'
 import Reviews from '@/components/book/Reviews'
+import { CartProvider } from '@/context/book/CartContext'
+import ProductList from '@/components/book/ProductList'
+import CartDisplay from '@/components/book/CartDisplay'
 
 export default function Index() {
   // 輪播大圖參數
   const images = [
-    'https://i.postimg.cc/9f7MBgC9/camp-2650359-1280-0.jpg',
-    'https://i.postimg.cc/Gmgdjy70/camping-6882479-1280-0.jpg',
-    'https://i.postimg.cc/xdkYp1hX/istockphoto-1148431349-1024x1024-0.jpg',
+    'https://blogger.googleusercontent.com/img/a/AVvXsEgsgrEeSaTmv-Cp0Weq_uwhGPCqmMH1fEpJ9H2j610RC6feq5XcWDjvt50iegowU-Xad_LD5ruoUCaGmdnHLXjx4gtvzRutskogqsHOF6P0EUa_Am5PH7LW_HQuWFxyqlj5IK9VXd4umvLgTudK8Qot7UcJEK3XoNk7gE8H6J2PIq1rwt5eD_t_QlOZ4uIQ',
+    'https://blogger.googleusercontent.com/img/a/AVvXsEhRfyv-EMgbxjRICabPdF2FcH7HLsCga5uuHEZ0Wht4reo6oUhKCueG1NuUWO6MDSbOHGEvWY7x1caom7Sgs9Nv8rFv0VYHM1gBskh5qrt1rzgySQDbxGUTmUsnWIs_obOjXgN7ODgbkyB-G97c71CZI8_eN1Kh7hbgLXvP59Sv5KN8NX01uD2CTuJTCqtd',
+    'https://blogger.googleusercontent.com/img/a/AVvXsEjb3t5eyq9en2kqn05QXQbvHYInnJ-UbrJM1pGyNmQh1xMJfuh-Pd4zVsbu2gpfq3c3KOpuk0j-W32fhl-ui2uWHa2SE5JnQd_VlUB4VlatV7K9hco6SBbP4rEFUZtZK9sCqxFnAVMV1IJFr5HKRwrL21wzhjaDGFeXB3CN1loZgMqm898WHeexSbXmfHmA',
   ]
 
   const titles = [
@@ -30,6 +33,9 @@ export default function Index() {
   const [accordionData, setAccordionData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  // 設定當前的 campsites_id
+  const [campsiteId, setCampsiteId] = useState(1) // 預設為 1
 
   useEffect(() => {
     // 使用 fetch 來從 public 資料夾中的 JSON 檔案讀取資料
@@ -62,39 +68,36 @@ export default function Index() {
   return (
     <>
       <Navbar />
-
       {/* 輪播圖 */}
       <div>
         <CarouselBanner images={images} titles={titles} />
       </div>
-
       {/* book-nav */}
       <BookNav />
-
       {/* info */}
       <CampInfo />
-
-      {/* 推薦方案 */}
-      <QuickBooking />
-
       {/* 篩選搜尋 */}
       <SearchFilter />
-      <SearchResults />
-
+      {/* 按鈕切換 campsites_id */}
+      <div>
+        <button onClick={() => setCampsiteId(1)}>營地 1</button>
+        <button onClick={() => setCampsiteId(2)}>營地 2</button>
+        {/* 可以添加更多按鈕來切換不同的 campsites_id */}
+      </div>
+      <CartProvider>
+        <ProductList />
+        <CartDisplay />
+      </CartProvider>
       {/* 輪播圖:篩選結果 */}
-      {/* <CarouselCard title="房型方案" /> */}
-
+      <SearchResults campsiteId={campsiteId} /> {/* 傳遞 campsiteId */}
       {/* 手風琴-注意事項 */}
       <div className={styles.AccordCon}>
         <Accordion data={accordionData} />
       </div>
-
       {/* comment */}
       <Reviews />
-
       {/* 推薦相似營地 */}
       <SuggestCard />
-
       <Footer1 />
     </>
   )
