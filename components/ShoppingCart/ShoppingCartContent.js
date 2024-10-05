@@ -2,8 +2,13 @@ import React from "react";
 import CartItem from "./CartItem";
 import CouponSection from "./CouponSection";
 import TotalSection from "./TotalSection";
+import { useCart } from '@/context/CartContext';  // 引入 useCart
 
-function ShoppingCartContent({ cartItems, setCartItems }) {
+
+function ShoppingCartContent() {
+  const { cartItems, setCartItems } = useCart();  // 使用 cartItems 和 setCartItems
+  
+
   return (
     <main className="content">
       <h1 className="pageTitle">商品</h1>
@@ -19,6 +24,7 @@ function ShoppingCartContent({ cartItems, setCartItems }) {
       ))}
       <div className="divider" />
       <CouponSection />
+      {/* 傳遞 totalAmount 到 TotalSection */}
       <TotalSection />
       <style jsx>{`
         .content {

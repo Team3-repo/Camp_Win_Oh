@@ -2,6 +2,7 @@
  **
  */
 import React from 'react'
+import Link from 'next/link'
 
 const ProductCard = ({ image, badge, price, title, description }) => {
   return (
@@ -13,9 +14,14 @@ const ProductCard = ({ image, badge, price, title, description }) => {
       </div>
       <h3 className="product-title">{title}</h3>
       <p className="product-description">{description}</p>
-      <button className="buy-button">立即選購</button>
+      <Link href="/cart/2ProductDetails">
+        <button className="buy-button">立即選購</button>
+      </Link>
       <style jsx>{`
         .product-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center; /* 讓所有子元素居中，包括按鈕 */
           background-color: #fff;
           border-radius: 15px;
           padding: 15px;
@@ -71,15 +77,18 @@ const ProductCard = ({ image, badge, price, title, description }) => {
         }
 
         .buy-button {
+          text-align: center; /* 水平居中 */
           align-self: center;
           background-color: var(--secondary-color);
-          color: var(--white);
+          color: white;
           border: none;
           border-radius: 8.414px;
           padding: 5px 10px;
           font-size: 16px;
           cursor: pointer;
           margin-top: 11px;
+          background: var(--BTN-CLOR, #fc9a84);
+          background-color: var(--BTN-CLOR, #fc9a84);
         }
       `}</style>
     </article>
@@ -87,5 +96,3 @@ const ProductCard = ({ image, badge, price, title, description }) => {
 }
 
 export default ProductCard
-
-;

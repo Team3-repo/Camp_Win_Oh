@@ -2,32 +2,35 @@
  **
  */
 import React from "react";
+import Link from "next/link";
+import { useCart } from '@/context/CartContext';  // 修改1：引入 useCart
+
 
 const OrderSummary = () => {
+  const { cartItems, totalAmount } = useCart();  // 修改2：使用 cartItems 和 totalAmount
   return (
     <div className="order-summary2">
       <div className="summary-section2">
         <h2 className="summary-title2">您的訂單</h2>
         <div className="summary-details2">
-          <div className="summary-row2">
-            <span>商品</span>
-            <span>露營帳篷</span>
-          </div>
-          <div className="summary-row">
-            <span>數量</span>
-            <span>*1</span>
-          </div>
+          {cartItems.map((item) => (  // 修改3：遍歷 cartItems 並顯示訂單項目
+            <div key={item.id} className="summary-row2">
+              <span>{item.name}</span>
+              <span>{item.quantity} x NT${item.price}</span>
+            </div>
+          ))}
         </div>
         <div className="summary-total">
           <span>總價(原價)</span>
-          <span>NT$ 1,300</span>
+          <span>NT$ {totalAmount}</span>   
+          {/* 修改4：使用 totalAmount 顯示總價 */}
         </div>
       </div>
       <div className="price-section2">
         <div className="price-details">
           <div className="price-row">
             <span>價格</span>
-            <span>NT$ 1,300</span>
+            <span>NT$ {totalAmount}</span>
           </div>
           <div className="price-row">
             <span>優惠卷</span>
@@ -35,10 +38,12 @@ const OrderSummary = () => {
           </div>
           <div className="price-row total">
             <span>付款金額(優惠後)</span>
-            <span>NT$ 910</span>
+            <span>NT$ {totalAmount}</span>
           </div>
         </div>
+        <Link href="/cart/3ShoppingCartPage">
         <button className="btn-view-cart">查看購物車</button>
+        </Link>
       </div>
       <div className="coupon-section2">
         <h3 className="coupon-title">使用優惠券</h3>
@@ -115,11 +120,13 @@ const OrderSummary = () => {
         .price-row {
           display: flex;
           justify-content: space-between;
-          font-size: 14px;
           color: #333;
+          {/* font-size:14px; */}
         }
         .summary-total,
         .price-row.total {
+          display: flex;
+          justify-content: space-between;
           font-weight: 600;
           margin-top: 12px;
         }

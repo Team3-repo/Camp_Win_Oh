@@ -2,6 +2,7 @@
  **
  */
 import React from "react";
+import Link from "next/link";
 
 const CheckoutForm = () => {
   return (
@@ -85,12 +86,16 @@ const CheckoutForm = () => {
               </div>
             </div>
             <div className="form-actions">
+              <Link href="/cart/3ShoppingCartPage">
               <button type="button" className="btn-back">
                 回上一頁
               </button>
+              </Link>
+              <Link href="/cart/5OrderCompletion">
               <button type="submit" className="btn-next">
                 前往付款
               </button>
+              </Link>
             </div>
           </div>
         </form>

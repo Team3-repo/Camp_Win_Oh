@@ -52,6 +52,7 @@ function ProductDetails() {
         }
         .product-layout {
           display: flex;
+          justify-content:space-between;
           gap: 20px;
         }
         @media (max-width: 991px) {
