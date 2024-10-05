@@ -120,6 +120,7 @@ export default function UsersPage() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Actions</th>
+                <th>is_deleted</th>
               </tr>
             </thead>
             <tbody>
@@ -131,6 +132,7 @@ export default function UsersPage() {
                     <button onClick={() => handleEditUser(user)}>Edit</button>
                     <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
                   </td>
+                  <td style={{ textAlign: 'right' }}>{user.is_deleted ? 'Yes' : '-'}</td>
                 </tr>
               ))}
             </tbody>
