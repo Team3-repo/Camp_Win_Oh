@@ -2,6 +2,9 @@ import '@/styles/globals.css'
 import '@/styles/component_style/pagi.css'
 import '@/styles/component_style/Footer.css'
 import '@/styles/EventStyle.css'
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:3300'; // Express API URL
 
 
 export default function MyApp({ Component, pageProps }) {
