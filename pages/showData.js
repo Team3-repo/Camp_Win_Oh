@@ -23,7 +23,7 @@ export default function ShowData({ products }) {
 
 // 在伺服器端獲取資料
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3001/api/getData'); // 使用正確的 API URL
+  const res = await fetch('http://localhost:3000/api/getData'); // 使用正確的 API URL
   const products = await res.json();
 
   return {

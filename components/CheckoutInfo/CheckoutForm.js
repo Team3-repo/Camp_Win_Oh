@@ -1,56 +1,96 @@
-/**
- **
- */
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 const CheckoutForm = () => {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [notes, setNotes] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('/api/addData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, phone, email, address, notes }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert('資料成功送出！');
+      } else {
+        alert('錯誤：' + data.error);
+      }
+    } catch (error) {
+      alert('請求失敗：' + error.message);
+    }
+  };
+
   return (
     <div className="form-container">
       <div className="form-wrapper">
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <h2 className="form-title">填寫資料</h2>
           <div className="form-content">
             <h3 className="form-section-title">訂購人資訊</h3>
             <div className="form-fields">
               <div className="form-field">
-                <label htmlFor="name">
-                  姓名 <span className="required">＊</span>
-                </label>
-                <input type="text" id="name" className="form-input" required />
-              </div>
-              <div className="form-field">
-                <label htmlFor="phone">
-                  手機號碼 <span className="required">＊</span>
-                </label>
-                <input type="tel" id="phone" className="form-input" required />
-              </div>
-              <div className="form-field">
-                <label htmlFor="email">
-                  電子郵件(接收訂單最新資訊){" "}
-                  <span className="required">＊</span>
-                </label>
+                <label htmlFor="name">姓名 <span className="required">＊</span></label>
                 <input
-                  type="email"
-                  id="email"
+                  type="text"
+                  id="name"
                   className="form-input"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                 />
               </div>
               <div className="form-field">
-                <label htmlFor="address">
-                  寄送地址 <span className="required">＊</span>
-                </label>
+                <label htmlFor="phone">手機號碼 <span className="required">＊</span></label>
+                <input
+                  type="tel"
+                  id="phone"
+                  className="form-input"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-field">
+                <label htmlFor="email">電子郵件 <span className="required">＊</span></label>
+                <input
+                  type="email"
+                  id="email"
+                  className="form-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-field">
+                <label htmlFor="address">寄送地址 <span className="required">＊</span></label>
                 <input
                   type="text"
                   id="address"
                   className="form-input"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   required
                 />
               </div>
               <div className="form-field-large">
                 <label htmlFor="notes">訂單備註</label>
-                <textarea id="notes" className="form-input-large"></textarea>
+                <textarea
+                  id="notes"
+                  className="form-input-large"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                ></textarea>
               </div>
               <div className="discount-section">
                 <h4 className="discount-title">優惠折扣</h4>
@@ -87,15 +127,9 @@ const CheckoutForm = () => {
             </div>
             <div className="form-actions">
               <Link href="/cart/3ShoppingCartPage">
-              <button type="button" className="btn-back">
-                回上一頁
-              </button>
+                <button type="button" className="btn-back">回上一頁</button>
               </Link>
-              <Link href="/cart/5OrderCompletion">
-              <button type="submit" className="btn-next">
-                前往付款
-              </button>
-              </Link>
+              <button type="submit" className="btn-next">前往付款</button>
             </div>
           </div>
         </form>
