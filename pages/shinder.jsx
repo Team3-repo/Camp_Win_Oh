@@ -1,4 +1,4 @@
-// pageshttp://localhost:3000/users.js
+// pageshttp://localhost:3099/users.js
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import useSWR from 'swr';
@@ -6,7 +6,7 @@ import useSWR from 'swr';
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 export default function UsersPage() {
-  const { data: users, error, mutate } = useSWR('http://localhost:3000/users', fetcher);
+  const { data: users, error, mutate } = useSWR('http://localhost:3099/users', fetcher);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [editingUserId, setEditingUserId] = useState(null);
@@ -18,7 +18,7 @@ export default function UsersPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('http://localhost:3000/users', { name, email });
+      await axios.post('http://localhost:3099/users', { name, email });
       mutate(); // 重新加載用戶資料
       setIsAdding(false);
       setName('');
@@ -42,7 +42,7 @@ export default function UsersPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.put(`http://localhost:3000/users/${editingUserId}`, { name, email });
+      await axios.put(`http://localhost:3099/users/${editingUserId}`, { name, email });
       mutate(); // 重新加載用戶資料
       setEditingUserId(null);
       setName('');
@@ -58,7 +58,7 @@ export default function UsersPage() {
   const handleDeleteUser = async (id) => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:3000/users/${id}`);
+      await axios.delete(`http://localhost:3099/users/${id}`);
       mutate(); // 重新加載用戶資料
     } catch (error) {
       console.error('Error deleting user', error);
@@ -120,6 +120,7 @@ export default function UsersPage() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Actions</th>
+                <th>is_deleted</th>
               </tr>
             </thead>
             <tbody>
@@ -131,6 +132,7 @@ export default function UsersPage() {
                     <button onClick={() => handleEditUser(user)}>Edit</button>
                     <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
                   </td>
+                  <td style={{ textAlign: 'right' }}>{user.is_deleted ? 'Yes' : '-'}</td>
                 </tr>
               ))}
             </tbody>
