@@ -15,42 +15,17 @@ export default function EventCreateForm() {
   // 費用（每人）
   const [costPerPerson, setCostPerPerson] = useState(0)
   // 選擇的住宿資訊
-  const [selectedAccommodation, setSelectedAccommodation] = useState(null)
+  const [selectedBookType, setSelectedBookType] = useState(null)
+  const [selectedCampsite, setSelectedCampsite] = useState(null)
+  const [campsites, setCampsites] = useState([])
+  const [bookingTypes, setBookingTypes] = useState([])
   // 表單狀態
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [organizerNick, setOrganizerNick] = useState('')
-  const [area, setArea] = useState('北部')
-  const [camp, setCamp] = useState('山Chill')
   const [notes, setNotes] = useState('')
-
-  // 假資料
-  const campsiteData = {
-    // campName:'山chill',
-    campAdd: '319-2106 台灣花蓮縣秀林鄉太魯閣村200號',
-    accommodations: [
-      {
-        name: '小木屋',
-        suitablePeople: 4,
-        unitPrice: 2000,
-        remainingQuantity: 5,
-      },
-      {
-        name: '帳篷',
-        suitablePeople: 2,
-        unitPrice: 1000,
-        remainingQuantity: 10,
-      },
-      {
-        name: '露營車',
-        suitablePeople: 6,
-        unitPrice: 3000,
-        remainingQuantity: 2,
-      },
-    ],
-  }
 
   useEffect(() => {
     // 僅允許選擇今天或之後的日期
@@ -67,26 +42,53 @@ export default function EventCreateForm() {
         }
       },
     })
-
-    // 初始化 end-date，限制只能選擇開始日期之後的日期
+    // end-date限制只能選擇開始日期之後的日期
     flatpickr('#end-date', {
       dateFormat: 'Y-m-d',
       minDate: new Date(), // 默認為今天或之後的日期
     })
   }, [])
 
+  // 從後端取得營地資料
+  useEffect(() => {
+    const fetchCampsites = async () => {
+      const res = await fetch('http://localhost:3001/api/campsites')
+      const data = await res.json()
+      setCampsites(data)
+    }
+
+    fetchCampsites()
+  }, [])
+
+  // 當選擇營地時，根據campsite_id取得房型資料
+  useEffect(() => {
+    if (selectedCampsite) {
+      const fetchBookingTypes = async () => {
+        const res = await fetch(
+          `http://localhost:3001/api/booking_types?campsite_id=${selectedCampsite.id}`
+        )
+        const data = await res.json()
+        setBookingTypes(data)
+      }
+
+      fetchBookingTypes()
+    } else {
+      setBookingTypes([]) // 清空先前的住宿選項
+    }
+  }, [selectedCampsite])
+
   // 更新訂購數量，根據選擇的住宿類型的最大庫存量進行控制
-  const handleOrderQuantityChange = (e, accommodation) => {
+  const handleOrderQuantityChange = (e, book_type) => {
     let value = parseInt(e.target.value) || 1
-    if (value > accommodation.remainingQuantity) {
-      value = accommodation.remainingQuantity
+    if (value > book_type.stock) {
+      value = book_type.stock
     }
     setOrderQuantity(value)
-    setOrderAmount(value * accommodation.unitPrice)
+    setOrderAmount(value * book_type.price)
 
     if (eventPeople > 0) {
       setCostPerPerson(
-        ((value * accommodation.unitPrice + otherFees) / eventPeople).toFixed(1)
+        ((value * book_type.price + otherFees) / eventPeople).toFixed(1)
       )
     }
   }
@@ -95,9 +97,7 @@ export default function EventCreateForm() {
   const handleEventPeopleChange = (e) => {
     let value = parseInt(e.target.value) || 1
 
-    // 計算「適合人數」乘以「訂購數量」的最大值
-    const maxPeople =
-      (selectedAccommodation?.suitablePeople || 1) * orderQuantity
+    const maxPeople = (selectedBookType?.max_per || 1) * orderQuantity
 
     if (value > maxPeople) {
       value = maxPeople // 若超過最大值，則設定為最大值
@@ -111,6 +111,7 @@ export default function EventCreateForm() {
       setCostPerPerson(0)
     }
   }
+
   // 更新其他費用
   const handleOtherFeesChange = (e) => {
     let value = parseInt(e.target.value) || 0
@@ -124,18 +125,26 @@ export default function EventCreateForm() {
     } else {
       setCostPerPerson(0)
     }
-  }, [orderAmount, eventPeople, otherFees]) // 監聽這些變量的變化
+  }, [orderAmount, eventPeople, otherFees])
 
   // 選擇住宿
-  const handleAccommodationChange = (accommodation) => {
-    setSelectedAccommodation(accommodation)
+  const handleAccommodationChange = (book_type) => {
+    setSelectedBookType(book_type)
     setOrderQuantity(1) // 重置訂購數量
-    setOrderAmount(accommodation.unitPrice)
+    setOrderAmount(book_type.price)
     if (eventPeople > 0) {
-      setCostPerPerson(
-        ((accommodation.unitPrice + otherFees) / eventPeople).toFixed(1)
-      )
+      setCostPerPerson(((book_type.price + otherFees) / eventPeople).toFixed(1))
     }
+  }
+
+  // 當使用者選擇營地時，正確更新 selectedCampsite 狀態，並檢查選取的物件
+  const handleCampsiteChange = (e) => {
+    const selectedId = parseInt(e.target.value)
+    const campsite = campsites.find((camp) => camp.id === selectedId)
+    setSelectedCampsite(campsite)
+    setSelectedBookType(null)
+    setOrderQuantity(1)
+    setOrderAmount(0)
   }
 
   // 預覽活動頁面
@@ -146,10 +155,9 @@ export default function EventCreateForm() {
       startDate,
       endDate,
       organizerNick,
-      area,
-      camp,
-      campAdd: campsiteData.campAdd,
-      selectedAccommodation,
+      name: selectedCampsite?.name || '',
+      campAdd: selectedCampsite?.address || '',
+      selectedBookType,
       orderQuantity,
       orderAmount,
       costPerPerson,
@@ -160,10 +168,8 @@ export default function EventCreateForm() {
 
     localStorage.setItem('eventPreviewData', JSON.stringify(eventData))
 
-    // 切換至預覽頁面
     window.location.href = '/events/eventPreview'
   }
-
   return (
     <>
       <div className="ecsection-title">
@@ -173,7 +179,7 @@ export default function EventCreateForm() {
         <div className="ecsection-form">
           {/* 上傳圖片 */}
           <div className="ecsection">
-          <h2>創建活動？</h2>
+            <h2>創建活動？</h2>
             <div className="ectitle">
               <h3 className="ech3">上傳圖片</h3>
             </div>
@@ -270,7 +276,7 @@ export default function EventCreateForm() {
 
             {/* 區域和營地 */}
             <div className="eclocation-group">
-              <div className="ecform-group">
+              {/* <div className="ecform-group">
                 <label htmlFor="ecarea">區域</label>
                 <select
                   id="ecarea"
@@ -283,22 +289,28 @@ export default function EventCreateForm() {
                   <option value="南部">南部</option>
                   <option value="東部">東部</option>
                 </select>
-              </div>
+              </div> */}
               <div className="ecform-group">
                 <label htmlFor="eccamp">營地</label>
-                <select id="eccamp">
-                  <option
-                    id="eccamp"
-                    value={camp}
-                    onChange={(e) => setCamp(e.target.value)}
-                    required
-                  >
-                    山Chill
+                <select
+                  id="eccamp"
+                  value={selectedCampsite?.id || ''}
+                  onChange={handleCampsiteChange}
+                  required
+                >
+                  <option value="" disabled>
+                    請選擇營地
                   </option>
-                  {/* 這裡！根據選定的區域篩選營地選項 */}
+                  {campsites.map((campsite) => (
+                    <option key={campsite.id} value={campsite.id}>
+                      {campsite.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
+
+            {/* 住宿選項 */}
             <div className="ecamping-options">
               <table>
                 <thead>
@@ -312,78 +324,76 @@ export default function EventCreateForm() {
                   </tr>
                 </thead>
                 <tbody>
-                  {campsiteData.accommodations.map((accommodation, index) => (
-                    <tr key={index}>
-                      <td>{accommodation.name}</td>
-                      <td>{accommodation.suitablePeople}</td>
-                      <td>{accommodation.unitPrice}</td>
-                      <td>{accommodation.remainingQuantity}</td>
-                      <td>
-                        {/* 訂購數量 input */}
-                        <input
-                          type="number"
-                          min={1}
-                          max={accommodation.remainingQuantity}
-                          value={
-                            selectedAccommodation?.name === accommodation.name
-                              ? orderQuantity
-                              : 1
-                          }
-                          onChange={(e) =>
-                            handleOrderQuantityChange(e, accommodation)
-                          }
-                          disabled={
-                            selectedAccommodation?.name !== accommodation.name
-                          }
-                        />
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleAccommodationChange(accommodation)
-                          }
-                        >
-                          {selectedAccommodation?.name === accommodation.name
-                            ? '已選擇'
-                            : '選擇'}
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {bookingTypes
+                    .filter((bt) => bt.campsites_id === selectedCampsite?.id)
+                    .map((book_type, index) => (
+                      <tr key={index}>
+                        <td>{book_type.name}</td>
+                        <td>{book_type.max_per}</td>
+                        <td>{book_type.price}</td>
+                        <td>{book_type.stock}</td>
+                        <td>
+                          <input
+                            type="number"
+                            min={1}
+                            max={book_type.stock}
+                            value={
+                              selectedBookType?.name === book_type.name
+                                ? orderQuantity
+                                : 1
+                            }
+                            onChange={(e) =>
+                              handleOrderQuantityChange(e, book_type)
+                            }
+                            disabled={selectedBookType?.name !== book_type.name}
+                          />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => handleAccommodationChange(book_type)}
+                          >
+                            {selectedBookType?.name === book_type.name
+                              ? '已選擇'
+                              : '選擇'}
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
 
             <div className="exaboutno">
-              {/* 修正: 使用 campsiteData 或 selectedAccommodation 中的屬性來設定最大人數 */}
-              <div className="ecform-group">
-                <label htmlFor="ecpeople-limit">活動人數</label>
-                <input
-                  type="number"
-                  id="event-people"
-                  min={1}
-                  max={
-                    (selectedAccommodation?.suitablePeople || 1) * orderQuantity
-                  }
-                  value={eventPeople}
-                  onChange={handleEventPeopleChange}
-                  required
-                />
-              </div>
-              {/* 其他活動費用 */}
-              <div className="ecform-group">
-                <label htmlFor="ecfee">其他支出</label>
-                <input
-                  type="number"
-                  id="other-fees"
-                  min={0}
-                  value={otherFees}
-                  onChange={handleOtherFeesChange}
-                  required
-                />
+              {/* 活動人數與其他費用 */}
+              <div className="exaboutno">
+                <div className="ecform-group">
+                  <label htmlFor="ecpeople-limit">活動人數</label>
+                  <input
+                    type="number"
+                    id="event-people"
+                    min={1}
+                    max={(selectedBookType?.max_per || 1) * orderQuantity}
+                    value={eventPeople}
+                    onChange={handleEventPeopleChange}
+                    required
+                  />
+                </div>
+                <div className="ecform-group">
+                  <label htmlFor="ecfee">其他支出</label>
+                  <input
+                    type="number"
+                    id="other-fees"
+                    min={0}
+                    value={otherFees}
+                    onChange={handleOtherFeesChange}
+                    required
+                  />
+                </div>
               </div>
             </div>
+
+            {/* 營地資訊與費用總計 */}
             <div className="eventSummary">
               <div className="ectitle2">
                 <legend>
@@ -392,38 +402,34 @@ export default function EventCreateForm() {
               </div>
               <p>
                 <strong>營地地址：</strong>
-                {campsiteData.campAdd}
+                {selectedCampsite?.address || '尚未選擇'}
               </p>
               <p>
                 <strong>住宿選擇：</strong>{' '}
-                {selectedAccommodation?.name || '尚未選擇住宿'}
+                {selectedBookType?.name || '尚未選擇住宿'}
               </p>
               <p>
-                <strong>可容納：</strong>{' '}
-                {(selectedAccommodation?.suitablePeople || 1) * orderQuantity}{' '}
-                人
+                <strong>可容納：</strong>
+                {(selectedBookType?.max_per || 1) * orderQuantity} 人
               </p>
               <p>
-                <strong>單價：</strong>{' '}
-                {selectedAccommodation?.unitPrice || ' '} 元
+                <strong>單價：</strong> {selectedBookType?.price || ' '} 元
               </p>
               <p>
                 <strong>訂購數量：</strong> {orderQuantity} 間
               </p>
-
               <p>
                 <strong>訂購金額：</strong> {orderAmount} 元
               </p>
               <hr />
-              <hr />
-              <br />
               <p>
-                <strong>每人費用：</strong> {parseInt(costPerPerson)}元
+                <strong>每人費用：</strong> {parseInt(costPerPerson)} 元
               </p>
               <p>
                 <strong>總費用：</strong> {orderAmount + otherFees} 元
               </p>
             </div>
+
             {/* 備註 */}
             <div className="ecform-group">
               <label htmlFor="notes">備註</label>

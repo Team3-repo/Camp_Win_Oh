@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import flatpickr from 'flatpickr'
-import 'flatpickr/dist/flatpickr.css'
 import Navbar from '@/components/event/navbar'
 import Footer2 from '@/components/event/footer2'
 import Button from '@/components/book/button'
 import CampingFeatures from '@/components/event/CampingFeatures'
 
 export default function EventDetail() {
-  const [eventDetails, setEventDetails] = useState(null)
+  const [eventPreview, seteventPreview] = useState(null)
 
   // 在組件載入時從 localStorage 獲取資料
   useEffect(() => {
     const storedData = localStorage.getItem('eventPreviewData')
     if (storedData) {
       const eventData = JSON.parse(storedData)
-      setEventDetails(eventData)
+      seteventPreview(eventData)
     }
   }, [])
 
   // 如果資料尚未載入，顯示 Loading...
-  if (!eventDetails) {
+  if (!eventPreview) {
     return <h2>Loading...</h2>
   }
 
@@ -27,16 +25,16 @@ export default function EventDetail() {
     <>
       <Navbar />
       <div className="ecsection-title">
-        <h2>預覽</h2>
+        <h2>活動預覽</h2>
       </div>
       <section className="ecsectionall2">
         <div className="ecsection-form">
-          {/* 圖片（此處未使用圖片上傳功能，因此不顯示） */}
+          {/* 活動圖片 (若無上傳圖片則使用佔位符圖片) */}
           <div className="ecsection">
             <div className="event-content">
               <img
                 src={
-                  eventDetails.imageUrl || 'https://via.placeholder.com/400x200'
+                  eventPreview.imageUrl || 'https://via.placeholder.com/400x200'
                 }
                 alt="Event image"
                 className="event-image"
@@ -47,7 +45,7 @@ export default function EventDetail() {
               <h3 className="ech3">活動簡介</h3>
             </div>
             <div className="ecform-group">
-              <p>{eventDetails.description}</p>
+              <p>{eventPreview.description}</p>
             </div>
 
             {/* 活動資訊 */}
@@ -57,60 +55,52 @@ export default function EventDetail() {
             <div className="event-info">
               <dl className="einfo-list">
                 <dt className="einfo-label">活動名稱</dt>
-                <dd className="einfo-value">{eventDetails.title}</dd>
+                <dd className="einfo-value">{eventPreview.title}</dd>
                 <dt className="einfo-label">主辦人</dt>
-                <dd className="einfo-value">{eventDetails.organizerNick}</dd>
-
-                <dt className="einfo-label">報名截止</dt>
-                <dd className="einfo-value">
-                  {eventDetails.registrationDeadline || 'N/A'}
-                </dd>
+                <dd className="einfo-value">{eventPreview.organizerNick}</dd>
 
                 <dt className="einfo-label">開始日期</dt>
-                <dd className="einfo-value">{eventDetails.startDate}</dd>
-
+                <dd className="einfo-value">{eventPreview.startDate}</dd>
                 <dt className="einfo-label">結束日期</dt>
-                <dd className="einfo-value">{eventDetails.endDate}</dd>
-
-                <dt className="einfo-label">區域</dt>
-                <dd className="einfo-value">{eventDetails.area}</dd>
+                <dd className="einfo-value">{eventPreview.endDate}</dd>
 
                 <dt className="einfo-label">營地名稱</dt>
-                <dd className="einfo-value">{eventDetails.camp}</dd>
+                <dd className="einfo-value">{eventPreview.name}</dd>
 
                 <dt className="einfo-label">營地地址</dt>
-                <dd className="einfo-value">{eventDetails.campAdd}</dd>
+                <dd className="einfo-value">{eventPreview.campAdd}</dd>
 
-                <dt className="einfo-label">住宿類型</dt>
+                <dt className="einfo-label">住宿選擇</dt>
                 <dd className="einfo-value">
-                  {eventDetails.selectedAccommodation?.name || '尚未選擇住宿'}
+                  {eventPreview.selectedBookType?.name || '尚未選擇住宿'}
                 </dd>
 
                 <dt className="einfo-label">活動人數</dt>
-                <dd className="einfo-value">{eventDetails.eventPeople} 人</dd>
+                <dd className="einfo-value">{eventPreview.eventPeople} 人</dd>
 
-                <dt className="einfo-label">
-                  負擔費用<p>（每人）</p>
-                </dt>
+                <dt className="einfo-label">負擔費用（每人）</dt>
                 <dd className="einfo-value">
-                  {parseInt(eventDetails.costPerPerson)} 元
+                  {parseInt(eventPreview.costPerPerson)} 元
                 </dd>
 
-                <dt className="einfo-label">其他支出</dt>
+                <dt className="einfo-label">訂購數量</dt>
+                <dd className="einfo-value">{eventPreview.orderQuantity} 間</dd>
+
+                <dt className="einfo-label">總費用</dt>
                 <dd className="einfo-value">
-                  {parseInt(eventDetails.otherFees)} 元
+                  {eventPreview.orderAmount + eventPreview.otherFees} 元
                 </dd>
 
                 <dt className="einfo-label">備註</dt>
-                <dd className="einfo-value">{eventDetails.notes}</dd>
+                <dd className="einfo-value">{eventPreview.notes}</dd>
               </dl>
             </div>
           </div>
           <div className="joinbtn1">
-            {/* 提交按鈕 */}
+            {/* 返回上一頁與確認送出按鈕 */}
             <Button
               label="回上一頁"
-              onClick={() => (window.location.href = '/create.html')}
+              onClick={() => (window.location.href = '/events/eventCreate')}
             />
             <Button
               label="確認送出"
