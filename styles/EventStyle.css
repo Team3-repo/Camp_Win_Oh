@@ -364,11 +364,9 @@
 .ecsection-title {
   color: #ff5833;
   margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 50px;
+  margin-bottom: 10px;
   border-left: 10px solid #ff5833;
   padding-left: 15px;
-  left: 30%;
 }
 .ecsectionall {
   display: flex;
@@ -453,14 +451,7 @@ legend {
   object-fit: cover;
 }
 
-.ecupload-btn {
-  background-color: #ff5833;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-radius: 4px;
-}
+
 
 .ecimage-controls {
   margin-top: 10px;

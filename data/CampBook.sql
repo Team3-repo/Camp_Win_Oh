@@ -1693,25 +1693,35 @@ DROP TABLE IF EXISTS `roomE`;
 -- INSERT INTO `roomE` (`e_camp_type_id`, `e_total_person`, `camp_name`, `camping_theme`, `camping_type`, `bed_name`, `food_type`, `pet_type`, `ser_name`, `child_type`, `feature_category`) VALUES
 -- ('RE1', 4, '走馬賴農場', '豪華型營位', '露營車', '雙人床', '附早餐', '可攜帶寵物', '停車場', '嬰兒設施', '附冷氣');
 
--- event_holding_list
--- DROP TABLE IF EXISTS `event_holding_list`;
+DROP TABLE IF EXISTS `event_holding_list`;
 
--- CREATE TABLE `event_holding_list` (
---   `event_id` INT NOT NULL AUTO_INCREMENT,
---   `event_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `camp_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `e_host` VARCHAR (200) NOT NULL,
---   `e_in_date` date DEFAULT NULL,
---   `e_out_date` date DEFAULT NULL,
---   `event_notes` varchar(255) DEFAULT NULL,
---   `e_created_at`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
---   `event_pic` varchar(255) DEFAULT NULL,
---   
---   PRIMARY KEY (`event_id`),
---   UNIQUE KEY (`event_name`),
---   CONSTRAINT `FK_camp_name4` FOREIGN KEY (`camp_name`) REFERENCES `place_info`(`camp_name`),
---   CONSTRAINT `FK_e_host` FOREIGN KEY (`e_host`) REFERENCES `user_data`(`user_name`) ON DELETE CASCADE
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `event_holding_list` (
+  `event_id` VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` INT NOT NULL,
+  `organizer_nick` VARCHAR(255) NOT NULL,
+  `event_pic` VARCHAR(255) DEFAULT NULL,
+  `event_description` VARCHAR(255) DEFAULT NULL,
+  `event_title` VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `start_date` DATE DEFAULT NULL,
+  `end_date` DATE DEFAULT NULL,
+  `camp_id` INT NOT NULL,
+  `camp_address` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `selected_book_type` INT NOT NULL,
+  `order_quantity` INT NOT NULL,
+  `event_people` INT NOT NULL,
+  `order_amount` INT NOT NULL,
+  `other_fees` INT NOT NULL,
+  `total_cost` INT NOT NULL,
+  `cost_per_person` INT NOT NULL,
+  `event_notes` VARCHAR(255) DEFAULT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deadline` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`event_id`),
+  CONSTRAINT `FK_camp_id` FOREIGN KEY (`camp_id`) REFERENCES `campsites`(`id`),
+  CONSTRAINT `FK_selected_book_type` FOREIGN KEY (`selected_book_type`) REFERENCES `booking_type`(`id`),
+  CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_data`(`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- -- 設定起始值
 -- ALTER TABLE `event_holding_list` AUTO_INCREMENT = 1000001;
