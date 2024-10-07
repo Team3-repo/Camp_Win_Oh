@@ -1,28 +1,40 @@
-import React from "react";
-// import Header from "@/components/Header";
+import React, { useState } from 'react';
+import { useCart } from '../../context/CartContext'; // 更新路徑
 import ProductInfo from "@/components/ProductDetails/ProductInfo";
 import OrderSummary from "@/components/ProductDetails/OrderSummary";
 import Description from "@/components/ProductDetails/Description";
-// import Footer from "@/components/Footer";
-import Footer from '@/components/event/footer2'
-import Navbar from '@/components/event/navbar'
+import Footer from '@/components/event/footer2';
+import Navbar from '@/components/event/navbar';
 
 function ProductDetails() {
+  const { cartItems, setCartItems } = useCart(); // 獲取 cartItems 和 setCartItems
+  const [quantity, setQuantity] = useState(1);
+  const pricePerItem = 1300;
+
+  const updateQuantity = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
+
+  const addToCart = () => {
+    setCartItems((prevItems) => [
+      ...prevItems,
+      { name: '露營帳篷', quantity, price: pricePerItem }
+    ]);
+  };
+
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="product-details-body">
-        {/* <Header /> */}
         <main className="product-content">
           <div className="product-layout">
-            <ProductInfo />
-            <OrderSummary />
+            <ProductInfo quantity={quantity} updateQuantity={updateQuantity} addToCart={addToCart} pricePerItem={pricePerItem} />
+            <OrderSummary cartItems={cartItems} />
           </div>
           <Description />
         </main>
-       
       </div>
-       <Footer />
+      <Footer />
       <style jsx>{`
         .product-details-body {
           background-color: #cfe9c6;
@@ -40,6 +52,7 @@ function ProductDetails() {
         }
         .product-layout {
           display: flex;
+          justify-content:space-between;
           gap: 20px;
         }
         @media (max-width: 991px) {
