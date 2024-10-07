@@ -40,4 +40,3 @@ yarn.lock
 /.temp/
 
 # .gitignore
-lib/db.js
