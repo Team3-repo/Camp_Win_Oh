@@ -1,9 +1,9 @@
 import '@/styles/globals.css'
 import '@/styles/component_style/pagi.css'
 import '@/styles/EventStyle.css'
-import '@/styles/Navbar.css';
-import '@/styles/Pagi.css';
-import '@/styles/Footer.css';
+// import '@/styles/Navbar.css';
+// import '@/styles/Pagi.css';
+// import '@/styles/Footer.css';
 import '@/styles/EventStyle.css';
 import { CartProvider } from '@/context/CartContext'; // 確保路徑正確
 import { AuthProvider } from '@/hooks/use-auth'; // 引入 AuthProvider
