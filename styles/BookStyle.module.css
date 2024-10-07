@@ -1,3 +1,98 @@
+/* nav */
+.carouselSection {
+  margin: 0 auto;
+  padding: 0.5rem 6.25rem;
+  position: sticky;
+  top: 0; /* 導覽列在滾動到頂部時固定 */
+  width: 100%;
+  z-index: 1000; /* 確保導覽列在其他元素之上 */
+  background-color: #c9e9c7;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 0.625rem;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  border-bottom: 1px solid #b4a59f;
+}
+
+.breadcrumbItem {
+  color: #b4a59f;
+  font-weight: normal;
+  cursor: pointer;
+  /* border-bottom: 1px solid transparent; */
+}
+
+.breadcrumbItem:hover {
+  color: #71564a;
+  font-weight: bold;
+}
+.active {
+  color: #71564a;
+  font-weight: bold;
+}
+
+/* camp-info */
+.campInfo {
+  padding: 0 6.25rem 1.125rem;
+}
+
+.campTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding-top: 0.625rem;
+}
+
+.campIcon {
+  width: 1.0625rem;
+  height: 1.6875rem;
+}
+
+.campName {
+  font-weight: 500;
+}
+
+.campAddress {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.625rem;
+}
+
+.campAddress h4 {
+  font-weight: normal;
+}
+
+.mapLink {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.googleMapLink {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mapIcon {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.campDescription {
+  border-left: 0.625rem solid rgba(245, 174, 174, 1);
+  padding-left: 1.25rem;
+  margin-top: 0.625rem;
+  color: #698D65;
+}
+
+.campDetails {
+  margin-top: 0.625rem;
+  font-weight: normal;
+}
+
 /* SearchBox */
 .SearchContainer {
   display: flex;
@@ -22,7 +117,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin: 20px auto;
 }
 .filterContainer {
   position: relative;
@@ -46,28 +141,43 @@
   margin: -20px -20px 20px -20px;
 }
 
-.dateFilter {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.dateSection,
-.guestsSection,
+.dateFilter,
 .typeSection,
-.areaSection {
+.typeOption {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
+  gap:40px;
+}
+.typeSection{
+  padding-top: 10px;
+}
+.guestSection{
+  align-items: center;
+  text-align: left;
+  width: 35%;
+}
+.combineCol{
+  display: flex;
+  flex-direction: column;
 }
 
 .dateSection label,
 .guestSection label,
 .typeSection label,
-.areaSection label {
+.typeOption label {
   font-size: 14px;
+  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
   font-weight: bold;
   color: #2c3e50;
+}
+
+.dateSection {
+  align-items: center;
+  width: 25%;
+  text-align: left;
 }
 
 .regInput,
@@ -79,11 +189,6 @@
   width: 60%;
 }
 
-.calendarIcon {
-  margin-left: -30px;
-  font-size: 16px;
-}
-
 .radioGroup {
   display: flex;
   gap: 10px;
@@ -93,51 +198,77 @@
   margin-right: 5px;
 }
 
-/* region */
-.regSearch {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  padding: 10px 0;
-}
-
-/* campCard */
-.campCard {
-  display: flex;
-  justify-content: center;
-  color: #4c3a30;
-  padding-top: 10px;
-  font-weight: normal;
-  margin: 0 55px;
+/* CarouselCard */
+.carolCard {
   border-top: 1px solid #333;
+  margin: 0 150px;
 }
 
-/* news */
-.carolCardNews {
-  position: relative;
-  width: 28%;
-  height: 150px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 0 10px;
+/* accordion */
+.AccordCon {
+  margin: 0 100px;
 }
-.carolNewsContainer {
+
+/* serch-type-result */
+.searchResult {
   display: flex;
-  justify-content: center;
-  padding: 20px;
-  margin: 0 50px;
-  cursor: pointer;
+  gap: 40px;
+  border-bottom: 1px solid rgba(141, 141, 141, 1);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.875rem;
 }
-.carolCardNews:hover {
-  transform: scale(1.05);
-}
-.carolCardNews img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.carolNewsH4 {
+
+.resultNumber {
+  font-weight: 400;
+  color: #4c3a30;
   display: flex;
+  align-items: center;
+}
+
+.resultImage {
+  width: 18.75rem;
+  height: 15.625rem;
+  object-fit: cover;
+  border-radius: 0.3125rem;
+}
+
+.resultDetails {
+  flex: 1;
+}
+
+.resultTitle {
+  margin-bottom: 0.625rem;
+}
+
+.resultDescription,
+.resultCapacity,.resultPrice,
+.resultFacilities {
+  margin-bottom: 0.3125rem;
+  font-weight:normal;
+}
+
+.priceHighlight {
+  color: rgba(255, 88, 51, 1);
+  font-weight: 900;
+}
+
+.resultActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
   justify-content: center;
+}
+
+/* ------ */
+.searchResults {
+  padding: 0 6.25rem;
+}
+
+.resultsCount {
+  background-color: rgba(245, 174, 174, 1);
+  color: #fff;
+  font-weight: normal;
+  padding: 5px 10px;
+  margin-bottom: 1.875rem;
 }

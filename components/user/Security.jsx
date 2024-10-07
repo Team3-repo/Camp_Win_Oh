@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import FormField from '@/components/form/FormField';
-import Button from '@/components/book/button';
+import React, { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import FormField from '@/components/form/FormField'
+import Button from '@/components/book/button'
 
 function Security() {
-  const [currentPassword, setCurrentPassword] = useState('123456');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('123456')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmedPassword, setConfirmedPassword] = useState('')
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmedPassword, setShowConfirmedPassword] = useState(false)
 
   // 表單驗證函數
   const validateForm = () => {
-    return newPassword === confirmedPassword && newPassword.length > 0;
-  };
+    return newPassword === confirmedPassword && newPassword.length > 0
+  }
 
   // 儲存變更按鈕的處理邏輯
   const handleSaveChanges = (e) => {
-    e.preventDefault(); // 防止表單的默認提交行為
+    e.preventDefault() // 防止表單的默認提交行為
     if (validateForm()) {
-      console.log('密碼已更改');
-      toast.success('密碼已成功變更！'); // 成功提示
+      console.log('密碼已更改')
+      toast.success('密碼已成功變更！') // 成功提示
       // 在此處處理提交表單的邏輯，例如發送 API 請求等
     } else {
-      console.log('新密碼和確認密碼不匹配');
-      toast.error('新密碼和確認密碼不匹配！'); // 錯誤提示
+      console.log('新密碼和確認密碼不匹配')
+      toast.error('新密碼和確認密碼不匹配！') // 錯誤提示
     }
-  };
+  }
 
   const handleCancel = () => {
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmedPassword('');
-  };
+    setCurrentPassword('')
+    setNewPassword('')
+    setConfirmedPassword('')
+  }
 
   return (
     <div>
@@ -51,7 +51,10 @@ function Security() {
           width="80%"
           backgroundColor="#fff"
         />
-        <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)}>
+        <button
+          type="button"
+          onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+        >
           {showCurrentPassword ? '隱藏' : '顯示'}
         </button>
 
@@ -67,7 +70,10 @@ function Security() {
           width="80%"
           backgroundColor="#fff"
         />
-        <button type="button" onClick={() => setShowNewPassword(!showNewPassword)}>
+        <button
+          type="button"
+          onClick={() => setShowNewPassword(!showNewPassword)}
+        >
           {showNewPassword ? '隱藏' : '顯示'}
         </button>
 
@@ -83,7 +89,10 @@ function Security() {
           width="80%"
           backgroundColor="#fff"
         />
-        <button type="button" onClick={() => setShowConfirmedPassword(!showConfirmedPassword)}>
+        <button
+          type="button"
+          onClick={() => setShowConfirmedPassword(!showConfirmedPassword)}
+        >
           {showConfirmedPassword ? '隱藏' : '顯示'}
         </button>
 
@@ -92,17 +101,21 @@ function Security() {
           style={{
             display: 'flex',
             gap: '5px',
-            justifyContent: 'flex-end',
+            // justifyContent: 'flex-end',
             margin: '20px 0',
           }}
         >
           <Button label="取消" onClick={handleCancel} />
-          <Button label="提交" type="submit" onClick={handleSaveChanges} />
+          <Button
+            label="提交"
+            onClick={handleSaveChanges} // 呼叫儲存變更的處理邏輯
+            type="btn-reg"
+          />
         </section>
       </form>
       <ToastContainer />
     </div>
-  );
+  )
 }
 
-export default Security;
+export default Security

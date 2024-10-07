@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin: 20px auto;
 }
 .filterContainer {
   position: relative;
@@ -46,28 +46,43 @@
   margin: -20px -20px 20px -20px;
 }
 
-.dateFilter {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.dateSection,
-.guestsSection,
+.dateFilter,
 .typeSection,
-.areaSection {
+.typeOption {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
+  gap:5px;
+}
+.typeSection{
+  padding-top: 10px;
+}
+.guestSection{
+  align-items: center;
+  text-align: left;
+  width: 35%;
+}
+.combineCol{
+  display: flex;
+  flex-direction: column;
 }
 
 .dateSection label,
 .guestSection label,
 .typeSection label,
-.areaSection label {
+.typeOption label {
   font-size: 14px;
+  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
   font-weight: bold;
   color: #2c3e50;
+}
+
+.dateSection {
+  align-items: center;
+  width: 25%;
+  text-align: left;
 }
 
 .regInput,
@@ -77,11 +92,6 @@
   border-radius: 5px;
   font-size: 14px;
   width: 60%;
-}
-
-.calendarIcon {
-  margin-left: -30px;
-  font-size: 16px;
 }
 
 .radioGroup {
@@ -101,15 +111,10 @@
   padding: 10px 0;
 }
 
-/* campCard */
-.campCard {
-  display: flex;
-  justify-content: center;
-  color: #4c3a30;
-  padding-top: 10px;
-  font-weight: normal;
-  margin: 0 55px;
+/* CarouselCard */
+.carolCard {
   border-top: 1px solid #333;
+  margin: 0 150px;
 }
 
 /* news */

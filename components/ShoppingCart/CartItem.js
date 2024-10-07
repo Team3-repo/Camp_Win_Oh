@@ -1,45 +1,34 @@
-/**
- **
- */
-import React, { useState } from "react";
+import React from "react";
 
-function CartItem() {
-  const [quantity, setQuantity] = useState(1);
-
-  const increaseQuantity = () => setQuantity((prev) => prev + 1);
-  const decreaseQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
+function CartItem({ item, cartItems, setCartItems }) {
+  const increaseQuantity = () => {
+    const updatedItems = cartItems.map(cartItem =>
+      cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+    );
+    setCartItems(updatedItems);
+  };
+  
+  const decreaseQuantity = () => {
+    if (item.quantity > 1) {
+      const updatedItems = cartItems.map(cartItem =>
+        cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+      );
+      setCartItems(updatedItems);
+    }
+  };
 
   return (
     <div className="cartItem">
       <div className="itemDetails">
-        <button className="removeButton" aria-label="Remove item">
-          x
-        </button>
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e2a841df1004403854633321fae117f4c1a2b3084cf78fdf62334202bb8d204?placeholderIfAbsent=true&apiKey=ff1208b97220405794b61b476c6106d1"
-          alt="Camping Tent"
-          className="itemImage"
-        />
-        <div className="itemName">露營帳篷</div>
+        <button className="removeButton" aria-label="Remove item">x</button>
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e2a841df1004403854633321fae117f4c1a2b3084cf78fdf62334202bb8d204?placeholderIfAbsent=true&apiKey=ff1208b97220405794b61b476c6106d1" alt="Camping Tent" className="itemImage" />
+        <div className="itemName">{item.name}</div>
       </div>
-      <div className="itemPrice">NT$1300</div>
+      <div className="itemPrice">NT${item.price}</div>
       <div className="quantityControl">
-        <button
-          className="quantityButton"
-          onClick={decreaseQuantity}
-          aria-label="Decrease quantity"
-        >
-          ㄧ
-        </button>
-        <div className="quantity">{quantity}</div>
-        <button
-          className="quantityButton"
-          onClick={increaseQuantity}
-          aria-label="Increase quantity"
-        >
-          ＋
-        </button>
+        <button className="quantityButton" onClick={decreaseQuantity} aria-label="Decrease quantity">－</button>
+        <div className="quantity">{item.quantity}</div>
+        <button className="quantityButton" onClick={increaseQuantity} aria-label="Increase quantity">＋</button>
       </div>
       <style jsx>{`
         .cartItem {
@@ -82,19 +71,18 @@ function CartItem() {
           gap: 16px;
         }
         .quantityButton {
-          background-color: rgba(217, 217, 217, 0);
           font-size: 28px;
           font-weight: 700;
           width: 39px;
           height: 39px;
-          border: 1px solid #626262;
           cursor: pointer;
+          border: 1px solid #626262;
+          background-color: #fc9a84;
         }
         .quantity {
           font-size: 24px;
           font-weight: 400;
           padding: 5px 27px;
-          border: 1px solid #626262;
         }
         @media (max-width: 991px) {
           .cartItem {

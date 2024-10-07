@@ -2,41 +2,51 @@
  **
  */
 import React from "react";
+import { useCart } from '@/context/CartContext';  // 修改1：引入 useCart
+
 
 const OrderSummary = () => {
+  const { cartItems, totalAmount } = useCart();  // 修改2：從 context 中取得 cartItems 和 totalAmount
+
   return (
     <div className="order-summary">
       <div className="order-details">
         <div className="order-title">結帳訂單</div>
-        <div className="order-item">
+        {cartItems.map((item) => (  // 修改3：遍歷 cartItems，顯示訂單中的商品
+        <div key={item.id} className="order-item">
           <div className="item-row">
             <div className="item-label">日期</div>
           </div>
+          
           <div className="item-row">
-            <div className="item-label">商品</div>
-            <div>露營帳篷</div>
-          </div>
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/04276e37cd0529b1c930c2249d8e1aa8c28317592ca25e82dbcb623195330d2a?placeholderIfAbsent=true&apiKey=ff1208b97220405794b61b476c6106d1"
-            className="item-image"
-            alt="Product"
-          />
-          <div className="item-row">
-            <div className="item-label">數量</div>
-            <div>*1</div>
-          </div>
+              <div className="item-label">商品</div>
+              <div>{item.name}</div>
+            </div>
+            <img
+              loading="lazy"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/04276e37cd0529b1c930c2249d8e1aa8c28317592ca25e82dbcb623195330d2a?placeholderIfAbsent=true&apiKey=ff1208b97220405794b61b476c6106d1"
+              className="item-image"
+              alt={item.name}  // 修改4：使用 item.name 作為圖片的 alt
+            />
+            <div className="item-row">
+              <div className="item-label">數量</div>
+              <div>*{item.quantity}</div>  
+              {/* // 修改5：顯示商品數量 */}
+            </div>
         </div>
+        ))}
         <div className="order-total">
           <div className="total-label">總價</div>
-          <div className="total-amount">NT$ 1,300</div>
+          <div className="total-amount">NT$ {totalAmount}</div>  
+          {/* // 修改6：使用 totalAmount 顯示總金額 */}
         </div>
       </div>
       <div className="price-summary">
         <div className="price-details">
           <div className="price-row">
             <div className="price-label">價格</div>
-            <div className="price-value">NT$ 1,300</div>
+            <div className="price-value">NT$ {totalAmount}</div>  
+            {/* // 修改7：顯示總金額 */}
           </div>
           <div className="price-row">
             <div className="price-label">優惠卷</div>
@@ -44,7 +54,8 @@ const OrderSummary = () => {
           </div>
           <div className="price-row">
             <div className="price-label">付款金額</div>
-            <div className="final-price">NT$ 1,300</div>
+            <div className="final-price">NT$ {totalAmount}</div>  
+            {/* // 修改8：顯示最終付款金額 */}
           </div>
         </div>
       </div>

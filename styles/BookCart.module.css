@@ -1,46 +1,230 @@
-/* ProgressBar */
-.progress-container {
+.BCartContainer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  /* background-color: #D7EAD3; */
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  align-items: flex-start
+  max-width: 1100px;
+  margin: 0px auto 20px auto;
+  padding: 0 100px;
 }
-
-.step {
+.BCartContainer2 {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  max-width: 1100px;
+  margin: 20px auto 20px auto;
+  padding: 0 100px;
+  gap: 20px;
 }
 
-.circle {
-  background-color: #F76BC3;
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+/* left */
+.bookingForm {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(84, 65, 65, 0.1);
+  width: 62%;
+}
+.bookingForm h3 {
+  color: #ff5833;
+  margin-bottom: 15px;
+}
+/* ---Success--- */
+.bookingForm2 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(84, 65, 65, 0.1);
+  width: 100%;
+}
+
+/* right */
+.orderContainer {
+  width: 35%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.orderSummary {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: auto;
+}
+.orderSummary h4 {
+  border-bottom: 2px solid #4e3d34;
+  color: #4e3d34;
+}
+.orderSummary h5 {
+  color: #333;
+  font-weight: normal;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  padding-top: 2px;
+}
+.orderSummary p {
+  font-size: 14px;
+  padding-top: 2px;
+}
+/* ------ */
+.orderSummary2 {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: auto;
+}
+.orderSummary2 h5 {
+  color: #333;
+  font-weight: normal;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px 0;
+}
+.orderSummary2 p{
+  font-size: 14px;
+}
+.orderSummary2 .couponP {
+  color: #198ea6;
+  font-size: 14px;
+}
+.orderSummary2 .totalP {
+  color: #ff5833;
+  font-size: 16px;
   font-weight: bold;
 }
 
-.step p {
-  margin-top: 5px;
-  font-size: 14px;
-  color: #2C3E50;
+/* 預定資訊 */
+.bookingInfo {
+  display: flex;
+  align-items: flex-start;
+}
+.bookingInfo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  margin-right: 15px;
+  object-fit: cover;
 }
 
-.line {
-  flex-grow: 1;
-  height: 2px;
-  background-color: #F5BFD5;
-  margin: 15px 10px;
+.bookingDetails {
+  color: #333;
 }
 
-/*  */
+/* form */
+.formSection {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ff6f61;
+  border-radius: 8px;
+  background-color: #fffaf2;
+}
+
+.formSection h4 {
+  color: #705448;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #b4a59f;
+  padding-bottom: 10px;
+}
+
+.formSection label {
+  margin-bottom: 5px;
+  display: block;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
+.formSection input,
+.formSection select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
+.phoneInput {
+  display: flex;
+}
+
+.phoneInput select {
+  width: 20%;
+  margin-right: 10px;
+}
+
+.phoneInput input {
+  width: 80%;
+}
+
+.notice {
+  color: #777;
+}
+
+.checkContainer {
+  margin-right: 10px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+.checkContainer2 {
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
+/* btn */
+.paybtn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.combinePay {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* payment */
+.accordionPay {
+  width: 71.5%;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+.accordionItem {
+  border-bottom: 1px solid #ddd;
+}
+.accordionHeader {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #4e3d34;
+  background-color: #fcf884;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+}
+.accordionHeader:hover {
+  background-color: #b4a59f;
+  color: #4e3d34;
+}
+.accordionContent {
+  max-height: auto;
+  overflow: hidden;
+  padding: 20px 20px 0;
+  background-color: #fafafa;
+  transition: max-height 0.3s ease;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-bottom: 10px;
+}
+/* icon */
+.accordionIcon {
+  font-size: 30px;
+  transition: transform 0.3s ease;
+}
+.accordionIcon.rotate {
+  transform: rotate(180deg);
+}

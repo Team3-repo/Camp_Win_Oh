@@ -4,14 +4,33 @@ import Navbar from '@/components/event/navbar'
 import Button from '@/components/book/button'
 import Card from '@/components/book/card'
 import FeatureSection1 from '@/components/event/featureSection1'
+import CarouselBanner from '@/components/book/CarouselBanner'
+import CarouselCard from '@/components/book/carouselCard'
+import styles from '@/styles/HomePage.module.css'
+
+import CarouselCards from '@/components/book/carouselCard'
 
 export default function EIndex() {
+  const images = [
+    'https://i.postimg.cc/9f7MBgC9/camp-2650359-1280-0.jpg',
+    'https://i.postimg.cc/Gmgdjy70/camping-6882479-1280-0.jpg',
+    'https://i.postimg.cc/xdkYp1hX/istockphoto-1148431349-1024x1024-0.jpg',
+  ]
+
+  const titles = [
+    '一緒にキャンプにいきましょう!',
+    '大自然でリラックスしましょう',
+    '忘れられない思い出を作りましょう',
+  ]
   return (
     <>
       <Navbar />
+      <CarouselBanner images={images} titles={titles} interval={5000} />
+      {/* 可以傳入不同的圖片和標題 */}
       <section className="ehot-topics">
         <h3 className="esection-title">熱門主題</h3>
-        <div className="efilter-buttons">
+        {/* 標籤:地區篩選 */}
+        <div className={styles.regSearch}>
           <Button
             label="全部地區"
             onClick={() => alert('Button clicked!')}
@@ -38,38 +57,15 @@ export default function EIndex() {
             type="btn-reg"
           />
         </div>
-        <div className="">
-          <>
-            <div
-              className="card"
-              style={{
-                backgroundImage:
-                  'url("https://i.postimg.cc/Rh0b3ckd/camping-6882479-1280.jpg")',
-              }}
-            >
-              <div className="card-content">
-                <h3>高山健行</h3>
-                <p>雲海仙境</p>
-                <span>2024-08-31</span>
-              </div>
-            </div>
-            <div
-              className="card"
-              style={{ backgroundImage: 'url("camp3.jpg")' }}
-            >
-              <div className="card-content">
-                <h3>輕鬆一夏</h3>
-                <p>Uchill</p>
-                <span>2024-08-31</span>
-              </div>
-            </div>
-            <button className="arrow right">&gt;</button>
-          </>
+        {/* 輪播圖:篩選結果 */}
+        <div className={styles.carolCard}>
+          {' '}
+          <CarouselCard title="營區" />
         </div>
       </section>
-      <section>
-        <FeatureSection1 />
-      </section>
+
+      <FeatureSection1 />
+
       <section className="ehilight-topics1">
         <h3 className="esection-title">精選活動</h3>
         <div className="ehilight-cards">
