@@ -84,8 +84,15 @@ export default function Navbar() {
           header {
             display: flex;
             height: auto;
-            justify-content: space-evenly;
+            justify-content: space-between; /* 調整元素間距 */
             background-color: #fffbf6;
+            position: fixed; /* 將 header 固定 */
+            top: 0; /* 固定在頂部 */
+            left: 0;
+            right: 0;
+            z-index: 1000; /* 確保 header 位於最上層 */
+            padding: 0px 20px; /* 增加 padding */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加陰影 */
           }
           .logo {
             width: 100px;

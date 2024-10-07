@@ -2,15 +2,16 @@ import styles from '../../styles/HomePage.module.css'
 import Button from './button'
 import { IoSearch } from 'react-icons/io5'
 import { useState } from 'react'
+import CarouselCards from './carouselCard'
 
 export default function SearchFilter() {
-  const [adults, setAdults] = useState(1) // 預設數量為 1
+  const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
   const [checkInDate, setCheckInDate] = useState('')
   const [checkOutDate, setCheckOutDate] = useState('')
-  const [accordionOpen, setAccordionOpen] = useState(false) // 控制手風琴的展開/收起狀態
+  const [accordionOpen, setAccordionOpen] = useState(false)
+  const [showResults, setShowResults] = useState(false) // 新增狀態
 
-  // 定義篩選器選項並進行分組
   const filterOptions = {
     房型: [
       { id: 'bedType', label: '全部' },
@@ -26,35 +27,30 @@ export default function SearchFilter() {
     ],
   }
 
-  // 狀態：已選擇的選項和搜索關鍵詞
   const [selectedFilters, setSelectedFilters] = useState([
     'bedType',
     'campArea',
-  ]) // 預設:全部
+  ])
   const [searchTerm, setSearchTerm] = useState('')
 
-  // 處理多選框變化
   const handleFilterChange = (event) => {
     const { id, checked } = event.target
     if (checked) {
-      setSelectedFilters((prev) => [...prev, id]) // 加入選中項目
+      setSelectedFilters((prev) => [...prev, id])
     } else {
-      setSelectedFilters((prev) => prev.filter((filter) => filter !== id)) // 移除未選中項目
+      setSelectedFilters((prev) => prev.filter((filter) => filter !== id))
     }
   }
 
-  // 過濾選項根據搜索關鍵字
   const filterVisibleOptions = (options) => {
     return options.filter((option) =>
       option.label.toLowerCase().includes(searchTerm)
     )
   }
 
-  // date-select
   const handleCheckInChange = (e) => {
     const selectedDate = e.target.value
     setCheckInDate(selectedDate)
-    // 自動設置退房日期為入住日期之後的一天
     if (!selectedDate || new Date(selectedDate) >= new Date(checkOutDate)) {
       setCheckOutDate('')
     }
@@ -64,18 +60,20 @@ export default function SearchFilter() {
     setCheckOutDate(e.target.value)
   }
 
-  // 人數
   const toggleAccordion = () => {
-    setAccordionOpen(!accordionOpen) // 切換手風琴狀態
+    setAccordionOpen(!accordionOpen)
   }
 
   const incrementAdults = () => setAdults((prev) => prev + 1)
   const decrementAdults = () =>
     setAdults((prev) => (prev > 1 ? prev - 1 : prev))
-
   const incrementChildren = () => setChildren((prev) => prev + 1)
   const decrementChildren = () =>
     setChildren((prev) => (prev > 0 ? prev - 1 : prev))
+
+  const handleSearchClick = () => {
+    setShowResults(true) // 點擊時顯示篩選結果區塊
+  }
 
   return (
     <>
@@ -175,16 +173,13 @@ export default function SearchFilter() {
                   &nbsp;搜索
                 </>
               }
-              onClick={() => alert('Button clicked!')}
+              onClick={handleSearchClick}
             />
           </div>
 
           {/* 分組顯示篩選選項 */}
           {Object.keys(filterOptions).map((group) => (
-            <div
-              key={group}
-              className={styles.typeSection}
-            >
+            <div key={group} className={styles.typeSection}>
               <label>{group}</label>
               <div className={styles.typeOption}>
                 {filterVisibleOptions(filterOptions[group]).map((option) => (
@@ -205,12 +200,51 @@ export default function SearchFilter() {
           ))}
 
           {/* 已選擇的選項顯示 */}
-          {/* <div style={{ marginTop: '20px' }}>
+          <div style={{ marginTop: '20px' }}>
             <strong>選擇的設施與服務:</strong>{' '}
             {selectedFilters.length > 0 ? selectedFilters.join(', ') : '未選擇'}
-          </div> */}
+          </div>
         </div>
       </div>
+
+      {/* 將篩選結果區塊移到篩選器的外部 */}
+      {showResults && (
+        <div>
+          {/* 標籤:地區篩選 */}
+          <div className={styles.regSearch}>
+            <Button
+              label="全部地區"
+              onClick={() => alert('Button clicked!')}
+              type="btn-reg"
+            />
+            <Button
+              label="北部"
+              onClick={() => alert('Button clicked!')}
+              type="btn-reg"
+            />
+            <Button
+              label="中部"
+              onClick={() => alert('Button clicked!')}
+              type="btn-reg"
+            />
+            <Button
+              label="南部"
+              onClick={() => alert('Button clicked!')}
+              type="btn-reg"
+            />
+            <Button
+              label="東部"
+              onClick={() => alert('Button clicked!')}
+              type="btn-reg"
+            />
+          </div>
+
+          {/* 輪播圖:篩選結果 */}
+          <div className={styles.carolCard}>
+            <CarouselCards title="營區" />
+          </div>
+        </div>
+      )}
     </>
   )
 }
