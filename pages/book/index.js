@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Footer1 from '@/components/event/footer1'
 import Navbar from '@/components/event/navbar'
 import styles from '@/styles/BookStyle.module.css'
 import CarouselBanner from '@/components/book/CarouselBanner'
 import Accordion from '@/components/book/accordion'
-import SuggestCard from '@/components/book/SuggestCard'
 import SearchFilter from '@/components/book/SearchFilter'
 import BookNav from '@/components/book/booknav'
 import CampInfo from '@/components/book/CampInfo'
@@ -14,6 +13,7 @@ import Reviews from '@/components/book/Reviews'
 import { CartProvider } from '@/context/book/CartContext'
 import ProductList from '@/components/book/ProductList'
 import CartDisplay from '@/components/book/CartDisplay'
+import SuggestCard2 from '@/components/book/SuggestCard2'
 
 export default function Index() {
   // 輪播大圖參數
@@ -68,36 +68,38 @@ export default function Index() {
   return (
     <>
       <Navbar />
+
       {/* 輪播圖 */}
       <div>
         <CarouselBanner images={images} titles={titles} />
       </div>
+
       {/* book-nav */}
       <BookNav />
+
       {/* info */}
       <CampInfo />
+
       {/* 篩選搜尋 */}
       <SearchFilter />
-      {/* 按鈕切換 campsites_id */}
-      <div>
-        <button onClick={() => setCampsiteId(1)}>營地 1</button>
-        <button onClick={() => setCampsiteId(2)}>營地 2</button>
-        {/* 可以添加更多按鈕來切換不同的 campsites_id */}
-      </div>
+
       <CartProvider>
         <ProductList />
         <CartDisplay />
       </CartProvider>
+
       {/* 輪播圖:篩選結果 */}
-      <SearchResults campsiteId={campsiteId} /> {/* 傳遞 campsiteId */}
+      <SearchResults campsiteId={campsiteId} />
+
       {/* 手風琴-注意事項 */}
       <div className={styles.AccordCon}>
         <Accordion data={accordionData} />
       </div>
+
       {/* comment */}
       <Reviews />
       {/* 推薦相似營地 */}
-      <SuggestCard />
+      <SuggestCard2 />
       <Footer1 />
     </>
   )
