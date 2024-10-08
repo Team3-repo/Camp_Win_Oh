@@ -1,31 +1,57 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '@/styles/BookStyle.module.css'
+import { useRouter } from 'next/router'
 
-export default function CampInfo() {
+const CampInfo = () => {
+  const [campData, setCampData] = useState(null) 
+  const [loading, setLoading] = useState(true) // 使用 loading 狀態來追蹤資料是否加載中
+  const router = useRouter() // 使用 useRouter 來獲取當前路由資訊
+
+  useEffect(() => {
+    const { campsite } = router.query // 從路由中獲取 campsite 查詢參數
+    if (router.isReady && campsite) {
+      // 當 router 準備就緒並且獲取到 campsite 參數時，進行 API 請求
+      setLoading(true) // 設置 loading 為 true，表示開始加載資料
+      fetch(`http://localhost:3005/book/api/CampsiteData?campsite_id=${campsite}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.length > 0) {
+            const filteredData = data.find((camp) => camp.id.toString() === campsite)
+            setCampData(filteredData || null) // 設置符合 id 的資料，若無則為 null
+          } else {
+            setCampData(null) // 如果沒有獲取到資料，設為 null
+          }
+          setLoading(false) // 資料加載完成後設置 loading 為 false
+        })
+        .catch((error) => {
+          console.log('獲取資料錯誤:', error)
+          setCampData(null)
+          setLoading(false)
+        })
+    }
+  }, [router.isReady, router.query]) // 當 router 準備就緒及 query 變更時重新執行 useEffect
+
+  // 當資料加載中時顯示載入中的提示
+  if (loading) return <p>資料載入中...</p>
+
+  // 當資料為 null 或找不到對應的資料時顯示提示
+  if (!campData) return <p>找不到對應的營地資料。</p>
+
+  // 渲染符合條件的單一營地資料
   return (
     <section className={styles.campInfo}>
       <div className={styles.campTitle}>
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/8aea3433d966e2b464b1ae2cbda3cf47c96b8b03ac23f8f8e7ed412fb3de6d60?placeholderIfAbsent=true&apiKey=1aee4428530f453b80830a45c5f99b85"
-          className={styles.campIcon}
-          alt=""
-        />
-        <h1 className="campName">山林樂活露營區</h1>
+        {/* 營地名稱 */}
+        <h1 className={styles.campName}>{campData.name}</h1>
       </div>
+      <h4 className={styles.campDetails}>開放時間：{campData.open_time || '未提供開放時間'}</h4>
       <div className={styles.campAddress}>
-        <h4 className={styles.addressText}>
-          編號： 319-2106 台灣花蓮縣秀林鄉太魯閣村200號
-        </h4>
+        <h4 className={styles.addressText}>地址: {campData.address || '詳細地址待更新中'}</h4>
         <div className={styles.mapLink}>
-          <h4
-            href="https://www.google.com/maps/search/?api=1&query=36.50222964999376,140.4140038031799"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.googleMapLink}
-          >
+          <a href="#" target="_blank" rel="noopener noreferrer" className={styles.googleMapLink}>
             在Google地圖上
-          </h4>
+          </a>
+          {/* 圖標改為使用其他 Icon */}
           <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/2bb243c725ec86f422698f5b837e7194bb25a2952c40aa0cb0346bcbdd68a54a?placeholderIfAbsent=true&apiKey=1aee4428530f453b80830a45c5f99b85"
@@ -34,12 +60,10 @@ export default function CampInfo() {
           />
         </div>
       </div>
-      <h3 className={styles.campDescription}>
-        感受山林的靜謐與悠然，盡在山林樂活
-      </h3>
-      <h5 className={styles.campDetails}>
-        山林樂活露營區位於壯麗的太魯閣山脈之中，是一處讓人遠離塵囂、享受大自然的理想場所。這裡擁有優美的自然景觀和豐富的生態環境，適合各類露營愛好者。不論是喜愛探險的背包客，還是喜歡舒適享受的家庭旅行者，都能在這裡找到最適合的露營方式。
-      </h5>
+      <h3 className={styles.campDescription}>{campData.title || '無標題'}</h3>
+      <h5 className={styles.campDetails}>{campData.info || '無詳細資料'}</h5>
     </section>
   )
 }
+
+export default CampInfo

@@ -2,37 +2,104 @@
   display: flex;
   justify-content: space-between;
   max-width: 1100px;
-  margin: 0 auto 20px auto;
+  margin: 0px auto 20px auto;
   padding: 0 100px;
 }
+.BCartContainer2 {
+  display: flex;
+  flex-direction: column;
+  max-width: 1100px;
+  margin: 90px auto 20px auto;
+  padding: 0 100px;
+  gap: 20px;
+}
 
+/* left */
 .bookingForm {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(84, 65, 65, 0.1);
-  width: 65%;
+  width: 62%;
 }
 .bookingForm h3 {
   color: #ff5833;
   margin-bottom: 15px;
 }
-
-.orderSummary {
+/* ---Success--- */
+.bookingForm2 {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 30%;
-}
-.orderSummary p {
-  margin-bottom: 10px;
-  color: #333;
+  box-shadow: 0 2px 8px rgba(84, 65, 65, 0.1);
+  width: 100%;
 }
 
+/* right */
+.orderContainer {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.orderSummary {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: auto;
+}
+.orderSummary h4 {
+  border-bottom: 2px solid #4e3d34;
+  color: #4e3d34;
+}
+.orderSummary h5 {
+  color: #333;
+  font-weight: normal;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2px;
+}
+.orderSummary p {
+  font-size: 14px;
+  padding-top: 2px;
+}
+/* ------ */
+.orderSummary2 {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: auto;
+}
+.orderSummary2 h5 {
+  color: #333;
+  font-weight: normal;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px 0;
+}
+.orderSummary2 p{
+  font-size: 14px;
+}
+.orderSummary2 .couponP {
+  color: #198ea6;
+  font-size: 14px;
+}
+.orderSummary2 .totalP {
+  color: #ff5833;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* 預定資訊 */
 .bookingInfo {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .bookingInfo img {
   width: 80px;
@@ -46,10 +113,16 @@
   color: #333;
 }
 
+/* form */
 .formSection {
   margin-bottom: 15px;
   padding: 15px;
   border: 1px solid #ff6f61;
+  border-radius: 8px;
+  background-color: #fffaf2;
+}
+.formSection2 {
+  margin-bottom: 15px;
   border-radius: 8px;
   background-color: #fffaf2;
 }
@@ -64,6 +137,7 @@
 .formSection label {
   margin-bottom: 5px;
   display: block;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 }
 
 .formSection input,
@@ -74,6 +148,7 @@
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 }
 
 .phoneInput {
@@ -91,16 +166,25 @@
 
 .notice {
   color: #777;
-  margin-bottom: 15px;
 }
 
+.checkContainer {
+  margin-right: 10px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+.checkContainer2 {
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
+/* btn */
 .paybtn {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-top: 15px;
 }
 
-.combinePay{
+.combinePay {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -108,20 +192,15 @@
 
 /* payment */
 .accordionPay {
-  width: 70%;
+  width: 71.5%;
   margin: 0 auto;
   padding-bottom: 10px;
 }
-
-.accordionItem{
-  border-bottom: 1px solid #ddd;
-}
-
 .accordionHeader {
-  padding: 15px;
+  padding: 10px 15px;
   cursor: pointer;
-  color:#4E3D34;
-  background-color: #FCF884 ;
+  color: #4e3d34;
+  background-color: #fcf884;
   font-weight: bold;
   transition: background-color 0.3s ease;
   display: flex;
@@ -129,12 +208,10 @@
   align-items: center;
   border-radius: 5px;
 }
-
 .accordionHeader:hover {
-  background-color: #B4A59F ;
-  color:#4E3D34;
+  background-color: #b4a59f;
+  color: #4e3d34;
 }
-
 .accordionContent {
   max-height: auto;
   overflow: hidden;
@@ -143,14 +220,13 @@
   transition: max-height 0.3s ease;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-
+  margin-bottom: 10px;
 }
-
 /* icon */
 .accordionIcon {
-  font-size: 30px; 
-  transition: transform 0.3s ease; 
+  font-size: 30px;
+  transition: transform 0.3s ease;
 }
 .accordionIcon.rotate {
-  transform: rotate(180deg); 
+  transform: rotate(180deg);
 }

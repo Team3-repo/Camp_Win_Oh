@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 0.5rem 6.25rem;
   position: sticky;
-  top: 0; /* 導覽列在滾動到頂部時固定 */
+  top: 50px; /* 導覽列在滾動到頂部時固定 */
   width: 100%;
   z-index: 1000; /* 確保導覽列在其他元素之上 */
   background-color: #c9e9c7;
@@ -35,6 +35,7 @@
 
 /* camp-info */
 .campInfo {
+  margin-top: 15px;
   padding: 0 6.25rem 1.125rem;
 }
 
@@ -42,7 +43,6 @@
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  padding-top: 0.625rem;
 }
 
 .campIcon {
@@ -85,7 +85,7 @@
   border-left: 0.625rem solid rgba(245, 174, 174, 1);
   padding-left: 1.25rem;
   margin-top: 0.625rem;
-  color: #698D65;
+  color: #698d65;
 }
 
 .campDetails {
@@ -145,21 +145,21 @@
 .typeSection,
 .typeOption {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  gap:5px;
+  gap: 40px;
 }
-.typeSection{
+.typeSection {
   padding-top: 10px;
 }
-.guestSection{
+.guestSection {
   align-items: center;
   text-align: left;
   width: 35%;
 }
-.combineCol{
+.combineCol {
   display: flex;
   flex-direction: column;
 }
@@ -169,7 +169,7 @@
 .typeSection label,
 .typeOption label {
   font-size: 14px;
-  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
   font-weight: bold;
   color: #2c3e50;
 }
@@ -209,4 +209,67 @@
   margin: 0 100px;
 }
 
-/* like-suggest */
+/* serch-type-result */
+.searchResult {
+  display: flex;
+  gap: 40px;
+  border-bottom: 1px solid rgba(141, 141, 141, 1);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.875rem;
+}
+
+.resultNumber {
+  font-weight: 400;
+  color: #4c3a30;
+  display: flex;
+  align-items: center;
+}
+
+.resultImage {
+  width: 18.75rem;
+  height: 15.625rem;
+  object-fit: cover;
+  border-radius: 0.3125rem;
+}
+
+.resultDetails {
+  flex: 1;
+}
+
+.resultTitle {
+  margin-bottom: 0.625rem;
+}
+
+.resultDescription,
+.resultCapacity,
+.resultPrice,
+.resultFacilities {
+  margin-bottom: 0.3125rem;
+  font-weight: normal;
+}
+
+.priceHighlight {
+  color: rgba(255, 88, 51, 1);
+  font-weight: 900;
+}
+
+.resultActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ------ */
+.searchResults {
+  padding: 0 6.25rem;
+}
+
+.resultsCount {
+  background-color: rgba(245, 174, 174, 1);
+  color: #fff;
+  font-weight: normal;
+  padding: 5px 10px;
+  margin-bottom: 1.875rem;
+}

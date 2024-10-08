@@ -1,11 +1,11 @@
 import Footer2 from '@/components/event/footer2'
 import Navbar from '@/components/event/navbar'
 import styles from '../../styles/BookCart.module.css'
-import ProgressBar from '@/components/book/ProgressBar'
 import { useState } from 'react'
 import CartData from '@/components/book/cartdata'
 import CartPay from '@/components/book/cartpay'
-import Cartsuccess from '@/components/book/cartsuccess'
+import Link from 'next/link'
+import Button from '@/components/book/button'
 
 export default function BookCart() {
   // 使用狀態來追蹤當前的步驟
@@ -14,33 +14,23 @@ export default function BookCart() {
   // 渲染購物車頁面
   const renderCart = () => (
     <div>
-      {/* 傳遞 setStep 給 CartData */}
+      {/* 填寫資料 */}
       <CartData setStep={setStep} />
-    </div>
-  );
-
-  const renderPayment = () => (
-    <div>
-      <CartPay setStep={setStep}/>
     </div>
   )
 
-  const renderConfirmation = () => (
+  const renderPayment = () => (
     <div>
-      <Cartsuccess setStep={setStep}/>
-      <button onClick={() => alert('付款成功！')}></button>
+      <CartPay setStep={setStep} />
     </div>
   )
 
   return (
     <>
       <Navbar />
-      {/* step-by-step */}
-      <ProgressBar />
       <div>
         {step === 1 && renderCart()}
         {step === 2 && renderPayment()}
-        {step === 3 && renderConfirmation()}
       </div>
 
       <CartData />
