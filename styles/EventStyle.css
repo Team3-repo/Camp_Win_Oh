@@ -380,6 +380,8 @@
 .ecsection-form {
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
+
 }
 .ecsectionall2 {
   display: flex;

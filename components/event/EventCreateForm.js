@@ -77,7 +77,7 @@ export default function EventCreateForm() {
   // 從後端取得營地資料
   useEffect(() => {
     const fetchCampsites = async () => {
-      const res = await fetch('http://localhost:3001/api/campsites')
+      const res = await fetch('http://localhost:3005/events/api/campsites')
       const data = await res.json()
       setCampsites(data)
     }
@@ -90,7 +90,7 @@ export default function EventCreateForm() {
     if (selectedCampsite) {
       const fetchBookingTypes = async () => {
         const res = await fetch(
-          `http://localhost:3001/api/booking_types?campsite_id=${selectedCampsite.id}`
+          `http://localhost:3005/events/api/booking_types?campsite_id=${selectedCampsite.id}`
         )
         const data = await res.json()
         setBookingTypes(data)
@@ -101,6 +101,8 @@ export default function EventCreateForm() {
       setBookingTypes([]) // 清空先前的住宿選項
     }
   }, [selectedCampsite])
+
+  
 
   // 更新訂購數量，根據選擇的住宿類型的最大庫存量進行控制
   const handleOrderQuantityChange = (e, book_type) => {

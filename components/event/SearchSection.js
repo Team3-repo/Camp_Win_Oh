@@ -20,7 +20,7 @@ export default function SearchSection() {
           document.getElementById('date-range').value = `${instance.formatDate(
             startDate,
             'm/d (D)'
-          )} - ${instance.formatDate(endDate, 'm/d (D)')}, ${nights}晚`
+          )} - ${instance.formatDate(endDate, 'm/d (D)')}, ${nights}夜`
         }
       },
     })
@@ -37,7 +37,7 @@ export default function SearchSection() {
           <input
             type="text"
             id="date-range"
-            placeholder="08/24 (Sat) - 08/25 (Sun), 1晚"
+            placeholder="請選擇日期"
           />
         </div>
         <div className="edate-filter">
