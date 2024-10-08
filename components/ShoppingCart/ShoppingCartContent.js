@@ -15,7 +15,7 @@ function ShoppingCartContent() {
       <div className="divider" />
       {cartItems.map((item, index) => (
         <CartItem 
-          key={index} 
+          key={item.id} // 確保使用唯一的 key 
           item={item} 
           cartItems={cartItems} 
           setCartItems={setCartItems} 
