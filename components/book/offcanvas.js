@@ -1,12 +1,12 @@
 // 購物車
 import React, { useContext } from 'react'
 import styles from '../../styles/component_style/offcanvas.module.css'
-import { CartContext } from '../../context/book/CartContext.js'
+import { BookCartContext } from '../../context/book/BookCartContext.js'
 import Link from 'next/link'
 
 export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
   // 使用 useContext 來獲取購物車狀態和操作
-  const { cart, total, dispatch } = useContext(CartContext)
+  const { bookCart, BookTotal, dispatch } = useContext(BookCartContext)
 
   // 購物車增減數量功能
   const handleRemoveFromCart = (item) => {
@@ -47,12 +47,12 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
 
         {/* Offcanvas 主體內容 */}
         <div className={styles.offcanvasBody}>
-          {cart.length === 0 ? (
+          {bookCart.length === 0 ? (
             <p>購物車是空的</p>
           ) : (
             <div className={styles.cartItems}>
               <ul>
-                {cart.map((item) => (
+                {bookCart.map((item) => (
                   <li key={item.id} className={styles.cartItem}>
                     <div className={styles.cartItemDetails}>
                       <span className={styles.itemName}>{item.name}</span>
@@ -85,12 +85,12 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
               </ul>
 
               {/* 顯示總金額 */}
-              <h3 className={styles.totalAmount}>總金額: ${total}</h3>
+              <h3 className={styles.totalAmount}>總金額: ${BookTotal}</h3>
             </div>
           )}
 
           {/* 當購物車不為空時顯示「前往付款」按鈕 */}
-          {cart.length > 0 && (
+          {bookCart.length > 0 && (
             <div className={styles.checkoutButtonContainer}>
               <Link href="/book/cart">
                 <button className={styles.checkoutButton}>前往付款</button>

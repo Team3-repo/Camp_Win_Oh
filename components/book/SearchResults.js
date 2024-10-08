@@ -4,7 +4,7 @@ import Button from './button'
 import styles from '@/styles/BookStyle.module.css'
 import { FaHeartCirclePlus } from 'react-icons/fa6'
 import { useRouter } from 'next/router' // 引入 useRouter 來獲取當前路由資訊
-import { CartContext } from '../../context/book/CartContext.js'
+import { BookCartContext } from '../../context/book/BookCartContext.js'
 import OffcanvasCart from './offcanvas'
 
 const SearchResult = ({
@@ -68,7 +68,7 @@ const SearchResults = () => {
   const [data, setData] = useState([])
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false) // 管理 Offcanvas 顯示狀態
   const router = useRouter() // 使用 useRouter 來獲取當前路由資訊
-  const { dispatch } = useContext(CartContext)
+  const { dispatch } = useContext(BookCartContext)
 
   useEffect(() => {
     const { campsite } = router.query // 從路由中獲取 campsite 查詢參數

@@ -6,14 +6,14 @@ import ProgressBar from './ProgressBar'
 
 export default function CartDetail({ setStep }) {
   // 儲存購物車資料
-  const [cartItems, setCartItems] = useState([])
+  const [BookCartItems, setBookCartItems] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null) // 手風琴控制
   const [selectedOption, setSelectedOption] = useState('creditCard') // 預設付款方式
   const [discountAmount] = useState(0.7) // 折扣比例
 
   // 計算最終金額
-  const finalTotal = cartItems
-    .reduce((total, item) => total + item.price * item.quantity, 0)
+  const finalTotal = BookCartItems
+    .reduce((BookTotal, item) => BookTotal + item.price * item.quantity, 0)
     .toFixed(2)
   const discountedTotal = Math.floor(finalTotal * discountAmount)
 
@@ -28,8 +28,8 @@ export default function CartDetail({ setStep }) {
   // 初始化購物車資料
   useEffect(() => {
     // 從 localStorage 中獲取購物車資料（假設已存在）
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || []
-    setCartItems(storedCart)
+    const storedCart = JSON.parse(localStorage.getItem('bookCart')) || []
+    setBookCartItems(storedCart)
   }, [])
 
   // 手風琴切換控制
@@ -44,8 +44,8 @@ export default function CartDetail({ setStep }) {
       content: (
         <>
           {/* 迭代 cartItems 資料並顯示所有商品 */}
-          {cartItems.length > 0 ? (
-            cartItems.map((item) => (
+          {BookCartItems.length > 0 ? (
+            BookCartItems.map((item) => (
               <div key={item.id} className={styles.formSection}>
                 <h4>預訂資訊</h4>
                 <div className={styles.bookingInfo}>
@@ -162,7 +162,7 @@ export default function CartDetail({ setStep }) {
           <div className={styles.orderSummary}>
             <h4>訂單摘要</h4>
             {/* 顯示來自 cartItems 的摘要資料 */}
-            {cartItems.map((item) => (
+            {BookCartItems.map((item) => (
               <div key={item.id} className={styles.cartItem}>
                 <h5>
                   {item.name} | {item.info}

@@ -11,22 +11,22 @@ export default function CartData({ setStep }) {
   const router = useRouter();
 
   // 儲存來自 localStorage 的購物車資料
-  const [cartItems, setCartItems] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [BookCartItems, setBookCartItems] = useState([]);
+  const [BookTotal, setBookTotal] = useState(0);
   const [showCoupon, setShowCoupon] = useState(false); // 優惠券顯示狀態
   const discountAmount = 0.7; // 例如：七折折扣
 
   // 從 localStorage 中獲取購物車資料
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartItems(storedCart);
+    const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || [];
+    setBookCartItems(storedBookCart);
 
     // 計算總金額
-    const totalAmount = storedCart.reduce(
+    const totalAmount = storedBookCart.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
-    setTotal(totalAmount);
+    setBookTotal(totalAmount);
   }, []);
 
   // 切換顯示優惠券搜尋區塊
@@ -46,8 +46,8 @@ export default function CartData({ setStep }) {
           <div className={styles.formSection}>
             <h4>預訂資訊</h4>
             {/* 使用 map 迭代顯示所有購物車商品 */}
-            {cartItems.length > 0 ? (
-              cartItems.map((item) => (
+            {BookCartItems.length > 0 ? (
+              BookCartItems.map((item) => (
                 <div key={item.id} className={styles.bookingInfo}>
                   <img
                     src={item.photos || 'https://via.placeholder.com/150'} // 顯示圖片，若無則顯示佔位圖
@@ -133,7 +133,7 @@ export default function CartData({ setStep }) {
             <h4>訂單摘要</h4>
             <hr />
             {/* 顯示所有購物車商品的詳細資訊 */}
-            {cartItems.map((item) => (
+            {BookCartItems.map((item) => (
               <div key={item.id} className={styles.cartItem}>
                 <h5>{item.name}</h5>
                 <p>
@@ -144,9 +144,9 @@ export default function CartData({ setStep }) {
               </div>
             ))}
             {/* 顯示購物車總金額和折扣後金額 */}
-            <h5>總金額: ${total}</h5>
+            <h5>總金額: ${BookTotal}</h5>
             <h5>優惠券: <p className={styles.couponP}>七折折扣</p></h5>
-            <h5>付款金額: <p className={styles.totalP}>${(total * discountAmount).toFixed(2)}</p></h5>
+            <h5>付款金額: <p className={styles.totalP}>${(BookTotal * discountAmount).toFixed(2)}</p></h5>
           </div>
         </div>
       </div>

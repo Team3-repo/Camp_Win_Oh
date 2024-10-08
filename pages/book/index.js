@@ -4,15 +4,15 @@ import Navbar from '@/components/event/navbar'
 import styles from '@/styles/BookStyle.module.css'
 import CarouselBanner from '@/components/book/CarouselBanner'
 import Accordion from '@/components/book/accordion'
-import SearchFilter from '@/components/book/SearchFilter'
 import BookNav from '@/components/book/booknav'
 import CampInfo from '@/components/book/CampInfo'
 import QuickBooking from '@/components/book/QuickBooking'
 import SearchResults from '@/components/book/SearchResults'
 import Reviews from '@/components/book/Reviews'
-import { CartProvider } from '@/context/book/CartContext'
+import { BookCartProvider } from '@/context/book/BookCartContext'
 import SuggestCard2 from '@/components/book/SuggestCard2'
 import OffcanvasCart from '@/components/book/offcanvas'
+import SearchFilter2 from '@/components/book/SearchFilter2'
 
 export default function Index() {
   // 輪播大圖參數
@@ -80,16 +80,16 @@ export default function Index() {
       <CampInfo />
       
       {/* 篩選搜尋 */}
-      <SearchFilter />
+      <SearchFilter2 />
 
-      <CartProvider>
+      <BookCartProvider>
         <OffcanvasCart />
-      </CartProvider>
+      </BookCartProvider>
 
       {/* 輪播圖:篩選結果 */}
-      <CartProvider>
+      <BookCartProvider>
         <SearchResults campsiteId={campsiteId} />
-      </CartProvider>
+      </BookCartProvider>
 
       {/* 手風琴-注意事項 */}
       <div className={styles.AccordCon}>
