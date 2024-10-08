@@ -7,7 +7,7 @@ const Btest = () => {
 
     // create path
     useEffect(() => {
-      fetch('http://localhost:3001/api/book')
+      fetch('http://localhost:3005/book/api/book')
         .then((res) => res.json())
         .then((data) => setData(data))
         .catch((error) => console.log(error))

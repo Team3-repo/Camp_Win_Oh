@@ -1,91 +1,113 @@
-import styles from '@/styles/BookCart.module.css';
-import Button from '@/components/book/button';
-import { IoIosArrowDown } from 'react-icons/io';
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
+import styles from '@/styles/BookCart.module.css'
 
-const accordionData = [
-  {
-    title: '已填寫資料',
-    content: (
-      <>
-        <div className={styles.formSection}>
-          <h4>預訂資訊</h4>
-          <div className={styles.bookingInfo}>
-            <img src="https://i.postimg.cc/Z5CgZDBY/4.jpg" alt="Campsite Image" />
-            <div className={styles.bookingDetails}>
-              <p>
-                [山林樂活露營區]
-                <br />
-                標準營位 | 經典區露營 | A區
-              </p>
-              <p>大人: 2人, 小孩: 2人</p>
-            </div>
-          </div>
-        </div>
-      </>
-    ),
-  },
-];
+// useEffect只能一個，所以訂單資訊抓取設元件，此頁面移至Detail，訂單訊息簡單抓取json資料即可
 
-export default function CartDetail({ setStep }) {
+// 模擬 API 請求（用於示範，請替換為實際 API 調用）
+const fetchEventDetails = async () => {
+  // 模擬後端 API 回應的資料
+  return {
+    id: 1, // 活動 ID
+    title: '夏日狂歡派對',
+    description:
+      '這是一場充滿歡笑和活力的夏日派對活動，讓我們一起盡情享受夏日的陽光和大自然的美好。',
+    imageUrl:
+      'https://cdn.builder.io/api/v1/image/assets/TEMP/2c4f42695911ec327af3315bd4e177bdf625338dc60fd9748e07ebb6fc9deab6?placeholderIfAbsent=true&apiKey=917a01bb4dc8469db872546ae2709b5f',
+    memberId: '兔兔',
+    bookendDate: '2024-09-22', // 報名截止日期
+    maxPeople: 6,
+    fee: 1200,
+    startDate: '2024-09-23',
+    endDate: '2024-09-24',
+    area: '東部',
+    camp: '山Chill',
+    campAdd: '台灣花蓮縣秀林鄉太魯閣村200號',
+    notes: '儲存所有垃圾並帶走，參加者請自備帳篷等裝備，避免攜帶過量行李。',
+    participants: [
+      // 模擬參與者資料
+      {
+        id: 1,
+        name: '小明',
+        avatar:
+          'https://i.postimg.cc/3Rs3YT9M/DALL-E-2024-08-20-23-37-48-A-cute-chibi-style-illustration-of-a-camping-theme-similar-to-the-pro.webp',
+      },
+      {
+        id: 2,
+        name: '小華',
+        avatar:
+          'https://i.postimg.cc/3Rs3YT9M/DALL-E-2024-08-20-23-37-48-A-cute-chibi-style-illustration-of-a-camping-theme-similar-to-the-pro.webp',
+      },
+      {
+        id: 3,
+        name: '小強',
+        avatar:
+          'https://i.postimg.cc/3Rs3YT9M/DALL-E-2024-08-20-23-37-48-A-cute-chibi-style-illustration-of-a-camping-theme-similar-to-the-pro.webp',
+      },
+    ],
+  }
+}
+
+export default function CartSuccess() {
+  const [eventDetails, setEventDetails] = useState(null)
+
+  // 在組件載入時調用 API 並設置資料
+  useEffect(() => {
+    fetchEventDetails().then((data) => setEventDetails(data))
+  }, [])
+
+  // 如果資料尚未載入，顯示 Loading...
+  if (!eventDetails) {
+    return <p>Loading...</p>
+  }
 
   return (
     <>
-      <div className={styles.BCartContainer}>
-        <div className={styles.bookingForm}>
-          <h3>完成付款</h3>
-          <div className={styles.formSection}>
-            <h4>付款方式</h4>
-            <form>
-              <div>
-                <label>
-                  <input
-                    type="radio"
-                    value="option1"
-                    checked={selectedOption === 'option1'}
-                    onChange={handleOptionChange}
-                  />
-                  信用卡付款
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input
-                    type="radio"
-                    value="option2"
-                    checked={selectedOption === 'option2'}
-                    onChange={handleOptionChange}
-                  />
-                  Line Pay
-                </label>
-              </div>
-            </form>
+      <section className={styles.BCartContainer2}>
+        <div className={styles.bookingForm2}>
+          <h3>已付款完成</h3>
+        </div>
+        <div className={styles.bookingForm2}>
+          {' '}
+          {/* 活動資訊 */}
+          <div className="ectitle">
+            <h3 className="ech3">活動資訊</h3>
           </div>
+          <div className="event-info">
+            <dl className="einfo-list">
+              <dt className="einfo-label">主辦人</dt>
+              <dd className="einfo-value">{eventDetails.memberId}</dd>
 
-          <h5 className={styles.notice}>
-            點擊「確認付款」，即表示您以確認訂單無誤且同意右方顯示的總金額，亦同意
-            服務條款 和取消政策
-          </h5>
+              <dt className="einfo-label">報名截止</dt>
+              <dd className="einfo-value">
+                {eventDetails.registrationDeadline}
+              </dd>
 
-          <div className={styles.combinePay}>
-            <div className={styles.paybtn}>
-              <Button label="返回上頁" onClick={() => setStep(1)} />
-            </div>
-            <div className={styles.paybtn}>
-              <Button label="確認付款" onClick={handlePaymentConfirmation} />
-            </div>
+              <dt className="einfo-label">活動日期</dt>
+              <dd className="einfo-value">
+                {eventDetails.startDate} - {eventDetails.endDate}
+              </dd>
+
+              <dt className="einfo-label">區域</dt>
+              <dd className="einfo-value">{eventDetails.area}</dd>
+
+              <dt className="einfo-label">營地名稱</dt>
+              <dd className="einfo-value">{eventDetails.camp}</dd>
+
+              <dt className="einfo-label">營地地址</dt>
+              <dd className="einfo-value">{eventDetails.campAdd}</dd>
+
+              <dt className="einfo-label">人數限制</dt>
+              <dd className="einfo-value">{eventDetails.maxPeople} 人</dd>
+
+              <dt className="einfo-label">每人費用</dt>
+              <dd className="einfo-value">{eventDetails.fee} 元</dd>
+
+              <dt className="einfo-label">備註</dt>
+              <dd className="einfo-value">{eventDetails.notes}</dd>
+            </dl>
           </div>
         </div>
-        <div className={styles.orderSummary}>
-          <h4>山林樂活露營區 | 標準營位 | 經典區露營 | A區</h4>
-          <p>大人: 2人, 小孩: 2人</p>
-          <p>日期: 2024年10月15日 - 2024年10月16日</p>
-          <p>數量: 1</p>
-          <p>小計: NT$1,500</p>
-          <p>折扣: 七折折扣</p>
-          <p>付款金額: NT$1,050</p>
-        </div>
-      </div>
+      </section>
     </>
-  );
+  )
 }

@@ -11,9 +11,8 @@ import QuickBooking from '@/components/book/QuickBooking'
 import SearchResults from '@/components/book/SearchResults'
 import Reviews from '@/components/book/Reviews'
 import { CartProvider } from '@/context/book/CartContext'
-import ProductList from '@/components/book/ProductList'
-import CartDisplay from '@/components/book/CartDisplay'
 import SuggestCard2 from '@/components/book/SuggestCard2'
+import OffcanvasCart from '@/components/book/offcanvas'
 
 export default function Index() {
   // 輪播大圖參數
@@ -79,17 +78,18 @@ export default function Index() {
 
       {/* info */}
       <CampInfo />
-
+      
       {/* 篩選搜尋 */}
       <SearchFilter />
 
       <CartProvider>
-        <ProductList />
-        <CartDisplay />
+        <OffcanvasCart />
       </CartProvider>
 
       {/* 輪播圖:篩選結果 */}
-      <SearchResults campsiteId={campsiteId} />
+      <CartProvider>
+        <SearchResults campsiteId={campsiteId} />
+      </CartProvider>
 
       {/* 手風琴-注意事項 */}
       <div className={styles.AccordCon}>
