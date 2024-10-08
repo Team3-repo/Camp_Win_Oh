@@ -1,218 +1,159 @@
-import React, { useState, useEffect } from 'react'
-import flatpickr from 'flatpickr'
-import 'flatpickr/dist/flatpickr.css'
-import Button from '@/components/book/button'
+import React, { useState, useEffect, useContext } from 'react';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.css';
+import Button from '@/components/book/button';
+import { EventContext } from '@/context/event/EventContext';
 
 export default function EventCreateForm() {
-  // 訂購數量
-  const [orderQuantity, setOrderQuantity] = useState(1)
-  // 訂購金額
-  const [orderAmount, setOrderAmount] = useState(0)
-  // 活動人數
-  const [eventPeople, setEventPeople] = useState(1)
-  // 其他費用
-  const [eOtherFees, setEOtherFees] = useState(0)
-  // 費用（每人）
-  const [costPerPerson, setCostPerPerson] = useState(0)
-  // 選擇的住宿資訊
-  const [selectedBookType, setSelectedBookType] = useState(null)
-  const [selectedCampsite, setSelectedCampsite] = useState(null)
-  const [campsites, setCampsites] = useState([])
-  const [bookingTypes, setBookingTypes] = useState([])
-  // 表單狀態
-  const [eventTitle, setEventTitle] = useState('')
-  const [eventDescription, setEventDescription] = useState('')
-  const [eStartDate, setEStartDate] = useState('')
-  const [eEndDate, setEEndDate] = useState('')
-  const [organizerNick, setOrganizerNick] = useState('')
-  const [eventNotes, setENotes] = useState('')
-  const [uploadedImage, setUploadedImage] = useState('')
+  const { eventData, setEventData } = useContext(EventContext);
 
-  // 在頁面初始化時，從 localStorage 中讀取已保存的表單資料
+  const {
+    eventTitle,
+    eventDescription,
+    eStartDate,
+    eEndDate,
+    organizerNick,
+    selectedBookType,
+    orderQuantity,
+    orderAmount,
+    costPerPerson,
+    eOtherFees,
+    eventNotes,
+    eventPeople,
+    imageUrl,
+  } = eventData;
+
+  const [selectedCampsite, setSelectedCampsite] = useState(null);
+  const [campsites, setCampsites] = useState([]);
+  const [bookingTypes, setBookingTypes] = useState([]);
+
+  // 從 LocalStorage 中讀取資料並同步至狀態
   useEffect(() => {
-    const storedData = localStorage.getItem('eventPreviewData')
-    if (storedData) {
-      const eventData = JSON.parse(storedData)
-      setEventTitle(eventData.eventTitle || '')
-      setEventDescription(eventData.eventDescription || '')
-      setEStartDate(eventData.eStartDate || '')
-      setEEndDate(eventData.eEndDate || '')
-      setOrganizerNick(eventData.organizerNick || '')
-      setSelectedCampsite(
-        campsites.find((campsite) => campsite.id === eventData.camp_id) || null
-      )
-      setSelectedBookType(eventData.selectedBookType || null)
-      setOrderQuantity(eventData.orderQuantity || 1)
-      setOrderAmount(eventData.orderAmount || 0)
-      setEventPeople(eventData.eventPeople || 1)
-      setEOtherFees(eventData.eOtherFees || 0)
-      setCostPerPerson(eventData.costPerPerson || 0)
-      setENotes(eventData.eventNotes || '')
-      setUploadedImage(eventData.imageUrl || '')
+    const storedEventData = localStorage.getItem('eventPreviewData');
+    if (storedEventData) {
+      const parsedData = JSON.parse(storedEventData);
+      setEventData(parsedData);
+
+      // 同步更新 selectedCampsite 狀態
+      if (parsedData.camp_id) {
+        const selectedCamp = campsites.find(camp => camp.id === parsedData.camp_id);
+        setSelectedCampsite(selectedCamp);
+      }
     }
-  }, [campsites]) // 等待 campsites 加載完成後再執行
+  }, [setEventData, campsites]); // 注意將 campsites 作為依賴，確保在資料載入後再執行
 
   useEffect(() => {
-    // 僅允許選擇今天或之後的日期
     flatpickr('#start-date', {
       dateFormat: 'Y-m-d',
       minDate: new Date(),
-      onChange: function (selectedDates, dateStr, instance) {
-        // 當開始日期改變時，更新結束日期的 minDate
-        const endDateInput = document.getElementById('end-date')
+      onChange: function (selectedDates) {
+        const endDateInput = document.getElementById('end-date');
         if (selectedDates.length > 0) {
-          endDateInput._flatpickr.set('minDate', selectedDates[0])
+          endDateInput._flatpickr.set('minDate', selectedDates[0]);
         } else {
-          endDateInput._flatpickr.set('minDate', new Date())
+          endDateInput._flatpickr.set('minDate', new Date());
         }
       },
-    })
-    // end-date限制只能選擇開始日期之後的日期
+    });
     flatpickr('#end-date', {
       dateFormat: 'Y-m-d',
-      minDate: new Date(), // 默認為今天或之後的日期
-    })
-  }, [])
+      minDate: new Date(),
+    });
+  }, []);
 
-  // 從後端取得營地資料
+  const handleChange = (field, value) => {
+    setEventData((prev) => {
+      const updatedEventData = { ...prev, [field]: value };
+      localStorage.setItem('eventPreviewData', JSON.stringify(updatedEventData));
+      return updatedEventData;
+    });
+  };
+
   useEffect(() => {
     const fetchCampsites = async () => {
-      const res = await fetch('http://localhost:3005/events/api/campsites')
-      const data = await res.json()
-      setCampsites(data)
-    }
-
-    fetchCampsites()
-  }, [])
+      const res = await fetch('http://localhost:3005/events/api/campsites');
+      const data = await res.json();
+      setCampsites(data);
+    };
+    fetchCampsites();
+  }, []);
 
   useEffect(() => {
-    // 當選擇營地時，根據campsite_id取得房型資料
     if (selectedCampsite) {
       const fetchBookingTypes = async () => {
-        const res = await fetch(
-          `http://localhost:3005/events/api/booking_types?campsite_id=${selectedCampsite.id}`
-        )
-        const data = await res.json()
-        setBookingTypes(data)
-      }
-
-      fetchBookingTypes()
+        const res = await fetch(`http://localhost:3005/events/api/booking_types?campsite_id=${selectedCampsite.id}`);
+        const data = await res.json();
+        setBookingTypes(data);
+      };
+      fetchBookingTypes();
     } else {
-      setBookingTypes([]) // 清空先前的住宿選項
+      setBookingTypes([]);
     }
-  }, [selectedCampsite])
+  }, [selectedCampsite]);
 
-  
-
-  // 更新訂購數量，根據選擇的住宿類型的最大庫存量進行控制
   const handleOrderQuantityChange = (e, book_type) => {
-    let value = parseInt(e.target.value) || 1
-    if (value > book_type.stock) {
-      value = book_type.stock
-    }
-    setOrderQuantity(value)
-    setOrderAmount(value * book_type.price)
+    let value = parseInt(e.target.value) || 1;
+    if (value > book_type.stock) value = book_type.stock;
+    handleChange('orderQuantity', value);
+    handleChange('orderAmount', value * book_type.price);
+  };
 
-    if (eventPeople > 0) {
-      setCostPerPerson(
-        ((value * book_type.price + eOtherFees) / eventPeople).toFixed(1)
-      )
-    }
-  }
-
-  // 更新活動人數
   const handleEventPeopleChange = (e) => {
-    let value = parseInt(e.target.value) || 1
+    let value = parseInt(e.target.value) || 1;
+    const maxPeople = (selectedBookType?.max_per || 1) * orderQuantity;
+    if (value > maxPeople) value = maxPeople;
+    handleChange('eventPeople', value);
 
-    const maxPeople = (selectedBookType?.max_per || 1) * orderQuantity
-
-    if (value > maxPeople) {
-      value = maxPeople // 若超過最大值，則設定為最大值
-    }
-    setEventPeople(value)
-
-    // 更新費用（每人）
     if (value > 0) {
-      setCostPerPerson(((orderAmount + eOtherFees) / value).toFixed(1))
+      handleChange('costPerPerson', ((orderAmount + eOtherFees) / value).toFixed(1));
     } else {
-      setCostPerPerson(0)
+      handleChange('costPerPerson', 0);
     }
-  }
+  };
 
-  // 更新其他費用
   const handleOtherFeesChange = (e) => {
-    let value = parseInt(e.target.value) || 0
-    setEOtherFees(value)
-  }
+    let value = parseInt(e.target.value) || 0;
+    handleChange('eOtherFees', value);
+  };
 
-  // 每次狀態變更後更新費用（每人）
-  useEffect(() => {
-    if (eventPeople > 0) {
-      setCostPerPerson(((orderAmount + eOtherFees) / eventPeople).toFixed(1))
-    } else {
-      setCostPerPerson(0)
-    }
-  }, [orderAmount, eventPeople, eOtherFees])
-
-  // 選擇住宿
   const handleAccommodationChange = (book_type) => {
-    setSelectedBookType(book_type)
-    setOrderQuantity(1) // 重置訂購數量
-    setOrderAmount(book_type.price)
-    if (eventPeople > 0) {
-      setCostPerPerson(
-        ((book_type.price + eOtherFees) / eventPeople).toFixed(1)
-      )
-    }
-  }
+    handleChange('selectedBookType', book_type);
+    handleChange('orderQuantity', 1);
+    handleChange('orderAmount', book_type.price);
+    handleChange('costPerPerson', ((book_type.price + eOtherFees) / eventPeople).toFixed(1));
+  };
 
-  // 當使用者選擇營地時，正確更新 selectedCampsite 狀態，並檢查選取的物件
   const handleCampsiteChange = (e) => {
-    const selectedId = parseInt(e.target.value)
-    const campsite = campsites.find((camp) => camp.id === selectedId)
-    setSelectedCampsite(campsite)
-    setSelectedBookType(null)
-    setOrderQuantity(1)
-    setOrderAmount(0)
-  }
+    const selectedId = parseInt(e.target.value);
+    const campsite = campsites.find((camp) => camp.id === selectedId);
+    setSelectedCampsite(campsite);
+    handleChange('camp_id', campsite?.id);
+    handleChange('campName', campsite?.name);
+    handleChange('campAdd', campsite?.address);
+  };
 
-  // 圖片
   const handleUploadImage = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedImage(reader.result)
-      }
-      reader.readAsDataURL(file)
+        handleChange('imageUrl', reader.result);
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
-  // 預覽活動頁面
   const handlePreview = () => {
-    const eventData = {
-      eventTitle,
-      eventDescription,
-      eStartDate,
-      eEndDate,
-      organizerNick,
-      camp_id: selectedCampsite?.id || '', // 營地ID
-      campName: selectedCampsite?.name || '', // 營地名稱
-      campAdd: selectedCampsite?.address || '', // 營地地址
-      selectedBookType,
-      orderQuantity,
-      orderAmount,
-      costPerPerson,
-      eOtherFees,
-      eventNotes,
-      eventPeople,
-      imageUrl: uploadedImage,
-    }
+    const previewData = {
+      ...eventData,
+      camp_id: selectedCampsite?.id,
+      campName: selectedCampsite?.name,
+      campAdd: selectedCampsite?.address,
+    };
+    localStorage.setItem('eventPreviewData', JSON.stringify(previewData));
+    window.location.href = '/events/eventPreview';
+  };
 
-    localStorage.setItem('eventPreviewData', JSON.stringify(eventData))
-
-    window.location.href = '/events/eventPreview'
-  }
   return (
     <>
       <section className="ecsectionall">
@@ -226,10 +167,10 @@ export default function EventCreateForm() {
               <h3 className="ech3">上傳圖片</h3>
             </div>
             <div className="ecupload-wrapper">
-              {uploadedImage && (
+              {imageUrl && (
                 <img
                   id="ecuploaded-image"
-                  src={uploadedImage}
+                  src={imageUrl}
                   alt="uploaded-image"
                 />
               )}
@@ -251,7 +192,9 @@ export default function EventCreateForm() {
                 id="eventDescription"
                 rows={4}
                 value={eventDescription}
-                onChange={(e) => setEventDescription(e.target.value)}
+                onChange={(e) =>
+                  handleChange('eventDescription', e.target.value)
+                }
                 required
               />
             </div>
@@ -278,7 +221,9 @@ export default function EventCreateForm() {
                   type="text"
                   id="organizerNick"
                   value={organizerNick}
-                  onChange={(e) => setOrganizerNick(e.target.value)}
+                  onChange={(e) =>
+                    handleChange('organizerNick', e.target.value)
+                  }
                   required
                 />
               </div>
@@ -290,7 +235,7 @@ export default function EventCreateForm() {
                 type="text"
                 id="ecevent-name"
                 value={eventTitle}
-                onChange={(e) => setEventTitle(e.target.value)}
+                onChange={(e) => handleChange('eventTitle', e.target.value)}
                 required
               />
             </div>
@@ -302,6 +247,8 @@ export default function EventCreateForm() {
                 <input
                   type="text"
                   id="start-date"
+                  value={eStartDate}
+                  onChange={(e) => handleChange('eStartDate', e.target.value)}
                   placeholder="選擇開始日期"
                   required
                 />
@@ -311,6 +258,8 @@ export default function EventCreateForm() {
                 <input
                   type="text"
                   id="end-date"
+                  value={eEndDate}
+                  onChange={(e) => handleChange('eEndDate', e.target.value)}
                   placeholder="選擇結束日期"
                   required
                 />
@@ -480,7 +429,7 @@ export default function EventCreateForm() {
                 id="eventNotes"
                 rows={4}
                 value={eventNotes}
-                onChange={(e) => setENotes(e.target.value)}
+                onChange={(e) => handleChange('eventNotes', e.target.value)}
                 required
               />
             </div>
