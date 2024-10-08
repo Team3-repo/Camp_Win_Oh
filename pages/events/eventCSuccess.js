@@ -31,7 +31,10 @@ export default function eventCSuccess() {
               <strong>費用:</strong> 1200
             </p>
             <p>
-              <strong>活動日期:</strong> 2024年9月28日 - 2024年9月29日
+              <strong>開始日期:</strong> 2024年9月28日
+            </p>
+            <p>
+              <strong>結束日期:</strong> 2024年9月29日
             </p>
           </div>
         </div>

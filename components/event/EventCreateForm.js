@@ -11,7 +11,7 @@ export default function EventCreateForm() {
   // 活動人數
   const [eventPeople, setEventPeople] = useState(1)
   // 其他費用
-  const [otherFees, setOtherFees] = useState(0)
+  const [eOtherFees, setEOtherFees] = useState(0)
   // 費用（每人）
   const [costPerPerson, setCostPerPerson] = useState(0)
   // 選擇的住宿資訊
@@ -20,12 +20,37 @@ export default function EventCreateForm() {
   const [campsites, setCampsites] = useState([])
   const [bookingTypes, setBookingTypes] = useState([])
   // 表單狀態
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
+  const [eventTitle, setEventTitle] = useState('')
+  const [eventDescription, setEventDescription] = useState('')
+  const [eStartDate, setEStartDate] = useState('')
+  const [eEndDate, setEEndDate] = useState('')
   const [organizerNick, setOrganizerNick] = useState('')
-  const [notes, setNotes] = useState('')
+  const [eventNotes, setENotes] = useState('')
+  const [uploadedImage, setUploadedImage] = useState('')
+
+  // 在頁面初始化時，從 localStorage 中讀取已保存的表單資料
+  useEffect(() => {
+    const storedData = localStorage.getItem('eventPreviewData')
+    if (storedData) {
+      const eventData = JSON.parse(storedData)
+      setEventTitle(eventData.eventTitle || '')
+      setEventDescription(eventData.eventDescription || '')
+      setEStartDate(eventData.eStartDate || '')
+      setEEndDate(eventData.eEndDate || '')
+      setOrganizerNick(eventData.organizerNick || '')
+      setSelectedCampsite(
+        campsites.find((campsite) => campsite.id === eventData.camp_id) || null
+      )
+      setSelectedBookType(eventData.selectedBookType || null)
+      setOrderQuantity(eventData.orderQuantity || 1)
+      setOrderAmount(eventData.orderAmount || 0)
+      setEventPeople(eventData.eventPeople || 1)
+      setEOtherFees(eventData.eOtherFees || 0)
+      setCostPerPerson(eventData.costPerPerson || 0)
+      setENotes(eventData.eventNotes || '')
+      setUploadedImage(eventData.imageUrl || '')
+    }
+  }, [campsites]) // 等待 campsites 加載完成後再執行
 
   useEffect(() => {
     // 僅允許選擇今天或之後的日期
@@ -52,7 +77,7 @@ export default function EventCreateForm() {
   // 從後端取得營地資料
   useEffect(() => {
     const fetchCampsites = async () => {
-      const res = await fetch('http://localhost:3001/api/campsites')
+      const res = await fetch('http://localhost:3005/events/api/campsites')
       const data = await res.json()
       setCampsites(data)
     }
@@ -60,12 +85,12 @@ export default function EventCreateForm() {
     fetchCampsites()
   }, [])
 
-  // 當選擇營地時，根據campsite_id取得房型資料
   useEffect(() => {
+    // 當選擇營地時，根據campsite_id取得房型資料
     if (selectedCampsite) {
       const fetchBookingTypes = async () => {
         const res = await fetch(
-          `http://localhost:3001/api/booking_types?campsite_id=${selectedCampsite.id}`
+          `http://localhost:3005/events/api/booking_types?campsite_id=${selectedCampsite.id}`
         )
         const data = await res.json()
         setBookingTypes(data)
@@ -76,6 +101,8 @@ export default function EventCreateForm() {
       setBookingTypes([]) // 清空先前的住宿選項
     }
   }, [selectedCampsite])
+
+  
 
   // 更新訂購數量，根據選擇的住宿類型的最大庫存量進行控制
   const handleOrderQuantityChange = (e, book_type) => {
@@ -88,7 +115,7 @@ export default function EventCreateForm() {
 
     if (eventPeople > 0) {
       setCostPerPerson(
-        ((value * book_type.price + otherFees) / eventPeople).toFixed(1)
+        ((value * book_type.price + eOtherFees) / eventPeople).toFixed(1)
       )
     }
   }
@@ -106,7 +133,7 @@ export default function EventCreateForm() {
 
     // 更新費用（每人）
     if (value > 0) {
-      setCostPerPerson(((orderAmount + otherFees) / value).toFixed(1))
+      setCostPerPerson(((orderAmount + eOtherFees) / value).toFixed(1))
     } else {
       setCostPerPerson(0)
     }
@@ -115,17 +142,17 @@ export default function EventCreateForm() {
   // 更新其他費用
   const handleOtherFeesChange = (e) => {
     let value = parseInt(e.target.value) || 0
-    setOtherFees(value)
+    setEOtherFees(value)
   }
 
   // 每次狀態變更後更新費用（每人）
   useEffect(() => {
     if (eventPeople > 0) {
-      setCostPerPerson(((orderAmount + otherFees) / eventPeople).toFixed(1))
+      setCostPerPerson(((orderAmount + eOtherFees) / eventPeople).toFixed(1))
     } else {
       setCostPerPerson(0)
     }
-  }, [orderAmount, eventPeople, otherFees])
+  }, [orderAmount, eventPeople, eOtherFees])
 
   // 選擇住宿
   const handleAccommodationChange = (book_type) => {
@@ -133,7 +160,9 @@ export default function EventCreateForm() {
     setOrderQuantity(1) // 重置訂購數量
     setOrderAmount(book_type.price)
     if (eventPeople > 0) {
-      setCostPerPerson(((book_type.price + otherFees) / eventPeople).toFixed(1))
+      setCostPerPerson(
+        ((book_type.price + eOtherFees) / eventPeople).toFixed(1)
+      )
     }
   }
 
@@ -147,23 +176,37 @@ export default function EventCreateForm() {
     setOrderAmount(0)
   }
 
+  // 圖片
+  const handleUploadImage = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setUploadedImage(reader.result)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
   // 預覽活動頁面
   const handlePreview = () => {
     const eventData = {
-      title,
-      description,
-      startDate,
-      endDate,
+      eventTitle,
+      eventDescription,
+      eStartDate,
+      eEndDate,
       organizerNick,
-      name: selectedCampsite?.name || '',
-      campAdd: selectedCampsite?.address || '',
+      camp_id: selectedCampsite?.id || '', // 營地ID
+      campName: selectedCampsite?.name || '', // 營地名稱
+      campAdd: selectedCampsite?.address || '', // 營地地址
       selectedBookType,
       orderQuantity,
       orderAmount,
       costPerPerson,
-      otherFees,
-      notes,
+      eOtherFees,
+      eventNotes,
       eventPeople,
+      imageUrl: uploadedImage,
     }
 
     localStorage.setItem('eventPreviewData', JSON.stringify(eventData))
@@ -172,32 +215,32 @@ export default function EventCreateForm() {
   }
   return (
     <>
-      <div className="ecsection-title">
-        <h2>創建活動？</h2>
-      </div>
       <section className="ecsectionall">
         <div className="ecsection-form">
           {/* 上傳圖片 */}
           <div className="ecsection">
-            <h2>創建活動？</h2>
+            <div className="ecsection-title">
+              <h2>創建活動</h2>
+            </div>
             <div className="ectitle">
               <h3 className="ech3">上傳圖片</h3>
             </div>
             <div className="ecupload-wrapper">
-              <img id="ecuploaded-image" src="" alt="uploaded-image" />
-              <input type="file" id="ecupload-image" accept=".jpg, .png" />
-              <button type="button" className="ecupload-btn">
-                上傳
-              </button>
-              <div className="ecimage-controls">
-                <button type="button" className="ecedit-btn">
-                  編輯
-                </button>
-                <button type="button" className="ecdelete-btn">
-                  刪除
-                </button>
-              </div>
+              {uploadedImage && (
+                <img
+                  id="ecuploaded-image"
+                  src={uploadedImage}
+                  alt="uploaded-image"
+                />
+              )}
+              <input
+                type="file"
+                id="ecupload-image"
+                accept=".jpg, .png"
+                onChange={handleUploadImage}
+              />
             </div>
+
             {/* 活動簡介 */}
             <div className="ectitle">
               <h3 className="ech3">活動簡介</h3>
@@ -205,10 +248,10 @@ export default function EventCreateForm() {
             <div className="ecform-group">
               <label htmlFor="notes">請簡述活動的背景、行程安排</label>
               <textarea
-                id="description"
+                id="eventDescription"
                 rows={4}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={eventDescription}
+                onChange={(e) => setEventDescription(e.target.value)}
                 required
               />
             </div>
@@ -246,8 +289,8 @@ export default function EventCreateForm() {
               <input
                 type="text"
                 id="ecevent-name"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={eventTitle}
+                onChange={(e) => setEventTitle(e.target.value)}
                 required
               />
             </div>
@@ -385,7 +428,7 @@ export default function EventCreateForm() {
                     type="number"
                     id="other-fees"
                     min={0}
-                    value={otherFees}
+                    value={eOtherFees}
                     onChange={handleOtherFeesChange}
                     required
                   />
@@ -426,18 +469,18 @@ export default function EventCreateForm() {
                 <strong>每人費用：</strong> {parseInt(costPerPerson)} 元
               </p>
               <p>
-                <strong>總費用：</strong> {orderAmount + otherFees} 元
+                <strong>總費用：</strong> {orderAmount + eOtherFees} 元
               </p>
             </div>
 
             {/* 備註 */}
             <div className="ecform-group">
-              <label htmlFor="notes">備註</label>
+              <label htmlFor="eventNotes">備註</label>
               <textarea
-                id="notes"
+                id="eventNotes"
                 rows={4}
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
+                value={eventNotes}
+                onChange={(e) => setENotes(e.target.value)}
                 required
               />
             </div>
