@@ -5,33 +5,31 @@ import Button from '../book/button';
 import { IoSearch } from 'react-icons/io5';
 
 export default function SearchSection({ onFilter }) {
-  const [startDate, setStartDate] = useState(null); // 管理開始日期的 state
-  const [endDate, setEndDate] = useState(null); // 管理結束日期的 state
+  const [startDate, setStartDate] = useState(null); 
+  const [endDate, setEndDate] = useState(null); 
 
   useEffect(() => {
-    // 初始化開始日期的日期選擇器
     flatpickr('#start-date', {
       dateFormat: 'Y-m-d',
       minDate: new Date(),
       onChange: (selectedDates) => {
-        setStartDate(selectedDates[0]); // 更新開始日期
+        setStartDate(selectedDates[0]); // startDate更新
       },
     });
 
-    // 初始化結束日期的日期選擇器
     flatpickr('#end-date', {
       dateFormat: 'Y-m-d',
       minDate: new Date(),
       onChange: (selectedDates) => {
-        setEndDate(selectedDates[0]); // 更新結束日期
+        setEndDate(selectedDates[0]); // endDate更新
       },
     });
   }, []);
 
-  // 處理搜索按鈕點擊事件
+  
   const handleSearch = () => {
     if (startDate && endDate) {
-      onFilter(startDate, endDate); // 將選擇的日期傳遞給父組件
+      onFilter(startDate, endDate); 
     } else {
       alert('請選擇開始日期和結束日期');
     }
@@ -69,10 +67,10 @@ export default function SearchSection({ onFilter }) {
           label={
             <>
               <IoSearch />
-              &nbsp;搜索
+              &nbsp;搜尋
             </>
           }
-          onClick={handleSearch} // 點擊搜索按鈕時執行篩選
+          onClick={handleSearch} 
         />
       </div>
     </div>
