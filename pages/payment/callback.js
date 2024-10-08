@@ -4,7 +4,7 @@ import Link from 'next/link'
 const PaymentCallback = () => {
   return (
     <div className="wordtry">
-      <h1>已完成付款</h1>
+      <h1>已完成訂單</h1>
       <div className="putline">
         
         <button>回到首頁</button>

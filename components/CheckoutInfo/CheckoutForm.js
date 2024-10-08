@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import { useCart } from '@/context/CartContext';  
+import { useOrder } from '@/context/OrderContext'; // 引入 OrderContext
+import Modal from '../OrderCompletion/Modal'; // 將路徑更改為您的 Modal 組件路徑
 
 const CheckoutForm = () => {
   const [name, setName] = useState('');
@@ -7,9 +11,28 @@ const CheckoutForm = () => {
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [notes, setNotes] = useState('');
+  const [showMessage, setShowMessage] = useState(false); // 控制自定義訊息的狀態
+  const { cartItems, totalAmount } = useCart(); // 獲取購物車內容
+  const { order } = useOrder(); // 使用 useOrder 獲取 order 變數
+  const [showModal, setShowModal] = useState(false); // 控制模態框顯示
+
+  const goECPay = () => {
+    setShowModal(true); // 顯示模態框
+  };
+
+  const handleConfirm = () => {
+    window.location.href = `http://localhost:3005/api/ecpay-test-only?amount=${totalAmount}`;
+  };
+
+  const handleCancel = () => {
+    setShowModal(false); // 關閉模態框
+  };
+  
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(cartItems); // 檢查 cartItems 的值
 
     try {
       const res = await fetch('/api/addData', {
@@ -17,12 +40,24 @@ const CheckoutForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, phone, email, address, notes }),
+        body: JSON.stringify({
+          name, 
+          phone, 
+          email, 
+          address, 
+          notes, 
+          cartItems, // 新增購物車內容
+          totalAmount // 新增總金額
+        }),
       });
 
       const data = await res.json();
       if (res.ok) {
-        alert('資料成功送出！');
+        setShowMessage(true); // 顯示自定義訊息
+        setTimeout(() => {
+          setShowMessage(false);
+          router.push('/payment/callback'); // 成功後跳轉頁面
+        }, 2000); // 2秒後隱藏訊息並跳轉
       } else {
         alert('錯誤：' + data.error);
       }
@@ -129,12 +164,42 @@ const CheckoutForm = () => {
               <Link href="/cart/3ShoppingCartPage">
                 <button type="button" className="btn-back">回上一頁</button>
               </Link>
-              <button type="submit" className="btn-next">前往付款</button>
+              <div className="put-flex">
+              <button type="submit" className="btn-next">貨到付款</button>
+              <button onClick={goECPay} type="button" className="btn-next">信用卡付款</button>
+              </div>
             </div>
           </div>
         </form>
+        {/* 自定義訊息彈出框 */}
+        {showMessage && (
+          <div className="custom-alert">
+            資料成功送出！
+          </div>
+        )}
+        {showModal && (
+        <Modal
+          message="確認要導向至 ECPay 進行付款?"
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
+      )}
       </div>
       <style jsx>{`
+        .custom-alert {
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #198ea6;
+          color: #fff;
+          padding: 16px 32px;
+          border-radius: 8px;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+          font-size: 18px;
+          font-weight: bold;
+          z-index: 1000;
+        }
         .form-container {
           display: flex;
           flex-direction: column;
@@ -281,6 +346,10 @@ const CheckoutForm = () => {
         .btn-next {
           background-color: #fc9a84;
           color: #ffffff;
+        }
+        .put-flex{
+          display:flex;
+          gap:20px;
         }
       `}</style>
     </div>

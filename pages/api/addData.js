@@ -2,16 +2,15 @@ import { query } from '@/lib/db'; // 確保已經配置好資料庫連接
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, phone, email, address, notes } = req.body;
-
+    const { name, phone, email, address, notes, cartItems } = req.body;
     if (!name || !phone || !email || !address) {
       return res.status(400).json({ error: '所有必填欄位都需要填寫' });
     }
 
     try {
       const result = await query(
-        'INSERT INTO orders (name, phone, email, address, notes) VALUES (?, ?, ?, ?, ?)',
-        [name, phone, email, address, notes]
+        'INSERT INTO orders (name, phone, email, address, notes, cart_items) VALUES (?, ?, ?, ?, ?, ?)',
+        [name, phone, email, address, notes, JSON.stringify(cartItems)] // 將購物車內容轉換為 JSON 格式插入
       );
 
       res.status(200).json({ message: '資料已成功插入' });

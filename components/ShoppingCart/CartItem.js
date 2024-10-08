@@ -17,11 +17,17 @@ function CartItem({ item, cartItems, setCartItems }) {
     }
   };
 
+  // 新增刪除項目的函數
+  const removeItem = () => {
+    const updatedItems = cartItems.filter(cartItem => cartItem.id !== item.id);
+    setCartItems(updatedItems); // 更新狀態
+  };
+
   return (
     <div className="cartItem">
       <div className="itemDetails">
-        <button className="removeButton" aria-label="Remove item">x</button>
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e2a841df1004403854633321fae117f4c1a2b3084cf78fdf62334202bb8d204?placeholderIfAbsent=true&apiKey=ff1208b97220405794b61b476c6106d1" alt="Camping Tent" className="itemImage" />
+      <button className="removeButton" onClick={removeItem} aria-label="Remove item">x</button>
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e2a841df1004403854633321fae117f4c1a2b3084cf78fdf62334202bb8d204?placeholderIfAbsent=true&apiKey=ff1208b97220405794b61b476c6106d1" alt="Camping Tent" className="itemImage" />
         <div className="itemName">{item.name}</div>
       </div>
       <div className="itemPrice">NT${item.price}</div>
