@@ -44,7 +44,8 @@ export default function EventDetail() {
       event_people: eventPreview.eventPeople,
       order_amount: eventPreview.orderAmount,
       other_fees: eventPreview.eOtherFees,
-      total_cost: parseInt(eventPreview.orderAmount) + parseInt(eventPreview.eOtherFees),
+      total_cost:
+        parseInt(eventPreview.orderAmount) + parseInt(eventPreview.eOtherFees),
       cost_per_person: parseInt(eventPreview.costPerPerson),
       event_notes: eventPreview.eventNotes,
       created_at: new Date().toISOString(),
@@ -75,16 +76,18 @@ export default function EventDetail() {
   return (
     <>
       <Navbar />
-      <div className="ecsection-title">
-        <h2>活動預覽</h2>
-      </div>
       <section className="ecsectionall2">
         <div className="ecsection-form">
           {/* 活動圖片 */}
           <div className="ecsection">
+            <div className="ecsection-title">
+              <h2>活動預覽</h2>
+            </div>
             <div className="event-content">
               <img
-                src={eventPreview.imageUrl || 'https://via.placeholder.com/400x200'}
+                src={
+                  eventPreview.imageUrl || 'https://via.placeholder.com/400x200'
+                }
                 alt="Event image"
                 className="event-image"
               />
@@ -116,25 +119,33 @@ export default function EventDetail() {
                 <dd className="einfo-value">{eventPreview.eEndDate}</dd>
 
                 <dt className="einfo-label">營地名稱</dt>
-                <dd className="einfo-value">{eventPreview.campName || '尚未選擇營地'}</dd>
+                <dd className="einfo-value">
+                  {eventPreview.campName || '尚未選擇營地'}
+                </dd>
 
                 <dt className="einfo-label">營地地址</dt>
                 <dd className="einfo-value">{eventPreview.campAdd}</dd>
 
                 <dt className="einfo-label">住宿選擇</dt>
-                <dd className="einfo-value">{eventPreview.selectedBookType?.name || '尚未選擇住宿'}</dd>
+                <dd className="einfo-value">
+                  {eventPreview.selectedBookType?.name || '尚未選擇住宿'}
+                </dd>
 
                 <dt className="einfo-label">活動人數</dt>
                 <dd className="einfo-value">{eventPreview.eventPeople} 人</dd>
 
                 <dt className="einfo-label">負擔費用（每人）</dt>
-                <dd className="einfo-value">{parseInt(eventPreview.costPerPerson)} 元</dd>
+                <dd className="einfo-value">
+                  {parseInt(eventPreview.costPerPerson)} 元
+                </dd>
 
                 <dt className="einfo-label">訂購數量</dt>
                 <dd className="einfo-value">{eventPreview.orderQuantity} 間</dd>
 
                 <dt className="einfo-label">總費用</dt>
-                <dd className="einfo-value">{eventPreview.orderAmount + eventPreview.eOtherFees} 元</dd>
+                <dd className="einfo-value">
+                  {eventPreview.orderAmount + eventPreview.eOtherFees} 元
+                </dd>
 
                 <dt className="einfo-label">備註</dt>
                 <dd className="einfo-value">{eventPreview.eventNotes}</dd>

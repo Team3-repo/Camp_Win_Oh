@@ -1697,7 +1697,7 @@ DROP TABLE IF EXISTS `event_holding_list`;
 
 CREATE TABLE `event_holding_list` (
   `event_id` VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `user_id` INT NOT NULL,
+  `user_id` INT DEFAULT NULL,
   `organizer_nick` VARCHAR(255) NOT NULL,
   `event_pic` VARCHAR(255) DEFAULT NULL,
   `event_description` VARCHAR(255) DEFAULT NULL,
@@ -1715,7 +1715,7 @@ CREATE TABLE `event_holding_list` (
   `cost_per_person` INT NOT NULL,
   `event_notes` VARCHAR(255) DEFAULT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deadline` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deadline` DATETIME NOT NULL DEFAULT (DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 14 DAY)),
   
   PRIMARY KEY (`event_id`),
   CONSTRAINT `FK_camp_id` FOREIGN KEY (`camp_id`) REFERENCES `campsites`(`id`),
