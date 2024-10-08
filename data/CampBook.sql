@@ -1696,7 +1696,7 @@ DROP TABLE IF EXISTS `roomE`;
 DROP TABLE IF EXISTS `event_holding_list`;
 
 CREATE TABLE `event_holding_list` (
-  `event_id` VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `event_id` VARCHAR(30) NOT NULL DEFAULT (DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')),
   `user_id` INT DEFAULT NULL,
   `organizer_nick` VARCHAR(255) NOT NULL,
   `event_pic` VARCHAR(255) DEFAULT NULL,
