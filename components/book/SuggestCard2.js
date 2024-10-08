@@ -12,7 +12,7 @@ export default function SuggestCard2() {
   useEffect(() => {
     const fetchCampsiteData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/CampsiteData')
+        const response = await fetch('http://localhost:3005/book/api/CampsiteData')
         if (response.ok) {
           const data = await response.json()
           const formattedData = data.slice(5, 11).map((item) => ({

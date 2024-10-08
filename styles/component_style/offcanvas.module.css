@@ -1,0 +1,114 @@
+/* 控制顯示/隱藏 Offcanvas 的樣式 */
+.offcanvas {
+  position: fixed;
+  top: 0;
+  right: -700px; /* 初始位置在螢幕右側外 */
+  width: 700px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  transition: right 0.3s ease;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 1040;
+}
+
+.offcanvas.show {
+  right: 0; /* 顯示 Offcanvas 時移動到螢幕右側 */
+}
+
+.offcanvasHeader {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 20px;
+  background-color: #FF5833;
+  color: #fff;
+}
+
+.offcanvasTitle {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.offcanvasBody {
+  padding: 15px;
+}
+
+/* 控制開關 Offcanvas 的按鈕樣式 */
+.toggleButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.toggleButton:hover {
+  background-color: #0056b3;
+}
+
+/* 背景遮罩層樣式 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 黑色半透明背景 */
+  z-index: 1030; /* 要比 offcanvas 的 z-index 小 */
+}
+
+/* Dropdown 元素樣式 */
+.dropdown {
+  margin-top: 20px;
+}
+
+.dropdownButton {
+  padding: 10px 15px;
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdownButton:hover {
+  background-color: #5a6268;
+}
+
+.dropdownMenu {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  display: none; /* 預設隱藏 */
+  position: absolute;
+  right: 15px;
+  top: 40px;
+}
+
+.dropdownButton:focus + .dropdownMenu,
+.dropdownMenu:hover {
+  display: block; /* 當按鈕或選單被點擊或懸浮時顯示 */
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdownItem:hover {
+  background-color: #f1f1f1;
+  color: #007bff;
+}

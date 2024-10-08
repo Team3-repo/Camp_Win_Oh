@@ -54,7 +54,6 @@
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  gap:5px;
 }
 .typeSection{
   padding-top: 10px;
@@ -81,8 +80,8 @@
 
 .dateSection {
   align-items: center;
-  width: 25%;
   text-align: left;
+  width: 50%;
 }
 
 .regInput,
@@ -101,6 +100,28 @@
 
 .bedType {
   margin-right: 5px;
+}
+
+.bookDateFilter{
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+.bookDateFilter label {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.bookDateFilter input[type='text'],
+.bookDateFilter input[type='number']{
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 220px;
+  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+  width: 80%;
 }
 
 /* region */

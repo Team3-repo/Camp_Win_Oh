@@ -12,7 +12,7 @@ const CampInfo = () => {
     if (router.isReady && campsite) {
       // 當 router 準備就緒並且獲取到 campsite 參數時，進行 API 請求
       setLoading(true) // 設置 loading 為 true，表示開始加載資料
-      fetch(`http://localhost:3001/api/CampsiteData?campsite_id=${campsite}`)
+      fetch(`http://localhost:3005/book/api/CampsiteData?campsite_id=${campsite}`)
         .then((res) => res.json())
         .then((data) => {
           if (data && data.length > 0) {
