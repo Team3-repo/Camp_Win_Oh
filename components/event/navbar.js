@@ -5,7 +5,7 @@ import OverlayLoginRegister from '../user/OverlayLoginRegister'
 export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false) // 狀態控制覆蓋層的顯示
 
-  const [isLoggedIn,setIsLoggedIn]  = useState(false);
+  const [isLoggedIn,setIsLoggedIn]  = useState(true);
   const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
 
   const handleOpenOverlay = () => {
