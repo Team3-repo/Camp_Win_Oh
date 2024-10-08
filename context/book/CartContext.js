@@ -25,17 +25,17 @@ const cartReducer = (state, action) => {
         newCart = [...state.cart, { ...action.payload, quantity: 1 }]
       }
       total = newCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-      localStorage.setItem('shoppingCart', JSON.stringify(newCart)) // 更改此處 key 值為 'shoppingCart'
+      localStorage.setItem('cart', JSON.stringify(newCart))
       return { ...state, cart: newCart, total }
 
     case 'REMOVE_FROM_CART':
       newCart = state.cart.filter((item) => item.id !== action.payload.id)
       total = newCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-      localStorage.setItem('shoppingCart', JSON.stringify(newCart)) // 更改此處 key 值為 'shoppingCart'
+      localStorage.setItem('cart', JSON.stringify(newCart))
       return { ...state, cart: newCart, total }
 
     case 'CLEAR_CART':
-      localStorage.removeItem('shoppingCart') // 更改此處 key 值為 'shoppingCart'
+      localStorage.removeItem('cart')
       return { ...state, cart: [], total: 0 }
 
     case 'INCREASE_QUANTITY':
@@ -45,7 +45,7 @@ const cartReducer = (state, action) => {
           : item
       )
       total = newCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-      localStorage.setItem('shoppingCart', JSON.stringify(newCart)) // 更改此處 key 值為 'shoppingCart'
+      localStorage.setItem('cart', JSON.stringify(newCart))
       return { ...state, cart: newCart, total }
 
     case 'DECREASE_QUANTITY':
@@ -59,7 +59,7 @@ const cartReducer = (state, action) => {
         })
         .filter((item) => item !== null)
       total = newCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-      localStorage.setItem('shoppingCart', JSON.stringify(newCart)) // 更改此處 key 值為 'shoppingCart'
+      localStorage.setItem('cart', JSON.stringify(newCart))
       return { ...state, cart: newCart, total }
 
     default:
@@ -75,7 +75,7 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('shoppingCart')) || [] // 更改此處 key 值為 'shoppingCart'
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || []
     storedCart.forEach((item) => {
       dispatch({ type: 'ADD_TO_CART', payload: item })
     })
