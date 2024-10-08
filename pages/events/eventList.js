@@ -9,24 +9,47 @@ import Pagi from '@/components/event/pagi';
 import SearchSection from '@/components/event/SearchSection';
 
 export default function EventList() {
-  // 定義state存放活動資料、當前頁數和每頁顯示筆數
+  // 定義 state 來存放活動資料、篩選後的資料、當前頁數和每頁顯示筆數
   const [events, setEvents] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0); // 當前頁數，從0開始
-  const pageSize = 8; // 每頁顯示
+  const [filteredEvents, setFilteredEvents] = useState([]); // 儲存篩選後的活動資料
+  const [currentPage, setCurrentPage] = useState(0); // 當前頁數，從 0 開始
+  const pageSize = 8; // 每頁顯示 8 筆
 
-  // useEffect取得資料
+  const handleCreate = () => {
+    window.location.href = '/events/eventCreate';
+  };
+
+  // useEffect 取得所有活動資料
   useEffect(() => {
-    // Fetch API>後端取得活動資料
     fetch('http://localhost:3005/events/api/events')
       .then((response) => response.json())
-      .then((data) => setEvents(data))
+      .then((data) => {
+        setEvents(data);
+        setFilteredEvents(data); // 預設所有資料都顯示在篩選結果中
+      })
       .catch((error) => console.error('Error fetching events:', error));
   }, []);
 
-  // 計算目前要顯示的活動資料
+  // 根據當前頁數計算要顯示的活動資料
   const startIndex = currentPage * pageSize;
-  const currentEvents = events.slice(startIndex, startIndex + pageSize);
-  const totalSlides = Math.ceil(events.length / pageSize); // 計算總頁數
+  const currentEvents = filteredEvents.slice(startIndex, startIndex + pageSize);
+  const totalSlides = Math.ceil(filteredEvents.length / pageSize); // 計算總頁數
+
+  // 處理篩選條件的函式
+  const handleFilter = (startDate, endDate) => {
+    // 篩選符合日期區間的活動
+    const filtered = events.filter((event) => {
+      const eventStartDate = new Date(event.start_date);
+      const eventEndDate = new Date(event.end_date);
+
+      return (
+        (!startDate || eventStartDate >= startDate) &&
+        (!endDate || eventEndDate <= endDate)
+      );
+    });
+    setFilteredEvents(filtered);
+    setCurrentPage(0); // 篩選後重設當前頁數為第一頁
+  };
 
   return (
     <>
@@ -41,27 +64,32 @@ export default function EventList() {
                 <FaArrowCircleRight />
               </>
             }
-            onClick={() => alert('Button clicked!')}
+            onClick={handleCreate}
           />
         </div>
       </section>
       <section className="searchsection">
-        <SearchSection />
+        {/* 傳遞 handleFilter 函式作為 prop 給 SearchSection */}
+        <SearchSection onFilter={handleFilter} />
       </section>
       <section className="ehilight-topics2">
         <h3 className="esection-title">活動報名中</h3>
         <div className="ehilight-cards">
-          {/* 動態渲染當前頁面的 Card 組件 */}
+          {/* 動態渲染篩選後的活動卡片 */}
           {currentEvents.length > 0 ? (
             currentEvents.map((event) => (
               <Card
-                key={event.event_id} // 使用 event_id 作為每個卡片的唯一 key
+                key={event.event_id}
                 Estate="報名中"
                 title={event.event_title}
                 content={`活動人數：${event.event_people}人`}
-                content2={`開始日期：${new Date(event.start_date).toLocaleDateString()}`}
-                content3={`結束日期：${new Date(event.end_date).toLocaleDateString()}`}
-                imageUrl={event.event_pic} // 使用資料庫中提供的圖片 URL
+                content2={`開始日期：${new Date(
+                  event.start_date
+                ).toLocaleDateString()}`}
+                content3={`結束日期：${new Date(
+                  event.end_date
+                ).toLocaleDateString()}`}
+                imageUrl={event.event_pic}
                 label="立即參加"
                 onClick={() => alert(`參加活動：${event.event_title}`)}
               />
@@ -71,13 +99,15 @@ export default function EventList() {
           )}
         </div>
 
-        {/* 分頁功能 */}
+        {/* 分頁功能，根據篩選結果變動 */}
         <Pagi
-          currentIndex={currentPage} // 傳遞當前頁數
-          totalSlides={totalSlides} // 傳遞總頁數
+          currentIndex={currentPage}
+          totalSlides={totalSlides}
           onDotClick={(index) => setCurrentPage(index)} // 點擊頁數時切換頁面
           onPrev={() => setCurrentPage((prev) => Math.max(prev - 1, 0))} // 上一頁，確保頁數不小於 0
-          onNext={() => setCurrentPage((prev) => Math.min(prev + 1, totalSlides - 1))} // 下一頁，確保頁數不超過總頁數
+          onNext={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalSlides - 1))
+          } // 下一頁，確保頁數不超過總頁數
         />
       </section>
       <Footer2 />
