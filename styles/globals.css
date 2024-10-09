@@ -49,6 +49,19 @@ a {
 
 /* NEW */
 
+body {
+  font-family: 
+  'Poetsen One',
+  'Zen Maru Gothic',
+  sans-serif;
+}
+
+.global-font {
+  font-family: 'Poetsen One',
+  'Zen Maru Gothic',
+  sans-serif;
+}
+
 /* 字體大小 */
 h1,
 h2,
