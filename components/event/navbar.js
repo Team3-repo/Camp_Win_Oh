@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../book/button'
 import OverlayLoginRegister from '../user/OverlayLoginRegister'
 
 export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false) // 狀態控制覆蓋層的顯示
+  const [isLoggedIn, setIsLoggedIn] = useState(false) // 設置初始登入狀態為 false
 
-  const [isLoggedIn,setIsLoggedIn]  = useState(true);
   const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
+
+  // 檢查 Local Storage 中的 token 是否存在
+  useEffect(() => {
+    const token = localStorage.getItem('authToken')
+    if (token) {
+      setIsLoggedIn(true)
+    }
+  }, [])
 
   const handleOpenOverlay = () => {
     setIsOverlayOpen(true) // 開啟覆蓋層
@@ -57,34 +65,34 @@ export default function Navbar() {
                 活動情報
               </h5>
             </li>
-            <li>
-              <h5>客服中心</h5>
-            </li>
           </ul>
         </div>
         <div className="user">
           <div className="userpic">
-            <img
+          <a href={`${baseURL}/user/settings`}><img
               src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
               alt=""
-            />
+            /></a>
           </div>
-          <h5>
-            <a href={`${baseURL}/user/settings`}>兔兔</a>
-          </h5>
           {isLoggedIn ? (
             <Button
               type="button"
-              label="登入/註冊"
-              onClick={handleOpenOverlay}
+              label="登出"
+              onClick={() => {
+                localStorage.removeItem('authToken')
+                setIsLoggedIn(false)
+                window.location.href = `${baseURL}`
+              }}
             />
           ) : (
-            isOverlayOpen && (
-              <OverlayLoginRegister onClose={() => setIsOverlayOpen(false)} />
-            )
+            <Button type="button" label="登入" onClick={handleOpenOverlay} />
+          )}
+          {isOverlayOpen && (
+            <OverlayLoginRegister onClose={() => setIsOverlayOpen(false)} />
           )}
         </div>
       </header>
+      {/* CSS 省略 */}
       <style jsx>
         {`
           header {
@@ -177,7 +185,7 @@ export default function Navbar() {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 20px;
           }
           .userpic h5 img {
             width: 100%;
