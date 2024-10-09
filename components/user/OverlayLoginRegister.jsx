@@ -3,58 +3,45 @@ import FormField from '@/components/form/FormField';
 
 const OverlayLoginRegister = ({ onClose }) => {
     const [isLogin, setIsLogin] = useState(true); // 默認為登錄模式
-    const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-        confirmPassword: '',
-    });
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [colorChange, setColorChange] = useState(false); // 新增狀態
 
+    // 監聽顏色變化效果
     useEffect(() => {
-        // 設定三秒後變更顏色
-        const timer = setTimeout(() => {
-            setColorChange(true); // 更新狀態
-        }, 100);
+        // 模擬背景顏色變換的效果
+        setColorChange(true);
+    }, [isLogin]); // 切換登入/註冊時觸發效果
 
-        return () => clearTimeout(timer); // 清理計時器
-    }, []);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
-        setError(''); // 清除錯誤訊息
-    };
-
+    // 處理表單提交
     const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (isLogin) {
-            // 登錄驗證
-            if (!formData.username || !formData.password) {
-                setError('用戶名和密碼不可為空');
-                return;
-            }
-            console.log('登錄:', formData);
-        } else {
-            // 註冊驗證
-            if (
-                !formData.username ||
-                !formData.password ||
-                !formData.confirmPassword
-            ) {
-                setError('所有欄位都必須填寫');
-                return;
-            }
-            if (formData.password !== formData.confirmPassword) {
-                setError('密碼不匹配');
-                return;
-            }
-            console.log('註冊:', formData);
+        e.preventDefault(); // 防止表單提交
+        if (!username || !password) {
+            setError('請填寫所有必填欄位');
+            return;
         }
 
-        // 提交成功後關閉覆蓋層
-        onClose();
+        if (!isLogin && password !== confirmPassword) {
+            setError('密碼和確認密碼不一致');
+            return;
+        }
+
+        // 在此處執行登入或註冊邏輯
+        if (isLogin) {
+            console.log('執行登入', { username, password });
+            // 在此處添加您的登入邏輯
+        } else {
+            console.log('執行註冊', { username, password });
+            // 在此處添加您的註冊邏輯
+        }
+
+        // 清空輸入欄位和錯誤
+        setUserName('');
+        setPassword('');
+        setConfirmPassword('');
+        setError('');
     };
 
     return (
@@ -67,12 +54,12 @@ const OverlayLoginRegister = ({ onClose }) => {
                             <label htmlFor="username">用戶名</label>
                             <br />
                             <FormField
-                                type="text"
                                 id="username"
-                                name="username"
-                                value={formData.username}
-                                onChange={handleChange}
+                                type="text"
                                 placeholder="請輸入用戶名"
+                                name="username"
+                                value={username}
+                                onChange={(e) => setUserName(e.target.value)}
                                 width="100%"
                             />
                         </div>
@@ -83,8 +70,8 @@ const OverlayLoginRegister = ({ onClose }) => {
                                 type="password"
                                 id="password"
                                 name="password"
-                                value={formData.password}
-                                onChange={handleChange}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 placeholder="請輸入密碼"
                                 width="100%"
                             />
@@ -96,8 +83,8 @@ const OverlayLoginRegister = ({ onClose }) => {
                                     type="password"
                                     id="confirmPassword"
                                     name="confirmPassword"
-                                    value={formData.confirmPassword}
-                                    onChange={handleChange}
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
                                     placeholder="請輸入確認密碼"
                                     width="100%"
                                 />
@@ -135,7 +122,6 @@ const OverlayLoginRegister = ({ onClose }) => {
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    {/* background-color: rgba(0, 0, 0, 0.001); /* 半透明背景 */ */}
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -144,9 +130,9 @@ const OverlayLoginRegister = ({ onClose }) => {
                     opacity: 0; /* 初始狀態為透明 */
                 }
                 .overlay.color-changed {
-                    backdrop-filter: blur(100px); /* 初始狀態為無模糊 */
-                    opacity: 1; /* 初始狀態為透明 */
-                    transition: backdrop-filter 10000ms  linear, opacity 200ms  linear; /* 設定過渡效果 */
+                    backdrop-filter: blur(100px); /* 改變的模糊程度 */
+                    opacity: 1; /* 改變的不透明度 */
+                    transition: backdrop-filter 100ms linear, opacity 200ms linear; /* 設定過渡效果 */
                 }
                 .overlay-content {
                     position: relative; /* 確保 closeBtn 相對於此元素定位 */
@@ -190,7 +176,6 @@ const OverlayLoginRegister = ({ onClose }) => {
                     font-weight: bold;
                     line-height: 11px;
                     font-size: 18px;
-
                 }
                 .closeBtn:hover {
                     background-color: black;

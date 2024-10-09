@@ -2,15 +2,24 @@
  **
  */
 import React from "react";
+import Link from "next/link";
+import { useCart } from '@/context/CartContext';  // 修改1：引入 useCart
+
 
 function TotalSection() {
+  const { totalAmount } = useCart();  // 修改2：使用 useCart 從 context 中取得 totalAmount  
   return (
     <section className="totalSection">
+      <Link href="/cart/2ProductDetails">
       <button className="continueShoppingButton">←繼續選購</button>
+      </Link>
       <div className="checkoutInfo">
         <div className="totalLabel">總計</div>
-        <div className="totalAmount">NT$1300</div>
+        {/* 修改：使用傳遞進來的 totalAmount 來顯示總金額 */}
+        <div className="totalAmount">NT${totalAmount}</div>
+        <Link href="/cart/4CheckoutInfo">
         <button className="checkoutButton">前往結賬→</button>
+        </Link>
       </div>
       <style jsx>{`
         .totalSection {

@@ -1,17 +1,17 @@
 import React from "react";
-// import Header from "@/components/Header";
-// import Footer from "@/components/Footer";
 import ShoppingCartContent from "@/components/ShoppingCart/ShoppingCartContent";
-import Footer from '@/components/event/footer2'
-import Navbar from '@/components/event/navbar'
+import Footer from '@/components/event/footer2';
+import Navbar from '@/components/event/navbar';
+import { useCart } from '../../context/CartContext'; // 更新路徑
 
 function ShoppingCartPage() {
+  const { cartItems, setCartItems } = useCart(); // 獲取 cartItems 和 setCartItems
+
   return (
     <>
       <Navbar />
       <div className="shoppingCartBody">
-        {/* <Header /> */}
-        <ShoppingCartContent />
+        <ShoppingCartContent cartItems={cartItems} setCartItems={setCartItems} />
         <style jsx>{`
           .shoppingCartBody {
             background-color: #cfe9c6;
@@ -19,12 +19,12 @@ function ShoppingCartPage() {
             flex-direction: column;
             align-items: center;
             overflow: hidden;
-            position: relative; /* 父層容器要設為 relative */
-            min-height: 89vh; /* 讓內容至少佔滿整個視窗高度 */
+            position: relative;
+            min-height: 89vh;
           }
           .put-end {
             position: absolute;
-            bottom: 0; /* 固定在底部 */
+            bottom: 0;
             left: 0;
             width: 100%;
           }

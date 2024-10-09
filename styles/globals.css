@@ -3,6 +3,49 @@
 
 /* original */
 
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+} */
+
 
 /* NEW */
 
@@ -13,9 +56,12 @@ h3,
 h4,
 h5,
 h6,
-p {
+p ,
+button,
+input{
   margin: 0;
-  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+  font-family: 
+  'Poetsen One','Zen Maru Gothic',sans-serif;
 }
 
 h1 {
@@ -49,7 +95,7 @@ p {
 /* 背景 */
 body{
   background-color: #C9E9C7;
-  margin-top: 50px; /* 根據 header 的高度來設置 margin-top */
+  margin-top: 70px; /* 根據 header 的高度來設置 margin-top */
 }
 
 * {
