@@ -142,10 +142,10 @@ export default function SearchFilter() {
           ))}
 
           {/* 已選擇的選項顯示 */}
-          <div style={{ marginTop: '20px' }}>
+          {/* <div style={{ marginTop: '20px' }}>
             <strong>選擇的設施與服務:</strong>{' '}
             {selectedFilters.length > 0 ? selectedFilters.join(', ') : '未選擇'}
-          </div>
+          </div> */}
         </div>
       </div>
 

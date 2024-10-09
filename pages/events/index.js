@@ -5,6 +5,8 @@ import Button from '@/components/book/button'
 import Card from '@/components/book/card'
 import FeatureSection1 from '@/components/event/featureSection1'
 import CarouselBanner from '@/components/book/CarouselBanner'
+import CarouselCard from '@/components/book/carouselCard'
+import styles from '@/styles/HomePage.module.css'
 
 import CarouselCards from '@/components/book/carouselCard'
 
@@ -22,14 +24,13 @@ export default function EIndex() {
   ]
   return (
     <>
-      <Navbar/>
-      <div>
-        <CarouselBanner images={images} titles={titles} interval={5000} />
-        {/* 可以傳入不同的圖片和標題 */}
-      </div>
+      <Navbar />
+      <CarouselBanner images={images} titles={titles} interval={5000} />
+      {/* 可以傳入不同的圖片和標題 */}
       <section className="ehot-topics">
         <h3 className="esection-title">熱門主題</h3>
-        <div className="efilter-buttons">
+        {/* 標籤:地區篩選 */}
+        <div className={styles.regSearch}>
           <Button
             label="全部地區"
             onClick={() => alert('Button clicked!')}
@@ -56,12 +57,10 @@ export default function EIndex() {
             type="btn-reg"
           />
         </div>
-        <div className="">
-          <CarouselCards />
-          <div
-            className="card"
-            style={{ backgroundImage: 'url("camp3.jpg")' }}
-          ></div>
+        {/* 輪播圖:篩選結果 */}
+        <div className={styles.carolCard}>
+          {' '}
+          <CarouselCard title="營區" />
         </div>
       </section>
 

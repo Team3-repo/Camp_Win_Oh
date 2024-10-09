@@ -4,18 +4,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 15px;
 }
+
 .esection-title {
   color: #4c3a30;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
 .efilter-buttons {
   display: flex;
   gap: 5px;
   margin-bottom: 10px;
 }
+
 .ehilight-topics1 {
   display: flex;
   flex-direction: column;
@@ -23,6 +26,7 @@
   align-items: center;
   margin: 20px;
 }
+
 .ehilight-topics2 {
   display: flex;
   flex-direction: column;
@@ -30,6 +34,7 @@
   align-items: center;
   margin: 20px;
 }
+
 .ehilight-cards {
   display: flex;
   flex-wrap: wrap;
@@ -39,12 +44,14 @@
   border-top: 2px solid #a3d190;
   padding: 20px;
 }
+
 .feature-section1 {
   display: flex;
   flex-direction: column;
   background-color: #fffbf6;
   padding: 58px 64px;
 }
+
 .feature-section1 .section-title1 {
   display: flex;
   align-items: center;
@@ -52,10 +59,12 @@
   gap: 10px;
   color: #4c3a30;
 }
+
 .title-icon1 {
   width: 42px;
   height: 58px;
 }
+
 .feature-list1 {
   display: flex;
   flex-direction: row;
@@ -63,14 +72,17 @@
   gap: 31px;
   margin-top: 20px;
 }
+
 .feature-item1 {
   flex: 1;
 }
+
 .feature-title1 {
   font-size: 28px;
   color: #ff82d2;
   margin-bottom: 10px;
 }
+
 .feature-description1 {
   font-size: 20px;
 }
@@ -80,7 +92,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 58px 64px;
+  padding: 20px 64px;
   width: 100%;
   color: #4c3a30;
   background-color: #a3d190;
@@ -88,7 +100,6 @@
 .feature-section2 {
   display: flex;
   flex-direction: column;
-  /* background-color: #fffbf6; */
   padding: 0px 64px;
 }
 .feature-section2 .section-title2 {
@@ -127,8 +138,22 @@
   padding: 10px;
 }
 
+.searchsection {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Flatpickr styles */
+.flatpickr-calendar .flatpickr-day,
+.flatpickr-month,
+.flatpickr-weekdays,
+.flatpickr-weekday {
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
 /* eventDetail.js */
-/* .event-detail {
+.event-detail {
   align-items: flex-start;
   background-color: var(--primary-light, #c9e9c7);
   display: flex;
@@ -151,8 +176,19 @@
   width: 20px;
 }
 .event-title {
-  color: var(--black, #000);
-  font: 500 35px Zen Maru Gothic, sans-serif;
+  color: black;
+  font-family: Zen Maru Gothic, sans-serif;
+  margin: 0;
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  gap: 10px;
+  padding-left: 15px;
+  width: 100%;
+}
+.event-titleh1 {
+  color: #4c3a30;
+  font-family: Zen Maru Gothic, sans-serif;
   margin: 0;
 }
 .event-section {
@@ -161,23 +197,27 @@
   width: 100%;
 }
 .section-title {
-  border-left: 10px solid var(--BTN-CLOR, #fc9a84);
-  color: var(--black, #000);
-  font: 400 24px Zen Maru Gothic, sans-serif;
+  border-left: 10px solid #fc9a84;
+  color: black;
+  font-family: Zen Maru Gothic, sans-serif;
   margin: 0;
   padding-left: 15px;
 }
+.section-titleh2 {
+  border-left: 10px solid #fc9a84;
+  color: #4c3a30;
+  font-family: Zen Maru Gothic, sans-serif;
+  /* margin: 20px; */
+  padding-left: 15px;
+}
 .event-content {
-  align-items: center;
-  border-top: 1px solid var(--secondary-light2, #b4a59f);
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 40px 46px;
-  justify-content: center;
-  margin-top: 20px;
-  min-height: 333px;
-  padding: 20px 0 0 20px;
   width: 100%;
+  gap: 40px 46px;
+  min-height: 333px;
 }
 .event-image {
   aspect-ratio: 1;
@@ -185,137 +225,37 @@
   height: 248px;
   object-fit: contain;
   width: 248px;
-} */
+}
 
 /* styles.css */
-.logo {
+.event-info {
+  /* margin: 20px auto; */
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  font-family: Zen Maru Gothic, sans-serif;
+  /* min-height: 274px;
+  max-width: 1200px;
+  min-width: 240px; */
+  padding-bottom: 20px;
+  width: 100%;
 }
-
-.logo img {
-  height: 50px;
-  margin-right: 10px;
-}
-
-nav ul {
-  list-style: none;
+.einfo-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 70px;
   margin: 0;
   padding: 0;
-  display: flex;
 }
-
-nav ul li {
-  margin-left: 20px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #333;
-} 
-
-.event-info {
-  background-color: #e8f5e9;
-  padding: 20px;
-  margin: 20px auto;
-  width: 90%;
-  max-width: 1200px;
-  border-radius: 8px;
-}
-
-.event-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.einfo-label {
+  color: #6f8e62;
   margin-bottom: 15px;
-}
-
-.event-header h2 {
-  font-size: 1.8em;
-  color: #388e3c;
-}
-
-.join-button {
-  background-color: #ff8a65;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.event-details {
-  display: flex;
-  justify-content: space-between;
-}
-
-.event-image img {
-  width: 250px;
-  height: auto;
-  border-radius: 8px;
-}
-
-.event-description {
-  flex: 1;
-  margin-left: 20px;
-}
-
-.event-services {
-  background-color: #fff9c4;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-.event-services ul {
-  list-style: none;
-  padding: 0;
-}
-
-.event-services li {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.available {
-  color: green;
-}
-
-.not-available {
-  color: red;
-}
-
-.camp-rules {
-  margin: 20px auto;
-  width: 90%;
-  max-width: 1200px;
-}
-
-.accordion {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-}
-
-.accordion-item {
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.accordion-title {
-  background-color: #b2dfdb;
-  padding: 15px;
+  width: 64px;
   font-weight: bold;
-  cursor: pointer;
 }
-
-.accordion-content {
-  display: none;
-  padding: 15px;
-}
-
-/* 手風琴展開效果 */
-.accordion-item.active .accordion-content {
-  display: block;
+.einfo-value {
+  color: #000;
+  margin: 0 0 10px 0;
+  width: calc(100% - 134px);
 }
 
 /* 小圖輪播 */
@@ -403,49 +343,76 @@ nav ul li a {
   margin-right: 20px;
 }
 
-label {
+.edate-filter label {
   font-size: 14px;
   color: #333;
   margin-bottom: 5px;
-} */
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
 
-input[type='text'],
-select {
+.edate-filter input[type='text'],
+.edate-filter select {
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 220px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 }
 
-/* eventCreate.js */
+/* eventCreate.js、eventDetail.js */
 .ecsection-title {
-  color: #ff81d3;
+  color: #ff5833;
   margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 250px;
-  border-left: 10px solid #ff81d3;
+  margin-bottom: 10px;
+  border-left: 10px solid #ff5833;
   padding-left: 15px;
 }
 .ecsectionall {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin: 20px;
+  gap: 30px;
 }
 
-.ech2,
+.ecsection-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+
+}
+.ecsectionall2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 1200px;
+  align-items: flex-start;
+  margin: 20px;
+  gap: 30px;
+}
+
 .ech3 {
-  color: #ff81d3;
+  color: #ff5833;
   font-size: 24px;
+}
+.ech4 {
+  color: white;
+  font-size: 16px;
+}
+legend {
+  background-color: #ff5833;
+  padding: 3px 6px;
+  border-radius: 4px;
 }
 
 .ecform-group label::after {
   /* 星號 */
   content: '*';
-  color: #ff81d3;
+  color: #ff5833;
   margin-left: 3px;
+  font-weight: normal;
 }
 .ecsection {
   display: flex;
@@ -454,16 +421,20 @@ select {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   width: 600px;
-  margin-left: 20px;
-  margin-bottom: 20px;
   padding: 0px 20px;
   background-color: #fffbf6;
+  margin-bottom: 20px;
 }
 
 .ectitle {
   padding: 10px 0px;
   margin-bottom: 20px;
-  border-bottom: 2px solid #ff81d3;
+  border-bottom: 2px solid #ff5833;
+}
+
+.ectitle2 {
+  margin-bottom: 10px;
+  /* border-bottom: 2px solid #ff5833; */
 }
 
 .ecupload-wrapper {
@@ -482,14 +453,7 @@ select {
   object-fit: cover;
 }
 
-.ecupload-btn {
-  background-color: #ff81d3;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-radius: 4px;
-}
+
 
 .ecimage-controls {
   margin-top: 10px;
@@ -512,7 +476,7 @@ select {
 }
 
 .ecdelete-btn:hover {
-  background-color: #ff81d3;
+  background-color: #ff5833;
   color: #fff;
 }
 
@@ -525,6 +489,7 @@ select {
 .ecform-group label {
   font-weight: bold;
   color: #4c3a30;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 }
 
 .ecform-group input,
@@ -535,17 +500,36 @@ select {
   border-radius: 4px;
   width: 100%;
   background-color: #f5f5f5;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+.ecform-group p {
+  font-size: 16px;
+}
+.ecdate-group {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
 }
 
-.ecdate-group,
+.ecaboutuser {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.exaboutno {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
 .eclocation-group {
   display: flex;
-  gap: 20px;
+  flex-direction: row;
+  gap: 40px;
 }
 
 .ecdeclaragree {
-  background-color: #fffbf6;
-  border: 1px solid #ff81d3;
+  background-color: #ff5833;
+  border: 1px solid #fc9a84;
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 15px;
@@ -554,11 +538,113 @@ select {
 .ecdeclaragree p {
   font-size: 14px;
   font-weight: bold;
-  color: #ff81d3;
+  color: white;
 }
 .eccheckbox {
   margin-bottom: 15px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 }
+.joinbtn {
+  display: flex;
+  justify-content: flex-end;
+}
+.joinbtn1 {
+  display: flex;
+  justify-content: space-between;
+}
+.eventSummary {
+  border: 1px solid #e74c3c;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+.eventSummary p {
+  margin-bottom: 10px;
+  color: #ff5833;
+  font-size: 14px;
+}
+
+.memfea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.eventMember {
+  display: flex;
+  flex-direction: column;
+  background-color: #fffbf6;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  margin-bottom: 25px;
+}
+.eparticipant-list {
+  display: flex;
+  justify-content: flex-start;
+}
+.eparticipant-avatar {
+  width: 40px; /* 設定寬度 */
+  height: 40px; /* 設定高度 */
+  border-radius: 50%; /* 圓形顯示 */
+  margin-right: 8px; /* 右邊距離 */
+  object-fit: cover; /* 確保圖片不變形 */
+}
+
+/* -----庫存顯示start----- */
+.ecamping-options {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.ecamping-options table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
+.ecamping-options th,
+.ecamping-options td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  color: #4c3a30;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ecamping-options th {
+  background-color: #f2f2f2;
+}
+
+.ecamping-options td {
+  vertical-align: middle;
+}
+
+.ecamping-options button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 3px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  cursor: pointer;
+}
+
+.ecamping-options table tbody td input {
+  width: 70%;
+}
+.ecamping-options input[type='radio'] {
+  transform: scale(1.5);
+  cursor: pointer;
+}
+/* -----庫存顯示end----- */
 
 /* eventUpdate.js */
 .eusectionall {
@@ -692,4 +778,58 @@ select {
 }
 .eucheckbox {
   margin-bottom: 15px;
+}
+option {
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+
+/* eventCSuccess.js */
+.ecssuccess-message {
+  background-color: #e74c3c;
+  color: #ffe6e6;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ecsevent-list h2 {
+  margin: 20px 0;
+  text-align: center;
+  color: #4c3a30;
+}
+
+.ecsevent-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f9f4;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 20px auto;
+  /* margin-bottom: 20px; */
+}
+
+.ecsevent-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.ecsevent-details {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.ecsevent-details p {
+  margin: 5px 0;
+  color: #4c3a30;
+}
+.entmorebtn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }

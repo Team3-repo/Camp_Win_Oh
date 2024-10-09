@@ -41,9 +41,6 @@ export default function Index() {
 
       {/* 熱門推薦活動 */}
 
-      {/* 最新消息 */}
-      <NewActivity />
-
       <Footer1 />
     </>
   )
