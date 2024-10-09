@@ -4,7 +4,7 @@ import SearchBar from '@/components/CampingStore/SearchBar'
 import ProductFilter2 from '@/components/CampingStore/ProductFilter2'
 import ProductCategories from '@/components/CampingStore/ProductCategories'
 import ProductGrid from '@/components/CampingStore/ProductGrid'
-import Pagi from '@/components/event/pagi'
+// import Pagi from '@/components/CampingStore/pagi'
 import Footer from '@/components/event/footer2'
 import Navbar from '@/components/event/navbar'
 // import Pagination from '@/components/CampingStore/Pagination'
@@ -15,6 +15,7 @@ import Navbar2 from '@/components/CampingStore/Navbar2'
 // import HeroContent from "@/components/CampingStore/PD";
 // import ImageComponent from "@/components/CampingStore/BigImage";
 // import UncontrolledExample from "@/components/CampingStore/Carousels";
+import { useState } from 'react';
 
 export default function CampingStore() {
   const products = [
@@ -119,7 +120,23 @@ export default function CampingStore() {
       description:
         '豪華帳篷營位為希望在大自然中保持舒適生活的露營者設計。這些營位配有更大的空間和私人設施，適合家庭或小團體享受更高端的露營體驗。',
     },
-  ]
+  ];
+
+  const itemsPerPage = 10; // 每頁顯示的產品數量
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // 計算當前頁面應顯示的產品
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  
+  // 計算總頁數
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+
+  // 處理分頁按鈕點擊
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   // const CampingStore = () => {
   return (
@@ -134,13 +151,13 @@ export default function CampingStore() {
         {/* <HotTopics /> */}
         <Navbar />
         <ProductCategories />
-        <SearchBar />
-        <ProductFilter2 />
+        {/* <SearchBar /> */}
+        {/* <ProductFilter2 /> */}
         <main className="camping-store">
-        <ProductGrid products={products} />
+        <ProductGrid products={currentProducts} />
           </main>
         <div className="store-pagi">
-        <Pagi />
+        {/* <Pagi totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} /> */}
         {/* <Pagination /> */}
         </div>
         <Footer />

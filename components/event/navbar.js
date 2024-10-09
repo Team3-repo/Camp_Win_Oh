@@ -1,51 +1,98 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../book/button'
 import OverlayLoginRegister from '../user/OverlayLoginRegister'
 
 export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false) // 狀態控制覆蓋層的顯示
+  const [isLoggedIn, setIsLoggedIn] = useState(false) // 設置初始登入狀態為 false
+
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
+
+  // 檢查 Local Storage 中的 token 是否存在
+  useEffect(() => {
+    const token = localStorage.getItem('authToken')
+    if (token) {
+      setIsLoggedIn(true)
+    }
+  }, [])
 
   const handleOpenOverlay = () => {
     setIsOverlayOpen(true) // 開啟覆蓋層
   }
+
   return (
     <>
       <header>
         <div className="logo">
-          <p>待補圖</p>
+          <img
+            src="/logo.png"
+            alt="logo"
+            onClick={() => {
+              window.location.href = `${baseURL}`
+            }}
+            style={{ cursor: 'pointer' }}
+          />
         </div>
         <div className="navbar">
           <ul>
             <li>
-              <h5>尋找空位</h5>
+              <h5
+                onClick={() => {
+                  window.location.href = `${baseURL}/book`
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                尋找空位
+              </h5>
             </li>
             <li>
-              <h5>露營用具</h5>
+              <h5
+                onClick={() => {
+                  window.location.href = `${baseURL}/cart/1CampingStore`
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                露營用具
+              </h5>
             </li>
             <li>
-              <h5>活動情報</h5>
-            </li>
-            <li>
-              <h5>客服中心</h5>
+              <h5
+                onClick={() => {
+                  window.location.href = `${baseURL}/events`
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                活動情報
+              </h5>
             </li>
           </ul>
         </div>
         <div className="user">
           <div className="userpic">
-            <img
+          <a href={`${baseURL}/user/settings`}><img
               src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
               alt=""
-            />
+            /></a>
           </div>
-          <h5 onClick={handleOpenOverlay}>兔兔</h5>
-          <Button label="登入/註冊" onClick={handleOpenOverlay} />
-
-          {/* 如果覆蓋層需要顯示，則渲染 OverlayLoginRegister */}
+          {isLoggedIn ? (
+            <Button
+              type="button"
+              label="登出"
+              onClick={() => {
+                localStorage.removeItem('authToken')
+                setIsLoggedIn(false)
+                window.location.href = `${baseURL}`
+              }}
+            />
+          ) : (
+            <Button type="button" label="登入" onClick={handleOpenOverlay} />
+          )}
           {isOverlayOpen && (
             <OverlayLoginRegister onClose={() => setIsOverlayOpen(false)} />
           )}
         </div>
       </header>
+      {/* CSS 省略 */}
       <style jsx>
         {`
           header {
@@ -63,10 +110,15 @@ export default function Navbar() {
           }
           .logo {
             width: 100px;
-            background-color: lightblue;
             display: flex;
             align-items: center;
+            justify-content: center; /* 水平置中 */
           }
+
+          .logo:hover {
+            background-color: lightblue;
+          }
+
           .logo p {
             width: 100%;
             color: #fff;
@@ -76,6 +128,14 @@ export default function Navbar() {
             display: flex;
             align-items: center;
             justify-content: center;
+          }
+
+          .logo img {
+            position: relative;
+            top: 8%;
+            height: 110%;
+            object-fit: scale-down; /* 自由伸縮但不變形 */
+            max-width: 70%; /* 防止圖片溢出容器 */
           }
           .navbar {
             display: flex;
@@ -125,7 +185,7 @@ export default function Navbar() {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 20px;
           }
           .userpic h5 img {
             width: 100%;

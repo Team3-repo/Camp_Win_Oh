@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 0.5rem 6.25rem;
   position: sticky;
-  top: 50px; /* 導覽列在滾動到頂部時固定 */
+  top: 70px; /* 導覽列在滾動到頂部時固定 */
   width: 100%;
   z-index: 1000; /* 確保導覽列在其他元素之上 */
   background-color: #c9e9c7;
