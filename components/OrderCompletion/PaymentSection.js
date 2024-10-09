@@ -1,9 +1,25 @@
-/**
- **
- */
-import React from "react";
+import React, { useContext, useState } from 'react'; // 引入 useContext 和 useState
+import { useCart } from '@/context/CartContext';  
+import { useOrder } from '@/context/OrderContext'; // 引入 OrderContext
+import Modal from '../OrderCompletion/Modal'; // 將路徑更改為您的 Modal 組件路徑
 
 const PaymentSection = () => {
+  const { cartItems, totalAmount } = useCart();
+  const { order } = useOrder(); // 使用 useOrder 獲取 order 變數
+  const [showModal, setShowModal] = useState(false); // 控制模態框顯示
+
+  const goECPay = () => {
+    setShowModal(true); // 顯示模態框
+  };
+
+  const handleConfirm = () => {
+    window.location.href = `http://localhost:3005/api/ecpay-test-only?amount=${totalAmount}`;
+  };
+
+  const handleCancel = () => {
+    setShowModal(false); // 關閉模態框
+  };
+
   return (
     <section className="payment-section">
       <div className="alert-box">
@@ -37,7 +53,7 @@ const PaymentSection = () => {
           <div className="line-pay-option">
             <div className="payment-option">
               <div className="line-pay-radio" />
-              <div>LINE Pay</div>
+              <div>貨到付款</div>
             </div>
           </div>
           <div className="payment-confirmation">
@@ -46,12 +62,21 @@ const PaymentSection = () => {
               服務條款 和取消政策
             </div>
             <div className="confirmation-actions">
-              <div className="total-amount">NT$ 1,300</div>
-              <button className="confirm-button">確認付款</button>
+              <div className="total-amount">NT$ {totalAmount}</div>
+              {/* <Link href="/cart/ecpay"> */}
+              <button onClick={goECPay} className="confirm-button">確認付款</button>
+              {/* </Link> */}
             </div>
           </div>
         </div>
       </div>
+      {showModal && (
+        <Modal
+          message="確認要導向至 ECPay 進行付款?"
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
+      )}
       <style jsx>{`
         .payment-section {
           align-self: start;
@@ -310,6 +335,7 @@ const PaymentSection = () => {
           font-weight: 400;
           white-space: nowrap;
           padding: 0 30px;
+          cursor: pointer;
         }
         @media (max-width: 991px) {
           .confirm-button {

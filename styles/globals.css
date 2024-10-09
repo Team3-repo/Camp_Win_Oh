@@ -3,6 +3,49 @@
 
 /* original */
 
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  font-family: 
+  'Poetsen One',
+  'Zen Maru Gothic',
+  sans-serif;
+}
+
+.global-font {
+  font-family: 'Poetsen One',
+  'Zen Maru Gothic',
+  sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+} */
+
 
 /* NEW */
 
@@ -13,9 +56,12 @@ h3,
 h4,
 h5,
 h6,
-p {
+p ,
+button,
+input{
   margin: 0;
-  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+  font-family: 
+  'Poetsen One','Zen Maru Gothic',sans-serif;
 }
 
 h1 {
