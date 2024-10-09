@@ -28,8 +28,8 @@ export default function CartDetail({ setStep }) {
   // 初始化購物車資料
   useEffect(() => {
     // 從 localStorage 中獲取購物車資料（假設已存在）
-    const storedCart = JSON.parse(localStorage.getItem('bookCart')) || []
-    setBookCartItems(storedCart)
+    const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || []
+    setBookCartItems(storedBookCart)
   }, [])
 
   // 手風琴切換控制
