@@ -110,7 +110,7 @@ const OverlayLoginRegister = ({ onClose }) => {
                     </form>
 
                     <div className="closeBtn" onClick={onClose}>
-                        X
+                        &times;
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@ const OverlayLoginRegister = ({ onClose }) => {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    z-index: 1000; /* 確保在最上面 */
+                    z-index: 10000; /* 確保在最上面 */
                     backdrop-filter: blur(0px); /* 初始狀態為無模糊 */
                     opacity: 0; /* 初始狀態為透明 */
                 }

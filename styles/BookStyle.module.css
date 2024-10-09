@@ -5,7 +5,7 @@
   position: sticky;
   top: 70px; /* 導覽列在滾動到頂部時固定 */
   width: 100%;
-  z-index: 1000; /* 確保導覽列在其他元素之上 */
+  z-index: 500; /* 確保導覽列在其他元素之上 */
   background-color: #c9e9c7;
 }
 
