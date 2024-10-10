@@ -79,52 +79,91 @@ export default function EventCreateForm() {
       ].join('\n'),
     }
 
-    // 使用 Compressor 壓縮圖片
-    const handleUploadImage = async (e) => {
-      const file = e.target.files[0]
-      if (file) {
-        // 壓縮圖片並上傳至後端
-        new Compressor(file, {
-          quality: 0.4,
-          maxWidth: 600,
-          maxHeight: 600,
-          success: async (compressedResult) => {
-            const formData = new FormData()
-            formData.append('image', compressedResult)
+    // // 使用 Compressor 壓縮圖片
+    // const handleUploadImage = async (e) => {
+    //   const file = e.target.files[0]
+    //   if (file) {
+    //     // 壓縮圖片並上傳至後端
+    //     new Compressor(file, {
+    //       quality: 0.4,
+    //       maxWidth: 600,
+    //       maxHeight: 600,
+    //       success: async (compressedResult) => {
+    //         const formData = new FormData()
+    //         formData.append('image', compressedResult)
 
-            try {
-              // 發送 POST 請求上傳圖片
-              const response = await fetch(
-                'http://localhost:3005/events/api/upload_image',
-                {
-                  method: 'POST',
-                  body: formData,
-                }
-              )
+    //         try {
+    //           // 發送 POST 請求上傳圖片
+    //           const response = await fetch(
+    //             'http://localhost:3005/events/api/upload_image',
+    //             {
+    //               method: 'POST',
+    //               body: formData,
+    //             }
+    //           )
 
-              if (response.ok) {
-                const data = await response.json()
-                // 上傳成功後，將返回的 URL 存入 eventData 中
-                handleChange('imageUrl', data.imageUrl)
-              } else {
-                console.error('圖片上傳失敗')
-              }
-            } catch (error) {
-              console.error('圖片上傳錯誤:', error)
-            }
-          },
-          error(err) {
-            console.error('圖片壓縮失敗:', err)
-          },
-        })
-      }
-    }
+    //           if (response.ok) {
+    //             const data = await response.json()
+    //             // 上傳成功後，將返回的 URL 存入 eventData 中
+    //             handleChange('imageUrl', data.imageUrl)
+    //           } else {
+    //             console.error('圖片上傳失敗')
+    //           }
+    //         } catch (error) {
+    //           console.error('圖片上傳錯誤:', error)
+    //         }
+    //       },
+    //       error(err) {
+    //         console.error('圖片壓縮失敗:', err)
+    //       },
+    //     })
+    //   }
+    // }
 
     setEventData((prev) => {
       const updatedEventData = { ...prev, ...demoData }
       localStorage.setItem('eventPreviewData', JSON.stringify(updatedEventData))
       return updatedEventData
     })
+  }
+  // 上傳圖片處理邏輯
+  const handleUploadImage = async (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      // 使用 Compressor 壓縮圖片
+      new Compressor(file, {
+        quality: 0.4,
+        maxWidth: 600,
+        maxHeight: 600,
+        success: async (compressedResult) => {
+          const formData = new FormData()
+          formData.append('file', compressedResult) // 將壓縮後的圖片加入 FormData
+
+          try {
+            const response = await fetch(
+              'http://localhost:3005/events/api/uploads',
+              {
+                method: 'POST',
+                body: formData,
+              }
+            )
+
+            if (response.ok) {
+              const data = await response.json()
+              // 成功後將返回的圖片 URL 更新到 eventData 中
+              handleChange('imageUrl', `http://localhost:3005/${data.filePath}`)
+            } else {
+              console.error('圖片上傳失敗')
+            }
+          } catch (error) {
+            console.error('圖片上傳錯誤:', error)
+          }
+        },
+        error(err) {
+          console.error('圖片壓縮失敗:', err)
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -241,16 +280,68 @@ export default function EventCreateForm() {
     handleChange('campAdd', campsite?.address)
   }
 
-  const handleUploadImage = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        handleChange('imageUrl', reader.result)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
+  // const handleUploadImage = (e) => {
+  //   const file = e.target.files[0]
+  //   if (file) {
+  //     const reader = new FileReader()
+  //     reader.onloadend = () => {
+  //       handleChange('imageUrl', reader.result)
+  //     }
+  //     reader.readAsDataURL(file)
+  //   }
+  // }
+
+  // const handleUploadImage = async (e) => {
+  //   const file = e.target.files[0]
+  //   if (file) {
+  //     // 壓縮圖片並上傳至後端
+  //     new Compressor(file, {
+  //       quality: 0.4,
+  //       maxWidth: 600,
+  //       maxHeight: 600,
+  //       success: async (compressedResult) => {
+  //         const formData = new FormData()
+  //         formData.append('image', compressedResult)
+
+  //         try {
+  //           // 發送 POST 請求上傳圖片
+  //           // const response = await fetch(
+  //           //   'http://localhost:3005/events/api/upload_image',
+  //           //   {
+  //           //     method: 'POST',
+  //           //     body: formData,
+  //           //   }
+  //           // )
+
+  //           const formData = new FormData()
+  //           formData.append('file', fileInput.files[0]) // 將檔案新增到 FormData 中
+
+  //           // 發送至後端 API
+  //           fetch('http://localhost:3005/events/api/uploads', {
+  //             method: 'POST',
+  //             body: formData,
+  //           })
+  //             .then((response) => response.json())
+  //             .then((data) => console.log('File uploaded successfully', data))
+  //             .catch((error) => console.error('Error uploading file:', error))
+
+  //           if (response.ok) {
+  //             const data = await response.json()
+  //             // 上傳成功後，將返回的 URL 存入 eventData 中
+  //             handleChange('imageUrl', data.imageUrl)
+  //           } else {
+  //             console.error('圖片上傳失敗')
+  //           }
+  //         } catch (error) {
+  //           console.error('圖片上傳錯誤:', error)
+  //         }
+  //       },
+  //       error(err) {
+  //         console.error('圖片壓縮失敗:', err)
+  //       },
+  //     })
+  //   }
+  // }
 
   const handlePreview = () => {
     const previewData = {
