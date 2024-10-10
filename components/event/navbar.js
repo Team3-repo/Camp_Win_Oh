@@ -38,7 +38,7 @@ export default function Navbar() {
             <li>
               <h5
                 onClick={() => {
-                  window.location.href = `${baseURL}/book`
+                  window.location.href = `${baseURL}/`
                 }}
                 style={{ cursor: 'pointer' }}
               >

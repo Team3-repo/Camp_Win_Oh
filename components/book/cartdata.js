@@ -2,10 +2,10 @@
 import styles from '@/styles/BookCart.module.css'
 import Button from '@/components/book/button'
 import { useState, useEffect } from 'react'
-import SearchFilter from '@/components/book/SearchFilter'
 import ProgressBar from './ProgressBar'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Discount from './Discount'
 
 export default function CartData({ setStep }) {
   const router = useRouter()
@@ -17,7 +17,11 @@ export default function CartData({ setStep }) {
   const discountAmount = 0.7 // 例如：七折折扣
 
   // 儲存會員資料
-  const [userData, setUserData] = useState({ user_name: '', phone: '', email: '' })
+  const [userData, setUserData] = useState({
+    user_name: '',
+    phone: '',
+    email: '',
+  })
 
   // 從 localStorage 中獲取資料
   useEffect(() => {
@@ -39,13 +43,13 @@ export default function CartData({ setStep }) {
       user_name: '',
       phone: '',
       email: '',
-    };
+    }
 
     setUserData((prevData) => ({
       user_name: prevData.user_name || storedUser.user_name,
       phone: prevData.phone || storedUser.phone,
       email: prevData.email || storedUser.email,
-    }));
+    }))
   }
 
   // 切換顯示優惠券搜尋區塊
@@ -63,7 +67,7 @@ export default function CartData({ setStep }) {
           <h3>填寫資料</h3>
           {/* 使用購物車資料顯示商品的詳細資訊 */}
           <div className={styles.formSection}>
-            <h4>預訂資訊</h4>
+            <h4 className={styles.formSectionTitle}>預訂資訊</h4>
             {/* 使用 map 迭代顯示所有購物車商品 */}
             {BookCartItems.length > 0 ? (
               BookCartItems.map((item) => (
@@ -74,22 +78,26 @@ export default function CartData({ setStep }) {
                   />
                   <div className={styles.bookingDetails}>
                     <h5>{item.name}</h5> {/* 顯示商品名稱 */}
-                    <p>{item.info}</p> {/* 顯示商品詳細資訊 */}
                     <p>單價: ${item.price}</p> {/* 顯示單價 */}
-                    <p>數量: {item.quantity}</p> {/* 顯示數量 */}
-                    <p>小計: ${item.price * item.quantity}</p> {/* 顯示小計 */}
+                    <p>大人: {item.adult} 人</p> {/* 顯示單價 */}
+                    <p>小孩: {item.children} 人</p> {/* 顯示單價 */}
+                    {/* <p>小計: ${item.price * item.quantity}</p> */}
                   </div>
                   <hr />
                 </div>
               ))
             ) : (
-              <p>購物車是空的</p>
+              <h5>購物車是空的</h5>
             )}
           </div>
 
           {/* 訂購人資料填寫區域 */}
           <div className={styles.formSection}>
-            <h4>訂購人資料</h4>
+            <div className={styles.userSection}>
+              <h4>訂購人資料</h4>
+              {/* 自動填入資料按鈕 */}
+              <Button label="同步會員資料" onClick={fillInUserData} />
+            </div>
             <form>
               <label htmlFor="name">姓名 *</label>
               <input
@@ -134,30 +142,26 @@ export default function CartData({ setStep }) {
                 為了順利收到入場相關通知，請提供有效的聯絡方式，預訂後系統將自動發送電子郵件進行確認。
               </p>
             </form>
-            {/* 自動填入資料按鈕 */}
-            <Button label="同步會員資料" onClick={fillInUserData} />
           </div>
 
           {/* 優惠折扣區域 */}
           <div className={styles.formSection}>
-            <h4>優惠折扣</h4>
+            <h4 className={styles.formSectionTitle}>優惠折扣</h4>
             <Button
               label="套用優惠券"
               onClick={toggleCouponSearch}
               type="btn-coup"
             />
             {/* 優惠券搜尋區塊，根據狀態顯示或隱藏 */}
-            {showCoupon && <SearchFilter />}
+            {showCoupon && <Discount />}
           </div>
 
           <div htmlFor="terms" className={styles.checkContainer2}>
             <input
               type="checkbox"
-              id="terms"
-              required=""
-              className={styles.checkContainer}
+              id="agree"
             />
-            我已了解並同意 <a href="#">服務條款</a> 與<a href="#">隱私政策</a>
+            <label htmlFor="agree">我已了解並同意服務條款和隱私政策</label>
           </div>
           <div className={styles.combinePay}>
             {/* 返回按鈕，使用 router.back() 返回上一頁 */}
@@ -165,7 +169,12 @@ export default function CartData({ setStep }) {
               <Button label="返回上頁" onClick={() => router.back()} />
             </div>
             <div className={styles.paybtn}>
-              <Button label="前往付款" onClick={() => setStep(2)} />
+              <Button
+                label="前往付款"
+                onClick={() => {
+                  setStep(2)
+                }}
+              />
             </div>
           </div>
         </div>
@@ -181,7 +190,7 @@ export default function CartData({ setStep }) {
                 <h5>{item.name}</h5>
                 <p>
                   單價: ${item.price}
-                   {/* ｜ 數量: {item.quantity} */}
+                  {/* ｜ 數量: {item.quantity} */}
                 </p>
                 <p>小計: ${item.price * 0.7}</p>
                 <hr />

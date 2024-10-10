@@ -13,6 +13,13 @@
   padding: 0 100px;
   gap: 20px;
 }
+.BCartContainer3 {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0px auto 120px;
+  padding: 0 100px;
+}
 
 /* left */
 .bookingForm {
@@ -21,6 +28,7 @@
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(84, 65, 65, 0.1);
   width: 62%;
+  
 }
 .bookingForm h3 {
   color: #ff5833;
@@ -83,7 +91,7 @@
   align-items: center;
   padding: 1px 0;
 }
-.orderSummary2 p{
+.orderSummary2 p {
   font-size: 14px;
 }
 .orderSummary2 .couponP {
@@ -108,9 +116,17 @@
   margin-right: 15px;
   object-fit: cover;
 }
-
 .bookingDetails {
   color: #333;
+}
+
+.userSection{
+  margin-bottom: 10px;
+  border-bottom: 2px solid #4e3d34;
+  color: #4e3d34;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* form */
@@ -127,11 +143,10 @@
   background-color: #fffaf2;
 }
 
-.formSection h4 {
-  color: #705448;
+.formSectionTitle {
   margin-bottom: 10px;
-  border-bottom: 1px solid #b4a59f;
-  padding-bottom: 10px;
+  border-bottom: 2px solid #4e3d34;
+  color: #4e3d34;
 }
 
 .formSection label {
@@ -186,7 +201,6 @@
 
 .combinePay {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -194,7 +208,6 @@
 .accordionPay {
   width: 71.5%;
   margin: 0 auto;
-  padding-bottom: 10px;
 }
 .accordionHeader {
   padding: 10px 15px;
@@ -229,4 +242,31 @@
 }
 .accordionIcon.rotate {
   transform: rotate(180deg);
+}
+
+/* pay-btn */
+.formSection3 {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ff6f61;
+  border-radius: 8px;
+  background-color: #fffaf2;
+}
+.formSection3 h4 {
+  color: #705448;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #b4a59f;
+  padding-bottom: 10px;
+}
+.formSection3 label {
+  margin: 10px;
+  font-size: 18px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+.formSection3 input {
+  margin-right: 10px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+.payWay {
+  margin: 10px 0;
 }

@@ -6,7 +6,6 @@ import flatpickr from 'flatpickr'
 import 'flatpickr/dist/flatpickr.min.css'
 
 export default function SearchFilter() {
-
   const filterOptions = {
     房型: [
       { id: 'bedType', label: '全部' },
@@ -98,8 +97,8 @@ export default function SearchFilter() {
             />
           </div>
 
-{/* 分組顯示篩選選項 */}
-{Object.keys(filterOptions).map((group) => (
+          {/* 分組顯示篩選選項 */}
+          {Object.keys(filterOptions).map((group) => (
             <div key={group} className={styles.typeSection}>
               <label>{group}</label>
               <div className={styles.typeOption}>
@@ -111,16 +110,16 @@ export default function SearchFilter() {
                         id={option.id}
                         checked={selectedFilters.includes(option.id)}
                         onChange={(e) => {
-                          const newFilters = [...selectedFilters];
+                          const newFilters = [...selectedFilters]
                           if (e.target.checked) {
-                            newFilters.push(option.id);
+                            newFilters.push(option.id)
                           } else {
-                            const index = newFilters.indexOf(option.id);
+                            const index = newFilters.indexOf(option.id)
                             if (index > -1) {
-                              newFilters.splice(index, 1);
+                              newFilters.splice(index, 1)
                             }
                           }
-                          setSelectedFilters(newFilters);
+                          setSelectedFilters(newFilters)
                         }}
                       />
                       {option.label}
@@ -130,7 +129,7 @@ export default function SearchFilter() {
               </div>
             </div>
           ))}
-          
+
           {/* 已選擇的選項顯示 */}
           {/* <div style={{ marginTop: '20px' }}>
             <strong>選擇的設施與服務:</strong>
