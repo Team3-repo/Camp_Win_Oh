@@ -100,7 +100,7 @@
 .feature-section2 {
   display: flex;
   flex-direction: column;
-  padding: 0px 64px;
+  padding: 0px 45px;
 }
 .feature-section2 .section-title2 {
   display: flex;
@@ -141,7 +141,7 @@
 .searchsection {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
 /* Flatpickr styles */

@@ -6,18 +6,19 @@ export default function EventPreForm() {
   const { eventData, setEventData } = useContext(EventContext);
 
   const handleBack = () => {
-    window.history.back(); // 使用 window.history.back() 返回上一頁，不進行頁面重載
+    window.history.back(); // 回上頁不重載
   };
 
   useEffect(() => {
     const storedEventData = localStorage.getItem('eventPreviewData');
     if (storedEventData) {
-      setEventData(JSON.parse(storedEventData)); // 使用 setEventData 來設定 Context 中的資料
+      setEventData(JSON.parse(storedEventData)); // 用setEventData設定Context資料
     }
   }, [setEventData]);
 
   if (!eventData) {
-    return <h2>Loading...</h2>;
+    return <h2 style={{ color: '#ff82d2' }}>資料載入中，請稍後</h2>
+    ;
   }
 
   return (
