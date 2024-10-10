@@ -74,18 +74,19 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="user">
-          <div className="userpic">
-            <a href={`${baseURL}/user/settings`}>
-              <img
-                src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
-                alt=""
-              />
-            </a>
-          </div>
-
-          {/* icon 左邊的 username */}
           {isLoggedIn ? (
-            <h5>{storedUser?.user_name}</h5> // 確保 storedUser 存在後再顯示
+            <>
+              {/* 確保 storedUser 存在後再顯示 */}
+              <div className="userpic">
+                <a href={`${baseURL}/user/settings`}>
+                  <img
+                    src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+                    alt=""
+                  />
+                </a>
+              </div>
+              <h5>{storedUser?.user_name}</h5>{' '}
+            </>
           ) : (
             <h5></h5>
           )}
