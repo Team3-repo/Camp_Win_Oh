@@ -5,19 +5,23 @@ import OverlayLoginRegister from '../user/OverlayLoginRegister'
 export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false) // 狀態控制覆蓋層的顯示
   const [isLoggedIn, setIsLoggedIn] = useState(false) // 設置初始登入狀態為 false
+  const [storedUser, setStoredUser] = useState(null) // 用於存儲用戶資訊
 
   const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
 
-  // 從 localStorage 取出資料並顯示在 alert 中
-  const storedUser = JSON.parse(localStorage.getItem('user'))
-
   const checkLoginState = () => {
-    const loginState = localStorage.getItem('loginState')
-    setIsLoggedIn(loginState === 'true')
+    if (typeof window !== 'undefined') {
+      const loginState = localStorage.getItem('loginState')
+      setIsLoggedIn(loginState === 'true')
+      const user = JSON.parse(localStorage.getItem('user'))
+      setStoredUser(user) // 取得用戶資訊
+    }
   }
+
   useEffect(() => {
     checkLoginState() // 在進入頁面時，檢查有無登入
   }, [])
+
   const handleOpenOverlay = () => {
     setIsOverlayOpen(true) // 開啟覆蓋層
   }
@@ -79,9 +83,9 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* icon 左邊的username */}
+          {/* icon 左邊的 username */}
           {isLoggedIn ? (
-            <h5>{storedUser.user_name}</h5>
+            <h5>{storedUser?.user_name}</h5> // 確保 storedUser 存在後再顯示
           ) : (
             <h5></h5>
           )}
