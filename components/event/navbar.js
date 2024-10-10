@@ -64,7 +64,7 @@ export default function Navbar() {
             <li>
               <h5
                 onClick={() => {
-                  window.location.href = `${baseURL}/events`
+                  window.location.href = `${baseURL}/events/eventList`
                 }}
                 style={{ cursor: 'pointer' }}
               >
