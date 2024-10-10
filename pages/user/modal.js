@@ -8,7 +8,10 @@ export default function Untitled() {
 
   // 當覆蓋層關閉，跳轉至付款頁面
   const handleOverlayClose = () => {
-    window.location.href = '/book/cart';
+    const params = new URLSearchParams(window.location.search);
+    const redirectUrl = params.get('redirect') || '/book/cart';
+
+    window.location.href = redirectUrl;
   };
 
   return (
