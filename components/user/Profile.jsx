@@ -1,3 +1,4 @@
+// components\user\Profile.jsx
 import React, { useState } from 'react'
 import FormField from '@/components/form/FormField'
 import Button from '@/components/book/button'
@@ -70,7 +71,7 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <div className="profile" style={{ border: 'green,2px,solid' }}>
+      <div className="profile" >
         <section className={styles.outsideAvatar}>
           <div className={styles.avatarWrapper}>
             <Image
@@ -86,7 +87,7 @@ const Profile = () => {
           </div>
         </section>
 
-        <hr />
+        <hr width={470}/>
 
         <section className="basic-details">
           <h2>基本詳情</h2>
