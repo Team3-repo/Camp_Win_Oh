@@ -1,38 +1,57 @@
 // 填寫資料
-import styles from '@/styles/BookCart.module.css';
-import Button from '@/components/book/button';
-import { useState, useEffect } from 'react';
-import SearchFilter from '@/components/book/SearchFilter';
-import ProgressBar from './ProgressBar';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import styles from '@/styles/BookCart.module.css'
+import Button from '@/components/book/button'
+import { useState, useEffect } from 'react'
+import SearchFilter from '@/components/book/SearchFilter'
+import ProgressBar from './ProgressBar'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function CartData({ setStep }) {
-  const router = useRouter();
+  const router = useRouter()
 
-  // 儲存來自 localStorage 的購物車資料
-  const [BookCartItems, setBookCartItems] = useState([]);
-  const [BookTotal, setBookTotal] = useState(0);
-  const [showCoupon, setShowCoupon] = useState(false); // 優惠券顯示狀態
-  const discountAmount = 0.7; // 例如：七折折扣
+  // 儲存購物車資料
+  const [BookCartItems, setBookCartItems] = useState([])
+  const [BookTotal, setBookTotal] = useState(0)
+  const [showCoupon, setShowCoupon] = useState(false) // 優惠券顯示狀態
+  const discountAmount = 0.7 // 例如：七折折扣
 
-  // 從 localStorage 中獲取購物車資料
+  // 儲存會員資料
+  const [userData, setUserData] = useState({ user_name: '', phone: '', email: '' })
+
+  // 從 localStorage 中獲取資料
   useEffect(() => {
-    const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || [];
-    setBookCartItems(storedBookCart);
+    // 購物車
+    const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || []
+    setBookCartItems(storedBookCart)
 
     // 計算總金額
     const totalAmount = storedBookCart.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
-    );
-    setBookTotal(totalAmount);
-  }, []);
+    )
+    setBookTotal(totalAmount)
+  }, [])
+
+  // 填入會員資料到表單
+  const fillInUserData = () => {
+    const storedUser = JSON.parse(localStorage.getItem('user')) || {
+      user_name: '',
+      phone: '',
+      email: '',
+    };
+
+    setUserData((prevData) => ({
+      user_name: prevData.user_name || storedUser.user_name,
+      phone: prevData.phone || storedUser.phone,
+      email: prevData.email || storedUser.email,
+    }));
+  }
 
   // 切換顯示優惠券搜尋區塊
   const toggleCouponSearch = () => {
-    setShowCoupon(!showCoupon);
-  };
+    setShowCoupon(!showCoupon)
+  }
 
   return (
     <>
@@ -73,7 +92,16 @@ export default function CartData({ setStep }) {
             <h4>訂購人資料</h4>
             <form>
               <label htmlFor="name">姓名 *</label>
-              <input type="text" id="name" name="name" required="" />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={userData.user_name} // 綁定會員姓名狀態
+                onChange={(e) =>
+                  setUserData({ ...userData, user_name: e.target.value })
+                }
+                required
+              />
               <label htmlFor="phone">手機號碼 *</label>
               <div className={styles.phoneInput}>
                 <select name="country-code">
@@ -84,15 +112,30 @@ export default function CartData({ setStep }) {
                   id="phone"
                   name="phone"
                   maxLength="10"
-                  required=""
+                  value={userData.phone} // 綁定會員電話狀態
+                  onChange={(e) =>
+                    setUserData({ ...userData, phone: e.target.value })
+                  }
+                  required
                 />
               </div>
               <label htmlFor="email">電子郵件(將收到預訂確認信)</label>
-              <input type="email" id="email" name="email" required="" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={userData.email} // 綁定會員電子郵件狀態
+                onChange={(e) =>
+                  setUserData({ ...userData, email: e.target.value })
+                }
+                required
+              />
               <p className={styles.notice}>
                 為了順利收到入場相關通知，請提供有效的聯絡方式，預訂後系統將自動發送電子郵件進行確認。
               </p>
             </form>
+            {/* 自動填入資料按鈕 */}
+            <Button label="同步會員資料" onClick={fillInUserData} />
           </div>
 
           {/* 優惠折扣區域 */}
@@ -122,7 +165,7 @@ export default function CartData({ setStep }) {
               <Button label="返回上頁" onClick={() => router.back()} />
             </div>
             <div className={styles.paybtn}>
-            <Button label="前往付款" onClick={() => setStep(2)} />
+              <Button label="前往付款" onClick={() => setStep(2)} />
             </div>
           </div>
         </div>
@@ -137,19 +180,27 @@ export default function CartData({ setStep }) {
               <div key={item.id} className={styles.cartItem}>
                 <h5>{item.name}</h5>
                 <p>
-                  單價: ${item.price} ｜ 數量: {item.quantity}
+                  單價: ${item.price}
+                   {/* ｜ 數量: {item.quantity} */}
                 </p>
-                <p>小計: ${item.price * item.quantity}</p>
+                <p>小計: ${item.price * 0.7}</p>
                 <hr />
               </div>
             ))}
             {/* 顯示購物車總金額和折扣後金額 */}
             <h5>總金額: ${BookTotal}</h5>
-            <h5>優惠券: <p className={styles.couponP}>七折折扣</p></h5>
-            <h5>付款金額: <p className={styles.totalP}>${(BookTotal * discountAmount).toFixed(2)}</p></h5>
+            <h5>
+              優惠券: <p className={styles.couponP}>七折折扣</p>
+            </h5>
+            <h5>
+              付款金額:{' '}
+              <p className={styles.totalP}>
+                ${(BookTotal * discountAmount).toFixed(2)}
+              </p>
+            </h5>
           </div>
         </div>
       </div>
     </>
-  );
+  )
 }
