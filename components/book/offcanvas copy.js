@@ -1,41 +1,12 @@
 // 購物車
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import styles from '../../styles/component_style/offcanvas.module.css'
 import { BookCartContext } from '../../context/book/BookCartContext.js'
 import Link from 'next/link'
 
-import toast, { Toaster } from 'react-hot-toast'
-
 export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
   // 使用 useContext 來獲取購物車狀態和操作
   const { bookCart, BookTotal, dispatch } = useContext(BookCartContext)
-
-  // 用來追蹤登入狀態
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  // 使用 useEffect 來初始化登入狀態
-  useEffect(() => {
-    // 從 localStorage 中獲取登入狀態，並將其設置到 isLoggedIn 狀態中
-    const loginState = localStorage.getItem('loginState') === 'true'
-    setIsLoggedIn(loginState)
-  }, []) // 空依賴陣列，表示只在組件載入時執行一次
-
-  // 點擊「前往付款」的處理函數
-  const handleCheckout = () => {
-    if (!isLoggedIn) {
-      // 用戶未登入時顯示提示，並跳轉至登入頁面
-      toast.error('請先登入以進行付款！', {
-        duration: 3000,
-        position: 'top-center',
-      })
-      setTimeout(() => {
-        window.location.href = '/user/modal' 
-      }) 
-    } else {
-      // 用戶已登入，跳轉至付款頁面
-      window.location.href = '/book/cart'
-    }
-  }
 
   // 購物車增減數量功能
   const handleRemoveFromCart = (item) => {
@@ -105,7 +76,7 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
                         className={styles.removeButton}
                         onClick={() => handleRemoveFromCart(item)}
                       >
-                        &times;
+                        移除
                       </button>
                     </div>
                     <div className={styles.cartItemActions}></div>
@@ -122,19 +93,15 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
           {bookCart.length > 0 && (
             <div className={styles.checkoutButtonContainer}>
               <Link href="/book/cart">
-                <button
-                  className={styles.checkoutButton}
-                  onClick={handleCheckout}
-                >
-                  前往付款
-                </button>
+                <button className={styles.checkoutButton}>前往付款</button>
               </Link>
             </div>
+
+
+            
           )}
         </div>
       </div>
-
-      <Toaster />
     </>
   )
 }
