@@ -103,6 +103,7 @@ export default function Navbar() {
                     localStorage.removeItem(key)
                   }
                 })
+                window.location.href = `http://localhost:3000/`
                 checkLoginState() // 登出後再次檢查
               }}
             />
