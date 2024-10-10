@@ -49,10 +49,16 @@ export default function Footer1() {
                 />
               </h5>
               <h5>
-                <FaYoutube
-                  className="YT"
-                  style={{ color: '#fd1d1d', fontSize: '30px' }}
-                />
+                <a
+                  href="https://youtu.be/dQw4w9WgXcQ?si=eDH0Lk1qedkwA7YG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaYoutube
+                    className="YT"
+                    style={{ color: '#fd1d1d', fontSize: '30px' }}
+                  />
+                </a>
               </h5>
             </div>
           </div>

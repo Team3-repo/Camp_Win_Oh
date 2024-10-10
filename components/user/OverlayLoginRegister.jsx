@@ -1,3 +1,4 @@
+// 內嵌在 from '@components/event/navbar'
 import React, { useState, useEffect } from 'react'
 import FormField from '@/components/form/FormField'
 
@@ -5,6 +6,7 @@ const OverlayLoginRegister = ({ onClose }) => {
   const [isLogin, setIsLogin] = useState(true) // 默認為登錄模式
   const [email, setEmail] = useState('') // 將用戶名改為email，因為後端是用email驗證
   const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('') // 新增 username 狀態
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
   const [colorChange, setColorChange] = useState(false) // 新增狀態
@@ -18,7 +20,8 @@ const OverlayLoginRegister = ({ onClose }) => {
   // 處理表單提交
   const handleSubmit = async (e) => {
     e.preventDefault() // 防止表單提交
-    if (!email || !password) {
+    if (!email || !password || (!isLogin && !username)) {
+      // 檢查 username
       setError('請填寫所有必填欄位')
       return
     }
@@ -30,6 +33,7 @@ const OverlayLoginRegister = ({ onClose }) => {
 
     // 發送登入請求
     if (isLogin) {
+      // 登入邏輯
       try {
         const response = await fetch('http://localhost:3005/login', {
           method: 'POST',
@@ -53,7 +57,15 @@ const OverlayLoginRegister = ({ onClose }) => {
           const loginState = localStorage.getItem('loginState') === 'true'
 
           alert(
-            `localStorage 顯示資料！ \nloginState:從${localStorage.getItem('loginState')} \n用戶名稱: ${storedUser.user_name}, \n用戶ID: ${storedUser.user_id}, \nEmail: ${storedUser.email}, \n地址: ${storedUser.user_address}, \n電話: ${storedUser.phone}, \n生日: ${storedUser.birthday}, \n性別: ${storedUser.gender}`
+            `localStorage 顯示資料！ \nloginState:從${localStorage.getItem(
+              'loginState'
+            )} \n用戶名稱: ${storedUser.user_name}, \n用戶ID: ${
+              storedUser.user_id
+            }, \nEmail: ${storedUser.email}, \n地址: ${
+              storedUser.user_address
+            }, \n電話: ${storedUser.phone}, \n生日: ${
+              storedUser.birthday
+            }, \n性別: ${storedUser.gender}`
           )
         } else {
           setError('Email 或密碼不正確')
@@ -62,14 +74,30 @@ const OverlayLoginRegister = ({ onClose }) => {
         setError('請求失敗，請稍後重試')
       }
     } else {
-      // 註冊邏輯...
-    }
+      // 註冊邏輯
+      try {
+        const response = await fetch('http://localhost:3005/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, email, password, confirmPassword }), // 傳送 username
+        })
 
-    // 清空輸入欄位和錯誤
-    setEmail('')
-    setPassword('')
-    setConfirmPassword('')
-    setError('')
+        const data = await response.json()
+        if (data.success) {
+          const user = data.user
+          localStorage.setItem('user', JSON.stringify(user))
+          localStorage.setItem('loginState', 'true')
+          alert('註冊成功！歡迎，' + user.username) // 使用 username
+          onClose()
+        } else {
+          setError(data.message || '註冊失敗，請稍後再試')
+        }
+      } catch (error) {
+        setError('發生錯誤，請稍後再試')
+      }
+    }
   }
 
   return (
@@ -78,8 +106,28 @@ const OverlayLoginRegister = ({ onClose }) => {
         <div className="overlay-content">
           <h2>{isLogin ? '登錄' : '註冊'}</h2>
           <form onSubmit={handleSubmit}>
+            {/* 顯示錯誤訊息 */}
+            {!isLogin && (
+              <div>
+                <label htmlFor="username">
+                  姓名{!isLogin && <span style={{ color: 'red' }}>*</span>}
+                </label>
+                <br />
+                <FormField
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)} // 更新username的值
+                  placeholder="請輸入姓名"
+                  width="100%"
+                />
+              </div>
+            )}
             <div>
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">
+                Email{!isLogin && <span style={{ color: 'red' }}>*</span>}
+              </label>
               <br />
               <FormField
                 id="email"
@@ -92,7 +140,9 @@ const OverlayLoginRegister = ({ onClose }) => {
               />
             </div>
             <div>
-              <label htmlFor="password">密碼</label>
+              <label htmlFor="password">
+                密碼{!isLogin && <span style={{ color: 'red' }}>*</span>}
+              </label>
               <br />
               <FormField
                 id="password"
@@ -106,7 +156,9 @@ const OverlayLoginRegister = ({ onClose }) => {
             </div>
             {!isLogin && (
               <div>
-                <label htmlFor="confirmPassword">確認密碼</label>
+                <label htmlFor="confirmPassword">
+                  確認密碼{!isLogin && <span style={{ color: 'red' }}>*</span>}
+                </label>
                 <br />
                 <FormField
                   type="password"
@@ -120,7 +172,6 @@ const OverlayLoginRegister = ({ onClose }) => {
               </div>
             )}
             {error && <p style={{ color: 'red' }}>{error}</p>}
-
             {/* 將兩個按鈕放入同一個容器 */}
             <div className="button-container">
               <button type="submit">{isLogin ? '登錄' : '註冊'}</button>

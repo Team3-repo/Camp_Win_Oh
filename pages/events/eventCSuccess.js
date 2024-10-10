@@ -1,9 +1,22 @@
-import React from 'react'
-import Footer2 from '@/components/event/footer2'
-import Navbar from '@/components/event/navbar'
-import Button from '@/components/book/button'
+import React, { useEffect, useState } from 'react';
+import Footer2 from '@/components/event/footer2';
+import Navbar from '@/components/event/navbar';
+import Button from '@/components/book/button';
 
-export default function eventCSuccess() {
+export default function EventCSuccess() {
+  const [createdEvent, setCreatedEvent] = useState(null);
+
+  useEffect(() => {
+    const eventData = localStorage.getItem('createdEventData');
+    if (eventData) {
+      setCreatedEvent(JSON.parse(eventData)); // 從 localStorage 中讀取創建的活動資料
+    }
+  }, []);
+
+  if (!createdEvent) {
+    return <h3>資料載入中...</h3>;
+  }
+
   return (
     <>
       <Navbar />
@@ -13,28 +26,25 @@ export default function eventCSuccess() {
       <section className="ecsevent-list">
         <div className="ecsevent-card">
           <h2>活動資訊一覽</h2>
-          <img
-            src="https://i.postimg.cc/dQCvrjvh/camping-7947056-1280.jpg"
-            alt="Campfire"
-          />
+          <img src={createdEvent.imageUrl || 'https://via.placeholder.com/400x200'} alt="Event" />
           <div className="ecsevent-details">
             <p>
-              <strong>主辦人:</strong> 小八
+              <strong>主辦人:</strong> {createdEvent.organizerNick}
             </p>
             <p>
-              <strong>活動名稱:</strong> 營火晚會派對
+              <strong>活動名稱:</strong> {createdEvent.eventTitle}
             </p>
             <p>
-              <strong>人數限制:</strong> 6 人
+              <strong>人數限制:</strong> {createdEvent.eventPeople} 人
             </p>
             <p>
-              <strong>費用:</strong> 1200
+              <strong>費用:</strong> {createdEvent.orderAmount} 元
             </p>
             <p>
-              <strong>開始日期:</strong> 2024年9月28日
+              <strong>開始日期:</strong> {createdEvent.eStartDate}
             </p>
             <p>
-              <strong>結束日期:</strong> 2024年9月29日
+              <strong>結束日期:</strong> {createdEvent.eEndDate}
             </p>
           </div>
         </div>
@@ -44,5 +54,5 @@ export default function eventCSuccess() {
       </div>
       <Footer2 />
     </>
-  )
+  );
 }
