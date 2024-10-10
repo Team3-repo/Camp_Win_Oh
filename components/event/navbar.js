@@ -8,14 +8,16 @@ export default function Navbar() {
 
   const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
 
-  // 檢查 Local Storage 中的 token 是否存在
-  useEffect(() => {
-    const token = localStorage.getItem('authToken')
-    if (token) {
-      setIsLoggedIn(true)
-    }
-  }, [])
+  // 從 localStorage 取出資料並顯示在 alert 中
+  const storedUser = JSON.parse(localStorage.getItem('user'))
 
+  const checkLoginState = () => {
+    const loginState = localStorage.getItem('loginState')
+    setIsLoggedIn(loginState === 'true')
+  }
+  useEffect(() => {
+    checkLoginState() // 在進入頁面時，檢查有無登入
+  }, [])
   const handleOpenOverlay = () => {
     setIsOverlayOpen(true) // 開啟覆蓋層
   }
@@ -69,26 +71,47 @@ export default function Navbar() {
         </div>
         <div className="user">
           <div className="userpic">
-          <a href={`${baseURL}/user/settings`}><img
-              src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
-              alt=""
-            /></a>
+            <a href={`${baseURL}/user/settings`}>
+              <img
+                src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+                alt=""
+              />
+            </a>
           </div>
+
+          {/* icon 左邊的username */}
+          {isLoggedIn ? (
+            <h5>{storedUser.user_name}</h5>
+          ) : (
+            <h5></h5>
+          )}
+
           {isLoggedIn ? (
             <Button
               type="button"
               label="登出"
               onClick={() => {
-                localStorage.removeItem('authToken')
                 setIsLoggedIn(false)
-                window.location.href = `${baseURL}`
+                localStorage.setItem('loginState', 'false')
+                // 清除其他資料，但保留 loginState
+                Object.keys(localStorage).forEach((key) => {
+                  if (key !== 'loginState') {
+                    localStorage.removeItem(key)
+                  }
+                })
+                checkLoginState() // 登出後再次檢查
               }}
             />
           ) : (
             <Button type="button" label="登入" onClick={handleOpenOverlay} />
           )}
           {isOverlayOpen && (
-            <OverlayLoginRegister onClose={() => setIsOverlayOpen(false)} />
+            <OverlayLoginRegister
+              onClose={() => {
+                setIsOverlayOpen(false)
+                checkLoginState()
+              }}
+            />
           )}
         </div>
       </header>
@@ -173,6 +196,7 @@ export default function Navbar() {
           .user h5 {
             color: #4c3a30;
             cursor: pointer;
+            margin: 0 13px 0 0;
           }
           .user h5:hover {
             color: #ff82d2;
