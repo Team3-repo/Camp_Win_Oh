@@ -3,27 +3,26 @@ import flatpickr from 'flatpickr'
 import 'flatpickr/dist/flatpickr.css'
 import Button from '@/components/book/button'
 import { EventContext } from '@/context/event/EventContext'
-import { useRouter } from 'next/router'
+import Compressor from 'compressorjs' // 引入 compressorjs
 
 export default function EventCreateForm() {
   const { eventData, setEventData } = useContext(EventContext)
-  const router = useRouter()
   const [userData, setUserData] = useState({ user_id: '' })
 
   const {
-    eventTitle,
+    organizerNick,
+    imageUrl,
     eventDescription,
+    eventTitle,
     eStartDate,
     eEndDate,
-    organizerNick,
     selectedBookType,
     orderQuantity,
-    orderAmount,
-    costPerPerson,
-    eOtherFees,
-    eventNotes,
     eventPeople,
-    imageUrl,
+    orderAmount,
+    eOtherFees,
+    costPerPerson,
+    eventNotes,
   } = eventData
 
   const [selectedCampsite, setSelectedCampsite] = useState(null)
@@ -56,6 +55,11 @@ export default function EventCreateForm() {
         phone: user.phone || '',
         email: user.email || '',
       })
+      // 更新 eventData 中的 user_id
+      setEventData((prev) => ({
+        ...prev,
+        user_id: user.user_id || '',
+      }))
     }
   }, [setEventData, campsites])
 
@@ -73,6 +77,47 @@ export default function EventCreateForm() {
         '如果您有任何特殊飲食需求或過敏，請提前告知，以便主辦方準備合適的餐點。',
         '活動過程中，將由主辦方SunnyHiker123負責主要聯絡，並提供緊急聯絡方式。',
       ].join('\n'),
+    }
+
+    // 使用 Compressor 壓縮圖片
+    const handleUploadImage = async (e) => {
+      const file = e.target.files[0]
+      if (file) {
+        // 壓縮圖片並上傳至後端
+        new Compressor(file, {
+          quality: 0.4,
+          maxWidth: 600,
+          maxHeight: 600,
+          success: async (compressedResult) => {
+            const formData = new FormData()
+            formData.append('image', compressedResult)
+
+            try {
+              // 發送 POST 請求上傳圖片
+              const response = await fetch(
+                'http://localhost:3005/events/api/upload_image',
+                {
+                  method: 'POST',
+                  body: formData,
+                }
+              )
+
+              if (response.ok) {
+                const data = await response.json()
+                // 上傳成功後，將返回的 URL 存入 eventData 中
+                handleChange('imageUrl', data.imageUrl)
+              } else {
+                console.error('圖片上傳失敗')
+              }
+            } catch (error) {
+              console.error('圖片上傳錯誤:', error)
+            }
+          },
+          error(err) {
+            console.error('圖片壓縮失敗:', err)
+          },
+        })
+      }
     }
 
     setEventData((prev) => {
@@ -210,6 +255,7 @@ export default function EventCreateForm() {
   const handlePreview = () => {
     const previewData = {
       ...eventData,
+      user_id: userData.user_id,
       camp_id: selectedCampsite?.id,
       campName: selectedCampsite?.name,
       campAdd: selectedCampsite?.address,
@@ -280,8 +326,8 @@ export default function EventCreateForm() {
                 <label htmlFor="organizer">會員ID</label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="userid"
+                  name="userid"
                   value={userData.user_id} // 綁定會員ID
                   style={{ color: '#99837B' }}
                   readOnly
