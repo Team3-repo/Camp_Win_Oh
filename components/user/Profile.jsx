@@ -19,7 +19,8 @@ const Profile = () => {
     const storedUser = localStorage.getItem('user') || '{}'
     const user = JSON.parse(storedUser)
 
-    setAvatar(user.avatar || null) // 預設 avatar
+    setAvatar(null) // demo專用
+    // setAvatar(user.avatar || null) // 預設 avatar   
     setName(user.user_name || '') // 取得使用者名稱
     setEmail(user.email || '') // 取得電子郵件
     setAddress(user.user_address || '') // 取得地址
