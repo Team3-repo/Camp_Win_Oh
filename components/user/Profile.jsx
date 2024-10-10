@@ -1,5 +1,5 @@
 // components\user\Profile.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FormField from '@/components/form/FormField'
 import Button from '@/components/book/button'
 import Image from 'next/image'
@@ -12,6 +12,16 @@ const Profile = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
+
+  // 填入localStorage內的資料
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user') || '{}'
+    const user = JSON.parse(storedUser)
+
+    setName(user.user_name || '') // 取得使用者名稱
+    setEmail(user.email || '') // 取得電子郵件
+    setAddress(user.user_address || '') // 取得地址
+  }, [])
 
   // 新增錯誤訊息的 state
   const [errors, setErrors] = useState({
@@ -71,7 +81,7 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <div className="profile" >
+      <div className="profile">
         <section className={styles.outsideAvatar}>
           <div className={styles.avatarWrapper}>
             <Image
@@ -87,7 +97,7 @@ const Profile = () => {
           </div>
         </section>
 
-        <hr width={470}/>
+        <hr width={470} />
 
         <section className="basic-details">
           <h2>基本詳情</h2>
