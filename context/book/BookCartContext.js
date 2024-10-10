@@ -14,7 +14,9 @@ const BookCartReducer = (state, action) => {
 
   switch (action.type) {
     case 'ADD_TO_CART':
-      BookExistingItem = state.bookCart.find((item) => item.id === action.payload.id)
+      BookExistingItem = state.bookCart.find(
+        (item) => item.id === action.payload.id
+      )
       if (BookExistingItem) {
         newBookCart = state.bookCart.map((item) =>
           item.id === BookExistingItem.id
@@ -24,13 +26,21 @@ const BookCartReducer = (state, action) => {
       } else {
         newBookCart = [...state.bookCart, { ...action.payload, quantity: 1 }]
       }
-      BookTotal = newBookCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      BookTotal = newBookCart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      )
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
       return { ...state, bookCart: newBookCart, BookTotal }
 
     case 'REMOVE_FROM_CART':
-      newBookCart = state.bookCart.filter((item) => item.id !== action.payload.id)
-      BookTotal = newBookCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      newBookCart = state.bookCart.filter(
+        (item) => item.id !== action.payload.id
+      )
+      BookTotal = newBookCart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      )
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
       return { ...state, bookCart: newBookCart, BookTotal }
 
@@ -44,7 +54,10 @@ const BookCartReducer = (state, action) => {
           ? { ...item, quantity: item.quantity + 1 }
           : item
       )
-      BookTotal = newBookCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      BookTotal = newBookCart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      )
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
       return { ...state, bookCart: newBookCart, BookTotal }
 
@@ -58,9 +71,15 @@ const BookCartReducer = (state, action) => {
           return item
         })
         .filter((item) => item !== null)
-      BookTotal = newBookCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      BookTotal = newBookCart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      )
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
       return { ...state, bookCart: newBookCart, BookTotal }
+
+    case 'CLEAR_CART':
+      return []
 
     default:
       return state

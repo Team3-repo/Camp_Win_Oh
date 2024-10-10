@@ -29,8 +29,8 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
         position: 'top-center',
       })
       setTimeout(() => {
-        window.location.href = '/user/modal' 
-      }) 
+        window.location.href = '/user/modal'
+      })
     } else {
       // 用戶已登入，跳轉至付款頁面
       window.location.href = '/book/cart'
@@ -50,6 +50,12 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
     dispatch({ type: 'DECREASE_QUANTITY', payload: item })
   }
 
+  // 當 OffcanvasCart 被關閉時清空購物車
+  const handleCloseOffcanvas = () => {
+    dispatch({ type: 'CLEAR_CART' }) // 清空購物車
+    toggleOffcanvas() // 呼叫 toggleOffcanvas 關閉 Offcanvas
+  }
+
   return (
     <>
       {/* 背景遮罩層，當 Offcanvas 顯示時顯示遮罩 */}
@@ -67,7 +73,7 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
           <button
             type="button"
             className={styles.closeButton}
-            onClick={toggleOffcanvas}
+            onClick={handleCloseOffcanvas}
           >
             &times;
           </button>
