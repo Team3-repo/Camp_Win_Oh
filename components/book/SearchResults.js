@@ -16,6 +16,8 @@ const SearchResult = ({
   max_per,
   price,
   bed_opt,
+  adult,
+  children,
   AddOffcanvas,
 }) => {
   return (
@@ -46,6 +48,9 @@ const SearchResult = ({
                 name,
                 price,
                 photos,
+                max_per,
+                adult,
+                children,
               })
             }
           />

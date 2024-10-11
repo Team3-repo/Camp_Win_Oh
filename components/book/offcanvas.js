@@ -38,18 +38,21 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
   }
 
   // 購物車增減數量功能
-  const handleRemoveFromCart = (item) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: item })
-  }
-
-  const handleIncreaseQuantity = (item) => {
-    dispatch({ type: 'INCREASE_QUANTITY', payload: item })
-  }
-
-  const handleDecreaseQuantity = (item) => {
-    dispatch({ type: 'DECREASE_QUANTITY', payload: item })
-  }
-
+  const handleIncreaseAdult = (item) => {
+    dispatch({ type: 'INCREASE_ADULT_QUANTITY', payload: item });
+  };
+  
+  const handleDecreaseAdult = (item) => {
+    dispatch({ type: 'DECREASE_ADULT_QUANTITY', payload: item });
+  };
+  
+  const handleIncreaseChild = (item) => {
+    dispatch({ type: 'INCREASE_CHILD_QUANTITY', payload: item });
+  };
+  
+  const handleDecreaseChild = (item) => {
+    dispatch({ type: 'DECREASE_CHILD_QUANTITY', payload: item });
+  };
   // 當 OffcanvasCart 被關閉時清空購物車
   const handleCloseOffcanvas = () => {
     dispatch({ type: 'CLEAR_CART' }) // 清空購物車
@@ -94,31 +97,66 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
                         <span className={styles.itemName}>{item.name}</span>
                         <span className={styles.itemPrice}>${item.price}</span>
                       </div>
-                      <div className={styles.quantityCtl}>
-                        <span className={styles.itemQuantity}>
-                          {item.max_per}
-                        </span>
-                        <button
-                          className={styles.quantityButton}
-                          onClick={() => handleDecreaseQuantity(item)}
-                        >
-                          -
-                        </button>
-                        <span className={styles.itemQuantity}>
-                          {item.quantity}
-                        </span>
-                        <button
-                          className={styles.quantityButton}
-                          onClick={() => handleIncreaseQuantity(item)}
-                        >
-                          +
-                        </button>
-                        <button
-                          className={styles.removeButton}
-                          onClick={() => handleRemoveFromCart(item)}
-                        >
-                          &times;
-                        </button>
+                      
+                    </div>
+                    <div className={styles.cartItemActions}></div>
+                  </li>
+                ))}
+              </ul>
+              {/* 大人 */}
+              <ul>
+                {bookCart.map((item) => (
+                  <li key={item.id} className={styles.cartItem}>
+                    <div className={styles.cartItemDetails}>
+                      <div className={styles.detailsCtl}>
+                        <span className={styles.itemName}>大人</span>
+                        <div className={styles.quantityCtl}>
+                          <button
+                            className={styles.quantityButton}
+                            onClick={() => handleDecreaseAdult(item)}
+                          >
+                            -
+                          </button>
+                          <span className={styles.itemQuantity}>
+                            {item.quantity}
+                          </span>
+                          <button
+                            className={styles.quantityButton}
+                            onClick={() => handleIncreaseAdult(item)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.cartItemActions}></div>
+                  </li>
+                ))}
+              </ul>
+              {/* 小孩 */}
+              <ul>
+                {bookCart.map((item) => (
+                  <li key={item.id} className={styles.cartItem}>
+                    <div className={styles.cartItemDetails}>
+                      <div className={styles.detailsCtl}>
+                        <span className={styles.itemName}>小孩</span>
+                        <div className={styles.quantityCtl}>
+                          <button
+                            className={styles.quantityButton}
+                            onClick={() => handleDecreaseChild(item)}
+                          >
+                            -
+                          </button>
+                          <span className={styles.itemQuantity}>
+                            {item.quantity}
+                          </span>
+                          <button
+                            className={styles.quantityButton}
+                            onClick={() => handleIncreaseChild(item)}
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     </div>
                     <div className={styles.cartItemActions}></div>

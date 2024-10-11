@@ -176,13 +176,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 20px;
 }
 
 .itemName {
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 5px;
 }
 
 .itemQuantity {
@@ -199,7 +197,6 @@
   font-size: 16px;
   text-align: right; /* 讓 itemPrice 右對齊 */
 }
-
 
 .quantityButton {
   margin: 0 10px;
