@@ -33,7 +33,7 @@ export default function BookCart() {
         {step === 2 && renderPayment()}
       </div>
 
-      <CartData />
+      {/* <CartData /> */}
       {/* <CartPay/> */}
       {/* <Cartsuccess/> */}
 

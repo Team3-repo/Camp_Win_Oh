@@ -1,12 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../book/button'
 import OverlayLoginRegister from '../user/OverlayLoginRegister'
 
 export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false) // 狀態控制覆蓋層的顯示
+  const [isLoggedIn, setIsLoggedIn] = useState(false) // 設置初始登入狀態為 false
+  const [storedUser, setStoredUser] = useState(null) // 用於存儲用戶資訊
 
-  const [isLoggedIn,setIsLoggedIn]  = useState(true);
   const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
+
+  const checkLoginState = () => {
+    if (typeof window !== 'undefined') {
+      const loginState = localStorage.getItem('loginState')
+      setIsLoggedIn(loginState === 'true')
+      const user = JSON.parse(localStorage.getItem('user'))
+      setStoredUser(user) // 取得用戶資訊
+    }
+  }
+
+  useEffect(() => {
+    checkLoginState() // 在進入頁面時，檢查有無登入
+  }, [])
 
   const handleOpenOverlay = () => {
     setIsOverlayOpen(true) // 開啟覆蓋層
@@ -57,34 +71,57 @@ export default function Navbar() {
                 活動情報
               </h5>
             </li>
-            <li>
-              <h5>客服中心</h5>
-            </li>
           </ul>
         </div>
         <div className="user">
-          <div className="userpic">
-            <img
-              src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
-              alt=""
-            />
-          </div>
-          <h5>
-            <a href={`${baseURL}/user/settings`}>兔兔</a>
-          </h5>
+          {isLoggedIn ? (
+            <>
+              {/* 確保 storedUser 存在後再顯示 */}
+              <div className="userpic">
+                <a href={`${baseURL}/user/settings`}>
+                  <img
+                    src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+                    alt=""
+                  />
+                </a>
+              </div>
+              <h5>{storedUser?.user_name}</h5>{' '}
+            </>
+          ) : (
+            <h5></h5>
+          )}
+
           {isLoggedIn ? (
             <Button
               type="button"
-              label="登入/註冊"
-              onClick={handleOpenOverlay}
+              label="登出"
+              onClick={() => {
+                setIsLoggedIn(false)
+                localStorage.setItem('loginState', 'false')
+                // 清除其他資料，但保留 loginState
+                Object.keys(localStorage).forEach((key) => {
+                  if (key !== 'loginState') {
+                    localStorage.removeItem(key)
+                  }
+                })
+                window.location.href = `http://localhost:3000/`
+                checkLoginState() // 登出後再次檢查
+              }}
             />
           ) : (
-            isOverlayOpen && (
-              <OverlayLoginRegister onClose={() => setIsOverlayOpen(false)} />
-            )
+            <Button type="button" label="登入" onClick={handleOpenOverlay} />
+          )}
+          {isOverlayOpen && (
+            <OverlayLoginRegister
+              onClose={() => {
+                setIsOverlayOpen(false)
+                checkLoginState()
+              }}
+            />
           )}
         </div>
       </header>
+      {/* CSS 省略 */}
       <style jsx>
         {`
           header {
@@ -165,6 +202,7 @@ export default function Navbar() {
           .user h5 {
             color: #4c3a30;
             cursor: pointer;
+            margin: 0 13px 0 0;
           }
           .user h5:hover {
             color: #ff82d2;
@@ -177,7 +215,7 @@ export default function Navbar() {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 20px;
           }
           .userpic h5 img {
             width: 100%;

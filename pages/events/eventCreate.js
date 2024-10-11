@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import EventCreateForm from '@/components/event/EventCreateForm'
 import Navbar from '@/components/event/navbar'
 import Footer2 from '@/components/event/footer2'
-import EventCreateForm from '@/components/event/EventCreateForm'
+import { EventProvider } from '@/context/event/EventContext'
 
-export default function EventCreate() {
+export default function EventCreatePage() {
   return (
     <>
       <Navbar />
-      <EventCreateForm />
+      <EventProvider>
+        <EventCreateForm />
+      </EventProvider>
       <Footer2 />
     </>
   )

@@ -95,7 +95,7 @@ p {
 /* 背景 */
 body{
   background-color: #C9E9C7;
-  margin-top: 50px; /* 根據 header 的高度來設置 margin-top */
+  margin-top: 70px; /* 根據 header 的高度來設置 margin-top */
 }
 
 * {

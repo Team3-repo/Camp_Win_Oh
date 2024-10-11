@@ -95,7 +95,6 @@ export default function EventList() {
           )}
         </div>
 
-       
         <Pagi
           currentIndex={currentPage}
           totalSlides={totalSlides}
