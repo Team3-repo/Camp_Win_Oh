@@ -1,23 +1,152 @@
-import React, { useEffect, useContext } from 'react';
-import Button from '@/components/book/button';
-import { EventContext } from '@/context/event/EventContext';
+import React, { useEffect, useContext, useState } from 'react'
+import Button from '@/components/book/button'
+import { EventContext } from '@/context/event/EventContext'
+import { useRouter } from 'next/router'
 
 export default function EventPreForm() {
-  const { eventData, setEventData } = useContext(EventContext);
+  const { eventData, setEventData } = useContext(EventContext)
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleBack = () => {
-    window.history.back(); // 使用 window.history.back() 返回上一頁，不進行頁面重載
-  };
+    window.history.back() // 回上頁不重載
+  }
+
+  // 確保 eventData 中包含 user_id，否則從 localStorage 補上
+  const ensureUserIdInEventData = () => {
+    const storedUserData = localStorage.getItem('user')
+    if (storedUserData) {
+      const user = JSON.parse(storedUserData)
+      if (!eventData.user_id) {
+        setEventData((prev) => ({
+          ...prev,
+          user_id: user.user_id || '',
+        }))
+      }
+    }
+  }
+
+  const uploadImage = async (base64Image) => {
+    try {
+      // 建立 formData，並將圖片轉換為 blob 上傳
+      const blob = await fetch(base64Image).then((res) => res.blob())
+      const formData = new FormData()
+      formData.append('image', blob)
+
+      // 發送 POST 請求到圖片上傳 API
+      const response = await fetch(
+        'http://localhost:3005/events/api/upload_image',
+        {
+          method: 'POST',
+          body: formData,
+        }
+      )
+
+      if (response.ok) {
+        const data = await response.json()
+        return data.imageUrl // 回傳上傳成功的圖片 URL
+      } else {
+        console.error('圖片上傳失敗')
+        alert('圖片上傳失敗，請再試一次！')
+        return null
+      }
+    } catch (error) {
+      console.error('圖片上傳錯誤:', error)
+      return null
+    }
+  }
+
+  const handleSaveEvent = async () => {
+    setIsLoading(true)
+
+    // 確保所有必要資料欄位都已經存在
+    const requiredFields = [
+      'user_id',
+      'organizerNick',
+      'imageUrl',
+      'eventDescription',
+      'eventTitle',
+      'eStartDate',
+      'eEndDate',
+      'camp_id',
+      'campAdd',
+      'orderQuantity',
+      'eventPeople',
+      'orderAmount',
+      'eOtherFees',
+      'costPerPerson',
+      'eventNotes',
+    ]
+
+    // 確認所有必要欄位都有值
+    const missingFields = requiredFields.filter(
+      (field) => !eventData[field] || eventData[field] === ''
+    )
+
+    if (missingFields.length > 0) {
+      alert(`以下欄位缺少資料：${missingFields.join(', ')}`)
+      setIsLoading(false)
+      return
+    }
+
+    // 如果圖片 URL 是 Base64 編碼，則先進行圖片上傳
+    let imageUrl = eventData.imageUrl
+    if (imageUrl && imageUrl.startsWith('data:image/')) {
+      imageUrl = await uploadImage(imageUrl)
+      if (!imageUrl) {
+        setIsLoading(false)
+        return // 如果圖片上傳失敗，終止執行
+      }
+    }
+
+    try {
+      // 提取 selectedBookType 的 id，而不是整個物件
+      const selectedBookTypeId = eventData.selectedBookType?.id || null
+
+      const eventDataToSend = {
+        ...eventData,
+        event_pic: imageUrl, // 使用上傳後的圖片 URL 來填充 event_pic 欄位
+        selectedBookType: selectedBookTypeId, // 傳遞 selectedBookType 的 id，而不是整個物件
+      }
+
+      console.log('送出活動資料:', eventDataToSend)
+
+      const response = await fetch(
+        'http://localhost:3005/events/api/save_event',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(eventDataToSend),
+        }
+      )
+
+      if (response.ok) {
+        const savedEvent = await response.json()
+        localStorage.setItem('createdEventData', JSON.stringify(savedEvent))
+        router.push('/events/eventCSuccess') // 成功頁面
+      } else {
+        console.error('活動儲存失敗')
+        alert('活動儲存失敗，請再試一次！')
+      }
+    } catch (error) {
+      console.error('Error saving event:', error)
+      alert('伺服器錯誤，請稍後再試！')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const storedEventData = localStorage.getItem('eventPreviewData');
+    const storedEventData = localStorage.getItem('eventPreviewData')
     if (storedEventData) {
-      setEventData(JSON.parse(storedEventData)); // 使用 setEventData 來設定 Context 中的資料
+      setEventData(JSON.parse(storedEventData)) 
     }
-  }, [setEventData]);
+  }, [setEventData])
 
   if (!eventData) {
-    return <h2>Loading...</h2>;
+    return <h2 style={{ color: '#ff82d2' }}>資料載入中，請稍後</h2>
   }
 
   return (
@@ -98,13 +227,13 @@ export default function EventPreForm() {
         <div className="joinbtn1">
           {/* 返回上一頁與確認送出按鈕 */}
           <Button label="回上一頁" onClick={handleBack} />
-          {/* <Button label="確認送出" onClick={handleSaveEvent} /> */}
+          <Button
+            label={isLoading ? '儲存中...' : '確認送出'}
+            onClick={handleSaveEvent}
+            disabled={isLoading}
+          />
         </div>
       </div>
-
-      {/* <div className="memfea">
-        <CampingFeatures />
-      </div> */}
     </section>
   )
 }

@@ -6,15 +6,16 @@ import ProgressBar from './ProgressBar'
 
 export default function CartDetail({ setStep }) {
   // 儲存購物車資料
-  const [BookCartItems, setBookCartItems] = useState([]);
+  const [BookCartItems, setBookCartItems] = useState([])
   const [activeIndex, setActiveIndex] = useState(null) // 手風琴控制
   const [selectedOption, setSelectedOption] = useState('creditCard') // 預設付款方式
   const [discountAmount] = useState(0.7) // 折扣比例
 
   // 計算最終金額
-  const finalTotal = BookCartItems
-    .reduce((BookTotal, item) => BookTotal + item.price * item.quantity, 0)
-    .toFixed(2)
+  const finalTotal = BookCartItems.reduce(
+    (BookTotal, item) => BookTotal + item.price * item.quantity,
+    0
+  ).toFixed(2)
   const discountedTotal = Math.floor(finalTotal * discountAmount)
 
   // 導向ECPay
@@ -46,8 +47,8 @@ export default function CartDetail({ setStep }) {
           {/* 迭代 cartItems 資料並顯示所有商品 */}
           {BookCartItems.length > 0 ? (
             BookCartItems.map((item) => (
-              <div key={item.id} className={styles.formSection}>
-                <h4>預訂資訊</h4>
+              <div key={item.id}>
+                <h4 className={styles.formSectionTitle}>訂購人資訊</h4>
                 <div className={styles.bookingInfo}>
                   <img
                     src={item.photos || 'https://via.placeholder.com/150'}
@@ -82,11 +83,10 @@ export default function CartDetail({ setStep }) {
       {/* 顯示步驟進度條 */}
       <ProgressBar />
 
-      <div className={styles.BCartContainer}>
+      <div className={styles.BCartContainer3}>
         {/* 左側表單與付款方式 */}
         <div className={styles.bookingForm}>
           <h3>完成付款</h3>
-
           <div className={styles.formSection2}>
             {/* 手風琴區域：顯示已填寫資料 */}
             {accordionData.map((accordion, index) => (
@@ -110,11 +110,10 @@ export default function CartDetail({ setStep }) {
               </div>
             ))}
           </div>
-
-          <div className={styles.formSection}>
-            <h4>付款方式</h4>
+          <div className={styles.formSection3}>
+            <h4 className={styles.formSectionTitle}>付款方式</h4>
             <form>
-              <div>
+              <div className={styles.payWay}>
                 <label>
                   <input
                     type="radio"
@@ -141,10 +140,10 @@ export default function CartDetail({ setStep }) {
             </form>
           </div>
 
-          <h5 className={styles.notice}>
+          <p className={styles.notice}>
             點擊「確認付款」，即表示您已確認訂單無誤且同意右方顯示的總金額，亦同意
             服務條款 和取消政策
-          </h5>
+          </p>
 
           {/* 付款按鈕區塊 */}
           <div className={styles.combinePay}>
