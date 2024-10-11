@@ -21,7 +21,7 @@
   gap: 10px;
   align-items: center;
   padding: 20px;
-  background-color: #FF5833;
+  background-color: #ff5833;
   color: #fff;
 }
 
@@ -112,3 +112,160 @@
   background-color: #f1f1f1;
   color: #007bff;
 }
+
+/* 不要跟上面的混淆 */
+.offcanvasBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; /* 改為水平置中 */
+  gap: 20px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  padding: 20px; /* 設定左右和上下都有內邊距，避免內容過於貼邊 */
+  max-width: 800px; /* 調整最大寬度，與內部內容保持一致 */
+  margin: 0 auto; /* 水平居中顯示 */
+}
+
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%; /* 讓項目寬度與 .offcanvasBody 一致 */
+  max-width: 800px; /* 設定最大寬度，保持寬度平衡 */
+}
+
+.cartItems ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cartItem {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* 調整寬度以保持整體平衡 */
+}
+
+.cartItemDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%; /* 讓詳細信息也占據整個寬度 */
+}
+
+.detailsCtl {
+  display: flex;
+  justify-content: space-between; /* 橫向排列項目，並且留出空間 */
+  align-items: center; /* 垂直置中 */
+  gap: 20px; /* 增加間隔 */
+  width: 100%; /* 讓內容佔滿整個寬度 */
+}
+
+.itemRow {
+  display: flex;
+  justify-content: space-between; /* 將 itemName 和 itemPrice 橫向排列並分開 */
+  width: 100%; /* 讓行佔滿整個寬度 */
+}
+.quantityCtl {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.itemName {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.itemQuantity {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.itemPrice {
+  color: #45A049;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: right; /* 讓 itemPrice 右對齊 */
+}
+
+
+.quantityButton {
+  margin: 0 10px;
+  border: none;
+  background-color: #ff5833;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quantityButton:hover {
+  background-color: #ff7043;
+}
+
+.removeButton {
+  margin-left: 10px;
+  color: #ff5833;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  color: #ff7043;
+}
+
+.totalAmount {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ff5833;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  width: 100%; /* 讓總金額寬度與其他內容一致 */
+  text-align: right; /* 總金額右對齊 */
+  max-width: 800px; /* 調整總金額的寬度，使其與其他內容保持一致 */
+}
+
+.checkoutButtonContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end; /* 將按鈕容器靠右對齊 */
+  width: 100%; /* 讓按鈕容器寬度與外部內容一致 */
+  max-width: 800px; /* 限制最大寬度，與其他內容一致 */
+}
+
+.checkoutButton {
+  width: 100%;
+  max-width: 300px;
+  color: white;
+  background-color: #ff5833;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkoutButton:hover {
+  background-color: #ff7043;
+}
+
+
+
+
