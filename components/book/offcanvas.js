@@ -77,7 +77,7 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
           >
             &times;
           </button>
-          <h5 className={styles.offcanvasTitle}>購物車</h5>
+          <h5 className={styles.offcanvasTitle}>預約詳情</h5>
         </div>
 
         {/* Offcanvas 主體內容 */}
@@ -90,29 +90,33 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
                 {bookCart.map((item) => (
                   <li key={item.id} className={styles.cartItem}>
                     <div className={styles.cartItemDetails}>
-                      <span className={styles.itemName}>{item.name}</span>
-                      <span className={styles.itemPrice}>${item.price}</span>
-                      <button
-                        className={styles.quantityButton}
-                        onClick={() => handleIncreaseQuantity(item)}
-                      >
-                        +
-                      </button>
-                      <span className={styles.itemQuantity}>
-                        {item.quantity}
-                      </span>
-                      <button
-                        className={styles.quantityButton}
-                        onClick={() => handleDecreaseQuantity(item)}
-                      >
-                        -
-                      </button>
-                      <button
-                        className={styles.removeButton}
-                        onClick={() => handleRemoveFromCart(item)}
-                      >
-                        &times;
-                      </button>
+                      <div className={styles.detailsCtl}>
+                        <span className={styles.itemName}>{item.name}</span>
+                        <span className={styles.itemPrice}>${item.price}</span>
+                      </div>
+                      <div className={styles.quantityCtl}>
+                        <button
+                          className={styles.quantityButton}
+                          onClick={() => handleIncreaseQuantity(item)}
+                        >
+                          +
+                        </button>
+                        <span className={styles.itemQuantity}>
+                          {item.quantity}
+                        </span>
+                        <button
+                          className={styles.quantityButton}
+                          onClick={() => handleDecreaseQuantity(item)}
+                        >
+                          -
+                        </button>
+                        <button
+                          className={styles.removeButton}
+                          onClick={() => handleRemoveFromCart(item)}
+                        >
+                          &times;
+                        </button>
+                      </div>
                     </div>
                     <div className={styles.cartItemActions}></div>
                   </li>
@@ -120,7 +124,9 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
               </ul>
 
               {/* 顯示總金額 */}
-              <h3 className={styles.totalAmount}>總金額: ${BookTotal}</h3>
+              <div className={styles.totalAmount}>
+                <h3 className={styles.totalAmounth3}>總金額: ${BookTotal}</h3>
+              </div>
             </div>
           )}
 

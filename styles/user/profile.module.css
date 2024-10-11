@@ -5,7 +5,7 @@
 .container {
   height: 100%;
   width: 100%;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   /* margin: 20px 3% 20px 3%; */
 }
 
@@ -34,7 +34,7 @@
   align-items: center; /* 垂直置中 */
   overflow: hidden; /* 隱藏超出的部分 */
   border-radius: 50%; /* 圓形容器 */
-  background-color: red;
+  background-color: transparent;
 }
 
 .avatarWrapper img {
