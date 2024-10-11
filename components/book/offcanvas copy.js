@@ -97,18 +97,18 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
                       <div className={styles.quantityCtl}>
                         <button
                           className={styles.quantityButton}
-                          onClick={() => handleDecreaseQuantity(item)}
+                          onClick={() => handleIncreaseQuantity(item)}
                         >
-                          -
+                          +
                         </button>
                         <span className={styles.itemQuantity}>
                           {item.quantity}
                         </span>
                         <button
                           className={styles.quantityButton}
-                          onClick={() => handleIncreaseQuantity(item)}
+                          onClick={() => handleDecreaseQuantity(item)}
                         >
-                          +
+                          -
                         </button>
                         <button
                           className={styles.removeButton}

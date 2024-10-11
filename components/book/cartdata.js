@@ -79,8 +79,8 @@ export default function CartData({ setStep }) {
                   <div className={styles.bookingDetails}>
                     <h5>{item.name}</h5> {/* 顯示商品名稱 */}
                     <p>單價: ${item.price}</p> {/* 顯示單價 */}
-                    <p>大人: {item.adult} 人</p> {/* 顯示單價 */}
-                    <p>小孩: {item.children} 人</p> {/* 顯示單價 */}
+                    <p>大人: {item.adult} 人</p> 
+                    <p>小孩: {item.children} 人</p> 
                     {/* <p>小計: ${item.price * item.quantity}</p> */}
                   </div>
                   <hr />
