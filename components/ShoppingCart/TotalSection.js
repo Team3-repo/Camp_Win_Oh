@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useCart } from '@/context/CartContext';  // 修改1：引入 useCart
 
 
-function TotalSection() {
-  const { totalAmount } = useCart();  // 修改2：使用 useCart 從 context 中取得 totalAmount  
+function TotalSection({ totalAmount }) { // 接收 totalAmount 作為屬性
+
   return (
     <section className="totalSection">
       <Link href="/cart/2ProductDetails">
@@ -29,6 +29,7 @@ function TotalSection() {
           margin-top: 47px;
           width: 100%;
           max-width: 1440px;
+          margin-bottom:50px;
         }
         .continueShoppingButton {
           border-radius: 11px;

@@ -17,13 +17,8 @@ const ProductGrid = () => {
         // 只取前25筆資料
         const limitedData = data.slice(0, 25);
 
-        // 更新產品數據並設置圖片路徑
-        const updatedProducts = limitedData.map((product, index) => ({
-          ...product,
-          product_pic: `/uploads/img${index + 1}.png`, // 路徑前加上 /uploads/
-        }));
-
-        setProducts(updatedProducts);
+        // 不再需要設置圖片路徑，假設後端已經包含 product_pic
+        setProducts(limitedData);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -50,9 +45,10 @@ const ProductGrid = () => {
       {/* 顯示當前頁面的產品 */}
       {currentProducts.map((product) => (
         <ProductCard
-          key={product.product_id} // 使用 product_id 作為鍵
-          image={product.product_pic} // 確保這是正確的圖片路徑
-          badge={product.product_type} // 可以改成適合的內容
+          key={product.product_id}
+          product_id={product.product_id} // 傳遞 product_id
+          image={`/uploads/${product.product_pic}`}
+          badge={product.product_type}
           price={product.product_price}
           title={product.product_name}
           description={product.product_desc}

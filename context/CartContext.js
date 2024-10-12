@@ -1,36 +1,32 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const CartContext = createContext();
+export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // 新增商品至購物車
-  const addToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
-  };
+  useEffect(() => {
+    const storedItems = localStorage.getItem('cartItems');
+    if (storedItems) {
+        setCartItems(JSON.parse(storedItems)); // 從 localStorage 獲取數據
+    }
+}, []);
 
-  // 更新購物車中的商品
-  const updateCartItem = (item) => {
-    setCartItems((prevItems) =>
-      prevItems.map((i) => (i.id === item.id ? item : i))
-    );
-  };
+  
 
-  // 計算購物車總金額
-  const totalAmount = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  // 添加 clearCart 函數
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem('cartItems'); // 清理 localStorage
+};
 
   return (
-    <CartContext.Provider
-      value={{ cartItems, setCartItems, addToCart, updateCartItem, totalAmount }}
-    >
+    <CartContext.Provider value={{ cartItems, setCartItems, clearCart }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-// 自定義 hook 來使用 CartContext
-export const useCart = () => useContext(CartContext);
+export const useCart = () => {
+  return useContext(CartContext);
+};

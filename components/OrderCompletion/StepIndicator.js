@@ -132,11 +132,11 @@ const StepIndicator = () => {
           margin: auto 0;
         }
         .step-label {
-          color: var(--secondary-light2, #b4a59f);
+          {/* color: var(--secondary-light2, #b4a59f); */}
           align-self: end;
           z-index: 10;
           margin-top: -22px;
-          font: 500 15px Zen Maru Gothic, -apple-system, Roboto, Helvetica,
+          font: 500 15px PoetsenOne, -apple-system, Roboto, Helvetica,
             sans-serif;
         }
         .step-labels {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ShoppingCartContent from "@/components/ShoppingCart/ShoppingCartContent";
 import Footer from '@/components/event/footer2';
 import Navbar from '@/components/event/navbar';
@@ -7,11 +7,18 @@ import { useCart } from '../../context/CartContext'; // 更新路徑
 function ShoppingCartPage() {
   const { cartItems, setCartItems } = useCart(); // 獲取 cartItems 和 setCartItems
 
+  useEffect(() => {
+    const storedItems = localStorage.getItem('cartItems');
+    if (storedItems) {
+      setCartItems(JSON.parse(storedItems)); // 更新狀態
+    }
+  }, [setCartItems]);
+
   return (
     <>
       <Navbar />
       <div className="shoppingCartBody">
-        <ShoppingCartContent cartItems={cartItems} setCartItems={setCartItems} />
+        <ShoppingCartContent />
         <style jsx>{`
           .shoppingCartBody {
             background-color: #cfe9c6;

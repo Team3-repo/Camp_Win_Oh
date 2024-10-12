@@ -5,7 +5,7 @@ import ProductFilter2 from '@/components/CampingStore/ProductFilter2'
 import ProductCategories from '@/components/CampingStore/ProductCategories'
 import ProductGrid from '@/components/CampingStore/ProductGrid'
 // import Pagi from '@/components/CampingStore/pagi'
-import Footer from '@/components/event/footer2'
+import Footer1 from '@/components/event/footer1'
 import Navbar from '@/components/event/navbar'
 // import Pagination from '@/components/CampingStore/Pagination'
 // import Footer2 from '@/components/Footer2'
@@ -160,7 +160,7 @@ export default function CampingStore() {
         {/* <Pagi totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} /> */}
         {/* <Pagination /> */}
         </div>
-        <Footer />
+        <Footer1 />
         {/* <Footer2 /> */}
       
       <style jsx>{`
@@ -175,7 +175,7 @@ export default function CampingStore() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-bottom: 60px;
+          margin-bottom: 10px;
         }
       `}</style>
     </div>

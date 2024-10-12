@@ -34,6 +34,7 @@ const ProductCategories = () => {
           justify-content: center;
           gap: 20px;
           margin: 21px 0;
+          margin-top:100px;
         }
 
         .category-link {

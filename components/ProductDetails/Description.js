@@ -1,9 +1,6 @@
-/**
- **
- */
 import React from "react";
 
-function Description() {
+function Description({ product }) { // 接收 product 作為屬性
   return (
     <section className="product-description">
       <h2 className="description-title">
@@ -16,7 +13,7 @@ function Description() {
         描述
       </h2>
       <p className="description-text">
-        高品質防水帳篷，適合全家出遊，提供寬敞舒適的居住空間。
+        {product.product_desc} {/* 使用 product 的描述資料 */}
       </p>
       <style jsx>{`
         .product-description {
