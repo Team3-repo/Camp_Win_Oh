@@ -9,10 +9,10 @@ export default function EventPreForm() {
   const router = useRouter()
 
   const handleBack = () => {
-    window.history.back() // 回上頁不重載
+    window.history.back() 
   }
 
-  // 確保 eventData 中包含 user_id，否則從 localStorage 補上
+  // 確保 eventData 有 user_id
   const ensureUserIdInEventData = () => {
     const storedUserData = localStorage.getItem('user')
     if (storedUserData) {
@@ -79,7 +79,6 @@ export default function EventPreForm() {
     ]
 
     // 確認所有必要欄位都有值
-    // 特別處理 eOtherFees 的檢查，允許它為 0
     const missingFields = requiredFields.filter(
       (field) =>
         (eventData[field] === undefined || eventData[field] === '') &&
@@ -92,9 +91,9 @@ export default function EventPreForm() {
       return
     }
 
-    // 確認 eOtherFees 為 0 的情況
+    // 確認eOtherFees為0
     if (eventData.eOtherFees === undefined || eventData.eOtherFees === null) {
-      handleChange('eOtherFees', 0) // 如果 eOtherFees 為未定義或空值，則將其設為 0
+      handleChange('eOtherFees', 0) // 如eOtherFees為undefined或"">設為 0
     }
 
     // 如果圖片URL是Base64，則先進行圖片上傳

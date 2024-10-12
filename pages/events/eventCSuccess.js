@@ -26,7 +26,7 @@ export default function EventCSuccess() {
       <section className="ecsevent-list">
         <div className="ecsevent-card">
           <h2>活動資訊一覽</h2>
-          <img src={createdEvent.imageUrl || 'https://via.placeholder.com/400x200'} alt="Event" />
+          {/* <img src={createdEvent.imageUrl || 'https://via.placeholder.com/400x200'} alt="Event" /> */}
           <div className="ecsevent-details">
             <p>
               <strong>主辦人:</strong> {createdEvent.organizerNick}

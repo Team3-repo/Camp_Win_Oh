@@ -8,12 +8,14 @@ import Card from '@/components/event/card';
 import Pagi from '@/components/event/pagi';
 import SearchSection from '@/components/event/SearchSection';
 import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/router';  // 引入 useRouter
 
 export default function EventList() {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(0); // 現在頁數
   const pageSize = 8; // 每頁顯示8筆
+  const router = useRouter();  // 使用 useRouter 來進行跳轉
 
   // 用來追蹤登入狀態
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,7 +41,7 @@ export default function EventList() {
       }, 3000);
     } else {
       // 用戶已登入時，跳轉到創建活動頁面
-      window.location.href = '/events/eventCreate';
+      router.push('/events/eventCreate');  // 使用 router.push 來跳轉
     }
   };
 
@@ -75,7 +77,7 @@ export default function EventList() {
 
   // 點擊卡片跳轉至活動詳情頁面，並傳遞 event_id 作為 URL 參數
   const handleCardClick = (eventId) => {
-    window.location.href = `/events/eventDetail/${eventId}`;
+    router.push(`/events/${eventId}`);  // 使用 router.push 進行跳轉
   };
 
   return (
@@ -114,7 +116,7 @@ export default function EventList() {
                 content3={`結束日期：${new Date(event.end_date).toLocaleDateString()}`}
                 imageUrl={event.event_pic}
                 label="查看詳情"
-                onClick={() => handleCardClick(event.event_id)} // 點擊卡片跳轉至詳情頁面
+                onClick={() => handleCardClick(event.event_id)}// 點擊卡片跳轉至詳情頁面
               />
             ))
           ) : (
