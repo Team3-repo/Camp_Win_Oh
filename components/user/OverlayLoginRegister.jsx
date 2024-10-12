@@ -67,6 +67,7 @@ const OverlayLoginRegister = ({ onClose }) => {
               storedUser.birthday
             }, \n性別: ${storedUser.gender}`
           )
+          onClose()
         } else {
           setError('Email 或密碼不正確')
         }
