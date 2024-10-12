@@ -15,9 +15,9 @@ export default async function handler(req, res) {
         res.status(404).json({ message: 'Product not found' }); // 未找到書籍
       }
     } else {
-      // 如果未提供 product_id，查詢所有書籍
-      const [rows] = await db.query('SELECT * FROM books');
-      res.status(200).json(rows); // 回傳所有書籍資料
+      // 如果未提供 product_id，查詢所有書籍並限制抓取前 25 筆資料
+      const [rows] = await db.query('SELECT * FROM books LIMIT 25');
+      res.status(200).json(rows); // 回傳前 25 筆書籍資料
     }
   } catch (error) {
     console.error(error);
