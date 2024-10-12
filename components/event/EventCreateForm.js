@@ -3,7 +3,7 @@ import flatpickr from 'flatpickr'
 import 'flatpickr/dist/flatpickr.css'
 import Button from '@/components/book/button'
 import { EventContext } from '@/context/event/EventContext'
-import Compressor from 'compressorjs' // 引入 compressorjs
+import Compressor from 'compressorjs'
 
 export default function EventCreateForm() {
   const { eventData, setEventData } = useContext(EventContext)
@@ -63,7 +63,7 @@ export default function EventCreateForm() {
     }
   }, [setEventData, campsites])
 
-  // 自動填入資料的處理函數
+  // 自動填入資料
   const handleAutoFill = () => {
     const demoData = {
       eventDescription:
@@ -153,7 +153,7 @@ export default function EventCreateForm() {
     })
   }, [])
 
-  // 將 UTC 時間轉換為台灣時間 (UTC+8)
+  // 轉換為台灣時間
   const formatToTaiwanDate = (date) => {
     const offset = -480
     const localDate = new Date(date.getTime() - offset * 60000)
@@ -216,7 +216,7 @@ export default function EventCreateForm() {
   }
 
   const handleOtherFeesChange = (e) => {
-    let value = parseInt(e.target.value) || 0
+    const value = e.target.value === '' ? 0 : parseInt(e.target.value)
     handleChange('eOtherFees', value)
   }
 
