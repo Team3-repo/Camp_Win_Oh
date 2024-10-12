@@ -46,7 +46,6 @@ CREATE TABLE `campsites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `campsites` (`id`, `sn`, `name`, `img`, `title`, `info`, `position`, `address`, `open_time`, `created_at`, `updated_at`) VALUES
-INSERT INTO `campsites` (`id`, `sn`, `name`, `img`, `title`, `info`, `position`, `address`, `open_time`, `created_at`, `updated_at`) VALUES
 (1, 'CampA01',  '山林樂活露營區', 'https://blogger.googleusercontent.com/img/a/AVvXsEiV_j5n4dleE--X4wszIfrGu4pmdvMOqQaj2ccD66KX7woBdB2kwqjFu_lXypdvc8OAIdtWnw5zv5VTaNqAU3iYOSenlV6QFWiFAXUy5491uNxiXkx1Xo7Q5lz9eev4WvZeyL-KJNC-u_laYfJVRK6UDhQaaHb51qtH9Ks51FBQeeY4pHpO97A2nCYjrYVC', '感受山林的靜謐與悠然，盡在山林樂活', '山林樂活露營區位於壯麗的太魯閣山脈之中，是一處讓人遠離塵囂、享受大自然的理想場所。這裡擁有優美的自然景觀和豐富的生態環境，適合各類露營愛好者。不論是喜愛探險的背包客，還是喜歡舒適享受的家庭旅行者，都能在這裡找到最適合的露營方式。', '東部', '台灣花蓮縣秀林鄉太魯閣村200號', '上午 9:00', '2024-09-02 10:44:22', '2024-09-02 10:44:22'),
 (2, 'CampA02',  '森林之星露營地', 'https://blogger.googleusercontent.com/img/a/AVvXsEiRyE498AlTlH91EYdcJjazwpPuwikz6wZsAI1zO3au57G79fwi1jzFfjRJqYgq86Xe1OJIRAvFMbv7IvNxVzJMISePQIcf-mUCUa1FDmHkVLzcj6iDyNInBxHapIhI9_np2ZTws0i3FrgaRUDunVhip0wjH3-nUO2ywJsZECDyuWGeP02ACJ3FRYpNhXLh', '仰望星空，擁抱自然，讓心靈在綠意中閃耀', '森林之星露營地位於台灣中央山脈的腹地，擁有壯麗的山景和清新的空氣。營地提供多樣化的露營選項，從基本的帳篷區到配備齊全的小木屋，適合各種露營者。無論是親子旅遊、團體活動還是單獨冒險，這裡都是理想的選擇。', '中部', '台灣南投縣仁愛鄉翠峰村101號', '上午 9:20', '2024-09-02 10:44:22', '2024-09-02 10:44:22'),
 (3, 'CampA03', '海洋之心露營區', 'https://blogger.googleusercontent.com/img/a/AVvXsEj8YVFb5gbNE2xlKiI5RYKQ2MRmT2Y7MUXrKG344Ev5XvmeJ0i7QSMJHZkEa_e28yIRzV7V28H2oZ7YP4vNnsuCvqvT9u02Ac96P6Yw-ErllGcuc4G_OGtqTBPw6_BbNFBiIFDEocHTYUP5KMoJ1DVLMPAZEgEhJ8dxNkja8_quLRxZgpqrOl_uSDEc5m9U', '在海浪聲中安靜入夢，感受海洋的魅力', '海洋之心露營區坐落於壯觀的太平洋海岸，擁有無敵海景與柔軟沙灘。這裡提供舒適的營位選擇，讓露營者可以在星空下享受海風，並沉浸於自然之中。無論是想要享受陽光的家庭，還是尋找靜謐的獨行客，這裡都是最佳的露營目的地。', '東部', '台灣台東縣成功鎮海邊路50號', '上午 8:30', '2024-09-29 10:44:22', '2024-09-29 10:44:22'),
@@ -190,54 +189,54 @@ INSERT INTO `booking_type` (`id`, `sn`, `name`, `campsites_id`, `cat_id`, `photo
 (7, 'RTC01C04', '標準型營位｜露營車', 1, 5, 'https://blogger.googleusercontent.com/img/a/AVvXsEgChQkqqivrt4UXzBtbNTWFwFypB3xs_terjGSyxft4-AwF4paQ3WoTIF-FSPI9KHGReRf76jPAsZY2i4rqZWm62-uTQDpLEN7bls4YzqlnveAbCUU4LPu2KUlXiwGz31drUyFmwqxRtyp2UScg3IjCDLAeFIJiOpe2D4K6JA25wvLfZyhHj1TTixTMfjLy', '15', 4000, '提供基本的舒適設施，適合第一次體驗露營車的旅客。這款露營車位於風景優美的地點，讓您在大自然中享受簡單而便利的戶外生活', '1張雙人床 + 1張雙層床', 4, '附晚餐', '2024-09-02 10:44:22', '2024-09-02 10:44:22'),
 (8, 'RTC01C05', '家庭型營位｜露營車', 1, 4, 'https://blogger.googleusercontent.com/img/a/AVvXsEjWdoUoqh5_O-WhL9qtBrLBzGhgSJ0eoWQXAlwXpIl71YIf0sAcyu70391L5AZce86MZEYXCJ0sjhdU120zAuyujTiyhBLMTdSPXOhYqZjvyLR30ViiJORhpFmxgOzWuLMldKmxeBTuxd7Mbr0fH1FU4OHDE5H-QS4Sjz97EvXb7ODWXFvfneNkW_AUTq0h', '12', 6800, '專為多人設計為多人口家庭或團體提供更多空間和設施。這款露營車擁有額外的臥室和更大的起居區域，讓全家人都能在舒適中享受露營的樂趣', '1張大號雙人床 + 2張沙發床 + 1張上下鋪床', 6, '附全餐', '2024-09-02 10:44:22', '2024-09-02 10:44:22'),
 (9, 'RTC01C06', '豪華型營位｜露營車', 1, 6, 'https://blogger.googleusercontent.com/img/a/AVvXsEgrIfGob4_0Y8yIfj_XdUhKs-VWBkuoeFRlUmJZZnGwFIq30zWD0NOOerhjV4k60-rF-bBFuRvR83pORw77fm8DZVkovNeDqiI3pktYKgCWHF8wZbP_tui50WxjteNBxRMJbGNBB0sWL4dHqdsWVzCDCYnjftJ9FRlenV0ge9lJO7VLqri9WgtiyDmwTWsf', '8', 5500, '配備高級設施，適合希望在露營中享受現代舒適生活的旅客。寬敞的內部設計和更高檔的設備，為您提供更愜意的露營體驗', '1張大號雙人床 + 1張沙發床 + 1張上下鋪床', 6, '附全餐', '2024-09-02 10:44:22', '2024-09-02 10:44:22'),
-(10, 'RTC02C04', '家庭型營位｜露營車', 2, 4, 'family_rv1.jpg,family_rv2.jpg', 10, 3000, '適合家庭的露營車，提供舒適的住宿體驗', '1張雙人床 + 1張單人床', 4, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(11, 'RTC02C05', '標準型營位｜露營車', 2, 5, 'standard_rv1.jpg,standard_rv2.jpg', 8, 4000, '標準型露營車提供舒適設施，適合中小家庭', '1張雙人床 + 1張沙發床', 4, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(12, 'RTC02C06', '豪華型營位｜露營車', 2, 6, 'luxury_rv1.jpg,luxury_rv2.jpg', 5, 5000, '豪華型露營車適合高端家庭或小團體', '1張大號雙人床 + 1張單人床', 4, '附全餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(13, 'RTC02T04', '家庭型營位｜小木屋', 2, 7, 'family_cabin1.jpg,family_cabin2.jpg', 6, 3500, '適合家庭的舒適小木屋，讓您享受大自然的同時有家的感覺', '1張雙人床 + 1張單人床', 3, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(14, 'RTC02T05', '標準型營位｜小木屋', 2, 8, 'standard_cabin1.jpg,standard_cabin2.jpg', 4, 4500, '標準型小木屋提供現代化設施，適合家庭或小型團體', '1張雙人床', 3, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(15, 'RTC02T06', '豪華型營位｜小木屋', 2, 9, 'luxury_cabin1.jpg,luxury_cabin2.jpg', 3, 6000, '豪華型小木屋提供高端設施和獨立空間', '1張大號雙人床 + 1張沙發床', 4, '附全餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(16, 'RTC02B04', '家庭型營位｜帳篷', 2, 10, 'family_tent1.jpg,family_tent2.jpg', 12, 2500, '適合家庭的帳篷，提供露營的樂趣與舒適的環境', '1張雙人床', 4, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(17, 'RTC02B05', '標準型營位｜帳篷', 2, 11, 'standard_tent1.jpg,standard_tent2.jpg', 10, 3500, '標準型帳篷提供較佳的住宿體驗，適合小家庭', '1張雙人床', 3, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(18, 'RTC02B06', '豪華型營位｜帳篷', 2, 12, 'luxury_tent1.jpg,luxury_tent2.jpg', 8, 4500, '豪華型帳篷提供極致舒適的戶外體驗', '1張大號雙人床', 2, '附全餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
-(19, 'RTC03C01', '家庭型營位｜露營車', 3, 4, 'family_rv3001.jpg,family_rv3002.jpg', 10, 10200, '為家庭旅遊設計的舒適露營車', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(20, 'RTC03C02', '標準型營位｜露營車', 3, 5, 'standard_rv3001.jpg,standard_rv3002.jpg', 8, 10800, '標準露營車，提供實用的居住空間', '1張雙人床 + 1張沙發床', 4, '附早餐和晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(21, 'RTC03C03', '豪華型營位｜露營車', 3, 6, 'luxury_rv3001.jpg,luxury_rv3002.jpg', 6, 15000, '豪華露營車，享受高端的露營體驗', '1張大號雙人床', 3, '附全餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(22, 'RTC03T01', '家庭型營位｜小木屋', 3, 7, 'family_cabin3001.jpg,family_cabin3002.jpg', 12, 9100, '適合全家的溫馨小木屋', '1張雙人床 + 2張單人床', 5, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(23, 'RTC03T02', '標準型營位｜小木屋', 3, 8, 'standard_cabin3001.jpg,standard_cabin3002.jpg', 10, 9600, '舒適小木屋，為您的假期提供完美的住宿', '1張雙人床 + 1張單人床', 4, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(24, 'RTC03T03', '豪華型營位｜小木屋', 3, 9, 'luxury_cabin3001.jpg,luxury_cabin3002.jpg', 8, 16500, '奢華小木屋，帶來獨特的住宿體驗', '1張大號雙人床', 3, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(25, 'RTC03B01', '家庭型營位｜帳篷', 3, 10, 'family_tent3001.jpg,family_tent3002.jpg', 10, 8500, '適合家庭使用的寬敞帳篷', '1張雙人床 + 2張單人床', 5, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(26, 'RTC03B02', '標準型營位｜帳篷', 3, 11, 'standard_tent3001.jpg,standard_tent3002.jpg', 9, 8800, '舒適標準帳篷，完美的戶外選擇', '1張雙人床', 3, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(27, 'RTC03B03', '豪華型營位｜帳篷', 3, 12, 'luxury_tent3001.jpg,luxury_tent3002.jpg', 8, 13000, '奢華帳篷，讓您享受戶外的同時擁有高端服務', '1張大號雙人床', 2, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(28, 'RTC04C01', '家庭型營位｜露營車', 4, 4, 'family_rv4001.jpg,family_rv4002.jpg', 9, 15000, '適合家庭的露營車，擁有寬敞的內部空間', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(29, 'RTC04C02', '標準型營位｜露營車', 4, 5, 'standard_rv4001.jpg,standard_rv4002.jpg', 8, 14000, '適合小家庭或情侶的標準露營車', '1張雙人床', 4, '附早餐和晚餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(30, 'RTC04C03', '豪華型營位｜露營車', 4, 6, 'luxury_rv4001.jpg,luxury_rv4002.jpg', 6, 23000, '豪華露營車，提供高端設施與私人空間', '1張大號雙人床', 3, '附全餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(31, 'RTC04T01', '家庭型營位｜小木屋', 4, 7, 'family_cabin4001.jpg,family_cabin4002.jpg', 10, 13000, '溫馨家庭小木屋，適合家人或團體入住', '1張雙人床 + 1張單人床', 5, '附早餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(32, 'RTC04T02', '標準型營位｜小木屋', 4, 8, 'standard_cabin4001.jpg,standard_cabin4002.jpg', 9, 12500, '適合小型家庭或朋友的標準小木屋', '1張雙人床', 4, '附早餐和燒烤晚餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(33, 'RTC04T03', '豪華型營位｜小木屋', 4, 9, 'luxury_cabin4001.jpg,luxury_cabin4002.jpg', 7, 24000, '豪華小木屋，提供頂級設施與景觀', '1張大號雙人床', 3, '附全餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(34, 'RTC04B01', '家庭型營位｜帳篷', 4, 10, 'family_tent4001.jpg,family_tent4002.jpg', 12, 12000, '適合家庭的舒適帳篷', '1張雙人床 + 2張單人床', 5, '附早餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(35, 'RTC04B02', '標準型營位｜帳篷', 4, 11, 'standard_tent4001.jpg,standard_tent4002.jpg', 10, 11000, '適合情侶或小家庭的標準帳篷', '1張雙人床', 3, '附早餐和燒烤晚餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(36, 'RTC04B03', '豪華型營位｜帳篷', 4, 12, 'luxury_tent4001.jpg,luxury_tent4002.jpg', 8, 17000, '豪華帳篷，提供高端露營體驗', '1張大號雙人床', 2, '附全餐和私人服務', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
-(37, 'RTC05C01', '家庭型營位｜露營車', 5, 4, 'family_rv5001.jpg,family_rv5002.jpg', 10, 10500, '舒適的家庭型露營車，適合家庭旅遊', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(38, 'RTC05C02', '標準型營位｜露營車', 5, 5, 'standard_rv5001.jpg,standard_rv5002.jpg', 8, 11000, '實用的標準型露營車，為您提供舒適的住宿', '1張雙人床 + 1張沙發床', 4, '附早餐和晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(39, 'RTC05C03', '豪華型營位｜露營車', 5, 6, 'luxury_rv5001.jpg,luxury_rv5002.jpg', 6, 15500, '高端豪華露營車，享受奢華的露營體驗', '1張大號雙人床', 3, '附全餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(40, 'RTC05T01', '家庭型營位｜小木屋', 5, 7, 'family_cabin5001.jpg,family_cabin5002.jpg', 12, 9500, '為家庭設計的溫馨小木屋', '1張雙人床 + 2張單人床', 5, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(41, 'RTC05T02', '標準型營位｜小木屋', 5, 8, 'standard_cabin5001.jpg,standard_cabin5002.jpg', 10, 9800, '標準小木屋，為您提供舒適的假期', '1張雙人床 + 1張單人床', 4, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(42, 'RTC05T03', '豪華型營位｜小木屋', 5, 9, 'luxury_cabin5001.jpg,luxury_cabin5002.jpg', 8, 17000, '奢華的小木屋，讓您擁有獨特的住宿體驗', '1張大號雙人床', 3, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(43, 'RTC05B01', '家庭型營位｜帳篷', 5, 10, 'family_tent5001.jpg,family_tent5002.jpg', 10, 8800, '適合全家的寬敞帳篷', '1張雙人床 + 2張單人床', 5, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(44, 'RTC05B02', '標準型營位｜帳篷', 5, 11, 'standard_tent5001.jpg,standard_tent5002.jpg', 9, 9100, '舒適標準帳篷，適合戶外活動', '1張雙人床', 3, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(45, 'RTC05B03', '豪華型營位｜帳篷', 5, 12, 'luxury_tent5001.jpg,luxury_tent5002.jpg', 8, 13500, '奢華帳篷，提供獨特的戶外住宿體驗', '1張大號雙人床', 2, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(46, 'RTC06C01', '家庭型營位｜露營車', 6, 4, 'family_rv6001.jpg,family_rv6002.jpg', 10, 11200, '舒適的家庭型露營車，適合家庭旅遊', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(47, 'RTC06C02', '標準型營位｜露營車', 6, 5, 'standard_rv6001.jpg,standard_rv6002.jpg', 8, 11500, '實用的標準型露營車，為您提供舒適的住宿', '1張雙人床 + 1張沙發床', 4, '附早餐和晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(48, 'RTC06C03', '豪華型營位｜露營車', 6, 6, 'luxury_rv6001.jpg,luxury_rv6002.jpg', 6, 16000, '高端豪華露營車，享受奢華的露營體驗', '1張大號雙人床', 3, '附全餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(10, 'RTC02C04', '家庭型營位｜露營車', 2, 4, 'https://blogger.googleusercontent.com/img/a/AVvXsEgChQkqqivrt4UXzBtbNTWFwFypB3xs_terjGSyxft4-AwF4paQ3WoTIF-FSPI9KHGReRf76jPAsZY2i4rqZWm62-uTQDpLEN7bls4YzqlnveAbCUU4LPu2KUlXiwGz31drUyFmwqxRtyp2UScg3IjCDLAeFIJiOpe2D4K6JA25wvLfZyhHj1TTixTMfjLy', 10, 3000, '適合家庭的露營車，提供舒適的住宿體驗', '1張雙人床 + 1張單人床', 4, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(11, 'RTC02C05', '標準型營位｜露營車', 2, 5, 'https://blogger.googleusercontent.com/img/a/AVvXsEjWdoUoqh5_O-WhL9qtBrLBzGhgSJ0eoWQXAlwXpIl71YIf0sAcyu70391L5AZce86MZEYXCJ0sjhdU120zAuyujTiyhBLMTdSPXOhYqZjvyLR30ViiJORhpFmxgOzWuLMldKmxeBTuxd7Mbr0fH1FU4OHDE5H-QS4Sjz97EvXb7ODWXFvfneNkW_AUTq0h', 8, 4000, '標準型露營車提供舒適設施，適合中小家庭', '1張雙人床 + 1張沙發床', 4, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(12, 'RTC02C06', '豪華型營位｜露營車', 2, 6, 'https://blogger.googleusercontent.com/img/a/AVvXsEgrIfGob4_0Y8yIfj_XdUhKs-VWBkuoeFRlUmJZZnGwFIq30zWD0NOOerhjV4k60-rF-bBFuRvR83pORw77fm8DZVkovNeDqiI3pktYKgCWHF8wZbP_tui50WxjteNBxRMJbGNBB0sWL4dHqdsWVzCDCYnjftJ9FRlenV0ge9lJO7VLqri9WgtiyDmwTWsf', 5, 5000, '豪華型露營車適合高端家庭或小團體', '1張大號雙人床 + 1張單人床', 4, '附全餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(13, 'RTC02T04', '家庭型營位｜小木屋', 2, 7, 'https://blogger.googleusercontent.com/img/a/AVvXsEgSkc1QToAAaS8UD5Spd68MtkNMQG9tXh1EB5PrjKavBYkjC-Gfb3WtuQuz1OevCZkDZ_gfoe_vRCKeIDAeMWomaxMltxGmuWYH08T2I31yG3_EVr67vYl4ojGReNQ1Im3V98LqygMIt6hAKd_H9xksSN4rKPXZn-79Y7m20_mko42sRecfg9P8fMit6k2y', 6, 3500, '適合家庭的舒適小木屋，讓您享受大自然的同時有家的感覺', '1張雙人床 + 1張單人床', 3, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(14, 'RTC02T05', '標準型營位｜小木屋', 2, 8, 'https://blogger.googleusercontent.com/img/a/AVvXsEig-DWGoXP6LfQGBUQZLW9b8hNDSvO2NWz5ZiYz_lvRm4ykyoPdICkcT8en-RQ7C-poIAIC09E7sNC6nFShOTSdC41hBdCMKiXF4RIdDT4BpacH8_zrKGR-XC0q3VZwcUQwHUtT0MobzEWpI2aWWcLnGpTI2KGLMb2sMCHSSNdAMCBSq1milbNl2VtXUoIa', 4, 4500, '標準型小木屋提供現代化設施，適合家庭或小型團體', '1張雙人床', 3, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(15, 'RTC02T06', '豪華型營位｜小木屋', 2, 9, 'https://blogger.googleusercontent.com/img/a/AVvXsEi2xMYdF16PiAGDXDqmbyN9unzSahdJhUXVQWYxmWhd7iXA4YDSb5l4pWJcwYeyIasVY2jZlvi5RVx1_KgxRGSpjx5qgFuv0xHaMW18Us1VwkmfW3fK2400L37Sj_cKW-SE3mZcIsCnMOqZ58FF7yWQTUn7DxFwHxc_zQQZgN9bVb9Oq5NIR8vZ2sQDeGfb', 3, 6000, '豪華型小木屋提供高端設施和獨立空間', '1張大號雙人床 + 1張沙發床', 4, '附全餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(16, 'RTC02B04', '家庭型營位｜帳篷', 2, 10, 'https://blogger.googleusercontent.com/img/a/AVvXsEjFBjXeGI45uwfWzs-PTlA_LZcb5EOUpj-mGBnJAL3Z8F1A5ANa3p6N8XRWjnvHmc8Da3ODZYcldbjKDDcMX5Naaa_Oa2R9vSh07ZP5-D5OUs1wS-wv7Ed53am3CcwUqkknzs73vEfOnzFBYyld4iELY9Xc11yup8EA_LOBuTr53vlG3TbONgX0E5Q9WnUr', 12, 2500, '適合家庭的帳篷，提供露營的樂趣與舒適的環境', '1張雙人床', 4, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(17, 'RTC02B05', '標準型營位｜帳篷', 2, 11, 'https://blogger.googleusercontent.com/img/a/AVvXsEj87Ywtt6hu0yS03z90s88u8FbMzWg4NZ7-eARV8gNaCLrDu_HSNHbr-eFe5h7FFbrgAMmtS-Z9tSVPo29krvLMzPoxbECa3JvORtgbCh5S5Ahy-_i3X9ORHuZ_-x22MD_14Io8A31G9i24DbSeYAp3uRtFG55xmAZOZQWE_wr78UIbxmg5ZY_k_OMqUAES', 10, 3500, '標準型帳篷提供較佳的住宿體驗，適合小家庭', '1張雙人床', 3, '附早餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(18, 'RTC02B06', '豪華型營位｜帳篷', 2, 12, 'https://blogger.googleusercontent.com/img/a/AVvXsEimgWX2W2B6UAxXCwLJ69MYOoXWEutSplPH-LKDdHleiu0WHqE6nxUtD_GPhtawYR600C37WoJv9pRg_ZXphOLIXFpuuTdUSsfMQhR44AyQg5qfui0Pn0t5RErJMROzazjf4XInvKvR19DqEFqqDWwhoclfcUZGjBD5G-uexXFUQQJs33mGTTrT7VuUxf5f', 8, 4500, '豪華型帳篷提供極致舒適的戶外體驗', '1張大號雙人床', 2, '附全餐', '2024-09-29 10:00:00', '2024-09-29 10:00:00'),
+(19, 'RTC03C01', '家庭型營位｜露營車', 3, 4, 'https://blogger.googleusercontent.com/img/a/AVvXsEgChQkqqivrt4UXzBtbNTWFwFypB3xs_terjGSyxft4-AwF4paQ3WoTIF-FSPI9KHGReRf76jPAsZY2i4rqZWm62-uTQDpLEN7bls4YzqlnveAbCUU4LPu2KUlXiwGz31drUyFmwqxRtyp2UScg3IjCDLAeFIJiOpe2D4K6JA25wvLfZyhHj1TTixTMfjLy', 10, 10200, '為家庭旅遊設計的舒適露營車', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(20, 'RTC03C02', '標準型營位｜露營車', 3, 5, 'https://blogger.googleusercontent.com/img/a/AVvXsEjWdoUoqh5_O-WhL9qtBrLBzGhgSJ0eoWQXAlwXpIl71YIf0sAcyu70391L5AZce86MZEYXCJ0sjhdU120zAuyujTiyhBLMTdSPXOhYqZjvyLR30ViiJORhpFmxgOzWuLMldKmxeBTuxd7Mbr0fH1FU4OHDE5H-QS4Sjz97EvXb7ODWXFvfneNkW_AUTq0h', 8, 10800, '標準露營車，提供實用的居住空間', '1張雙人床 + 1張沙發床', 4, '附早餐和晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(21, 'RTC03C03', '豪華型營位｜露營車', 3, 6, 'https://blogger.googleusercontent.com/img/a/AVvXsEgrIfGob4_0Y8yIfj_XdUhKs-VWBkuoeFRlUmJZZnGwFIq30zWD0NOOerhjV4k60-rF-bBFuRvR83pORw77fm8DZVkovNeDqiI3pktYKgCWHF8wZbP_tui50WxjteNBxRMJbGNBB0sWL4dHqdsWVzCDCYnjftJ9FRlenV0ge9lJO7VLqri9WgtiyDmwTWsf', 6, 15000, '豪華露營車，享受高端的露營體驗', '1張大號雙人床', 3, '附全餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(22, 'RTC03T01', '家庭型營位｜小木屋', 3, 7, 'https://blogger.googleusercontent.com/img/a/AVvXsEgSkc1QToAAaS8UD5Spd68MtkNMQG9tXh1EB5PrjKavBYkjC-Gfb3WtuQuz1OevCZkDZ_gfoe_vRCKeIDAeMWomaxMltxGmuWYH08T2I31yG3_EVr67vYl4ojGReNQ1Im3V98LqygMIt6hAKd_H9xksSN4rKPXZn-79Y7m20_mko42sRecfg9P8fMit6k2y', 12, 9100, '適合全家的溫馨小木屋', '1張雙人床 + 2張單人床', 5, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(23, 'RTC03T02', '標準型營位｜小木屋', 3, 8, 'https://blogger.googleusercontent.com/img/a/AVvXsEig-DWGoXP6LfQGBUQZLW9b8hNDSvO2NWz5ZiYz_lvRm4ykyoPdICkcT8en-RQ7C-poIAIC09E7sNC6nFShOTSdC41hBdCMKiXF4RIdDT4BpacH8_zrKGR-XC0q3VZwcUQwHUtT0MobzEWpI2aWWcLnGpTI2KGLMb2sMCHSSNdAMCBSq1milbNl2VtXUoIa', 10, 9600, '舒適小木屋，為您的假期提供完美的住宿', '1張雙人床 + 1張單人床', 4, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(24, 'RTC03T03', '豪華型營位｜小木屋', 3, 9, 'https://blogger.googleusercontent.com/img/a/AVvXsEi2xMYdF16PiAGDXDqmbyN9unzSahdJhUXVQWYxmWhd7iXA4YDSb5l4pWJcwYeyIasVY2jZlvi5RVx1_KgxRGSpjx5qgFuv0xHaMW18Us1VwkmfW3fK2400L37Sj_cKW-SE3mZcIsCnMOqZ58FF7yWQTUn7DxFwHxc_zQQZgN9bVb9Oq5NIR8vZ2sQDeGfb', 8, 16500, '奢華小木屋，帶來獨特的住宿體驗', '1張大號雙人床', 3, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(25, 'RTC03B01', '家庭型營位｜帳篷', 3, 10, 'https://blogger.googleusercontent.com/img/a/AVvXsEjFBjXeGI45uwfWzs-PTlA_LZcb5EOUpj-mGBnJAL3Z8F1A5ANa3p6N8XRWjnvHmc8Da3ODZYcldbjKDDcMX5Naaa_Oa2R9vSh07ZP5-D5OUs1wS-wv7Ed53am3CcwUqkknzs73vEfOnzFBYyld4iELY9Xc11yup8EA_LOBuTr53vlG3TbONgX0E5Q9WnUr', 10, 8500, '適合家庭使用的寬敞帳篷', '1張雙人床 + 2張單人床', 5, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(26, 'RTC03B02', '標準型營位｜帳篷', 3, 11, 'https://blogger.googleusercontent.com/img/a/AVvXsEj87Ywtt6hu0yS03z90s88u8FbMzWg4NZ7-eARV8gNaCLrDu_HSNHbr-eFe5h7FFbrgAMmtS-Z9tSVPo29krvLMzPoxbECa3JvORtgbCh5S5Ahy-_i3X9ORHuZ_-x22MD_14Io8A31G9i24DbSeYAp3uRtFG55xmAZOZQWE_wr78UIbxmg5ZY_k_OMqUAES', 9, 8800, '舒適標準帳篷，完美的戶外選擇', '1張雙人床', 3, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(27, 'RTC03B03', '豪華型營位｜帳篷', 3, 12, 'https://blogger.googleusercontent.com/img/a/AVvXsEimgWX2W2B6UAxXCwLJ69MYOoXWEutSplPH-LKDdHleiu0WHqE6nxUtD_GPhtawYR600C37WoJv9pRg_ZXphOLIXFpuuTdUSsfMQhR44AyQg5qfui0Pn0t5RErJMROzazjf4XInvKvR19DqEFqqDWwhoclfcUZGjBD5G-uexXFUQQJs33mGTTrT7VuUxf5f', 8, 13000, '奢華帳篷，讓您享受戶外的同時擁有高端服務', '1張大號雙人床', 2, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(28, 'RTC04C01', '家庭型營位｜露營車', 4, 4, 'https://blogger.googleusercontent.com/img/a/AVvXsEgChQkqqivrt4UXzBtbNTWFwFypB3xs_terjGSyxft4-AwF4paQ3WoTIF-FSPI9KHGReRf76jPAsZY2i4rqZWm62-uTQDpLEN7bls4YzqlnveAbCUU4LPu2KUlXiwGz31drUyFmwqxRtyp2UScg3IjCDLAeFIJiOpe2D4K6JA25wvLfZyhHj1TTixTMfjLy', 9, 15000, '適合家庭的露營車，擁有寬敞的內部空間', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(29, 'RTC04C02', '標準型營位｜露營車', 4, 5, 'https://blogger.googleusercontent.com/img/a/AVvXsEjWdoUoqh5_O-WhL9qtBrLBzGhgSJ0eoWQXAlwXpIl71YIf0sAcyu70391L5AZce86MZEYXCJ0sjhdU120zAuyujTiyhBLMTdSPXOhYqZjvyLR30ViiJORhpFmxgOzWuLMldKmxeBTuxd7Mbr0fH1FU4OHDE5H-QS4Sjz97EvXb7ODWXFvfneNkW_AUTq0h', 8, 14000, '適合小家庭或情侶的標準露營車', '1張雙人床', 4, '附早餐和晚餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(30, 'RTC04C03', '豪華型營位｜露營車', 4, 6, 'https://blogger.googleusercontent.com/img/a/AVvXsEgrIfGob4_0Y8yIfj_XdUhKs-VWBkuoeFRlUmJZZnGwFIq30zWD0NOOerhjV4k60-rF-bBFuRvR83pORw77fm8DZVkovNeDqiI3pktYKgCWHF8wZbP_tui50WxjteNBxRMJbGNBB0sWL4dHqdsWVzCDCYnjftJ9FRlenV0ge9lJO7VLqri9WgtiyDmwTWsf', 6, 23000, '豪華露營車，提供高端設施與私人空間', '1張大號雙人床', 3, '附全餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(31, 'RTC04T01', '家庭型營位｜小木屋', 4, 7, 'https://blogger.googleusercontent.com/img/a/AVvXsEgSkc1QToAAaS8UD5Spd68MtkNMQG9tXh1EB5PrjKavBYkjC-Gfb3WtuQuz1OevCZkDZ_gfoe_vRCKeIDAeMWomaxMltxGmuWYH08T2I31yG3_EVr67vYl4ojGReNQ1Im3V98LqygMIt6hAKd_H9xksSN4rKPXZn-79Y7m20_mko42sRecfg9P8fMit6k2y', 10, 13000, '溫馨家庭小木屋，適合家人或團體入住', '1張雙人床 + 1張單人床', 5, '附早餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(32, 'RTC04T02', '標準型營位｜小木屋', 4, 8, 'https://blogger.googleusercontent.com/img/a/AVvXsEig-DWGoXP6LfQGBUQZLW9b8hNDSvO2NWz5ZiYz_lvRm4ykyoPdICkcT8en-RQ7C-poIAIC09E7sNC6nFShOTSdC41hBdCMKiXF4RIdDT4BpacH8_zrKGR-XC0q3VZwcUQwHUtT0MobzEWpI2aWWcLnGpTI2KGLMb2sMCHSSNdAMCBSq1milbNl2VtXUoIa', 9, 12500, '適合小型家庭或朋友的標準小木屋', '1張雙人床', 4, '附早餐和燒烤晚餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(33, 'RTC04T03', '豪華型營位｜小木屋', 4, 9, 'https://blogger.googleusercontent.com/img/a/AVvXsEi2xMYdF16PiAGDXDqmbyN9unzSahdJhUXVQWYxmWhd7iXA4YDSb5l4pWJcwYeyIasVY2jZlvi5RVx1_KgxRGSpjx5qgFuv0xHaMW18Us1VwkmfW3fK2400L37Sj_cKW-SE3mZcIsCnMOqZ58FF7yWQTUn7DxFwHxc_zQQZgN9bVb9Oq5NIR8vZ2sQDeGfb', 7, 24000, '豪華小木屋，提供頂級設施與景觀', '1張大號雙人床', 3, '附全餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(34, 'RTC04B01', '家庭型營位｜帳篷', 4, 10, 'https://blogger.googleusercontent.com/img/a/AVvXsEjFBjXeGI45uwfWzs-PTlA_LZcb5EOUpj-mGBnJAL3Z8F1A5ANa3p6N8XRWjnvHmc8Da3ODZYcldbjKDDcMX5Naaa_Oa2R9vSh07ZP5-D5OUs1wS-wv7Ed53am3CcwUqkknzs73vEfOnzFBYyld4iELY9Xc11yup8EA_LOBuTr53vlG3TbONgX0E5Q9WnUr', 12, 12000, '適合家庭的舒適帳篷', '1張雙人床 + 2張單人床', 5, '附早餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(35, 'RTC04B02', '標準型營位｜帳篷', 4, 11, 'https://blogger.googleusercontent.com/img/a/AVvXsEj87Ywtt6hu0yS03z90s88u8FbMzWg4NZ7-eARV8gNaCLrDu_HSNHbr-eFe5h7FFbrgAMmtS-Z9tSVPo29krvLMzPoxbECa3JvORtgbCh5S5Ahy-_i3X9ORHuZ_-x22MD_14Io8A31G9i24DbSeYAp3uRtFG55xmAZOZQWE_wr78UIbxmg5ZY_k_OMqUAES', 10, 11000, '適合情侶或小家庭的標準帳篷', '1張雙人床', 3, '附早餐和燒烤晚餐', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(36, 'RTC04B03', '豪華型營位｜帳篷', 4, 12, 'https://blogger.googleusercontent.com/img/a/AVvXsEimgWX2W2B6UAxXCwLJ69MYOoXWEutSplPH-LKDdHleiu0WHqE6nxUtD_GPhtawYR600C37WoJv9pRg_ZXphOLIXFpuuTdUSsfMQhR44AyQg5qfui0Pn0t5RErJMROzazjf4XInvKvR19DqEFqqDWwhoclfcUZGjBD5G-uexXFUQQJs33mGTTrT7VuUxf5f', 8, 17000, '豪華帳篷，提供高端露營體驗', '1張大號雙人床', 2, '附全餐和私人服務', '2024-09-29 18:00:00', '2024-09-29 18:00:00'),
+(37, 'RTC05C01', '家庭型營位｜露營車', 5, 4, 'https://blogger.googleusercontent.com/img/a/AVvXsEgChQkqqivrt4UXzBtbNTWFwFypB3xs_terjGSyxft4-AwF4paQ3WoTIF-FSPI9KHGReRf76jPAsZY2i4rqZWm62-uTQDpLEN7bls4YzqlnveAbCUU4LPu2KUlXiwGz31drUyFmwqxRtyp2UScg3IjCDLAeFIJiOpe2D4K6JA25wvLfZyhHj1TTixTMfjLy', 10, 10500, '舒適的家庭型露營車，適合家庭旅遊', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(38, 'RTC05C02', '標準型營位｜露營車', 5, 5, 'https://blogger.googleusercontent.com/img/a/AVvXsEjWdoUoqh5_O-WhL9qtBrLBzGhgSJ0eoWQXAlwXpIl71YIf0sAcyu70391L5AZce86MZEYXCJ0sjhdU120zAuyujTiyhBLMTdSPXOhYqZjvyLR30ViiJORhpFmxgOzWuLMldKmxeBTuxd7Mbr0fH1FU4OHDE5H-QS4Sjz97EvXb7ODWXFvfneNkW_AUTq0h', 8, 11000, '實用的標準型露營車，為您提供舒適的住宿', '1張雙人床 + 1張沙發床', 4, '附早餐和晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(39, 'RTC05C03', '豪華型營位｜露營車', 5, 6, 'https://blogger.googleusercontent.com/img/a/AVvXsEgrIfGob4_0Y8yIfj_XdUhKs-VWBkuoeFRlUmJZZnGwFIq30zWD0NOOerhjV4k60-rF-bBFuRvR83pORw77fm8DZVkovNeDqiI3pktYKgCWHF8wZbP_tui50WxjteNBxRMJbGNBB0sWL4dHqdsWVzCDCYnjftJ9FRlenV0ge9lJO7VLqri9WgtiyDmwTWsf', 6, 15500, '高端豪華露營車，享受奢華的露營體驗', '1張大號雙人床', 3, '附全餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(40, 'RTC05T01', '家庭型營位｜小木屋', 5, 7, 'https://blogger.googleusercontent.com/img/a/AVvXsEgSkc1QToAAaS8UD5Spd68MtkNMQG9tXh1EB5PrjKavBYkjC-Gfb3WtuQuz1OevCZkDZ_gfoe_vRCKeIDAeMWomaxMltxGmuWYH08T2I31yG3_EVr67vYl4ojGReNQ1Im3V98LqygMIt6hAKd_H9xksSN4rKPXZn-79Y7m20_mko42sRecfg9P8fMit6k2y', 12, 9500, '為家庭設計的溫馨小木屋', '1張雙人床 + 2張單人床', 5, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(41, 'RTC05T02', '標準型營位｜小木屋', 5, 8, 'https://blogger.googleusercontent.com/img/a/AVvXsEig-DWGoXP6LfQGBUQZLW9b8hNDSvO2NWz5ZiYz_lvRm4ykyoPdICkcT8en-RQ7C-poIAIC09E7sNC6nFShOTSdC41hBdCMKiXF4RIdDT4BpacH8_zrKGR-XC0q3VZwcUQwHUtT0MobzEWpI2aWWcLnGpTI2KGLMb2sMCHSSNdAMCBSq1milbNl2VtXUoIa', 10, 9800, '標準小木屋，為您提供舒適的假期', '1張雙人床 + 1張單人床', 4, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(42, 'RTC05T03', '豪華型營位｜小木屋', 5, 9, 'https://blogger.googleusercontent.com/img/a/AVvXsEi2xMYdF16PiAGDXDqmbyN9unzSahdJhUXVQWYxmWhd7iXA4YDSb5l4pWJcwYeyIasVY2jZlvi5RVx1_KgxRGSpjx5qgFuv0xHaMW18Us1VwkmfW3fK2400L37Sj_cKW-SE3mZcIsCnMOqZ58FF7yWQTUn7DxFwHxc_zQQZgN9bVb9Oq5NIR8vZ2sQDeGfb', 8, 17000, '奢華的小木屋，讓您擁有獨特的住宿體驗', '1張大號雙人床', 3, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(43, 'RTC05B01', '家庭型營位｜帳篷', 5, 10, 'https://blogger.googleusercontent.com/img/a/AVvXsEjFBjXeGI45uwfWzs-PTlA_LZcb5EOUpj-mGBnJAL3Z8F1A5ANa3p6N8XRWjnvHmc8Da3ODZYcldbjKDDcMX5Naaa_Oa2R9vSh07ZP5-D5OUs1wS-wv7Ed53am3CcwUqkknzs73vEfOnzFBYyld4iELY9Xc11yup8EA_LOBuTr53vlG3TbONgX0E5Q9WnUr', 10, 8800, '適合全家的寬敞帳篷', '1張雙人床 + 2張單人床', 5, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(44, 'RTC05B02', '標準型營位｜帳篷', 5, 11, 'https://blogger.googleusercontent.com/img/a/AVvXsEj87Ywtt6hu0yS03z90s88u8FbMzWg4NZ7-eARV8gNaCLrDu_HSNHbr-eFe5h7FFbrgAMmtS-Z9tSVPo29krvLMzPoxbECa3JvORtgbCh5S5Ahy-_i3X9ORHuZ_-x22MD_14Io8A31G9i24DbSeYAp3uRtFG55xmAZOZQWE_wr78UIbxmg5ZY_k_OMqUAES', 9, 9100, '舒適標準帳篷，適合戶外活動', '1張雙人床', 3, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(45, 'RTC05B03', '豪華型營位｜帳篷', 5, 12, 'https://blogger.googleusercontent.com/img/a/AVvXsEimgWX2W2B6UAxXCwLJ69MYOoXWEutSplPH-LKDdHleiu0WHqE6nxUtD_GPhtawYR600C37WoJv9pRg_ZXphOLIXFpuuTdUSsfMQhR44AyQg5qfui0Pn0t5RErJMROzazjf4XInvKvR19DqEFqqDWwhoclfcUZGjBD5G-uexXFUQQJs33mGTTrT7VuUxf5f', 8, 13500, '奢華帳篷，提供獨特的戶外住宿體驗', '1張大號雙人床', 2, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(46, 'RTC06C01', '家庭型營位｜露營車', 6, 4, 'https://blogger.googleusercontent.com/img/a/AVvXsEgChQkqqivrt4UXzBtbNTWFwFypB3xs_terjGSyxft4-AwF4paQ3WoTIF-FSPI9KHGReRf76jPAsZY2i4rqZWm62-uTQDpLEN7bls4YzqlnveAbCUU4LPu2KUlXiwGz31drUyFmwqxRtyp2UScg3IjCDLAeFIJiOpe2D4K6JA25wvLfZyhHj1TTixTMfjLy', 10, 11200, '舒適的家庭型露營車，適合家庭旅遊', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(47, 'RTC06C02', '標準型營位｜露營車', 6, 5, 'https://blogger.googleusercontent.com/img/a/AVvXsEjWdoUoqh5_O-WhL9qtBrLBzGhgSJ0eoWQXAlwXpIl71YIf0sAcyu70391L5AZce86MZEYXCJ0sjhdU120zAuyujTiyhBLMTdSPXOhYqZjvyLR30ViiJORhpFmxgOzWuLMldKmxeBTuxd7Mbr0fH1FU4OHDE5H-QS4Sjz97EvXb7ODWXFvfneNkW_AUTq0h', 8, 11500, '實用的標準型露營車，為您提供舒適的住宿', '1張雙人床 + 1張沙發床', 4, '附早餐和晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(48, 'RTC06C03', '豪華型營位｜露營車', 6, 6, 'https://blogger.googleusercontent.com/img/a/AVvXsEgrIfGob4_0Y8yIfj_XdUhKs-VWBkuoeFRlUmJZZnGwFIq30zWD0NOOerhjV4k60-rF-bBFuRvR83pORw77fm8DZVkovNeDqiI3pktYKgCWHF8wZbP_tui50WxjteNBxRMJbGNBB0sWL4dHqdsWVzCDCYnjftJ9FRlenV0ge9lJO7VLqri9WgtiyDmwTWsf', 6, 16000, '高端豪華露營車，享受奢華的露營體驗', '1張大號雙人床', 3, '附全餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
 (49, 'RTC06T01', '家庭型營位｜小木屋', 6, 7, 'family_cabin6001.jpg,family_cabin6002.jpg', 12, 10000, '為家庭設計的溫馨小木屋', '1張雙人床 + 2張單人床', 5, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
 (50, 'RTC06T02', '標準型營位｜小木屋', 6, 8, 'standard_cabin6001.jpg,standard_cabin6002.jpg', 10, 10200, '標準小木屋，為您提供舒適的假期', '1張雙人床 + 1張單人床', 4, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
 (51, 'RTC06T03', '豪華型營位｜小木屋', 6, 9, 'luxury_cabin6001.jpg,luxury_cabin6002.jpg', 8, 17500, '奢華的小木屋，讓您擁有獨特的住宿體驗', '1張大號雙人床', 3, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(52, 'RTC06B01', '家庭型營位｜帳篷', 6, 10, 'family_tent6001.jpg,family_tent6002.jpg', 10, 9000, '適合全家的寬敞帳篷', '1張雙人床 + 2張單人床', 5, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(53, 'RTC06B02', '標準型營位｜帳篷', 6, 11, 'standard_tent6001.jpg,standard_tent6002.jpg', 9, 9500, '舒適標準帳篷，適合戶外活動', '1張雙人床', 3, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(54, 'RTC06B03', '豪華型營位｜帳篷', 6, 12, 'luxury_tent6001.jpg,luxury_tent6002.jpg', 8, 14000, '奢華帳篷，提供獨特的戶外住宿體驗', '1張大號雙人床', 2, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(55, 'RTC07C01', '家庭型營位｜露營車', 7, 4, 'family_rv7001.jpg,family_rv7002.jpg', 12, 11000, '專為家庭設計的露營車，提供舒適的住宿', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(56, 'RTC07C02', '標準型營位｜露營車', 7, 5, 'standard_rv7001.jpg,standard_rv7002.jpg', 10, 11500, '舒適的標準露營車，適合小家庭', '1張雙人床 + 1張單人床', 4, '附早餐和晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
-(57, 'RTC07C03', '豪華型營位｜露營車', 7, 6, 'luxury_rv7001.jpg,luxury_rv7002.jpg', 8, 16500, '豪華露營車，提供優雅的露營體驗', '1張大號雙人床', 3, '附全餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(52, 'RTC06B01', '家庭型營位｜帳篷', 6, 10, 'https://blogger.googleusercontent.com/img/a/AVvXsEjFBjXeGI45uwfWzs-PTlA_LZcb5EOUpj-mGBnJAL3Z8F1A5ANa3p6N8XRWjnvHmc8Da3ODZYcldbjKDDcMX5Naaa_Oa2R9vSh07ZP5-D5OUs1wS-wv7Ed53am3CcwUqkknzs73vEfOnzFBYyld4iELY9Xc11yup8EA_LOBuTr53vlG3TbONgX0E5Q9WnUr', 10, 9000, '適合全家的寬敞帳篷', '1張雙人床 + 2張單人床', 5, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(53, 'RTC06B02', '標準型營位｜帳篷', 6, 11, 'https://blogger.googleusercontent.com/img/a/AVvXsEj87Ywtt6hu0yS03z90s88u8FbMzWg4NZ7-eARV8gNaCLrDu_HSNHbr-eFe5h7FFbrgAMmtS-Z9tSVPo29krvLMzPoxbECa3JvORtgbCh5S5Ahy-_i3X9ORHuZ_-x22MD_14Io8A31G9i24DbSeYAp3uRtFG55xmAZOZQWE_wr78UIbxmg5ZY_k_OMqUAES', 9, 9500, '舒適標準帳篷，適合戶外活動', '1張雙人床', 3, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(54, 'RTC06B03', '豪華型營位｜帳篷', 6, 12, 'https://blogger.googleusercontent.com/img/a/AVvXsEimgWX2W2B6UAxXCwLJ69MYOoXWEutSplPH-LKDdHleiu0WHqE6nxUtD_GPhtawYR600C37WoJv9pRg_ZXphOLIXFpuuTdUSsfMQhR44AyQg5qfui0Pn0t5RErJMROzazjf4XInvKvR19DqEFqqDWwhoclfcUZGjBD5G-uexXFUQQJs33mGTTrT7VuUxf5f', 8, 14000, '奢華帳篷，提供獨特的戶外住宿體驗', '1張大號雙人床', 2, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(55, 'RTC07C01', '家庭型營位｜露營車', 7, 4, 'https://blogger.googleusercontent.com/img/a/AVvXsEgChQkqqivrt4UXzBtbNTWFwFypB3xs_terjGSyxft4-AwF4paQ3WoTIF-FSPI9KHGReRf76jPAsZY2i4rqZWm62-uTQDpLEN7bls4YzqlnveAbCUU4LPu2KUlXiwGz31drUyFmwqxRtyp2UScg3IjCDLAeFIJiOpe2D4K6JA25wvLfZyhHj1TTixTMfjLy', 12, 11000, '專為家庭設計的露營車，提供舒適的住宿', '1張雙人床 + 2張單人床', 6, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(56, 'RTC07C02', '標準型營位｜露營車', 7, 5, 'https://blogger.googleusercontent.com/img/a/AVvXsEjWdoUoqh5_O-WhL9qtBrLBzGhgSJ0eoWQXAlwXpIl71YIf0sAcyu70391L5AZce86MZEYXCJ0sjhdU120zAuyujTiyhBLMTdSPXOhYqZjvyLR30ViiJORhpFmxgOzWuLMldKmxeBTuxd7Mbr0fH1FU4OHDE5H-QS4Sjz97EvXb7ODWXFvfneNkW_AUTq0h', 10, 11500, '舒適的標準露營車，適合小家庭', '1張雙人床 + 1張單人床', 4, '附早餐和晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
+(57, 'RTC07C03', '豪華型營位｜露營車', 7, 6, 'https://blogger.googleusercontent.com/img/a/AVvXsEgrIfGob4_0Y8yIfj_XdUhKs-VWBkuoeFRlUmJZZnGwFIq30zWD0NOOerhjV4k60-rF-bBFuRvR83pORw77fm8DZVkovNeDqiI3pktYKgCWHF8wZbP_tui50WxjteNBxRMJbGNBB0sWL4dHqdsWVzCDCYnjftJ9FRlenV0ge9lJO7VLqri9WgtiyDmwTWsf', 8, 16500, '豪華露營車，提供優雅的露營體驗', '1張大號雙人床', 3, '附全餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
 (58, 'RTC07T01', '家庭型營位｜小木屋', 7, 7, 'family_cabin7001.jpg,family_cabin7002.jpg', 14, 10500, '溫馨家庭小木屋，讓您有如回到家般的舒適感', '1張雙人床 + 2張單人床', 5, '附早餐和燒烤晚餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
 (59, 'RTC07T02', '標準型營位｜小木屋', 7, 8, 'standard_cabin7001.jpg,standard_cabin7002.jpg', 11, 10800, '適合家庭的標準小木屋，提供放鬆的環境', '1張雙人床 + 1張單人床', 4, '附早餐', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
 (60, 'RTC07T03', '豪華型營位｜小木屋', 7, 9, 'luxury_cabin7001.jpg,luxury_cabin7002.jpg', 9, 18000, '高端豪華小木屋，帶來奢華的露營體驗', '1張大號雙人床', 3, '附全餐和專屬服務', '2024-09-29 17:00:00', '2024-09-29 17:00:00'),
@@ -1632,6 +1631,7 @@ INSERT INTO `user_data` (`user_id`, `user_name`, `password`, `email`, `user_addr
 -- 訂單概要資訊
 CREATE TABLE my_booking (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `order_id` INT NOT NULL, -- 訂單概要id
     `sn` varchar(255) NOT NULL, -- BO20240902A01
     `user_id` INT NOT NULL,
     `status` ENUM('pending', 'processing', 'completed', 'canceled') NOT NULL, -- 處理中?完成?取消?
@@ -1644,55 +1644,24 @@ CREATE TABLE my_booking (
 -- 訂單詳情
 CREATE TABLE b_order_items (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `order_id` INT NOT NULL, -- 訂單概要id
+    `user_id` INT DEFAULT  NULL,
     `r_type_id` INT NOT NULL, -- 房型方案id
     `username` varchar(255) NOT NULL, -- 訂購人姓名
     `phone` varchar(255) NOT NULL, -- 訂購人電話
-    `email` varchar(255) NOT NULL, -- 訂購人郵件
+    `bookEmail` varchar(255) NOT NULL, -- 訂購人郵件
     `quantity` INT NOT NULL, -- 預訂房間數量
     `price` DECIMAL(10, 2) NOT NULL, -- 單價
-    `total_price` DECIMAL(10, 2) GENERATED ALWAYS AS (quantity * price) STORED, -- 總價=單價*數量
+    `total_price` INT NOT NULL , -- 總價=單價*數量
 	`adult` INT NOT NULL,  -- 大人人數
     `children` INT default NULL, -- 小孩人數
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (order_id) REFERENCES my_booking(id) ON DELETE CASCADE,
-    FOREIGN KEY (r_type_id) REFERENCES booking_type(id) ON DELETE CASCADE
+    FOREIGN KEY (r_type_id) REFERENCES booking_type(id) ON DELETE CASCADE,
+    FOREIGN KEY (`user_id`) REFERENCES `user_data`(`user_id`) ON DELETE CASCADE
 );
 
 -- ----------------------------
--- 活動的房型 roomE 
+-- 活動
 -- ----------------------------
-DROP TABLE IF EXISTS `roomE`;
--- 營地的房型 room 的資料表
--- CREATE TABLE `roomE` 
--- (
---   `e_camp_type_id` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `e_total_person` int DEFAULT NULL,
---   `camp_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `camping_theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `camping_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `bed_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `food_type`varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `pet_type`varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `ser_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `child_type`varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   `feature_category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
---   PRIMARY KEY (`e_camp_type_id`),
---   
---   CONSTRAINT `Fk_camp_name3` FOREIGN KEY (`camp_name`) REFERENCES `place_info` (`camp_name`),
---   CONSTRAINT `Fk_camping_theme3` FOREIGN KEY (`camping_theme`) REFERENCES `camping_theme_list` (`camping_theme`),
---   CONSTRAINT `FK_camping_type3` FOREIGN KEY (`camping_type`) REFERENCES `camping_type_list`(`camping_type`),
---   CONSTRAINT `FK_bed_name3` FOREIGN KEY (`bed_name`) REFERENCES `bed_type`(`bed_name`),
---   CONSTRAINT `FK_food_type3` FOREIGN KEY (`food_type`) REFERENCES `food`(`food_type`),
---   CONSTRAINT `FK_pet_type3` FOREIGN KEY (`pet_type`) REFERENCES `pet`(`pet_type`),
---   CONSTRAINT `FK_ser_name3` FOREIGN KEY (`ser_name`) REFERENCES `services`(`ser_name`),
---   CONSTRAINT `FK_child_type3` FOREIGN KEY (`child_type`) REFERENCES `child_fac`(`child_type`),
---   CONSTRAINT `FK_feature_category3` FOREIGN KEY (`feature_category`) REFERENCES `feature_category_list`(`feature_category`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 傾印資料表的資料 `roomE`
--- INSERT INTO `roomE` (`e_camp_type_id`, `e_total_person`, `camp_name`, `camping_theme`, `camping_type`, `bed_name`, `food_type`, `pet_type`, `ser_name`, `child_type`, `feature_category`) VALUES
--- ('RE1', 4, '走馬賴農場', '豪華型營位', '露營車', '雙人床', '附早餐', '可攜帶寵物', '停車場', '嬰兒設施', '附冷氣');
 
 DROP TABLE IF EXISTS `event_holding_list`;
 

@@ -57,7 +57,7 @@ const OverlayLoginRegister = ({ onClose }) => {
           const loginState = localStorage.getItem('loginState') === 'true'
 
           alert(
-            `localStorage 顯示資料！ \nloginState:從${localStorage.getItem(
+            `從localStorage 顯示資料！ \nloginState:${localStorage.getItem(
               'loginState'
             )} \n用戶名稱: ${storedUser.user_name}, \n用戶ID: ${
               storedUser.user_id
