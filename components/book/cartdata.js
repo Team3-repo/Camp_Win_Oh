@@ -58,6 +58,23 @@ export default function CartData({ setStep }) {
     }))
   }
 
+  // 更新購物車資料並保存到 localStorage
+  const handleSubmit = () => {
+    // 更新購物車資料，將使用者的資料同步到每個購物車項目中
+    const updatedBookCart = BookCartItems.map((item) => ({
+      ...item,
+      username: userData.user_name,  // 使用者姓名
+      bookEmail: userData.email,     // 使用者電子郵件
+      phone: userData.phone,         // 使用者電話
+    }));
+  
+    // 更新購物車資料並存入 localStorage 中的 bookCart
+    localStorage.setItem('bookCart', JSON.stringify(updatedBookCart));
+  
+    // 跳轉到下一步付款
+    setStep(2);
+  };
+
   // 切換顯示優惠券搜尋區塊
   const toggleCouponSearch = () => {
     setShowCoupon(!showCoupon)
@@ -174,9 +191,7 @@ export default function CartData({ setStep }) {
             <div className={styles.paybtn}>
               <Button
                 label="前往付款"
-                onClick={() => {
-                  setStep(2)
-                }}
+                onClick={handleSubmit}
               />
             </div>
           </div>
@@ -190,9 +205,13 @@ export default function CartData({ setStep }) {
             {/* 顯示所有購物車商品的詳細資訊 */}
             {BookCartItems.map((item) => (
               <div key={item.id} className={styles.cartItem}>
-                <h5>
-                  房型方案 <p>{item.name}</p>
+                <h5 style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                  {item.name}
                 </h5>
+                <h5>預訂日期</h5>
+                <p style={{ textAlign: 'right' }}>{item.InOutDate}</p>
+                <hr />
+
                 <h5>
                   大人<p>{item.adult}人</p>
                 </h5>
@@ -220,7 +239,7 @@ export default function CartData({ setStep }) {
               付款金額
               {isDiscountApplied ? (
                 <h5 className={styles.totalP}>
-                NT${Math.floor((BookTotal * discountAmount).toFixed(2))}
+                  NT${Math.floor((BookTotal * discountAmount).toFixed(2))}
                 </h5>
               ) : (
                 <p className={styles.totalP}>NT${Math.floor(BookTotal)}</p>

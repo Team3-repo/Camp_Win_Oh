@@ -6,6 +6,7 @@ const initialState = {
   BookTotal: 0,
   BookAdult: 0,
   BookChild: 0,
+  BookDate: '',
 }
 
 // 定義 reducer 函數
@@ -15,6 +16,7 @@ const BookCartReducer = (state, action) => {
   let BookTotal
   let BookAdult
   let BookChild
+  let BookDate = state.BookDate; // 確保 BookDate 被正確初始化
 
   switch (action.type) {
     case 'ADD_TO_CART':
@@ -33,8 +35,7 @@ const BookCartReducer = (state, action) => {
                 username: '',
                 bookEmail: '',
                 phone: '',
-                inDate: '',
-                endDate: '',
+                InOutDate:BookDate
               }
             : item
         )
@@ -50,8 +51,7 @@ const BookCartReducer = (state, action) => {
             username: '',
             bookEmail: '',
             phone: '',
-            inDate: '',
-            endDate: '',
+            InOutDate:BookDate
           },
         ]
       }
@@ -59,8 +59,11 @@ const BookCartReducer = (state, action) => {
         (sum, item) => sum + item.price * item.quantity,
         0
       )
+
+      // 儲存購物車和日期到 localStorage
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
-      return { ...state, bookCart: newBookCart, BookTotal }
+
+      return { ...state, bookCart: newBookCart, BookTotal, BookDate }
 
     case 'REMOVE_FROM_CART':
       newBookCart = state.bookCart.filter(
@@ -75,7 +78,7 @@ const BookCartReducer = (state, action) => {
 
     case 'CLEAR_CART':
       localStorage.removeItem('bookCart')
-      return { ...state, bookCart: [], BookTotal: 0 }
+      return { ...state, bookCart: [], BookTotal: 0,BookDate: state.BookDate}
 
     case 'INCREASE_QUANTITY':
       newBookCart = state.bookCart.map((item) =>
@@ -168,7 +171,11 @@ export const BookCartContext = createContext()
 
 // 定義 CartProvider 組件
 export const BookCartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(BookCartReducer, initialState)
+  const [state, dispatch] = useReducer(BookCartReducer, {
+    ...initialState,
+    // 檢查 localStorage 中是否存在日期
+    BookDate: localStorage.getItem('BookDate') || '',
+  })
 
   useEffect(() => {
     const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || []
@@ -179,7 +186,7 @@ export const BookCartProvider = ({ children }) => {
 
   return (
     <BookCartContext.Provider
-      value={{ bookCart: state.bookCart, BookTotal: state.BookTotal, dispatch }}
+      value={{ bookCart: state.bookCart, BookTotal: state.BookTotal,  BookDate: state.BookDate,dispatch }}
     >
       {children}
     </BookCartContext.Provider>

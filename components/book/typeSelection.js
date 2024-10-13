@@ -32,26 +32,32 @@ export default function SearchFilter({ onSearch }) {
   // 日期篩選
   useEffect(() => {
     flatpickr('#check-in-out', {
-      mode: 'range',
-      dateFormat: 'm/d (D)',
-      minDate: 'today',
+      mode: 'range', // 選擇日期範圍
+      dateFormat: 'm/d (D)', // 設置顯示的日期格式
+      minDate: 'today', // 最小日期為今天
       onClose: function (selectedDates, dateStr, instance) {
-        if (selectedDates.length === 2) {
-          const startDate = selectedDates[0]
-          const endDate = selectedDates[1]
-          const nights = Math.round(
-            (endDate - startDate) / (1000 * 60 * 60 * 24)
-          )
-          const formattedDates = `${instance.formatDate(
-            startDate,
-            'm/d (D)'
-          )} - ${instance.formatDate(endDate, 'm/d (D)')}, ${nights}夜`
-          document.getElementById('check-in-out').value = formattedDates
-          setCheckInOut(formattedDates) // 設置日期篩選條件
+        if (selectedDates.length === 2) { // 當選取到兩個日期時
+          const startDate = selectedDates[0]; // 開始日期
+          const endDate = selectedDates[1]; // 結束日期
+  
+          // 計算夜數
+          const nights = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
+  
+          // 格式化日期範圍顯示
+          const formattedDates = `${instance.formatDate(startDate, 'm/d (D)')} - ${instance.formatDate(endDate, 'm/d (D)')}, ${nights}夜`;
+          
+          // 更新輸入框的值
+          document.getElementById('check-in-out').value = formattedDates;
+          
+          // 更新狀態，供後續篩選使用
+          setCheckInOut(formattedDates);
+  
+          // 將選取的日期存入 localStorage 的 BookDate
+          localStorage.setItem('BookDate', formattedDates);
         }
-      },
-    })
-  }, [])
+      }
+    });
+  }, []);
 
   // 發送篩選條件到後端 API 並進行人數篩選
   const handleSearch = async () => {
@@ -156,15 +162,11 @@ export default function SearchFilter({ onSearch }) {
           </div>
 
           {/* 搜索按鈕 */}
-          <Button
-            label={
-              <>
-                <IoSearch />
-                &nbsp;搜索
-              </>
-            }
-            onClick={handleSearch}
-          />
+          <button className={styles.searchBtn} onClick={handleSearch}>
+            <IoSearch />
+            &nbsp;搜索
+          </button>
+
         </div>
 
         {/* 房型選擇 */}
