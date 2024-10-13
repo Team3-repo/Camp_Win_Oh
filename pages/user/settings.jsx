@@ -44,7 +44,7 @@ export default function Settings() {
               toast.info('大頭照');
               setActiveSection('Avatar');
             }}
-            type={activeSection === 'Avatar'  ? undefined : 'btn-reg'}
+            type={activeSection === 'Avatar' ? undefined : 'btn-reg'}
           />
           <Button
             label="個人資料" // Profile
@@ -52,7 +52,7 @@ export default function Settings() {
               toast.info('顯示個人資料');
               setActiveSection('Profile');
             }}
-            type={activeSection === 'Profile'  ? undefined : 'btn-reg'}
+            type={activeSection === 'Profile' ? undefined : 'btn-reg'}
           />
           <Button
             label="變更密碼" // Security

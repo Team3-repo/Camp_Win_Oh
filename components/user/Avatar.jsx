@@ -1,69 +1,70 @@
-import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
-import styles from '@/styles/user/profile.module.css'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import styles from '@/styles/user/profile.module.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Avatar = () => {
-  const [avatar, setAvatar] = useState(null) // 儲存上傳的 avatar 檔案
-  const [preview, setPreview] = useState(null) // 預覽圖片
+  const [avatar, setAvatar] = useState(null); // 儲存上傳的 avatar 檔案
+  const [preview, setPreview] = useState(null); // 預覽圖片
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user') || '{}'
-    const user = JSON.parse(storedUser)
+    const storedUser = localStorage.getItem('user') || '{}';
+    const user = JSON.parse(storedUser);
 
-    // 如果 avatar 是 "none"，則使用預設圖片
-    setAvatar(user.avatar !== 'none' ? user.avatar : '/pics/avatar-1.png')
-  }, [])
+    // 使用預設圖片的邏輯
+    const initialAvatar = user.avatar && user.avatar !== 'none' ? `http://localhost:3005${user.avatar}` : '/pics/avatar-1.png';
+    setAvatar(initialAvatar);
+  }, []);
 
   // 上傳圖片處理
   const handleImageChange = async (e) => {
-    const file = e.target.files[0]
-    if (!file) return
+    const file = e.target.files[0];
+    if (!file) return;
 
     // 驗證圖片格式
-    const validTypes = ['image/png', 'image/jpeg', 'image/gif']
+    const validTypes = ['image/png', 'image/jpeg', 'image/gif'];
     if (!validTypes.includes(file.type)) {
-      toast.error('檔案格式無效，請選擇 png, jpeg 或 gif 格式')
-      return
+      toast.error('檔案格式無效，請選擇 png, jpeg 或 gif 格式');
+      return;
     }
 
     // 預覽圖片
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.onloadend = () => {
-      setPreview(reader.result)
-    }
-    reader.readAsDataURL(file)
+      setPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
 
     // 建立表單資料
-    const formData = new FormData()
-    formData.append('avatar', file)
+    const formData = new FormData();
+    formData.append('avatar', file);
 
     try {
       // 上傳圖片至伺服器
       const response = await fetch('http://localhost:3005/api/upload-avatar', {
         method: 'POST',
         body: formData,
-      })
+      });
 
       if (!response.ok) {
-        throw new Error('圖片上傳失敗')
+        throw new Error('圖片上傳失敗');
       }
 
-      const data = await response.json()
-      setAvatar(data.avatarUrl)
+      const data = await response.json();
+      setAvatar(data.avatarUrl);
 
       // 更新 localStorage 中的 user 資料
-      const storedUser = localStorage.getItem('user') || '{}'
-      const user = JSON.parse(storedUser)
-      user.avatar = data.avatarUrl
-      localStorage.setItem('user', JSON.stringify(user))
+      const storedUser = localStorage.getItem('user') || '{}';
+      const user = JSON.parse(storedUser);
+      user.avatar = data.avatarUrl;
+      localStorage.setItem('user', JSON.stringify(user));
 
-      toast.success('大頭照已成功更新')
+      toast.success('大頭照已成功更新');
     } catch (error) {
-      toast.error('上傳過程中發生錯誤，請稍後再試')
+      toast.error('上傳過程中發生錯誤，請稍後再試');
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -91,7 +92,7 @@ const Avatar = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Avatar
+export default Avatar;
