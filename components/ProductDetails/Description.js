@@ -27,7 +27,7 @@ function Description({ product }) { // 接收 product 作為屬性
           align-items: center;
           gap: 5px;
           color: #000;
-          font-size: 18px;
+          font-size: 22px;
           margin-bottom: 20px;
         }
         .description-icon {
@@ -35,6 +35,7 @@ function Description({ product }) { // 接收 product 作為屬性
           height: 14px;
         }
         .description-text {
+          font-size: 18px;
           color: #000;
           margin-left: 20px;
         }

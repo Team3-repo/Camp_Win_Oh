@@ -71,7 +71,7 @@
          }
  
          .product-description {
-           font-size: 8px;
+           font-size: 12px;
            text-align: center;
            flex-grow: 1;
          }
