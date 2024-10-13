@@ -1,31 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import Button from '../book/button'
-import OverlayLoginRegister from '../user/OverlayLoginRegister'
-import Image from 'next/image'
+import React, { useState, useEffect } from 'react';
+import Button from '../book/button';
+import OverlayLoginRegister from '../user/OverlayLoginRegister';
+import Image from 'next/image';
 
 export default function Navbar() {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false) // 狀態控制覆蓋層的顯示
-  const [isLoggedIn, setIsLoggedIn] = useState(false) // 設置初始登入狀態為 false
-  const [storedUser, setStoredUser] = useState(null) // 用於存儲用戶資訊
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [storedUser, setStoredUser] = useState(null);
+  const [avatarSrc, setAvatarSrc] = useState('/pics/avatar-1.png'); // 預設頭像
 
-  const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
 
   const checkLoginState = () => {
     if (typeof window !== 'undefined') {
-      const loginState = localStorage.getItem('loginState')
-      setIsLoggedIn(loginState === 'true')
-      const user = JSON.parse(localStorage.getItem('user'))
-      setStoredUser(user) // 取得用戶資訊
+      const loginState = localStorage.getItem('loginState');
+      setIsLoggedIn(loginState === 'true');
+      const storedUser = localStorage.getItem('user') || '{}';
+      const user = JSON.parse(storedUser);
+      setStoredUser(user); // 取得用戶資訊
+
+      // 使用預設圖片的邏輯
+      const initialAvatar = user.avatar && user.avatar !== 'none' ? `http://localhost:3005${user.avatar}` : '/pics/avatar-1.png';
+      setAvatarSrc(initialAvatar);
     }
-  }
+  };
 
   useEffect(() => {
-    checkLoginState() // 在進入頁面時，檢查有無登入
-  }, [])
+    checkLoginState(); // 在進入頁面時，檢查有無登入
+  }, []);
 
   const handleOpenOverlay = () => {
-    setIsOverlayOpen(true) // 開啟覆蓋層
-  }
+    setIsOverlayOpen(true);
+  };
 
   return (
     <>
@@ -35,7 +41,7 @@ export default function Navbar() {
             src="/logo.png"
             alt="logo"
             onClick={() => {
-              window.location.href = `${baseURL}`
+              window.location.href = `${baseURL}`;
             }}
             style={{ cursor: 'pointer' }}
           />
@@ -45,7 +51,7 @@ export default function Navbar() {
             <li>
               <h5
                 onClick={() => {
-                  window.location.href = `${baseURL}/`
+                  window.location.href = `${baseURL}/`;
                 }}
                 style={{ cursor: 'pointer' }}
               >
@@ -55,7 +61,7 @@ export default function Navbar() {
             <li>
               <h5
                 onClick={() => {
-                  window.location.href = `${baseURL}/cart/1CampingStore`
+                  window.location.href = `${baseURL}/cart/1CampingStore`;
                 }}
                 style={{ cursor: 'pointer' }}
               >
@@ -65,7 +71,7 @@ export default function Navbar() {
             <li>
               <h5
                 onClick={() => {
-                  window.location.href = `${baseURL}/events`
+                  window.location.href = `${baseURL}/events`;
                 }}
                 style={{ cursor: 'pointer' }}
               >
@@ -77,18 +83,17 @@ export default function Navbar() {
         <div className="user">
           {isLoggedIn ? (
             <>
-              {/* 確保 storedUser 存在後再顯示 */}
               <div className="userpic">
                 <a href={`${baseURL}/user/settings`}>
                   <Image
-                    src="/pics/avatar-1.png"
-                    alt=""
+                    src={avatarSrc} // 顯示用戶頭像
+                    alt="avatar"
                     width={40}
                     height={40}
                   />
                 </a>
               </div>
-              <h5>{storedUser?.user_name}</h5>{' '}
+              <h5>{storedUser?.user_name}</h5>
             </>
           ) : (
             <h5></h5>
@@ -99,16 +104,15 @@ export default function Navbar() {
               type="button"
               label="登出"
               onClick={() => {
-                setIsLoggedIn(false)
-                localStorage.setItem('loginState', 'false')
-                // 清除其他資料，但保留 loginState
+                setIsLoggedIn(false);
+                localStorage.setItem('loginState', 'false');
                 Object.keys(localStorage).forEach((key) => {
                   if (key !== 'loginState') {
-                    localStorage.removeItem(key)
+                    localStorage.removeItem(key);
                   }
-                })
-                window.location.href = `http://localhost:3000/`
-                checkLoginState() // 登出後再次檢查
+                });
+                window.location.href = `http://localhost:3000/`;
+                checkLoginState(); // 登出後再次檢查
               }}
             />
           ) : (
@@ -117,57 +121,45 @@ export default function Navbar() {
           {isOverlayOpen && (
             <OverlayLoginRegister
               onClose={() => {
-                setIsOverlayOpen(false)
-                checkLoginState()
+                setIsOverlayOpen(false);
+                checkLoginState();
               }}
             />
           )}
         </div>
       </header>
-      {/* CSS 省略 */}
       <style jsx>
         {`
           header {
             display: flex;
             height: auto;
-            justify-content: space-between; /* 調整元素間距 */
+            justify-content: space-between;
             background-color: #fffbf6;
-            position: fixed; /* 將 header 固定 */
-            top: 0; /* 固定在頂部 */
+            position: fixed;
+            top: 0;
             left: 0;
             right: 0;
-            z-index: 1000; /* 確保 header 位於最上層 */
-            padding: 0px 20px; /* 增加 padding */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加陰影 */
+            z-index: 1000;
+            padding: 0px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
           }
           .logo {
             width: 100px;
             display: flex;
             align-items: center;
-            justify-content: center; /* 水平置中 */
+            justify-content: center;
           }
 
           .logo:hover {
             background-color: lightblue;
           }
 
-          .logo p {
-            width: 100%;
-            color: #fff;
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-
           .logo img {
             position: relative;
             top: 8%;
             height: 110%;
-            object-fit: scale-down; /* 自由伸縮但不變形 */
-            max-width: 70%; /* 防止圖片溢出容器 */
+            object-fit: scale-down;
+            max-width: 70%;
           }
           .navbar {
             display: flex;
@@ -211,8 +203,8 @@ export default function Navbar() {
             color: #ff82d2;
           }
           .userpic {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             overflow: hidden;
             display: flex;
@@ -220,13 +212,8 @@ export default function Navbar() {
             justify-content: center;
             margin-right: 20px;
           }
-          .userpic h5 img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
         `}
       </style>
     </>
-  )
+  );
 }
