@@ -7,7 +7,7 @@ const Modal = ({ message, onConfirm, onCancel }) => {
       <div className="modal-content">
         <p>{message}</p>
         <div className="modal-actions">
-          <button onClick={onConfirm}>確定</button>
+          <button type='submit' onClick={onConfirm}>確定</button>
           <button onClick={onCancel}>取消</button>
         </div>
       </div>
