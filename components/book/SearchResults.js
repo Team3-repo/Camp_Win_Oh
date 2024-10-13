@@ -28,17 +28,28 @@ const SearchResult = ({
       <div className={styles.resultDetails}>
         <h3 className={styles.resultTitle}>{name}</h3>
         <h5 className={styles.resultDescription}>{info}</h5>
-        <h5 className={styles.resultCapacity}>適合人數: 最多可容納{max_per}人</h5>
-        <h5 className={styles.resultPrice}>價格: <span className={styles.priceHighlight}>{price}/晚</span></h5>
+        <h5 className={styles.resultCapacity}>
+          適合人數: 最多可容納{max_per}人
+        </h5>
+        <h5 className={styles.resultPrice}>
+          價格: <span className={styles.priceHighlight}>{price}/晚</span>
+        </h5>
         <h5 className={styles.resultFacilities}>床型: {bed_opt}</h5>
       </div>
       <div className={styles.resultActions}>
         <Button
           label="前往預約"
-          onClick={() => AddOffcanvas({ id, name, price, photos, max_per, adult, children })}
+          onClick={() =>
+            AddOffcanvas({ id, name, price, photos, max_per, adult, children })
+          }
         />
         <Button
-          label={<><FaHeartCirclePlus />&nbsp;加入收藏</>}
+          label={
+            <>
+              <FaHeartCirclePlus />
+              &nbsp;加入收藏
+            </>
+          }
           onClick={() => alert('Button clicked!')}
         />
       </div>
@@ -71,18 +82,28 @@ const SearchResults = ({ results }) => {
 
   return (
     <>
-      <OffcanvasCart isOpen={isOffcanvasOpen} toggleOffcanvas={toggleOffcanvas} />
+      <OffcanvasCart
+        isOpen={isOffcanvasOpen}
+        toggleOffcanvas={toggleOffcanvas}
+      />
 
       <section className={styles.searchResults}>
-        <h5 className={styles.resultsCount}>符合條件的房型 (共 {results.length} 筆)</h5>
-        {results.map((result, index) => (
-          <SearchResult
-            key={result.id}
-            index={index}
-            {...result}
-            AddOffcanvas={AddOffcanvas}
-          />
-        ))}
+        <h5 className={styles.resultsCount}>
+          符合條件的房型 (共 {results.length} 筆)
+        </h5>
+        {/* 如果篩選結果為空，顯示 "無符合" */}
+        {results.length === 0 ? (
+          <h3 className={styles.noResultsMessage}>無符合條件的房型方案</h3>
+        ) : (
+          results.map((result, index) => (
+            <SearchResult
+              key={result.id}
+              index={index}
+              {...result}
+              AddOffcanvas={AddOffcanvas}
+            />
+          ))
+        )}
       </section>
     </>
   )

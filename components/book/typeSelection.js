@@ -10,6 +10,7 @@ export default function SearchFilter({ onSearch }) {
   const [selectedRoomType, setSelectedRoomType] = useState('') // 房型選擇
   const [checkInOut, setCheckInOut] = useState('') // 入住和退房日期
   const [totalPersons, setTotalPersons] = useState('') // 總人數
+  const [data, setData] = useState([]) // 儲存篩選後的房型資料
 
   // 初次加載時顯示所有結果
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function SearchFilter({ onSearch }) {
           `http://localhost:3005/book/api/searchType?campsite_id=1`
         )
         const resultData = await response.json()
+        setData(resultData) // 設置初始數據
         onSearch(resultData) // 傳遞結果給父組件
       } catch (error) {
         console.error('加載全部數據時發生錯誤:', error)
@@ -51,7 +53,7 @@ export default function SearchFilter({ onSearch }) {
     })
   }, [])
 
-  // 發送篩選條件到後端 API
+  // 發送篩選條件到後端 API 並進行人數篩選
   const handleSearch = async () => {
     try {
       let url = `http://localhost:3005/book/api/searchType?campsite_id=1`
@@ -79,7 +81,14 @@ export default function SearchFilter({ onSearch }) {
 
       const response = await fetch(url)
       const resultData = await response.json()
-      onSearch(resultData) // 傳遞結果給父組件
+
+      // 過濾符合人數條件的房型
+      const filteredData = resultData.filter(
+        (room) => room.max_per >= totalPersons
+      )
+
+      setData(filteredData) // 更新篩選後的結果
+      onSearch(filteredData) // 傳遞結果給父組件
     } catch (error) {
       console.error('發送篩選條件時發生錯誤:', error)
     }
@@ -114,22 +123,6 @@ export default function SearchFilter({ onSearch }) {
             </div>
           </div>
 
-          {/* 營位名稱篩選 (套用人數篩選樣式) */}
-          <div className={styles.guestSection}>
-            <div className={styles.combineCol}>
-              <div className={styles.bookDateFilter}>
-                <label htmlFor="filters">營位類型:</label>
-                <input
-                  type="text"
-                  id="filters"
-                  value={filters}
-                  onChange={handleFilterChange}
-                  placeholder="請輸入篩選條件"
-                />
-              </div>
-            </div>
-          </div>
-
           {/* 人數篩選 */}
           <div className={styles.guestSection}>
             <div className={styles.combineCol}>
@@ -146,12 +139,34 @@ export default function SearchFilter({ onSearch }) {
             </div>
           </div>
 
+          {/* 營位名稱篩選 */}
+          <div className={styles.guestSection}>
+            <div className={styles.combineCol}>
+              <div className={styles.bookDateFilter}>
+                <label htmlFor="filters">營位名稱篩選:</label>
+                <input
+                  type="text"
+                  id="filters"
+                  value={filters}
+                  onChange={handleFilterChange}
+                  placeholder="輸入篩選條件"
+                />
+              </div>
+            </div>
+          </div>
+
           {/* 搜索按鈕 */}
-          <button className={styles.searchBtn} onClick={handleSearch}>
-            <IoSearch />
-            &nbsp;搜索
-          </button>
+          <Button
+            label={
+              <>
+                <IoSearch />
+                &nbsp;搜索
+              </>
+            }
+            onClick={handleSearch}
+          />
         </div>
+
         {/* 房型選擇 */}
         <div className={styles.typeContainer}>
           <h5 style={{ color: '#2c3e50', paddingTop: '10px' }}>住宿類型</h5>
