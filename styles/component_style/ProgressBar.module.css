@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  align-items: flex-start
+  align-items: flex-start;
 }
 
 .step {
@@ -15,9 +15,15 @@
   align-items: center;
   text-align: center;
 }
+.step2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
 .circle {
-  background-color: #F76BC3;
+  background-color: #f76bc3;
   color: white;
   width: 30px;
   height: 30px;
@@ -26,17 +32,37 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+}
+.circle2 {
+  background-color: #ff5833;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 }
 
 .step p {
   margin-top: 5px;
   font-size: 14px;
-  color: #2C3E50;
+  color: #2c3e50;
+}
+
+.step2 p {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #2c3e50;
+  font-weight: bold;
 }
 
 .line {
   flex-grow: 1;
   height: 2px;
-  background-color: #F5BFD5;
+  background-color: #f5bfd5;
   margin: 15px 10px;
 }

@@ -2,9 +2,9 @@ import styles from '@/styles/BookCart.module.css'
 import Button from '@/components/book/button'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useState, useEffect } from 'react'
-import ProgressBar from './ProgressBar'
+import ProgressBar2 from './ProgressBar2'
 
-export default function CartDetail({ setStep }) {
+export default function CartPay({ setStep }) {
   // 儲存購物車資料
   const [BookCartItems, setBookCartItems] = useState([])
   const [activeIndex, setActiveIndex] = useState(null) // 手風琴控制
@@ -15,7 +15,7 @@ export default function CartDetail({ setStep }) {
   const finalTotal = BookCartItems.reduce(
     (BookTotal, item) => BookTotal + item.price * item.quantity,
     0
-  ).toFixed(2)
+  )
   const discountedTotal = Math.floor(finalTotal * discountAmount)
 
   // 導向ECPay
@@ -55,17 +55,11 @@ export default function CartDetail({ setStep }) {
                     alt="Campsite Image"
                   />
                   <div className={styles.bookingDetails}>
-                    <p>
-                      [{item.name}]
-                      <br />
-                      {item.info}
-                    </p>
-                    <p>
-                      大人: {item.adults}人, 小孩: {item.children}人
-                    </p>
-                    <p>日期: {item.date}</p>
-                    <p>數量: {item.quantity}</p>
-                    <p>小計: NT${item.price * item.quantity}</p>
+                    <h5>{item.name}</h5>
+                    <p>姓名: {item.username}</p>
+                    <p>手機號碼: {item.phone}</p>
+                    <p>電子郵件: {item.date}</p>
+                    
                   </div>
                 </div>
               </div>
@@ -81,7 +75,7 @@ export default function CartDetail({ setStep }) {
   return (
     <>
       {/* 顯示步驟進度條 */}
-      <ProgressBar />
+      <ProgressBar2 />
 
       <div className={styles.BCartContainer3}>
         {/* 左側表單與付款方式 */}
@@ -163,32 +157,37 @@ export default function CartDetail({ setStep }) {
             {/* 顯示來自 cartItems 的摘要資料 */}
             {BookCartItems.map((item) => (
               <div key={item.id} className={styles.cartItem}>
+                <h5 style={{fontWeight:'bold',fontSize:'18px'}}>{item.name}</h5>
                 <h5>
-                  {item.name} | {item.info}
+                  預訂日期
                 </h5>
-                <p>
-                  大人: {item.adults}人, 小孩: {item.children}人
-                </p>
-                <p>日期: {item.date}</p>
-                <p>數量: {item.quantity}</p>
-                <p>單價: NT${item.price}</p>
-                <p>小計: NT${item.price * item.quantity}</p>
+                <p style={{textAlign:'right'}}>{item.InOutDate}</p>
+                <hr />
+                <h5>
+                  大人 <p>{item.adult}人</p>
+                </h5>
+                <h5>
+                  小孩<p>{item.child}人</p>
+                </h5>
+                <h5>
+                  單價<p>NT${item.price}</p>
+                </h5>
                 <hr />
               </div>
             ))}
             {/* 總金額計算 */}
             <h5>
-              總金額:
+              總金額
               <p>
                 NT$
                 {finalTotal}
               </p>
             </h5>
             <h5>
-              折扣: <p>七折折扣</p>
+              優惠券 <p className={styles.couponP}>七折折扣</p>
             </h5>
             <h5>
-              付款金額:
+              付款金額
               <p>
                 NT$
                 {discountedTotal}

@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   max-width: 1100px;
-  margin: 0px auto 120px;
+  margin: 0px auto 70px;
   padding: 0 100px;
 }
 
@@ -28,7 +28,6 @@
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(84, 65, 65, 0.1);
   width: 62%;
-  
 }
 .bookingForm h3 {
   color: #ff5833;
@@ -71,8 +70,10 @@
   padding-top: 2px;
 }
 .orderSummary p {
-  font-size: 14px;
+  font-size: 16px;
   padding-top: 2px;
+  
+  justify-content: space-between;
 }
 /* ------ */
 .orderSummary2 {
@@ -94,16 +95,29 @@
 .orderSummary2 p {
   font-size: 14px;
 }
-.orderSummary2 .couponP {
+.orderSummary2,
+.couponP {
   color: #198ea6;
-  font-size: 14px;
+  font-size: 16px;
+}
+.couponT {
+  font-size: 16px;
 }
 .orderSummary2 .totalP {
   color: #ff5833;
   font-size: 16px;
   font-weight: bold;
 }
-
+/* coupon */
+.couponSection {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.appliedDiscount {
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  color: #198ea6;
+}
 /* 預定資訊 */
 .bookingInfo {
   display: flex;
@@ -114,13 +128,15 @@
   height: 80px;
   border-radius: 10px;
   margin-right: 15px;
+  padding-bottom: 5px;
+  height: auto;
   object-fit: cover;
 }
 .bookingDetails {
   color: #333;
 }
 
-.userSection{
+.userSection {
   margin-bottom: 10px;
   border-bottom: 2px solid #4e3d34;
   color: #4e3d34;

@@ -12,7 +12,7 @@ import Reviews from '@/components/book/Reviews'
 import { BookCartProvider } from '@/context/book/BookCartContext'
 import SuggestCard2 from '@/components/book/SuggestCard2'
 import OffcanvasCart from '@/components/book/offcanvas'
-import SearchFilter2 from '@/components/book/SearchFilter2'
+import TypeSelection from '@/components/book/typeSelection'
 
 export default function Index() {
   // 輪播大圖參數
@@ -35,6 +35,9 @@ export default function Index() {
 
   // 設定當前的 campsites_id
   const [campsiteId, setCampsiteId] = useState(1) // 預設為 1
+
+
+  const [results, setResults] = useState([]) // 儲存篩選結果
 
   useEffect(() => {
     // 使用 fetch 來從 public 資料夾中的 JSON 檔案讀取資料
@@ -78,17 +81,16 @@ export default function Index() {
 
       {/* info */}
       <CampInfo />
-      
-      {/* 篩選搜尋 */}
-      <SearchFilter2 />
 
+      {/* 購物車-預約詳情 */}
       <BookCartProvider>
         <OffcanvasCart />
       </BookCartProvider>
 
       {/* 輪播圖:篩選結果 */}
       <BookCartProvider>
-        <SearchResults campsiteId={campsiteId} />
+        <TypeSelection onSearch={setResults} /> {/* 傳遞篩選結果函數 */}
+        <SearchResults  results={results} /> {/* 顯示篩選結果 */}
       </BookCartProvider>
 
       {/* 手風琴-注意事項 */}
