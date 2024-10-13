@@ -6,9 +6,9 @@ function CouponSection({ onApplyCoupon }) {
   const [inputCoupon, setInputCoupon] = useState("");
   
   const coupons = [
-    { id: 1, name: "7折優惠卷", discount: "0.7", type: "全部", code: "SAVE30" },
-    { id: 2, name: "8折優惠卷", discount: "0.8", type: "全部", code: "SAVE20" },
-    { id: 3, name: "9折優惠卷", discount: "0.9", type: "全部", code: "SAVE10" },
+    { id: 1, name: "7折優惠卷", discount: "0.7", type: "全部1", code: "SAVE30" },
+    { id: 2, name: "8折優惠卷", discount: "0.8", type: "全部2", code: "SAVE20" },
+    { id: 3, name: "9折優惠卷", discount: "0.9", type: "全部3", code: "SAVE10" },
   ];
 
   const handleCouponSelect = (e) => {

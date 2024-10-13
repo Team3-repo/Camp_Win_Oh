@@ -54,7 +54,7 @@ function ShoppingCartContent() {
         />
       ))}
       <div className="divider" />
-      <CouponSection />
+      {/* <CouponSection /> */}
       {/* 傳遞 totalAmount 到 OrderSummary */}
       {/* <OrderSummary subtotal={totalAmount} /> 新增的 OrderSummary */}
       <TotalSection totalAmount={totalAmount} />

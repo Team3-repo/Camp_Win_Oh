@@ -86,6 +86,7 @@ const CheckoutInfo = () => {
         .sidebar-column {
           display: flex;
           flex-direction: column;
+          {/* align:center; */}
           line-height: normal;
           width: 22%;
           margin-left: 20px;
