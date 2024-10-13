@@ -19,13 +19,14 @@ export default function Card({
   cardLike,
   cardLikeIcon,
   PCol,
-  className = ''
+  className = '',
+  onClick // onClick作prop
 }) {
   // 預設使用 e-s-col1 樣式，若要更改於 ESCol 添加其他樣式名稱
   const ESColClass = `${styles['e-s-col1']} ${styles[ESCol] || ''}`;
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}> {/* 確保整個卡片可點擊 */}
       {showIcon && (
         <div className={styles[cardLike]}>
           <div className={styles[cardLikeIcon]}>{icon}</div>
@@ -46,7 +47,7 @@ export default function Card({
 
         <Button
           label={label}
-          onClick={() => alert('Button clicked!')}
+          onClick={onClick} // 使用相同的 onClick 行為
         />
       </div>
     </div>

@@ -9,10 +9,10 @@ export default function EventPreForm() {
   const router = useRouter()
 
   const handleBack = () => {
-    window.history.back() // 回上頁不重載
+    window.history.back() 
   }
 
-  // 確保 eventData 中包含 user_id，否則從 localStorage 補上
+  // 確保 eventData 有 user_id
   const ensureUserIdInEventData = () => {
     const storedUserData = localStorage.getItem('user')
     if (storedUserData) {
@@ -80,7 +80,9 @@ export default function EventPreForm() {
 
     // 確認所有必要欄位都有值
     const missingFields = requiredFields.filter(
-      (field) => !eventData[field] || eventData[field] === ''
+      (field) =>
+        (eventData[field] === undefined || eventData[field] === '') &&
+        field !== 'eOtherFees'
     )
 
     if (missingFields.length > 0) {
@@ -89,13 +91,18 @@ export default function EventPreForm() {
       return
     }
 
-    // 如果圖片 URL 是 Base64 編碼，則先進行圖片上傳
+    // 確認eOtherFees為0
+    if (eventData.eOtherFees === undefined || eventData.eOtherFees === null) {
+      handleChange('eOtherFees', 0) // 如eOtherFees為undefined或"">設為 0
+    }
+
+    // 如果圖片URL是Base64，則先進行圖片上傳
     let imageUrl = eventData.imageUrl
     if (imageUrl && imageUrl.startsWith('data:image/')) {
       imageUrl = await uploadImage(imageUrl)
       if (!imageUrl) {
         setIsLoading(false)
-        return // 如果圖片上傳失敗，終止執行
+        return // 如果圖片上傳失敗>終止
       }
     }
 
@@ -105,11 +112,9 @@ export default function EventPreForm() {
 
       const eventDataToSend = {
         ...eventData,
-        event_pic: imageUrl, // 使用上傳後的圖片 URL 來填充 event_pic 欄位
-        selectedBookType: selectedBookTypeId, // 傳遞 selectedBookType 的 id，而不是整個物件
+        event_pic: imageUrl, // 使用上傳後的圖片URL>event_pic
+        selectedBookType: selectedBookTypeId, // 傳遞 selectedBookType的id，而不是整個物件
       }
-
-      console.log('送出活動資料:', eventDataToSend)
 
       const response = await fetch(
         'http://localhost:3005/events/api/save_event',
@@ -125,7 +130,8 @@ export default function EventPreForm() {
       if (response.ok) {
         const savedEvent = await response.json()
         localStorage.setItem('createdEventData', JSON.stringify(savedEvent))
-        router.push('/events/eventCSuccess') // 成功頁面
+        localStorage.removeItem('eventPreviewData') // 活動建立成功刪除暫存
+        router.push('/events/eventCSuccess') // 然後跳到活動建立成功頁面
       } else {
         console.error('活動儲存失敗')
         alert('活動儲存失敗，請再試一次！')
@@ -141,12 +147,12 @@ export default function EventPreForm() {
   useEffect(() => {
     const storedEventData = localStorage.getItem('eventPreviewData')
     if (storedEventData) {
-      setEventData(JSON.parse(storedEventData)) 
+      setEventData(JSON.parse(storedEventData))
     }
   }, [setEventData])
 
   if (!eventData) {
-    return <h2 style={{ color: '#ff82d2' }}>資料載入中，請稍後</h2>
+    return <h2 style={{ color: '#ff82d2' }}>資料載入中</h2>
   }
 
   return (
