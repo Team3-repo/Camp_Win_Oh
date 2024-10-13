@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Avatar from '@/components/user/Avatar';
 import Profile from '@/components/user/Profile';
 import Security from '@/components/user/Security'; 
-import Billing from '@/components/user/Billing';
+// import Billing from '@/components/user/Billing';
 
 export default function Settings() {
   const [activeSection, setActiveSection] = useState('Avatar');
@@ -24,8 +24,8 @@ export default function Settings() {
         return <Profile />;
       case 'Security':
         return <Security />;
-      case 'Billing':
-        return <Billing />;
+      // case 'Billing':
+      //   return <Billing />;
       default:
         return null;
     }
@@ -62,14 +62,14 @@ export default function Settings() {
             }}
             type={activeSection === 'Security' ? undefined : 'btn-reg'}
           />
-          <Button
+          {/* <Button
             label="歷史訂單" // Billing
             onClick={() => {
               toast.info('歷史訂單');
               setActiveSection('Billing');
             }}
             type={activeSection === 'Billing' ? undefined : 'btn-reg'}
-          />
+          /> */}
         </div>
 
         {/* 根據選擇顯示對應的內容 */}
