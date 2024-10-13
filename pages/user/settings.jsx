@@ -6,7 +6,7 @@ import Footer1 from '@/components/event/footer1';
 import styles from '@/styles/user/settings.module.css';
 import customBody from '@/styles/user/customBody.module.css';
 import Image from 'next/image';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Avatar from '@/components/user/Avatar';
 import Profile from '@/components/user/Profile';
@@ -76,7 +76,6 @@ export default function Settings() {
         {renderSection()}
       </div>
       <Footer1 style={{ width: '100%' }} />
-      <ToastContainer /> {/* 設定 ToastContainer */}
     </div>
   );
 }
