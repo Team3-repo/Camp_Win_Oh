@@ -30,10 +30,21 @@ const CheckoutForm = () => {
   
   const router = useRouter();
 
+// 確保 autoFillForm 函數被正確定義在組件內部
+  const autoFillForm = () => {
+    setName('陳小華');
+    setPhone('0912345678');
+    setEmail('example@email.com');
+    setAddress('高雄市前金區中正四路211號');
+    setNotes('請於週末送達');
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(cartItems); // 檢查 cartItems 的值
 
+  
     try {
       const res = await fetch('/api/addData', {
         method: 'POST',
@@ -74,6 +85,7 @@ const CheckoutForm = () => {
         <form className="form" onSubmit={handleSubmit}>
           <h2 className="form-title">填寫資料</h2>
           <div className="form-content">
+           
             <h3 className="form-section-title">訂購人資訊</h3>
             <div className="form-fields">
               <div className="form-field">
@@ -162,10 +174,17 @@ const CheckoutForm = () => {
                 </label>
               </div>
             </div>
+            {/* 新增自動填充按鈕 */}
+            <div className="btn-autofill-position">
+           <button type="button" onClick={autoFillForm} className="btn-autofill">
+              一鍵填寫範例資料
+            </button>
+            </div>
             <div className="form-actions">
               <Link href="/cart/3ShoppingCartPage">
                 <button type="button" className="btn-back">回上一頁</button>
               </Link>
+              
               <div className="put-flex">
               <button type="submit" className="btn-next">貨到付款</button>
               <button onClick={goECPay} type="button" className="btn-next">信用卡付款</button>
@@ -331,7 +350,7 @@ const CheckoutForm = () => {
         .form-actions {
           display: flex;
           justify-content: space-between;
-          margin-top: 24px;
+          margin-top: 0px;
         }
         .btn-back,
         .btn-next {
@@ -352,6 +371,24 @@ const CheckoutForm = () => {
         .put-flex{
           display:flex;
           gap:20px;
+        }
+        .btn-autofill-position{
+          display: flex;
+          justify-content: flex-end;
+          width: 100%; /* 讓容器佔滿可用空間 */
+        }
+        .btn-autofill {
+          margin-bottom: 20px;
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 18px;
+        }
+        .btn-autofill:hover {
+          background-color: #45a049;
         }
       `}</style>
     </div>
