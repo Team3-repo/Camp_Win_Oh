@@ -5,29 +5,7 @@ import { useState, useEffect } from 'react'
 import flatpickr from 'flatpickr'
 import 'flatpickr/dist/flatpickr.min.css'
 
-export default function SearchFilter() {
-  const filterOptions = {
-    房型: [
-      { id: 'bedType', label: '全部' },
-      { id: 'camp', label: '帳篷區' },
-      { id: 'campCar', label: '露營車' },
-      { id: 'house', label: '小木屋' },
-    ],
-    區域: [
-      { id: 'campArea', label: '全部' },
-      { id: 'campA', label: 'A' },
-      { id: 'campB', label: 'B' },
-      { id: 'campC', label: 'C' },
-    ],
-  }
-
-  const [selectedFilters, setSelectedFilters] = useState([
-    'bedType',
-    'campArea',
-  ])
-
-  // 搜索btn
-
+export default function SearchFilter2() {
   // 日期篩選
   useEffect(() => {
     flatpickr('#check-in-out', {
@@ -72,19 +50,19 @@ export default function SearchFilter() {
               </div>
             </div>
 
-            {/* 人數 */}
-            <div className={styles.guestSection}>
-              <div className={styles.combineCol}>
-                <div className={styles.bookDateFilter}>
-                  <label htmlFor="ALLperson">總人數:</label>
-                  <input
-                    type="number"
-                    id="ALLperson"
-                    placeholder="請選擇人數"
-                  />
-                </div>
+            {/* 人數篩選 */}
+          <div className={styles.guestSection}>
+            <div className={styles.combineCol}>
+              <div className={styles.bookDateFilter2}>
+                <label htmlFor="ALLperson">總人數:</label>
+                <input
+                  type="number"
+                  id="ALLperson"
+                  placeholder="請選擇人數"
+                />
               </div>
             </div>
+          </div>
 
             {/* 搜索btn */}
             <Button
@@ -96,45 +74,6 @@ export default function SearchFilter() {
               }
             />
           </div>
-
-          {/* 分組顯示篩選選項 */}
-          {Object.keys(filterOptions).map((group) => (
-            <div key={group} className={styles.typeSection}>
-              <label>{group}</label>
-              <div className={styles.typeOption}>
-                {filterOptions[group].map((option) => (
-                  <div key={option.id}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        id={option.id}
-                        checked={selectedFilters.includes(option.id)}
-                        onChange={(e) => {
-                          const newFilters = [...selectedFilters]
-                          if (e.target.checked) {
-                            newFilters.push(option.id)
-                          } else {
-                            const index = newFilters.indexOf(option.id)
-                            if (index > -1) {
-                              newFilters.splice(index, 1)
-                            }
-                          }
-                          setSelectedFilters(newFilters)
-                        }}
-                      />
-                      {option.label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-
-          {/* 已選擇的選項顯示 */}
-          {/* <div style={{ marginTop: '20px' }}>
-            <strong>選擇的設施與服務:</strong>
-            {selectedFilters.length > 0 ? selectedFilters.join(', ') : '未選擇'}
-          </div> */}
         </div>
       </div>
     </>

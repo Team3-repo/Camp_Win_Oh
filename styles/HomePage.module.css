@@ -23,6 +23,7 @@
   align-items: center;
   justify-content: center;
   margin: 20px auto;
+  box-sizing: none;
 }
 .filterContainer {
   position: relative;
@@ -53,17 +54,17 @@
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  flex-wrap: wrap;
 }
-.typeSection{
+.typeSection {
   padding-top: 10px;
+  width: 30%;
 }
-.guestSection{
+.guestSection {
   align-items: center;
   text-align: left;
   width: 35%;
 }
-.combineCol{
+.combineCol {
   display: flex;
   flex-direction: column;
 }
@@ -72,10 +73,11 @@
 .guestSection label,
 .typeSection label,
 .typeOption label {
-  font-size: 14px;
-  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+  font-size: 16px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
   font-weight: bold;
   color: #2c3e50;
+  width: 70%;
 }
 
 .dateSection {
@@ -97,33 +99,191 @@
   display: flex;
   gap: 10px;
 }
-
+.typeContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
 .bedType {
   margin-right: 5px;
 }
 
-.bookDateFilter{
+.bookDateFilter {
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
 }
 .bookDateFilter label {
-  font-size: 14px;
-  color: #333;
+  font-size: 16px;
   margin-bottom: 5px;
 }
 
-.bookDateFilter input[type='text'],
-.bookDateFilter input[type='number']{
+.bookDateFilter input[type='text'] {
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 220px;
-  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
-  width: 80%;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  width: 70%;
 }
 
+.bookDateFilter2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookDateFilter2 input[type='number'] {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  width: 70%;
+}
+.bookDateFilter2 label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.searchBtn {
+  display: flex;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #fc9a84;
+  width: 80px;
+  font-family: 'Poetsen One','Zen Maru Gothic', sans-serif;
+
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.searchBtn:hover {
+  background-color: #4282b7;
+  color: #fff579;
+  border: none;
+}
+
+/* coupon */
+.couponContainer {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  align-items: flex-start;
+  padding-top: 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.couponContainer3 {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  align-items: flex-start;
+  border: 1px solid #d8cec7;
+  border-radius: 5px;
+}
+.couponContainer2 {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  align-items: flex-start;
+  border-radius: 5px;
+}
+.couponContainer input {
+  width: 85%;
+  padding: 10px 10px 10px 10px; /* 右側空間用來放置圖示 */
+  border-radius: 3.79px;
+  border: 1px solid #ccc;
+}
+.couponBtn {
+  display: flex;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #fc9a84;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 5px;
+}
+.couponBtn:hover {
+  background-color: #4282b7;
+  color: #fff579;
+  border: none;
+}
+.couText {
+  display: flex;
+  width: 100%;
+}
+.couDraw {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  background-color: #f5aeae;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.couDrawP {
+  text-align: center;
+  padding: 5px;
+  color: #fff;
+  font-weight: normal;
+  font-size: 20px;
+}
+.couDrawP2 {
+  text-align: center;
+  padding: 5px;
+  color: #fff;
+  font-weight: normal;
+}
+.couDrawH2 {
+  text-align: center;
+  padding: 5px;
+  color: #fff;
+  border: 2px dotted #fff;
+  margin: 0 10px;
+}
+.couDrawT {
+  font-weight: normal;
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+.couDrawT2 {
+  font-weight: normal;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+.couDraw2 {
+  margin: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  padding-bottom: 5px;
+}
+.couDraw3 input {
+  margin-top: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  align-items: center;
+}
+.couDraw3 {
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  align-items: center;
+}
 /* region */
 .regSearch {
   display: flex;

@@ -250,7 +250,7 @@
   width: 100%;
   max-width: 300px;
   color: white;
-  background-color: #ff5833;
+  background-color: #fc9a84;
   border: none;
   border-radius: 4px;
   padding: 5px;
@@ -260,7 +260,8 @@
 }
 
 .checkoutButton:hover {
-  background-color: #ff7043;
+  background-color: #4282b7;
+  color: #fff579;
 }
 
 
