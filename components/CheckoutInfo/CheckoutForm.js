@@ -54,6 +54,8 @@ const CheckoutForm = () => {
       const data = await res.json();
       if (res.ok) {
         setShowMessage(true); // 顯示自定義訊息
+        // 新增：儲存訂單 ID 到 localStorage
+        localStorage.setItem('lastOrderId', data.orderId);
         setTimeout(() => {
           setShowMessage(false);
           router.push('/payment/callback'); // 成功後跳轉頁面
