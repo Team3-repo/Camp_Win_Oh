@@ -208,7 +208,7 @@ const OverlayLoginRegister = ({ onClose }) => {
           opacity: 0; /* 初始狀態為透明 */
         }
         .overlay.color-changed {
-          backdrop-filter: blur(100px); /* 改變的模糊程度 */
+          backdrop-filter: blur(3px); /* 改變的模糊程度 */
           opacity: 1; /* 改變的不透明度 */
           transition: backdrop-filter 100ms linear, opacity 200ms linear; /* 設定過渡效果 */
         }
