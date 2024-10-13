@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from '@/styles/user/profile.module.css';
-import { toast } from 'react-toastify';
+import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Avatar = () => {
