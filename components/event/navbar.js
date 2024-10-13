@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../book/button'
 import OverlayLoginRegister from '../user/OverlayLoginRegister'
+import Image from 'next/image'
 
 export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false) // 狀態控制覆蓋層的顯示
@@ -79,9 +80,11 @@ export default function Navbar() {
               {/* 確保 storedUser 存在後再顯示 */}
               <div className="userpic">
                 <a href={`${baseURL}/user/settings`}>
-                  <img
-                    src="https://www.anime-chiikawa.jp/images/episodes/084.jpg"
+                  <Image
+                    src="/pics/avatar-1.png"
                     alt=""
+                    width={40}
+                    height={40}
                   />
                 </a>
               </div>
