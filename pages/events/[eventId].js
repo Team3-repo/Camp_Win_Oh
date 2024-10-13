@@ -9,10 +9,10 @@ export default function EventDetail() {
   const [participants, setParticipants] = useState([])
   const [isJoined, setIsJoined] = useState(false)
   const [isEventFull, setIsEventFull] = useState(false)
-  const [isOrganizer, setIsOrganizer] = useState(false) // 判斷使用者是否為主辦人
+  const [isOrganizer, setIsOrganizer] = useState(false) // 是不是主辦人
   const [userId, setUserId] = useState(null)
   const [comments, setComments] = useState([]) // 留言板
-  const [newComment, setNewComment] = useState('') // 新留言內容
+  const [newComment, setNewComment] = useState('') // 留言內容
   const router = useRouter()
   const { eventId } = router.query
 
@@ -48,6 +48,7 @@ export default function EventDetail() {
             (participant) => participant.user_id === userId
           )
           setIsJoined(!!userParticipation)
+          setIsOrganizer(userParticipation?.is_organizer || false)
         }
 
         // Fetch留言
@@ -188,7 +189,6 @@ export default function EventDetail() {
   return (
     <>
       <Navbar />
-
       <section className="ecsectionall2">
         <div className="ecsection-form">
           <div className="ecsection">
@@ -287,14 +287,15 @@ export default function EventDetail() {
             </div>
             {/* 留言板區域 */}
             <div className="comment-section">
-              <h3>留言板</h3>
+              <h3>留言板 📝</h3>
               <div className="comment-list">
                 {comments.map((comment) => (
                   <div key={comment.id} className="comment-item">
                     <p>
                       <strong style={{ color: '#FF5833' }}>
-                        會員編號 {comment.user_id}  說：
+                        會員編號 {comment.user_id} 說：
                       </strong>
+                      <br />
                       {comment.comment}
 
                       <br />
@@ -313,7 +314,7 @@ export default function EventDetail() {
                   <textarea
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
-                    placeholder="輸入留言...請勿送出敏感資訊"
+                    placeholder="輸入留言...請保持禮貌"
                   ></textarea>
                   <Button label="發表留言" onClick={postComment} />
                 </div>

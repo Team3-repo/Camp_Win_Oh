@@ -8,6 +8,8 @@ import Compressor from 'compressorjs'
 export default function EventCreateForm() {
   const { eventData, setEventData } = useContext(EventContext)
   const [userData, setUserData] = useState({ user_id: '' })
+  const [agree, setAgree] = useState(false)
+  const [errors, setErrors] = useState({})
 
   const {
     organizerNick,
@@ -28,6 +30,112 @@ export default function EventCreateForm() {
   const [selectedCampsite, setSelectedCampsite] = useState(null)
   const [campsites, setCampsites] = useState([])
   const [bookingTypes, setBookingTypes] = useState([])
+  const prohibitedWords = [
+    // 禁用詞彙
+    '自殺',
+    '屍體',
+    '死亡',
+    '性騷',
+    '性別歧視',
+
+    // 新增與暴力相關的詞彙
+    '謀殺',
+    '殺人',
+    '暴力',
+    '毆打',
+    '傷害',
+    '強暴',
+    '虐待',
+    '戰爭',
+    '襲擊',
+    '恐怖主義',
+
+    // 非法行為相關
+    '毒品',
+    '吸毒',
+    '販毒',
+    '走私',
+    '賭博',
+    '非法交易',
+    '盜竊',
+    '搶劫',
+    '欺詐',
+    '詐騙',
+    '勒索',
+
+    // 不當言論與侮辱性詞彙
+    '智障',
+    '白癡',
+    '蠢貨',
+    '廢物',
+    '垃圾',
+    '混蛋',
+    '狗屎',
+    '種族歧視',
+    '宗教歧視',
+    '膚色歧視',
+    '同性戀歧視',
+
+    // 不當的性相關內容
+    '強姦',
+    '亂倫',
+    '淫穢',
+    '色情',
+    '暴露',
+    '裸露',
+    '性交易',
+    '性虐待',
+    '未成年性交',
+    '戀童癖',
+
+    // 兒童保護相關
+    '兒童色情',
+    '誘拐',
+    '虐童',
+    '猥褻兒童',
+    '未成年色情',
+    '青少年性行為',
+    '戀童',
+
+    // 環境保護與非法行為
+    '亂丟垃圾',
+    '毀壞自然',
+    '獵捕野生動物',
+    '非法露營',
+    '濫砍濫伐',
+    '非法狩獵',
+    '破壞營地',
+    '焚燒垃圾',
+    '污染水源',
+    '環境破壞',
+
+    // 與健康安全相關
+    '傳染病',
+    '瘟疫',
+    '感染',
+    '危險食品',
+    '酒駕',
+    '毒駕',
+    '中毒',
+    '醉酒',
+    '失控',
+
+    // 不適當的宗教與政治相關
+    '原教旨主義',
+    '異教徒',
+    '恐怖主義',
+    '極端主義',
+    '政變',
+    '武裝起義',
+    '造反',
+
+    // 其他不當內容
+    '假新聞',
+    '陰謀論',
+    '假冒',
+    '騙局',
+    '邪教',
+  ]
 
   // 從 LocalStorage 中讀取資料並填入
   useEffect(() => {
@@ -52,8 +160,6 @@ export default function EventCreateForm() {
       setUserData({
         user_id: user.user_id || '',
         user_name: user.user_name || '',
-        phone: user.phone || '',
-        email: user.email || '',
       })
       // 更新 eventData 中的 user_id
       setEventData((prev) => ({
@@ -85,6 +191,41 @@ export default function EventCreateForm() {
       return updatedEventData
     })
   }
+
+  // 表單驗證
+  const validateForm = () => {
+    const newErrors = {}
+  
+    // 檢查必填欄位
+    if (!imageUrl) newErrors.imageUrl = '請上傳圖片'
+    if (!organizerNick) newErrors.organizerNick = '請填寫暱稱'
+    if (!eventDescription) newErrors.eventDescription = '請填寫活動簡介'
+    if (!eventTitle) newErrors.eventTitle = '請填寫活動名稱'
+    if (!eStartDate) newErrors.eStartDate = '請選擇開始日期'
+    if (!eEndDate) newErrors.eEndDate = '請選擇結束日期'
+    if (!eventPeople) newErrors.eventPeople = '請填寫活動人數'
+    if (!eventNotes) newErrors.eventNotes = '請填寫備註'
+  
+    // 禁用詞彙檢查
+    const checkProhibitedWords = (text, fieldName) => {
+      const containsProhibited = prohibitedWords.some((word) => text.includes(word))
+      if (containsProhibited) {
+        newErrors[fieldName] = `*包含敏感詞彙`
+      }
+    }
+  
+    checkProhibitedWords(organizerNick, 'organizerNick')
+    checkProhibitedWords(eventDescription, 'eventDescription')
+    checkProhibitedWords(eventTitle, 'eventTitle')
+    checkProhibitedWords(eventNotes, 'eventNotes')
+  
+    if (!agree) newErrors.agree = '請同意揪團主辦人聲明'
+  
+    setErrors(newErrors)
+  
+    return Object.keys(newErrors).length === 0
+  }
+
   // 上傳圖片處理邏輯
   const handleUploadImage = async (e) => {
     const file = e.target.files[0]
@@ -240,6 +381,12 @@ export default function EventCreateForm() {
   }
 
   const handlePreview = () => {
+    // 首先進行表單驗證
+    if (!validateForm()) {
+      return // 如果表單驗證失敗，則停止後續處理
+    }
+
+    // 如果驗證成功，進行預覽跳轉
     const previewData = {
       ...eventData,
       user_id: userData.user_id,
@@ -247,6 +394,7 @@ export default function EventCreateForm() {
       campName: selectedCampsite?.name,
       campAdd: selectedCampsite?.address,
     }
+
     localStorage.setItem('eventPreviewData', JSON.stringify(previewData))
     window.location.href = '/events/eventPreview'
   }
@@ -277,6 +425,11 @@ export default function EventCreateForm() {
                 accept=".jpg, .png"
                 onChange={handleUploadImage}
               />
+              {errors.imageUrl && (
+                <p style={{ color: 'red', fontSize: '12px' }}>
+                  {errors.imageUrl}
+                </p>
+              )}
             </div>
 
             {/* 活動簡介 */}
@@ -294,6 +447,11 @@ export default function EventCreateForm() {
                 }
                 required
               />
+              {errors.eventDescription && (
+                <p style={{ color: 'red', fontSize: '12px' }}>
+                  {errors.eventDescription}
+                </p>
+              )}
               {/* 自動填入資料的按鈕 */}
               <div
                 className="eautobtn"
@@ -333,6 +491,11 @@ export default function EventCreateForm() {
                   placeholder="大家都會看到お"
                   required
                 />
+                {errors.organizerNick && (
+                  <p style={{ color: 'red', fontSize: '12px' }}>
+                    {errors.organizerNick}
+                  </p>
+                )}
               </div>
             </div>
             {/* 活動名稱 */}
@@ -340,12 +503,16 @@ export default function EventCreateForm() {
               <label htmlFor="ecevent-name">活動名稱</label>
               <input
                 type="text"
-                id="ecevent-name"
+                id="eventTitle"
                 value={eventTitle}
                 onChange={(e) => handleChange('eventTitle', e.target.value)}
-                placeholder="請輸入活動名稱"
                 required
               />
+              {errors.eventTitle && (
+                <p style={{ color: 'red', fontSize: '12px' }}>
+                  {errors.eventTitle}
+                </p>
+              )}
             </div>
 
             {/* 日期選擇 */}
@@ -360,6 +527,11 @@ export default function EventCreateForm() {
                   placeholder="選擇開始日期"
                   required
                 />
+                {errors.eStartDate && (
+                  <p style={{ color: 'red', fontSize: '12px' }}>
+                    {errors.eStartDate}
+                  </p>
+                )}
               </div>
               <div className="ecform-group">
                 <label htmlFor="end-date">結束日期</label>
@@ -371,25 +543,15 @@ export default function EventCreateForm() {
                   placeholder="選擇結束日期"
                   required
                 />
+                {errors.eEndDate && (
+                  <p style={{ color: 'red', fontSize: '12px' }}>
+                    {errors.eEndDate}
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* 區域和營地 */}
             <div className="eclocation-group">
-              {/* <div className="ecform-group">
-                <label htmlFor="ecarea">區域</label>
-                <select
-                  id="ecarea"
-                  value={area}
-                  onChange={(e) => setArea(e.target.value)}
-                  required
-                >
-                  <option value="北部">北部</option>
-                  <option value="中部">中部</option>
-                  <option value="南部">南部</option>
-                  <option value="東部">東部</option>
-                </select>
-              </div> */}
               <div className="ecform-group">
                 <label htmlFor="eccamp">營地</label>
                 <select
@@ -478,6 +640,11 @@ export default function EventCreateForm() {
                     onChange={handleEventPeopleChange}
                     required
                   />
+                  {errors.eventPeople && (
+                    <p style={{ color: 'red', fontSize: '12px' }}>
+                      {errors.eventPeople}
+                    </p>
+                  )}
                 </div>
                 <div className="ecform-group">
                   <label htmlFor="ecfee">其他支出</label>
@@ -544,6 +711,11 @@ export default function EventCreateForm() {
                 onChange={(e) => handleChange('eventNotes', e.target.value)}
                 required
               />
+              {errors.eventNotes && (
+                <p style={{ color: 'red', fontSize: '12px' }}>
+                  {errors.eventNotes}
+                </p>
+              )}
             </div>
           </div>
           {/* 主辦人聲明 */}
@@ -558,11 +730,27 @@ export default function EventCreateForm() {
               </p>
             </div>
             <div className="eccheckbox">
-              <input type="checkbox" id="ecagree" required />{' '}
+              <input
+                type="checkbox"
+                id="agree"
+                checked={agree}
+                onChange={(e) => setAgree(e.target.checked)}
+              />
+              {errors.agree && (
+                <p style={{ color: 'red', fontSize: '12px' }}>{errors.agree}</p>
+              )}
               我已閱讀並同意上述聲明
             </div>
             <div className="eccheckbox">
-              <input type="checkbox" id="ecagree" required />{' '}
+              <input
+                type="checkbox"
+                id="agree"
+                checked={agree}
+                onChange={(e) => setAgree(e.target.checked)}
+              />
+              {errors.agree && (
+                <p style={{ color: 'red', fontSize: '12px' }}>{errors.agree}</p>
+              )}
               我同意『報名截止日期為活動創立後的 14 日內』
             </div>
           </div>

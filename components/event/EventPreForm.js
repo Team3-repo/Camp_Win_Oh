@@ -152,7 +152,7 @@ export default function EventPreForm() {
   }, [setEventData])
 
   if (!eventData) {
-    return <h2 style={{ color: '#ff82d2' }}>資料載入中，請稍後</h2>
+    return <h2 style={{ color: '#ff82d2' }}>資料載入中</h2>
   }
 
   return (

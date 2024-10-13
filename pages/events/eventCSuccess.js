@@ -49,9 +49,9 @@ export default function EventCSuccess() {
           </div>
         </div>
       </section>
-      <div className="entmorebtn">
+      {/* <div className="entmorebtn">
         <Button label="探索更多" onClick={() => alert('Button clicked!')} />
-      </div>
+      </div> */}
       <Footer2 />
     </>
   );

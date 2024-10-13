@@ -95,12 +95,13 @@
   padding: 20px 64px;
   width: 100%;
   color: #4c3a30;
-  background-color: #a3d190;
+  background-color: #A3D190;
 }
 .feature-section2 {
   display: flex;
   flex-direction: column;
   padding: 0px 45px;
+  background-color: #A3D190;
 }
 .feature-section2 .section-title2 {
   display: flex;
@@ -142,6 +143,12 @@
   display: flex;
   justify-content: center;
   margin-top: 22px;
+}
+
+.esearchbtn{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Flatpickr styles */
@@ -878,9 +885,12 @@ option {
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: #4c3a30;
 }
-
+.comment-section small{
+  color: #999999;
+  font-size: 11px;
+}
 .comment-list {
   max-height: 300px;
   overflow-y: auto;
@@ -921,27 +931,202 @@ option {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 15px;
   resize: none;
   margin-bottom: 20px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+
 }
 
 .comment-input textarea:focus {
   outline: none;
-  border-color: #FF5833;
+  border-color: #ff5833;
 }
 
-/* .comment-input button {
-  margin-top: 10px;
-  background-color: #009688;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+/* 快截止的區塊 */
+.upcoming-deadline-section {
+  padding: 20px;
+  background-color: #C9E9C7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.upcomingsection-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #4c3a30;
+}
+
+.upcoming-cards-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  /* border-top: 3px solid #ff82d2; */
+}
+
+.upcoming-cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+.upevent-card {
+  flex: 0 0 auto;
+  width: 250px;
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin-right: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+}
+
+.event-card:last-child {
+  margin-right: 0;
+}
+
+.upevent-info {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.upevent-title {
+  font-size: 19.2px;
+  margin: 0 0 5px 0;
+  text-align: center;
+}
+
+.upevent-people,
+.upevent-deadline {
+  font-size: 14.4px;
+  margin: 0;
+}
+
+/* 管理表 */
+/* 表格容器 */
+.event-table-container {
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+
+  margin: 40px auto;
+  padding: 30px;
+  max-width: 1000px;
+  border-radius: 4px;
+}
+
+/* 標題樣式 */
+.event-table-container h2 {
+  text-align: center;
+  color: #4c3a30;
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* 表格樣式 */
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* 表格頭部 */
+.event-table th,
+.event-table td {
+  padding: 20px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eaeaea;
   font-size: 16px;
+}
+
+.event-table th {
+  background-color: #98D293;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 表格行樣式 */
+.event-table td {
+  background-color: #f9fbfd;
+  color: #4c3a30;
+  font-size: 16px;
+}
+
+.event-table tr:nth-child(even) {
+  background-color: #f4f6f8;
+}
+
+.event-table tr:hover {
+  background-color: #ecf5fc;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* 特別的樣式：主辦人列 */
+.event-table td:last-child {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 主辦人標示 */
+.event-table td:nth-child(6) {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.event-table td:nth-child(6):before {
+  content: '';
+}
+
+/* 無資料狀態 */
+.event-table td[colspan="4"] {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 18px;
+  padding: 40px;
+}
+
+/* 載入中與未登入狀態 */
+.loading-message, .not-logged-message {
+  text-align: center;
+  font-size: 18px;
+  padding: 20px;
+  color: #2c3e50;
+  background-color: #ecf5fc;
+  border-radius: 8px;
+  margin: 30px 0;
+}
+
+/* 按鈕樣式 */
+.button {
+  display: inline-block;
+  background-color: #3498db;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
-.comment-input button:hover {
-  background-color: #00796b;
-} */
+.button:hover {
+  background-color: #2980b9;
+}
+
+
