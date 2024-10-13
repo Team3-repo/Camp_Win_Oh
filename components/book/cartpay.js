@@ -58,7 +58,7 @@ export default function CartPay({ setStep }) {
                     <h5>{item.name}</h5>
                     <p>姓名: {item.username}</p>
                     <p>手機號碼: {item.phone}</p>
-                    <p>電子郵件: {item.date}</p>
+                    <p>電子郵件: {item.bookEmail}</p>
                     
                   </div>
                 </div>
