@@ -1,39 +1,56 @@
 import React from "react";
 
-function CartItem({ item, cartItems, setCartItems }) {
+function CartItem({ item, cartItems, setCartItems ,removeItem }) {
+  // 確保 price 是有效的數字
+  const price = parseFloat(item.price) || 0; 
+  const quantity = item.quantity || 1; // 確保 quantity 有預設值
+
   const increaseQuantity = () => {
     const updatedItems = cartItems.map(cartItem =>
-      cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+      cartItem.product_id === item.product_id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
     );
-    setCartItems(updatedItems);
-  };
-  
-  const decreaseQuantity = () => {
-    if (item.quantity > 1) {
-      const updatedItems = cartItems.map(cartItem =>
-        cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
-      );
+    // 只有在數量變化時才更新狀態
+    if (updatedItems !== cartItems) {
       setCartItems(updatedItems);
     }
   };
 
-  // 新增刪除項目的函數
-  const removeItem = () => {
-    const updatedItems = cartItems.filter(cartItem => cartItem.id !== item.id);
-    setCartItems(updatedItems); // 更新狀態
+  const decreaseQuantity = () => {
+    if (item.quantity > 1) {
+      const updatedItems = cartItems.map(cartItem =>
+        cartItem.product_id === item.product_id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+      );
+      // 只有在數量變化時才更新狀態
+      if (updatedItems !== cartItems) {
+        setCartItems(updatedItems);
+      }
+    }
   };
+
+  // const removeItem = () => {
+  //   const updatedItems = cartItems.filter(cartItem => cartItem.product_id !== item.product_id);
+  //   setCartItems(updatedItems); // 更新狀態
+  // };
+
+  // 計算此商品的總價
+  const totalPrice = price * quantity;
 
   return (
     <div className="cartItem">
       <div className="itemDetails">
-      <button className="removeButton" onClick={removeItem} aria-label="Remove item">x</button>
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e2a841df1004403854633321fae117f4c1a2b3084cf78fdf62334202bb8d204?placeholderIfAbsent=true&apiKey=ff1208b97220405794b61b476c6106d1" alt="Camping Tent" className="itemImage" />
+      <button className="removeButton" onClick={() => removeItem(item.product_id)} aria-label="Remove item">x</button>
+      <img
+          loading="lazy"
+          src={`/uploads/${item.product_pic}`} // 使用 item.product_pic 作為圖片來源
+          alt={item.name} // 使用商品名稱作為 alt
+          className="itemImage"
+        />
         <div className="itemName">{item.name}</div>
       </div>
-      <div className="itemPrice">NT${item.price}</div>
+      <div className="itemPrice">NT${price}</div> {/* 顯示總價 */}
       <div className="quantityControl">
         <button className="quantityButton" onClick={decreaseQuantity} aria-label="Decrease quantity">－</button>
-        <div className="quantity">{item.quantity}</div>
+        <div className="quantity">{quantity}</div>
         <button className="quantityButton" onClick={increaseQuantity} aria-label="Increase quantity">＋</button>
       </div>
       <style jsx>{`
