@@ -68,8 +68,9 @@ export default function CampingStore() {
     // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(product =>
-        product.product_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.product_desc.toLowerCase().includes(searchTerm.toLowerCase())
+        product.product_name.toLowerCase().includes(searchTerm.toLowerCase()) 
+        // ||
+        // product.product_desc.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
