@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { TbCategoryPlus } from 'react-icons/tb'
-import SearchFilter from './SearchFilter'
 import styles from '../../styles/HomePage.module.css'
 import SearchInput from '../SearchInput'
 import Button from './button'
+import SearchFilter2 from './SearchFilter2'
 
 export default function SearchBox() {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false) // 控制進階搜尋區塊的顯示狀態
@@ -30,7 +30,7 @@ export default function SearchBox() {
       </div>
 
       {/* 進階搜尋區塊，根據狀態顯示或隱藏 */}
-      {showAdvancedSearch && <SearchFilter />}
+      {showAdvancedSearch && <SearchFilter2 />}
     </>
   )
 }

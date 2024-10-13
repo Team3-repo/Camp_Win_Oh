@@ -176,13 +176,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 20px;
 }
 
 .itemName {
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 5px;
 }
 
 .itemQuantity {
@@ -199,7 +197,6 @@
   font-size: 16px;
   text-align: right; /* 讓 itemPrice 右對齊 */
 }
-
 
 .quantityButton {
   margin: 0 10px;
@@ -253,7 +250,7 @@
   width: 100%;
   max-width: 300px;
   color: white;
-  background-color: #ff5833;
+  background-color: #fc9a84;
   border: none;
   border-radius: 4px;
   padding: 5px;
@@ -263,7 +260,8 @@
 }
 
 .checkoutButton:hover {
-  background-color: #ff7043;
+  background-color: #4282b7;
+  color: #fff579;
 }
 
 

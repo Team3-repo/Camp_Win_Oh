@@ -273,3 +273,10 @@
   padding: 5px 10px;
   margin-bottom: 1.875rem;
 }
+
+/* 篩選 */
+.noResultsMessage{
+  margin-bottom: 70px;
+  color:#FF5833;
+  text-align: center;
+}

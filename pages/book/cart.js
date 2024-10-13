@@ -4,8 +4,6 @@ import styles from '../../styles/BookCart.module.css'
 import { useState } from 'react'
 import CartData from '@/components/book/cartdata'
 import CartPay from '@/components/book/cartpay'
-import Link from 'next/link'
-import Button from '@/components/book/button'
 
 export default function BookCart() {
   // 使用狀態來追蹤當前的步驟
@@ -28,14 +26,8 @@ export default function BookCart() {
   return (
     <>
       <Navbar />
-      <div>
-        {step === 1 && renderCart()}
-        {step === 2 && renderPayment()}
-      </div>
-
-      {/* <CartData /> */}
-      {/* <CartPay/> */}
-      {/* <Cartsuccess/> */}
+      {step === 1 && renderCart()}
+      {step === 2 && renderPayment()}
 
       <Footer2 />
     </>

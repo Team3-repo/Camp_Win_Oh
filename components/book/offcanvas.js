@@ -8,7 +8,9 @@ import toast, { Toaster } from 'react-hot-toast'
 
 export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
   // 使用 useContext 來獲取購物車狀態和操作
-  const { bookCart, BookTotal, dispatch } = useContext(BookCartContext)
+  const { bookCart, BookTotal, BookAdult, BookChild, dispatch } =
+    useContext(BookCartContext)
+  const [SaveBCart, setSaveBCart] = useState([])
 
   // 用來追蹤登入狀態
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -18,7 +20,27 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
     // 從 localStorage 中獲取登入狀態，並將其設置到 isLoggedIn 狀態中
     const loginState = localStorage.getItem('loginState') === 'true'
     setIsLoggedIn(loginState)
-  }, []) // 空依賴陣列，表示只在組件載入時執行一次
+
+    if (SaveBCart.length === 0) {
+      const defaultBookCart = [
+        {
+          adult: 1,
+          child: 0,
+        },
+      ]
+      // 將預設資料存儲到 LocalStorage
+      localStorage.setItem('bookCart', JSON.stringify(defaultBookCart))
+      setSaveBCart(defaultBookCart) // 將預設資料保存到狀態中
+    } else {
+      // 如果有資料，則初始化狀態
+      const initializedBookCart = SaveBCart.map((item) => ({
+        ...item,
+        adult: item.adult || 0,
+        child: item.child || 0,
+      }))
+      setSaveBCart(initializedBookCart) // 初始化狀態
+    }
+  }, [])
 
   // 點擊「前往付款」的處理函數
   const handleCheckout = () => {
@@ -38,16 +60,20 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
   }
 
   // 購物車增減數量功能
-  const handleRemoveFromCart = (item) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: item })
+  const handleIncreaseAdult = (item) => {
+    dispatch({ type: 'INCREASE_ADULT', payload: item })
   }
 
-  const handleIncreaseQuantity = (item) => {
-    dispatch({ type: 'INCREASE_QUANTITY', payload: item })
+  const handleDecreaseAdult = (item) => {
+    dispatch({ type: 'DECREASE_ADULT', payload: item })
   }
 
-  const handleDecreaseQuantity = (item) => {
-    dispatch({ type: 'DECREASE_QUANTITY', payload: item })
+  const handleIncreaseChild = (item) => {
+    dispatch({ type: 'INCREASE_CHILD', payload: item })
+  }
+
+  const handleDecreaseChild = (item) => {
+    dispatch({ type: 'DECREASE_CHILD', payload: item })
   }
 
   // 當 OffcanvasCart 被關閉時清空購物車
@@ -94,31 +120,66 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
                         <span className={styles.itemName}>{item.name}</span>
                         <span className={styles.itemPrice}>${item.price}</span>
                       </div>
-                      <div className={styles.quantityCtl}>
-                        <span className={styles.itemQuantity}>
-                          {item.max_per}
-                        </span>
-                        <button
-                          className={styles.quantityButton}
-                          onClick={() => handleDecreaseQuantity(item)}
-                        >
-                          -
-                        </button>
-                        <span className={styles.itemQuantity}>
-                          {item.quantity}
-                        </span>
-                        <button
-                          className={styles.quantityButton}
-                          onClick={() => handleIncreaseQuantity(item)}
-                        >
-                          +
-                        </button>
-                        <button
-                          className={styles.removeButton}
-                          onClick={() => handleRemoveFromCart(item)}
-                        >
-                          &times;
-                        </button>
+                    </div>
+                    <div className={styles.cartItemActions}></div>
+                  </li>
+                ))}
+              </ul>
+
+              {/* 大人 */}
+              <ul>
+                {bookCart.map((item) => (
+                  <li key={item.id} className={styles.cartItem}>
+                    <div className={styles.cartItemDetails}>
+                      <div className={styles.detailsCtl}>
+                        <span className={styles.itemName}>大人</span>
+                        <div className={styles.quantityCtl}>
+                          <button
+                            className={styles.quantityButton}
+                            onClick={() => handleDecreaseAdult(item)}
+                          >
+                            -
+                          </button>
+                          <span className={styles.itemQuantity}>
+                            {item.adult || 1}
+                          </span>
+                          <button
+                            className={styles.quantityButton}
+                            onClick={() => handleIncreaseAdult(item)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.cartItemActions}></div>
+                  </li>
+                ))}
+              </ul>
+              {/* 小孩 */}
+              <ul>
+                {bookCart.map((item) => (
+                  <li key={item.id} className={styles.cartItem}>
+                    <div className={styles.cartItemDetails}>
+                      <div className={styles.detailsCtl}>
+                        <span className={styles.itemName}>小孩</span>
+                        <div className={styles.quantityCtl}>
+                          <button
+                            className={styles.quantityButton}
+                            onClick={() => handleDecreaseChild(item)}
+                          >
+                            -
+                          </button>
+                          <span className={styles.itemQuantity}>
+                            {item.child || 0}
+                          </span>
+                          <button
+                            className={styles.quantityButton}
+                            onClick={() => handleIncreaseChild(item)}
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     </div>
                     <div className={styles.cartItemActions}></div>
@@ -129,6 +190,14 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
               {/* 顯示總金額 */}
               <div className={styles.totalAmount}>
                 <h3 className={styles.totalAmounth3}>總金額: ${BookTotal}</h3>
+                <Link
+                  href={{
+                    pathname: '/book/cart/',
+                    query: { BookAdult: BookAdult, BookChild: BookChild }, // 傳遞 BookAdult 作為參數
+                  }}
+                >
+                  
+                </Link>
               </div>
             </div>
           )}
