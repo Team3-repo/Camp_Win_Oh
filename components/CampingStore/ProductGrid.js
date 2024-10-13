@@ -34,11 +34,13 @@ const ProductGrid = ({ products, currentPage, setCurrentPage, itemsPerPage }) =>
           />
         ))}
       </div>
-      <Pagi
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      <div className="pagination-wrapper">
+        <Pagi
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      </div>
 
       <style jsx>{`
         .product-grid {
@@ -53,9 +55,16 @@ const ProductGrid = ({ products, currentPage, setCurrentPage, itemsPerPage }) =>
           display: flex;
           flex-wrap: wrap;
           gap: 30px 15px;
-          justify-content: flex-start;
+          justify-content: center;
           flex-grow: 1;
           padding: 8px;
+        }
+        .pagination-wrapper {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          margin-top: auto; /* 將分頁推到底部 */
+          padding: 20px 0;
         }
         @media (max-width: 991px) {
           .product-grid {
