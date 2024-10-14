@@ -6,6 +6,12 @@ import BookDetail from '@/components/book/BookDetail'
 import Footer2 from '@/components/event/footer2'
 
 export default function CartSuccess() {
+  useEffect(() => {
+    // 10 秒後自動跳轉到首頁（或其他指定頁面）
+    setTimeout(() => {
+      window.location.href = '/' // 使用原生 window.location 進行跳轉
+    }, 10000)
+  }, [])
 
   return (
     <>
