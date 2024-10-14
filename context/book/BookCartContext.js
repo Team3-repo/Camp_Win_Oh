@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useEffect } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
 // 初始化購物車狀態
 const initialState = {
@@ -16,7 +17,7 @@ const BookCartReducer = (state, action) => {
   let BookTotal
   let BookAdult
   let BookChild
-  let BookDate = state.BookDate; // 確保 BookDate 被正確初始化
+  let BookDate = state.BookDate // 確保 BookDate 被正確初始化
 
   switch (action.type) {
     case 'ADD_TO_CART':
@@ -35,7 +36,7 @@ const BookCartReducer = (state, action) => {
                 username: '',
                 bookEmail: '',
                 phone: '',
-                InOutDate:BookDate
+                InOutDate: BookDate,
               }
             : item
         )
@@ -51,7 +52,7 @@ const BookCartReducer = (state, action) => {
             username: '',
             bookEmail: '',
             phone: '',
-            InOutDate:BookDate
+            InOutDate: BookDate,
           },
         ]
       }
@@ -78,7 +79,7 @@ const BookCartReducer = (state, action) => {
 
     case 'CLEAR_CART':
       localStorage.removeItem('bookCart')
-      return { ...state, bookCart: [], BookTotal: 0,BookDate: state.BookDate}
+      return { ...state, bookCart: [], BookTotal: 0, BookDate: state.BookDate }
 
     case 'INCREASE_QUANTITY':
       newBookCart = state.bookCart.map((item) =>
@@ -111,49 +112,67 @@ const BookCartReducer = (state, action) => {
       return { ...state, bookCart: newBookCart, BookTotal }
 
     case 'INCREASE_ADULT':
-      newBookCart = state.bookCart.map((item) =>
-        item.id === action.payload.id
-          ? { ...item, adult: (item.adult || 0) + 1 } // 確保 adult 初始值為 0
-          : item
-      )
+      newBookCart = state.bookCart.map((item) => {
+        if (item.id === action.payload.id) {
+          if ((item.adult || 0) + (item.child || 0) >= item.max_per) {
+            // 確保只顯示一次 toast
+            if (!item.hasShownToast) {
+              toast.error('已達到最大人數', {
+                duration: 3000,
+                position: 'top-right',
+              })
+              item.hasShownToast = true // 標記已顯示過
+            }
+            return item
+          }
+          return { ...item, adult: (item.adult || 0) + 1, hasShownToast: false } // 重置 toast 顯示標記
+        }
+        return item
+      })
+
       BookAdult = newBookCart.reduce((sum, item) => sum + item.adult, 0)
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
       return { ...state, bookCart: newBookCart, BookAdult }
 
     case 'DECREASE_ADULT':
-      newBookCart = state.bookCart
-        .map((item) => {
-          if (item.id === action.payload.id) {
-            const newAdult = (item.adult || 0) - 1
-            return newAdult > 0 ? { ...item, adult: newAdult } : null
-          }
-          return item
-        })
-        .filter((item) => item !== null)
+      newBookCart = state.bookCart.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, adult: item.adult > 0 ? item.adult - 1 : 0 } // 確保不小於 0
+          : item
+      )
       BookAdult = newBookCart.reduce((sum, item) => sum + item.adult, 0)
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
       return { ...state, bookCart: newBookCart, BookAdult }
 
     case 'INCREASE_CHILD':
-      newBookCart = state.bookCart.map((item) =>
-        item.id === action.payload.id
-          ? { ...item, child: (item.child || 0) + 1 }
-          : item
-      )
+      newBookCart = state.bookCart.map((item) => {
+        if (item.id === action.payload.id) {
+          if ((item.adult || 0) + (item.child || 0) >= item.max_per) {
+            // 確保只顯示一次 toast
+            if (!item.hasShownToast) {
+              toast.error('已達到最大人數', {
+                duration: 3000,
+                position: 'top-right',
+              })
+              item.hasShownToast = true // 標記已顯示過
+            }
+            return item
+          }
+          return { ...item, child: (item.child || 0) + 1, hasShownToast: false } // 重置 toast 顯示標記
+        }
+        return item
+      })
+
       BookChild = newBookCart.reduce((sum, item) => sum + item.child, 0)
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
       return { ...state, bookCart: newBookCart, BookChild }
 
     case 'DECREASE_CHILD':
-      newBookCart = state.bookCart
-        .map((item) => {
-          if (item.id === action.payload.id) {
-            const newChild = (item.child || 0) - 1
-            return newChild > 0 ? { ...item, child: newChild } : null
-          }
-          return item
-        })
-        .filter((item) => item !== null)
+      newBookCart = state.bookCart.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, child: item.child > 0 ? item.child - 1 : 0 } // 確保不小於 0
+          : item
+      )
       BookChild = newBookCart.reduce((sum, item) => sum + item.child, 0)
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
       return { ...state, bookCart: newBookCart, BookChild }
@@ -186,7 +205,12 @@ export const BookCartProvider = ({ children }) => {
 
   return (
     <BookCartContext.Provider
-      value={{ bookCart: state.bookCart, BookTotal: state.BookTotal,  BookDate: state.BookDate,dispatch }}
+      value={{
+        bookCart: state.bookCart,
+        BookTotal: state.BookTotal,
+        BookDate: state.BookDate,
+        dispatch,
+      }}
     >
       {children}
     </BookCartContext.Provider>
