@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import FormField from '@/components/form/FormField';
 
 const Profile = () => {
   const initialData = JSON.parse(localStorage.getItem("user"));
@@ -13,9 +14,10 @@ const Profile = () => {
   });
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value, // 使用 name 屬性來更新相應的狀態
     });
   };
 
@@ -29,63 +31,65 @@ const Profile = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        名字:
-        <input
-          type="text"
-          name="user_name"
-          value={formData.user_name}
+      <FormField
+        label="名字"
+        id="user_name"
+        name="user_name" // 傳入 name 屬性
+        type="text"
+        placeholder="請輸入名字"
+        value={formData.user_name}
+        onChange={handleChange}
+        required={true}
+      />
+      <FormField
+        label="電子郵件"
+        id="email"
+        name="email" // 傳入 name 屬性
+        type="email"
+        placeholder="請輸入電子郵件"
+        value={formData.email}
+        onChange={handleChange}
+        required={true}
+      />
+      <FormField
+        label="地址"
+        id="user_address"
+        name="user_address" // 傳入 name 屬性
+        type="text"
+        placeholder="請輸入地址"
+        value={formData.user_address}
+        onChange={handleChange}
+      />
+      <FormField
+        label="電話"
+        id="phone"
+        name="phone" // 傳入 name 屬性
+        type="text"
+        placeholder="請輸入電話"
+        value={formData.phone}
+        onChange={handleChange}
+      />
+      <FormField
+        label="生日"
+        id="birthday"
+        name="birthday" // 傳入 name 屬性
+        type="date"
+        placeholder="請選擇生日"
+        value={formData.birthday}
+        onChange={handleChange}
+      />
+      <div>
+        <h2 style={{ fontSize: '1.3rem' }}>性別</h2>
+        <select
+          name="gender"
+          value={formData.gender}
           onChange={handleChange}
-        />
-      </label>
-      <br />
-      <label>
-        電子郵件:
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
-      <label>
-        地址:
-        <input
-          type="text"
-          name="user_address"
-          value={formData.user_address}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
-      <label>
-        電話:
-        <input
-          type="text"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
-      <label>
-        生日:
-        <input
-          type="date"
-          name="birthday"
-          value={formData.birthday}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
-      <label>
-        性別:
-        <select name="gender" value={formData.gender} onChange={handleChange}>
+          style={{ padding: '8px', width: '50%', borderRadius: '3.79px' }}
+        >
           <option value="male">男性</option>
           <option value="female">女性</option>
         </select>
-      </label>
+      </div>
       <br />
       <button type="submit">更新資料</button>
     </form>
