@@ -1,7 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-const ProductCategories = ({ activeCategory, onCategoryChange, setCurrentPage }) => {
-  const categories = ['所有商品', '優惠商品', '推薦商品', '熱銷商品', '出清商品'];
+const ProductCategories = ({
+  activeCategory,
+  onCategoryChange,
+  setCurrentPage,
+}) => {
+  const categories = [
+    '所有商品',
+    '優惠商品',
+    '推薦商品',
+    '熱銷商品',
+    '出清商品',
+  ]
 
   return (
     <nav className="product-categories navigation">
@@ -10,11 +20,13 @@ const ProductCategories = ({ activeCategory, onCategoryChange, setCurrentPage })
           <li key={category}>
             <a
               href={`#${category}`}
-              className={`category-link ${activeCategory === category ? 'category-link-active' : ''}`}
+              className={`category-link ${
+                activeCategory === category ? 'category-link-active' : ''
+              }`}
               onClick={(e) => {
-                e.preventDefault();
+                e.preventDefault()
                 // setCurrentPage(1); // 在這裡重置頁碼
-                onCategoryChange(category);
+                onCategoryChange(category)
               }}
             >
               {category}
@@ -28,7 +40,8 @@ const ProductCategories = ({ activeCategory, onCategoryChange, setCurrentPage })
           justify-content: center;
           gap: 20px;
           margin: 21px 0;
-          margin-top: 75px;
+          margin-top: 67px;
+          font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
         }
 
         .category-link {
@@ -51,7 +64,7 @@ const ProductCategories = ({ activeCategory, onCategoryChange, setCurrentPage })
         }
       `}</style>
     </nav>
-  );
+  )
 }
 
-export default ProductCategories;
+export default ProductCategories
