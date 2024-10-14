@@ -45,7 +45,7 @@ export default function Discount({ onApply }) {
             <p className={styles.couDrawT2}>2024/09/25 - 2024/10/31</p>
             <p>
               現在預訂即享
-              8折優惠！無論是露營體驗還是住宿，都可使用此優惠。免費提供燒烤器具，並可享露營專屬活動。
+              7折優惠！無論是露營體驗還是住宿，都可使用此優惠。免費提供燒烤器具，並可享露營專屬活動。
             </p>
           </div>
         </div>
