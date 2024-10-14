@@ -1657,10 +1657,13 @@ CREATE TABLE b_order_items (
     `total_price` INT NOT NULL , -- 總價=單價*數量
 	`adult` INT NOT NULL,  -- 大人人數
     `children` INT default NULL, -- 小孩人數
+    `InOutDate` varchar(255) NOT NULL, -- 訂購日期
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (r_type_id) REFERENCES booking_type(id) ON DELETE CASCADE,
     FOREIGN KEY (`user_id`) REFERENCES `user_data`(`user_id`) ON DELETE CASCADE
 );
+
+INSERT INTO `b_order_items` (`id`, `user_id`, `r_type_id`,`username`,`phone`,`bookEmail`,`quantity`,`price`,`total_price`,`adult`,`children`,`InOutDate`,`created_at`)values(
+1,1,1,'AAA','0912345678','A@TEST.COM',1,111,1234,1,2,'2012-1221','20241001-11:11');
 
 -- ----------------------------
 -- 活動

@@ -32,8 +32,6 @@ export default function CartPay({ setStep }) {
       return
     }
 
-    
-
     // 過濾出需要的欄位
     const filteredBookCart = storedBookCart.map((item) => ({
       r_type_id: item.id || '未定義的 r_type_id',  // 如果是 undefined，打印出問題
@@ -78,6 +76,7 @@ export default function CartPay({ setStep }) {
 
       if (result.success) {
         // 資料成功儲存後，導向至 ECPay 的付款頁面
+        alert('訂單已成立，請前往付款!')
         window.location.href = `http://localhost:3005/ecpay/book?amount=${discountedTotal}`
       } else {
         alert('資料儲存失敗，請重試。')
