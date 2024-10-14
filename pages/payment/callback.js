@@ -36,7 +36,10 @@ const PaymentCallback = () => {
               <button>繼續選購</button>
             </Link>
           </div>
-        </div>
+        </div> 
+        <div className="put-end">
+        <Footer />
+      </div>
       </div>
           <style jsx>{`
             .callback-body {
@@ -44,6 +47,8 @@ const PaymentCallback = () => {
           flex-direction: column;
           align-items: center;
           margin-top: 50px;
+          justify-content: space-between; /* 保證內容和 footer 之間的距離 */
+          min-height: 100vh; /* 讓內容佔滿整個視窗高度 */
 
             }
             .wordtry {
@@ -69,16 +74,16 @@ const PaymentCallback = () => {
               cursor: pointer;
             }
             .put-end {
-            position: absolute;
-            bottom: 0;
-            left: 0;
+            
+            position: relative;
+
             width: 100%;
+            bottom: 0;
+            left: 0; */
           }
           `}</style>
      
-          <div className="put-end">
-        <Footer />
-      </div>
+         
       
     </>
   )
