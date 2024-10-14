@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormField from '@/components/form/FormField';
+import Button from "../book/button";
 
 const Profile = () => {
   const initialData = JSON.parse(localStorage.getItem("user"));
@@ -91,7 +92,7 @@ const Profile = () => {
         </select>
       </div>
       <br />
-      <button type="submit">更新資料</button>
+      <Button type="submit" label="更新資料" ></Button>
     </form>
   );
 };
