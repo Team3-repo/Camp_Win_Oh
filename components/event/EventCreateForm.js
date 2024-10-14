@@ -195,7 +195,7 @@ export default function EventCreateForm() {
   // 表單驗證
   const validateForm = () => {
     const newErrors = {}
-  
+
     // 檢查必填欄位
     if (!imageUrl) newErrors.imageUrl = '請上傳圖片'
     if (!organizerNick) newErrors.organizerNick = '請填寫暱稱'
@@ -205,24 +205,26 @@ export default function EventCreateForm() {
     if (!eEndDate) newErrors.eEndDate = '請選擇結束日期'
     if (!eventPeople) newErrors.eventPeople = '請填寫活動人數'
     if (!eventNotes) newErrors.eventNotes = '請填寫備註'
-  
+
     // 禁用詞彙檢查
     const checkProhibitedWords = (text, fieldName) => {
-      const containsProhibited = prohibitedWords.some((word) => text.includes(word))
+      const containsProhibited = prohibitedWords.some((word) =>
+        text.includes(word)
+      )
       if (containsProhibited) {
         newErrors[fieldName] = `*包含敏感詞彙`
       }
     }
-  
+
     checkProhibitedWords(organizerNick, 'organizerNick')
     checkProhibitedWords(eventDescription, 'eventDescription')
     checkProhibitedWords(eventTitle, 'eventTitle')
     checkProhibitedWords(eventNotes, 'eventNotes')
-  
+
     if (!agree) newErrors.agree = '請同意揪團主辦人聲明'
-  
+
     setErrors(newErrors)
-  
+
     return Object.keys(newErrors).length === 0
   }
 
@@ -630,6 +632,17 @@ export default function EventCreateForm() {
               {/* 活動人數與其他費用 */}
               <div className="exaboutno">
                 <div className="ecform-group">
+                  <label htmlFor="ecfee">其他支出</label>
+                  <input
+                    type="number"
+                    id="other-fees"
+                    min={0}
+                    value={eOtherFees}
+                    onChange={handleOtherFeesChange}
+                    required
+                  />
+                </div>
+                <div className="ecform-group">
                   <label htmlFor="ecpeople-limit">活動人數</label>
                   <input
                     type="number"
@@ -645,17 +658,6 @@ export default function EventCreateForm() {
                       {errors.eventPeople}
                     </p>
                   )}
-                </div>
-                <div className="ecform-group">
-                  <label htmlFor="ecfee">其他支出</label>
-                  <input
-                    type="number"
-                    id="other-fees"
-                    min={0}
-                    value={eOtherFees}
-                    onChange={handleOtherFeesChange}
-                    required
-                  />
                 </div>
               </div>
             </div>
