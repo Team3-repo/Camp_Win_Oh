@@ -1628,6 +1628,9 @@ INSERT INTO `user_data` (`user_id`, `user_name`, `password`, `email`, `user_addr
 (499, '邱孝晤', 'Am7Kk4g4', 'brendan3132@gmail.com', '高雄市林園區三官路47號', '0924087249', '1984-07-12', 'male', '/img/A0499.jpg'),
 (500, '戴婉鬱', 'uvX4UPn9', 'grant1285@gmail.com', '彰化縣埔鹽鄉番金路100號之7', '0919518851', '1997-12-21', 'female', '/img/A0500.jpg');
 
+UPDATE user_data 
+SET avatar = 'none';
+
 -- 訂單概要資訊
 CREATE TABLE my_booking (
     `id` INT AUTO_INCREMENT PRIMARY KEY,

@@ -58,7 +58,7 @@ export default function CartPay({ setStep }) {
                     <h5>{item.name}</h5>
                     <p>姓名: {item.username}</p>
                     <p>手機號碼: {item.phone}</p>
-                    <p>電子郵件: {item.date}</p>
+                    <p>電子郵件: {item.bookEmail}</p>
                     
                   </div>
                 </div>
@@ -157,13 +157,11 @@ export default function CartPay({ setStep }) {
             {/* 顯示來自 cartItems 的摘要資料 */}
             {BookCartItems.map((item) => (
               <div key={item.id} className={styles.cartItem}>
-                <h5>{item.name}</h5>
+                <h5 style={{fontWeight:'bold',fontSize:'18px'}}>{item.name}</h5>
                 <h5>
-                  入住日期<p>{item.inDate}人</p>
+                  預訂日期
                 </h5>
-                <h5>
-                  退房日期 <p>{item.endDate}人</p>
-                </h5>
+                <p style={{textAlign:'right'}}>{item.InOutDate}</p>
                 <hr />
                 <h5>
                   大人 <p>{item.adult}人</p>

@@ -1,32 +1,26 @@
-/**
- **
- */
-import React from 'react'
+import React from 'react';
 
-const ProductCategories = () => {
+const ProductCategories = ({ activeCategory, onCategoryChange, setCurrentPage }) => {
+  const categories = ['所有商品', '優惠商品', '推薦商品', '熱銷商品', '出清商品'];
+
   return (
     <nav className="product-categories navigation">
       <ul>
-        <li>
-          <a href="#discounts" className="category-link category-link-active">
-            優惠商品
-          </a>
-        </li>
-        <li>
-          <a href="#recommended" className="category-link">
-            推薦商品
-          </a>
-        </li>
-        <li>
-          <a href="#bestsellers" className="category-link">
-            熱銷商品
-          </a>
-        </li>
-        <li>
-          <a href="#clearance" className="category-link">
-            出清商品
-          </a>
-        </li>
+        {categories.map((category) => (
+          <li key={category}>
+            <a
+              href={`#${category}`}
+              className={`category-link ${activeCategory === category ? 'category-link-active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                // setCurrentPage(1); // 在這裡重置頁碼
+                onCategoryChange(category);
+              }}
+            >
+              {category}
+            </a>
+          </li>
+        ))}
       </ul>
       <style jsx>{`
         .product-categories {
@@ -34,6 +28,7 @@ const ProductCategories = () => {
           justify-content: center;
           gap: 20px;
           margin: 21px 0;
+          margin-top: 100px;
         }
 
         .category-link {
@@ -56,8 +51,7 @@ const ProductCategories = () => {
         }
       `}</style>
     </nav>
-  )
+  );
 }
 
-export default ProductCategories
-;
+export default ProductCategories;

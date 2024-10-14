@@ -6,8 +6,25 @@ import Link from "next/link";
 import { useCart } from '@/context/CartContext';  // 修改1：引入 useCart
 
 
+
 const OrderSummary = () => {
-  const { cartItems, totalAmount } = useCart();  // 修改2：使用 cartItems 和 totalAmount
+  const { cartItems } = useCart();  // 修改2：使用 cartItems 和 totalAmount
+
+  // 確保所有價格都是數字型態
+  const totalAmount = (cartItems || []).reduce((total, item) => {
+    const itemPrice = parseFloat(item.price); // 確保價格是數字
+    const itemQuantity = parseInt(item.quantity, 10); // 確保數量是整數
+  
+    console.log('Item Quantity:', itemQuantity);
+    console.log('Item Price:', itemPrice);
+    console.log('Total for this item:', itemQuantity * itemPrice);
+  
+    if (!isNaN(itemPrice) && itemQuantity > 0) {
+      return total + itemQuantity * itemPrice;
+    }
+    return total;
+  }, 0);
+
   return (
     <div className="order-summary2">
       <div className="summary-section2">
@@ -20,24 +37,24 @@ const OrderSummary = () => {
             </div>
           ))}
         </div>
-        <div className="summary-total">
-          <span>總價(原價)</span>
-          <span>NT$ {totalAmount}</span>   
+        {/* <div className="summary-total"> */}
+          {/* <span>總價(原價)</span>
+          <span>NT$ {totalAmount}</span>    */}
           {/* 修改4：使用 totalAmount 顯示總價 */}
-        </div>
+        {/* </div> */}
       </div>
-      <div className="price-section2">
+      <div className="">
         <div className="price-details">
-          <div className="price-row">
+          {/* <div className="price-row">
             <span>價格</span>
             <span>NT$ {totalAmount}</span>
-          </div>
-          <div className="price-row">
+          </div> */}
+          {/* <div className="price-row">
             <span>優惠卷</span>
             <span>七折折扣</span>
-          </div>
+          </div> */}
           <div className="price-row total">
-            <span>付款金額(優惠後)</span>
+            <span>付款總金額</span>
             <span>NT$ {totalAmount}</span>
           </div>
         </div>
@@ -45,7 +62,7 @@ const OrderSummary = () => {
         <button className="btn-view-cart">查看購物車</button>
         </Link>
       </div>
-      <div className="coupon-section2">
+      {/* <div className="coupon-section2">
         <h3 className="coupon-title">使用優惠券</h3>
         <div className="coupon-input">
           <div className="input-wrapper">
@@ -87,7 +104,7 @@ const OrderSummary = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
       <style jsx>{`
         .order-summary2 {
           background-color: #ffffff;

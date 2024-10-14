@@ -12,27 +12,43 @@ const CheckoutForm = () => {
   const [address, setAddress] = useState('');
   const [notes, setNotes] = useState('');
   const [showMessage, setShowMessage] = useState(false); // 控制自定義訊息的狀態
-  const { cartItems, totalAmount } = useCart(); // 獲取購物車內容
+  const { cartItems } = useCart(); // 獲取購物車內容
   const { order } = useOrder(); // 使用 useOrder 獲取 order 變數
   const [showModal, setShowModal] = useState(false); // 控制模態框顯示
-
-  const goECPay = () => {
-    setShowModal(true); // 顯示模態框
-  };
-
-  const handleConfirm = () => {
-    window.location.href = `http://localhost:3005/api/ecpay-test-only?amount=${totalAmount}`;
-  };
-
-  const handleCancel = () => {
-    setShowModal(false); // 關閉模態框
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false); // 新增：控制表單提交狀態
   
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(cartItems); // 檢查 cartItems 的值
+  // 確保所有價格都是數字型態
+  const totalAmount = (cartItems || []).reduce((total, item) => {
+    const itemPrice = parseFloat(item.price) || 0; // 確保價格是數字，並且有預設值 0
+    const itemQuantity = parseInt(item.quantity, 10) || 0; // 確保數量是整數，並且有預設值 0
+  
+    console.log('Item Quantity:', itemQuantity);
+    console.log('Item Price:', itemPrice);
+    console.log('Total for this item:', itemQuantity * itemPrice);
+  
+    if (!isNaN(itemPrice) && itemQuantity > 0) {
+      return total + itemQuantity * itemPrice;
+    }
+    return total;
+  }, 0) || 1; // 若計算結果為 NaN 或 undefined，則預設為 0
+
+  // 確保 autoFillForm 函數被正確定義在組件內部
+  const autoFillForm = () => {
+    setName('陳小華');
+    setPhone('0912345678');
+    setEmail('example@email.com');
+    setAddress('高雄市前金區中正四路211號');
+    setNotes('請於週末送達');
+  };
+
+  // 新增：處理信用卡付款並重定向到 ECPay
+  const handleSubmitAndRedirect = async () => {
+    setIsSubmitting(true);
+
+    // 新增這行來確認 totalAmount 的值
+  console.log("Total Amount:", totalAmount);
 
     try {
       const res = await fetch('/api/addData', {
@@ -46,24 +62,76 @@ const CheckoutForm = () => {
           email, 
           address, 
           notes, 
-          cartItems, // 新增購物車內容
-          totalAmount // 新增總金額
+          cartItems,
+          totalAmount
         }),
       });
 
       const data = await res.json();
       if (res.ok) {
-        setShowMessage(true); // 顯示自定義訊息
-        setTimeout(() => {
-          setShowMessage(false);
-          router.push('/payment/callback'); // 成功後跳轉頁面
-        }, 2000); // 2秒後隱藏訊息並跳轉
+        localStorage.setItem('lastOrderId', data.orderId);
+        window.location.href = `http://localhost:3005/api/ecpay-test-only?amount=${totalAmount}`;
       } else {
         alert('錯誤：' + data.error);
       }
     } catch (error) {
       alert('請求失敗：' + error.message);
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // 新增這行來確認 totalAmount 的值
+  console.log("Total Amount:", totalAmount); 
+
+    try {
+      const res = await fetch('/api/addData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name, 
+          phone, 
+          email, 
+          address, 
+          notes, 
+          cartItems,
+          totalAmount
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setShowMessage(true);
+        localStorage.setItem('lastOrderId', data.orderId);
+        setTimeout(() => {
+          setShowMessage(false);
+          router.push('/payment/callback');
+        }, 2000);
+      } else {
+        alert('錯誤：' + data.error);
+      }
+    } catch (error) {
+      alert('請求失敗：' + error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // 新增：處理確認按鈕點擊
+  const handleConfirm = () => {
+    handleSubmitAndRedirect();
+  };
+
+  // 處理取消按鈕點擊
+  const handleCancel = () => {
+    setShowModal(false); // 關閉模態框
   };
 
   return (
@@ -72,6 +140,7 @@ const CheckoutForm = () => {
         <form className="form" onSubmit={handleSubmit}>
           <h2 className="form-title">填寫資料</h2>
           <div className="form-content">
+           
             <h3 className="form-section-title">訂購人資訊</h3>
             <div className="form-fields">
               <div className="form-field">
@@ -127,7 +196,7 @@ const CheckoutForm = () => {
                   onChange={(e) => setNotes(e.target.value)}
                 ></textarea>
               </div>
-              <div className="discount-section">
+              {/* <div className="discount-section">
                 <h4 className="discount-title">優惠折扣</h4>
                 <div className="discount-content">
                   <p className="discount-description">
@@ -140,7 +209,7 @@ const CheckoutForm = () => {
                     <span className="discount-applied">已套用七折折扣</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <p className="privacy-notice">
               我了解本人提供之個人資料，僅用於預訂實名制之旅遊及休閒娛樂活動商品，亦了解
@@ -160,13 +229,20 @@ const CheckoutForm = () => {
                 </label>
               </div>
             </div>
+            {/* 新增自動填充按鈕 */}
+            <div className="btn-autofill-position">
+              <button type="button" onClick={autoFillForm} className="btn-autofill">
+                一鍵填寫範例資料
+              </button>
+            </div>
             <div className="form-actions">
               <Link href="/cart/3ShoppingCartPage">
                 <button type="button" className="btn-back">回上一頁</button>
               </Link>
+              
               <div className="put-flex">
-              <button type="submit" className="btn-next">貨到付款</button>
-              <button onClick={goECPay} type="button" className="btn-next">信用卡付款</button>
+                <button type="submit" className="btn-next" disabled={isSubmitting}>貨到付款</button>
+                <button onClick={() => setShowModal(true)} type="button" className="btn-next" disabled={isSubmitting}>信用卡付款</button>
               </div>
             </div>
           </div>
@@ -178,12 +254,12 @@ const CheckoutForm = () => {
           </div>
         )}
         {showModal && (
-        <Modal
-          message="確認要導向至 ECPay 進行付款?"
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-        />
-      )}
+          <Modal
+            message="確認要導向至 ECPay 進行付款?"
+            onConfirm={handleConfirm}
+            onCancel={handleCancel}
+          />
+        )}
       </div>
       <style jsx>{`
         .custom-alert {
@@ -329,7 +405,7 @@ const CheckoutForm = () => {
         .form-actions {
           display: flex;
           justify-content: space-between;
-          margin-top: 24px;
+          margin-top: 0px;
         }
         .btn-back,
         .btn-next {
@@ -350,6 +426,24 @@ const CheckoutForm = () => {
         .put-flex{
           display:flex;
           gap:20px;
+        }
+        .btn-autofill-position{
+          display: flex;
+          justify-content: flex-end;
+          width: 100%; /* 讓容器佔滿可用空間 */
+        }
+        .btn-autofill {
+          margin-bottom: 20px;
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 18px;
+        }
+        .btn-autofill:hover {
+          background-color: #45a049;
         }
       `}</style>
     </div>

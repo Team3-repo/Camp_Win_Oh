@@ -1,45 +1,44 @@
 /**
  **
  */
-import React from "react"
-import Counter from "../../components/ProductDetails/Counter/Counter";
+import React from 'react'
+import Counter from '../../components/ProductDetails/Counter/Counter'
 // import OrderSummary from "../../components/ProductDetails/OrderSummary";
 
-function ProductInfo({ quantity, updateQuantity, addToCart, pricePerItem }) {
+function ProductInfo({
+  quantity,
+  updateQuantity,
+  addToCart,
+  pricePerItem,
+  product,
+}) {
   return (
     <section className="product-info">
       <img
         loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/6c701eb1620ca3db59174cf5faaf96ae7b7aec9097b74bd70df6cca6a6d07f55?placeholderIfAbsent=true&apiKey=ff1208b97220405794b61b476c6106d1"
+        src={`/uploads/${product.product_pic}`} // 修改這裡以使用正確的欄位名稱
         className="product-image"
-        alt="Camping Tent"
+        alt={product.product_name} // 使用傳遞的 product 的名稱作為 alt
       />
       <div className="product-details">
-        <h2 className="product-title">露營帳篷</h2>
+        <h2 className="product-title">{product.product_name}</h2>
         <div className="price-container">
-        <p className="storeproduct-price">NT${pricePerItem}</p>
-        {/* <p className="price-separator">_</p> */}
+          <p className="storeproduct-price">NT${product.product_price}</p>
         </div>
-        {/* <h2>NT$1300</h2> */}
         <Counter quantity={quantity} updateQuantity={updateQuantity} />
-        {/* <div className="quantity-selector">
-          <button className="quantity-btn" aria-label="Decrease quantity">
-            -
-          </button>
-          <span className="quantity">1</span>
-          <button className="quantity-btn" aria-label="Increase quantity">
-            +
-          </button>
-        </div> */}
-        <button className="add-to-cart-btn" onClick={addToCart}>加入購物車</button>
+        <button className="add-to-cart-btn" onClick={addToCart}>
+          加入購物車
+        </button>
       </div>
-      
+
       <style jsx>{`
         .product-info {
           display: flex;
           flex-direction: column;
           width: 77%;
-          {/* margin-right: 30px; */}
+           {
+            /* margin-right: 30px; */
+          }
         }
         .product-image {
           aspect-ratio: 1.12;
@@ -67,7 +66,7 @@ function ProductInfo({ quantity, updateQuantity, addToCart, pricePerItem }) {
           font-family: Inter, sans-serif;
         }
         .storeproduct-price {
-          margin:auto;
+          margin: auto;
           font-size: 21px;
           margin-bottom: 25px;
         }
@@ -81,7 +80,7 @@ function ProductInfo({ quantity, updateQuantity, addToCart, pricePerItem }) {
           align-items: center;
           gap: 4px;
           margin-top: 13px;
-          margin:auto;
+          margin: auto;
         }
         .quantity-btn {
           width: 42px;
@@ -126,7 +125,7 @@ function ProductInfo({ quantity, updateQuantity, addToCart, pricePerItem }) {
         }
       `}</style>
     </section>
-  );
+  )
 }
 
-export default ProductInfo;
+export default ProductInfo

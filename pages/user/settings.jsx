@@ -6,12 +6,12 @@ import Footer1 from '@/components/event/footer1';
 import styles from '@/styles/user/settings.module.css';
 import customBody from '@/styles/user/customBody.module.css';
 import Image from 'next/image';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Avatar from '@/components/user/Avatar';
 import Profile from '@/components/user/Profile';
 import Security from '@/components/user/Security'; 
-import Billing from '@/components/user/Billing';
+// import Billing from '@/components/user/Billing';
 
 export default function Settings() {
   const [activeSection, setActiveSection] = useState('Avatar');
@@ -24,8 +24,8 @@ export default function Settings() {
         return <Profile />;
       case 'Security':
         return <Security />;
-      case 'Billing':
-        return <Billing />;
+      // case 'Billing':
+      //   return <Billing />;
       default:
         return null;
     }
@@ -44,7 +44,7 @@ export default function Settings() {
               toast.info('大頭照');
               setActiveSection('Avatar');
             }}
-            type={activeSection === 'Avatar'  ? undefined : 'btn-reg'}
+            type={activeSection === 'Avatar' ? undefined : 'btn-reg'}
           />
           <Button
             label="個人資料" // Profile
@@ -52,7 +52,7 @@ export default function Settings() {
               toast.info('顯示個人資料');
               setActiveSection('Profile');
             }}
-            type={activeSection === 'Profile'  ? undefined : 'btn-reg'}
+            type={activeSection === 'Profile' ? undefined : 'btn-reg'}
           />
           <Button
             label="變更密碼" // Security
@@ -62,21 +62,20 @@ export default function Settings() {
             }}
             type={activeSection === 'Security' ? undefined : 'btn-reg'}
           />
-          <Button
+          {/* <Button
             label="歷史訂單" // Billing
             onClick={() => {
               toast.info('歷史訂單');
               setActiveSection('Billing');
             }}
             type={activeSection === 'Billing' ? undefined : 'btn-reg'}
-          />
+          /> */}
         </div>
 
         {/* 根據選擇顯示對應的內容 */}
         {renderSection()}
       </div>
       <Footer1 style={{ width: '100%' }} />
-      <ToastContainer /> {/* 設定 ToastContainer */}
     </div>
   );
 }
