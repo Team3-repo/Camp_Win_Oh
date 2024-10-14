@@ -19,6 +19,8 @@ export default function CartData({ setStep }) {
   const [isDiscountApplied, setIsDiscountApplied] = useState(false) // 控制優惠狀態
   const discountAmount = 0.7
 
+  const total_price = Math.floor((BookTotal * discountAmount).toFixed(2))
+
   // 回上一步，預防跳轉錯誤
   const [campsiteId, setCampsiteId] = useState(2)
 
@@ -37,7 +39,7 @@ export default function CartData({ setStep }) {
 
     // 計算總金額
     const totalAmount = storedBookCart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + item.price * item.quantity ,
       0
     )
     setBookTotal(totalAmount)
@@ -63,17 +65,22 @@ export default function CartData({ setStep }) {
     // 更新購物車資料，將使用者的資料同步到每個購物車項目中
     const updatedBookCart = BookCartItems.map((item) => ({
       ...item,
-      username: userData.user_name,  // 使用者姓名
-      bookEmail: userData.email,     // 使用者電子郵件
-      phone: userData.phone,         // 使用者電話
-    }));
-  
+      username: userData.user_name, // 使用者姓名
+      bookEmail: userData.email, // 使用者電子郵件
+      phone: userData.phone, // 使用者電話
+      totalAmount: total_price, // 使用者姓名
+    }))
+
+
     // 更新購物車資料並存入 localStorage 中的 bookCart
-    localStorage.setItem('bookCart', JSON.stringify(updatedBookCart));
-  
+    localStorage.setItem(
+      'bookCart',
+      JSON.stringify(updatedBookCart)
+    )
+
     // 跳轉到下一步付款
-    setStep(2);
-  };
+    setStep(2)
+  }
 
   // 切換顯示優惠券搜尋區塊
   const toggleCouponSearch = () => {
@@ -189,10 +196,7 @@ export default function CartData({ setStep }) {
               />
             </div>
             <div className={styles.paybtn}>
-              <Button
-                label="前往付款"
-                onClick={handleSubmit}
-              />
+              <Button label="前往付款" onClick={handleSubmit} />
             </div>
           </div>
         </div>
@@ -238,9 +242,7 @@ export default function CartData({ setStep }) {
             <h5>
               付款金額
               {isDiscountApplied ? (
-                <h5 className={styles.totalP}>
-                  NT${Math.floor((BookTotal * discountAmount).toFixed(2))}
-                </h5>
+                <h5 className={styles.totalP}>NT${total_price}</h5>
               ) : (
                 <p className={styles.totalP}>NT${Math.floor(BookTotal)}</p>
               )}
