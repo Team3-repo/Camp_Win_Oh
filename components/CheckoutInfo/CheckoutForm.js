@@ -196,7 +196,7 @@ const CheckoutForm = () => {
                   onChange={(e) => setNotes(e.target.value)}
                 ></textarea>
               </div>
-              <div className="discount-section">
+              {/* <div className="discount-section">
                 <h4 className="discount-title">優惠折扣</h4>
                 <div className="discount-content">
                   <p className="discount-description">
@@ -209,7 +209,7 @@ const CheckoutForm = () => {
                     <span className="discount-applied">已套用七折折扣</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <p className="privacy-notice">
               我了解本人提供之個人資料，僅用於預訂實名制之旅遊及休閒娛樂活動商品，亦了解
