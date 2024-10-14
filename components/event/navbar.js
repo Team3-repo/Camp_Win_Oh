@@ -1,37 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import Button from '../book/button';
-import OverlayLoginRegister from '../user/OverlayLoginRegister';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react'
+import Button from '../book/button'
+import OverlayLoginRegister from '../user/OverlayLoginRegister'
+import Image from 'next/image'
 
 export default function Navbar() {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [storedUser, setStoredUser] = useState(null);
-  const [avatarSrc, setAvatarSrc] = useState('/pics/avatar-1.png'); // 預設頭像
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [storedUser, setStoredUser] = useState(null)
+  const [avatarSrc, setAvatarSrc] = useState('/pics/avatar-1.png') // 預設頭像
 
-  const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : ''
 
   const checkLoginState = () => {
     if (typeof window !== 'undefined') {
-      const loginState = localStorage.getItem('loginState');
-      setIsLoggedIn(loginState === 'true');
-      const storedUser = localStorage.getItem('user') || '{}';
-      const user = JSON.parse(storedUser);
-      setStoredUser(user); // 取得用戶資訊
+      const loginState = localStorage.getItem('loginState')
+      setIsLoggedIn(loginState === 'true')
+      const storedUser = localStorage.getItem('user') || '{}'
+      const user = JSON.parse(storedUser)
+      setStoredUser(user) // 取得用戶資訊
 
       // 使用預設圖片的邏輯
-      const initialAvatar = user.avatar && user.avatar !== 'none' ? `http://localhost:3005${user.avatar}` : '/pics/avatar-1.png';
-      setAvatarSrc(initialAvatar);
+      const initialAvatar =
+        user.avatar && user.avatar !== 'none'
+          ? `http://localhost:3005${user.avatar}`
+          : '/pics/avatar-1.png'
+      setAvatarSrc(initialAvatar)
     }
-  };
+  }
 
   useEffect(() => {
-    checkLoginState(); // 在進入頁面時，檢查有無登入
-  }, []);
+    checkLoginState() // 在進入頁面時，檢查有無登入
+  }, [])
 
   const handleOpenOverlay = () => {
-    setIsOverlayOpen(true);
-  };
+    setIsOverlayOpen(true)
+  }
 
   return (
     <>
@@ -41,7 +44,7 @@ export default function Navbar() {
             src="/logo.png"
             alt="logo"
             onClick={() => {
-              window.location.href = `${baseURL}`;
+              window.location.href = `${baseURL}`
             }}
             style={{ cursor: 'pointer' }}
           />
@@ -51,7 +54,7 @@ export default function Navbar() {
             <li>
               <h5
                 onClick={() => {
-                  window.location.href = `${baseURL}/`;
+                  window.location.href = `${baseURL}/`
                 }}
                 style={{ cursor: 'pointer' }}
               >
@@ -61,7 +64,7 @@ export default function Navbar() {
             <li>
               <h5
                 onClick={() => {
-                  window.location.href = `${baseURL}/cart/1CampingStore`;
+                  window.location.href = `${baseURL}/cart/1CampingStore`
                 }}
                 style={{ cursor: 'pointer' }}
               >
@@ -71,7 +74,7 @@ export default function Navbar() {
             <li>
               <h5
                 onClick={() => {
-                  window.location.href = `${baseURL}/events`;
+                  window.location.href = `${baseURL}/events`
                 }}
                 style={{ cursor: 'pointer' }}
               >
@@ -88,12 +91,18 @@ export default function Navbar() {
                   <Image
                     src={avatarSrc} // 顯示用戶頭像
                     alt="avatar"
-                    width={40}
-                    height={40}
+                    width={50}
+                    height={50}
+                    style={{ borderRadius: '50%' }}
                   />
                 </a>
               </div>
-              <h5>{storedUser?.user_name}</h5>
+              <a
+                href={`${baseURL}/user/settings`}
+                style={{ textDecoration: 'none' }}
+              >
+                <h5>{storedUser?.user_name}</h5>
+              </a>
             </>
           ) : (
             <h5></h5>
@@ -104,15 +113,15 @@ export default function Navbar() {
               type="button"
               label="登出"
               onClick={() => {
-                setIsLoggedIn(false);
-                localStorage.setItem('loginState', 'false');
+                setIsLoggedIn(false)
+                localStorage.setItem('loginState', 'false')
                 Object.keys(localStorage).forEach((key) => {
                   if (key !== 'loginState') {
-                    localStorage.removeItem(key);
+                    localStorage.removeItem(key)
                   }
-                });
-                window.location.href = `http://localhost:3000/`;
-                checkLoginState(); // 登出後再次檢查
+                })
+                window.location.href = `http://localhost:3000/`
+                checkLoginState() // 登出後再次檢查
               }}
             />
           ) : (
@@ -121,8 +130,8 @@ export default function Navbar() {
           {isOverlayOpen && (
             <OverlayLoginRegister
               onClose={() => {
-                setIsOverlayOpen(false);
-                checkLoginState();
+                setIsOverlayOpen(false)
+                checkLoginState()
               }}
             />
           )}
@@ -215,5 +224,5 @@ export default function Navbar() {
         `}
       </style>
     </>
-  );
+  )
 }
