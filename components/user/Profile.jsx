@@ -1,121 +1,95 @@
-// components/user/Profile.jsx
-import React, { useState, useEffect } from 'react'
-import FormField from '@/components/form/FormField'
-import Button from '@/components/book/button'
-import styles from '@/styles/user/profile.module.css'
-import { ToastContainer,toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { useState } from "react";
 
 const Profile = () => {
-  // 定義 state 來控制表單值和錯誤訊息
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [address, setAddress] = useState('')
-  const [errors, setErrors] = useState({})
+  const initialData = JSON.parse(localStorage.getItem("user"));
 
-  // 填入localStorage內的資料
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user') || '{}'
-    const user = JSON.parse(storedUser)
+  const [formData, setFormData] = useState({
+    user_name: initialData?.user_name || "",
+    email: initialData?.email || "",
+    user_address: initialData?.user_address || "",
+    phone: initialData?.phone || "",
+    birthday: initialData?.birthday || "",
+    gender: initialData?.gender || "male", // 預設為 male
+  });
 
-    setName(user.user_name || '') // 取得使用者名稱
-    setEmail(user.email || '') // 取得電子郵件
-    setAddress(user.user_address || '') // 取得地址
-  }, [])
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  // 處理儲存變更的邏輯
-  const handleSaveChanges = (e) => {
-    e.preventDefault() // 防止表單默認行為
-
-    const newErrors = {}
-    if (!name) newErrors.name = '姓名是必填的'
-    if (!email) newErrors.email = 'Email是必填的'
-    if (!address) newErrors.address = '地址是必填的'
-
-    setErrors(newErrors)
-
-    // 如果有錯誤，則不進行儲存
-    if (Object.keys(newErrors).length > 0) {
-      return
-    }
-
-    // 儲存變更的邏輯
-    const updatedUser = {
-      user_name: name,
-      email,
-      user_address: address,
-    }
-    localStorage.setItem('user', JSON.stringify(updatedUser))
-    toast.success('資料已成功儲存！')
-  }
-
-  // 處理取消操作
-  const handleCancel = () => {
-    // 在這裡可以選擇重新載入資料或進行其他操作
-    setName('')
-    setEmail('')
-    setAddress('')
-    toast.info('已取消更改。')
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // 更新 localStorage
+    const updatedData = { ...initialData, ...formData };
+    localStorage.setItem("user", JSON.stringify(updatedData));
+    alert("資料已更新！");
+  };
 
   return (
-    <div className={styles.container}>
-      <form className="profile">
+    <form onSubmit={handleSubmit}>
+      <label>
+        名字:
+        <input
+          type="text"
+          name="user_name"
+          value={formData.user_name}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        電子郵件:
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        地址:
+        <input
+          type="text"
+          name="user_address"
+          value={formData.user_address}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        電話:
+        <input
+          type="text"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        生日:
+        <input
+          type="date"
+          name="birthday"
+          value={formData.birthday}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        性別:
+        <select name="gender" value={formData.gender} onChange={handleChange}>
+          <option value="male">男性</option>
+          <option value="female">女性</option>
+        </select>
+      </label>
+      <br />
+      <button type="submit">更新資料</button>
+    </form>
+  );
+};
 
-        <section className="basic-details">
-          <h2>基本詳情</h2>
-          <FormField
-            label="姓名"
-            id="name"
-            type="text"
-            placeholder="請輸入姓名"
-            required={true}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            width="80%"
-          />
-          {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
-          <FormField
-            label="Email"
-            id="email"
-            type="email"
-            placeholder="請輸入email"
-            required={true}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            width="80%"
-          />
-          {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
-          <FormField
-            label="地址"
-            id="address"
-            type="text"
-            placeholder="請輸入地址"
-            required={true}
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            width="80%"
-          />
-          {errors.address && <p style={{ color: 'red' }}>{errors.address}</p>}
-        </section>
-
-        <section
-          style={{
-            display: 'flex',
-            gap: '5px',
-            margin: '20px 0',
-          }}
-        >
-          <Button label="取消" onClick={handleCancel} />
-          <Button
-            label="提交"
-            onClick={handleSaveChanges} // 呼叫儲存變更的處理邏輯
-            type="btn-reg"
-          />
-        </section>
-      </form>
-    </div>
-  )
-}
-
-export default Profile
+export default Profile;
