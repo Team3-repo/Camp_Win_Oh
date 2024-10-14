@@ -12,7 +12,7 @@ const Security = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // 確認新密碼是否一致
@@ -34,7 +34,25 @@ const Security = () => {
     };
     localStorage.setItem('user', JSON.stringify(updatedUser));
 
-    toast.success('密碼已更新！'); // 使用 toast 來顯示成功訊息
+    // 發送更新請求到後端
+    try {
+      const response = await fetch('http://localhost:3005/api/userPass/update/password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (!response.ok) {
+        throw new Error('更新用戶資料失敗');
+      }
+
+      toast.success('密碼已更新，並成功上傳用戶資料！'); // 使用 toast 來顯示成功訊息
+    } catch (error) {
+      toast.error(`發生錯誤：${error.message}`); // 錯誤提示
+    }
+
     // 清空輸入框
     setCurrentPassword('');
     setNewPassword('');

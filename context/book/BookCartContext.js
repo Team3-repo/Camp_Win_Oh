@@ -24,6 +24,10 @@ const BookCartReducer = (state, action) => {
       BookExistingItem = state.bookCart.find(
         (item) => item.id === action.payload.id
       )
+
+      // 從 localStorage 確保獲取到最新的 BookDate
+  let BookDate = state.BookDate || localStorage.getItem('BookDate') || '';
+
       if (BookExistingItem) {
         newBookCart = state.bookCart.map((item) =>
           item.id === BookExistingItem.id
@@ -63,8 +67,9 @@ const BookCartReducer = (state, action) => {
 
       // 儲存購物車和日期到 localStorage
       localStorage.setItem('bookCart', JSON.stringify(newBookCart))
+      localStorage.setItem('BookDate', BookDate) // 確保日期也存入 localStorage
 
-      return { ...state, bookCart: newBookCart, BookTotal, BookDate }
+      return { ...state, bookCart: newBookCart, BookTotal,BookDate }
 
     case 'REMOVE_FROM_CART':
       newBookCart = state.bookCart.filter(
@@ -79,7 +84,7 @@ const BookCartReducer = (state, action) => {
 
     case 'CLEAR_CART':
       localStorage.removeItem('bookCart')
-      return { ...state, bookCart: [], BookTotal: 0, BookDate: state.BookDate }
+      return { ...state, bookCart: [], BookTotal: 0, BookDate: '' }
 
     case 'INCREASE_QUANTITY':
       newBookCart = state.bookCart.map((item) =>
@@ -197,10 +202,11 @@ export const BookCartProvider = ({ children }) => {
   })
 
   useEffect(() => {
-    const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || []
-    storedBookCart.forEach((item) => {
-      dispatch({ type: 'ADD_TO_CART', payload: item })
-    })
+    const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || [];
+  
+    if (storedBookCart.length > 0) {
+      dispatch({ type: 'SET_BOOK_CART', payload: storedBookCart });
+    }
   }, [])
 
   return (

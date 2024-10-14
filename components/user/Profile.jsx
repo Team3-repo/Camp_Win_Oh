@@ -1,34 +1,55 @@
-import React, { useState } from "react";
-import FormField from '@/components/form/FormField';
-import Button from "../book/button";
+import React, { useState } from 'react'
+import FormField from '@/components/form/FormField'
+import Button from '../book/button'
 
 const Profile = () => {
-  const initialData = JSON.parse(localStorage.getItem("user"));
+  const initialData = JSON.parse(localStorage.getItem('user'))
 
   const [formData, setFormData] = useState({
-    user_name: initialData?.user_name || "",
-    email: initialData?.email || "",
-    user_address: initialData?.user_address || "",
-    phone: initialData?.phone || "",
-    birthday: initialData?.birthday || "",
-    gender: initialData?.gender || "male", // 預設為 male
-  });
+    user_name: initialData?.user_name || '',
+    email: initialData?.email || '',
+    user_address: initialData?.user_address || '',
+    phone: initialData?.phone || '',
+    birthday: initialData?.birthday || '',
+    gender: initialData?.gender || 'male', // 預設為 male
+  })
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData({
       ...formData,
       [name]: value, // 使用 name 屬性來更新相應的狀態
-    });
-  };
+    })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
     // 更新 localStorage
-    const updatedData = { ...initialData, ...formData };
-    localStorage.setItem("user", JSON.stringify(updatedData));
-    alert("資料已更新！");
-  };
+    const updatedData = { ...initialData, ...formData }
+    localStorage.setItem('user', JSON.stringify(updatedData))
+
+    // 上傳資料到後端
+    fetch('http://localhost:3005/api/user/update/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert('資料已成功更新！')
+        } else {
+          alert('更新失敗：' + data.message)
+        }
+      })
+      .catch((error) => {
+        console.error('錯誤：', error)
+        alert('更新失敗，請稍後再試。')
+      })
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -92,9 +113,9 @@ const Profile = () => {
         </select>
       </div>
       <br />
-      <Button type="submit" label="更新資料" ></Button>
+      <Button type="submit" label="更新資料"></Button>
     </form>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
