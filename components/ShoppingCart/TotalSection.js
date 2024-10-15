@@ -8,9 +8,14 @@ import { useCart } from '@/context/CartContext';  // 修改1：引入 useCart
 
 function TotalSection({ totalAmount }) { // 接收 totalAmount 作為屬性
 
+  // 可用可不用，單純回到上一頁的效果
+  const handleBack = () => {
+    window.history.back(); // 返回上一頁
+  };
+
   return (
     <section className="totalSection">
-      <Link href="/cart/2ProductDetails">
+      <Link href={`/cart/1CampingStore`}>
       <button className="continueShoppingButton">←繼續選購</button>
       </Link>
       <div className="checkoutInfo">
