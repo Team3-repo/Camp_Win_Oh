@@ -1033,7 +1033,6 @@ option {
 }
 
 /* 管理表 */
-/* 表格容器 */
 .event-table-container {
   font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 
@@ -1120,7 +1119,7 @@ option {
   padding: 40px;
 }
 
-/* 載入中與未登入狀態 */
+/* 載入中&未登入狀態 */
 .loading-message,
 .not-logged-message {
   text-align: center;

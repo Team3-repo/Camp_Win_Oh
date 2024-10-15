@@ -1,78 +1,85 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Footer2 from '@/components/event/footer2';
-import Navbar from '@/components/event/navbar';
-import Button from '@/components/book/button';
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Footer2 from '@/components/event/footer2'
+import Navbar from '@/components/event/navbar'
+import Button from '@/components/book/button'
 
 export default function EventDetail() {
-  const [eventDetail, setEventDetail] = useState(null);
-  const [participants, setParticipants] = useState([]);
-  const [isJoined, setIsJoined] = useState(false);
-  const [isEventFull, setIsEventFull] = useState(false);
-  const [isOrganizer, setIsOrganizer] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
-  const router = useRouter();
-  const { eventId } = router.query;
+  const [eventDetail, setEventDetail] = useState(null)
+  const [participants, setParticipants] = useState([])
+  const [isJoined, setIsJoined] = useState(false)
+  const [isEventFull, setIsEventFull] = useState(false)
+  const [isOrganizer, setIsOrganizer] = useState(false)
+  const [userId, setUserId] = useState(null)
+  const [comments, setComments] = useState([])
+  const [newComment, setNewComment] = useState('')
+  const router = useRouter()
+  const { eventId } = router.query
 
   const checkLoginStatus = () => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('user')
     if (user) {
-      const parsedUser = JSON.parse(user);
-      setUserId(parsedUser.user_id || null);
+      const parsedUser = JSON.parse(user)
+      setUserId(parsedUser.user_id || null)
     }
-  };
+  }
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      checkLoginStatus();
-    }, 1000);
+      checkLoginStatus()
+    }, 1000)
 
-    return () => clearInterval(intervalId);
-  }, []);
+    return () => clearInterval(intervalId)
+  }, [])
 
   useEffect(() => {
     const fetchEventDetail = async () => {
-      if (!eventId) return;
+      if (!eventId) return
       try {
         const response = await fetch(
           `http://localhost:3005/events/api/events/eventDetail/${eventId}`
-        );
-        const data = await response.json();
-        setEventDetail(data);
-        setParticipants(data.participants);
+        )
+        const data = await response.json()
+        setEventDetail(data)
+        setParticipants(data.participants)
 
         if (userId) {
           const userParticipation = data.participants.find(
             (participant) => participant.user_id === userId
-          );
-          setIsJoined(!!userParticipation);
-          setIsOrganizer(userParticipation?.is_organizer || false);
+          )
+          setIsJoined(!!userParticipation)
+          setIsOrganizer(userParticipation?.is_organizer || false)
+        }
+
+        // 檢查活動是否已經額滿
+        if (data.participants.length >= data.event_people) {
+          setIsEventFull(true)
+        } else {
+          setIsEventFull(false)
         }
 
         const commentResponse = await fetch(
           `http://localhost:3005/events/api/comments/${eventId}`
-        );
-        const commentData = await commentResponse.json();
-        setComments(commentData);
+        )
+        const commentData = await commentResponse.json()
+        setComments(commentData)
       } catch (error) {
-        console.error('Error fetching event details or comments:', error);
+        console.error('Error fetching event details or comments:', error)
       }
-    };
+    }
 
-    fetchEventDetail();
-  }, [eventId, userId]);
+    fetchEventDetail()
+  }, [eventId, userId])
 
   const postComment = async () => {
     if (!isJoined) {
-      alert('只有參與者可以留言');
-      return;
+      alert('只有參與者可以留言')
+      return
     }
 
     if (!newComment) {
-      alert('請輸入留言內容');
-      return;
+      alert('請輸入留言內容')
+      return
     }
 
     try {
@@ -85,25 +92,25 @@ export default function EventDetail() {
           },
           body: JSON.stringify({ eventId, userId, comment: newComment }),
         }
-      );
+      )
 
       if (response.ok) {
-        const commentData = await response.json();
-        setComments([...comments, commentData]);
-        setNewComment('');
+        const commentData = await response.json()
+        setComments([...comments, commentData])
+        setNewComment('')
       } else {
-        alert('留言失敗');
+        alert('留言失敗')
       }
     } catch (error) {
-      console.error('Error posting comment:', error);
-      alert('伺服器錯誤，無法留言');
+      console.error('Error posting comment:', error)
+      alert('伺服器錯誤，無法留言')
     }
-  };
+  }
 
   const joinEvent = async () => {
     if (!userId) {
-      alert('請先登入後再參加活動');
-      return;
+      alert('請先登入後再參加活動')
+      return
     }
 
     try {
@@ -116,23 +123,23 @@ export default function EventDetail() {
           },
           body: JSON.stringify({ eventId, userId }),
         }
-      );
+      )
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (response.ok && data.success) {
-        setIsJoined(true);
-        setParticipants([...participants, { user_id: userId }]);
-        alert('成功加入活動');
+        setIsJoined(true)
+        setParticipants([...participants, { user_id: userId }])
+        alert('成功加入活動')
       } else {
-        console.error('Failed to join event:', data.message);
-        alert(data.message || '加入活動失敗');
+        console.error('Failed to join event:', data.message)
+        alert(data.message || '加入活動失敗')
       }
     } catch (error) {
-      console.error('Error joining event:', error);
-      alert('伺服器錯誤，無法加入活動');
+      console.error('Error joining event:', error)
+      alert('伺服器錯誤，無法加入活動')
     }
-  };
+  }
 
   const leaveEvent = async () => {
     try {
@@ -145,19 +152,19 @@ export default function EventDetail() {
           },
           body: JSON.stringify({ eventId, userId }),
         }
-      );
-      const data = await response.json();
+      )
+      const data = await response.json()
       if (data.success) {
-        setIsJoined(false);
+        setIsJoined(false)
         setParticipants(
           participants.filter((participant) => participant.user_id !== userId)
-        );
-        alert('已退出活動');
+        )
+        alert('已退出活動')
       }
     } catch (error) {
-      console.error('Error leaving event:', error);
+      console.error('Error leaving event:', error)
     }
-  };
+  }
 
   const deleteEvent = async () => {
     if (confirm('確定要刪除此活動嗎？這會影響所有參與者。')) {
@@ -167,22 +174,22 @@ export default function EventDetail() {
           {
             method: 'DELETE',
           }
-        );
+        )
         if (response.ok) {
-          alert('活動已刪除');
-          router.push('/events');
+          alert('活動已刪除')
+          router.push('/events')
         } else {
-          alert('刪除活動失敗');
+          alert('刪除活動失敗')
         }
       } catch (error) {
-        console.error('Error deleting event:', error);
-        alert('伺服器錯誤，無法刪除活動');
+        console.error('Error deleting event:', error)
+        alert('伺服器錯誤，無法刪除活動')
       }
     }
-  };
+  }
 
   if (!eventDetail) {
-    return <h3 style={{ color: '#ff82d2' }}>活動資料載入中</h3>;
+    return <h3 style={{ color: '#ff82d2' }}>活動資料載入中</h3>
   }
 
   return (
@@ -245,14 +252,14 @@ export default function EventDetail() {
             </div>
           </div>
 
-          {/* 參加活動按鈕 */}
+          {/* 活動按鈕 */}
           <div className="joinbtn">
             {isOrganizer ? (
               <Button label="刪除活動" onClick={deleteEvent} />
-            ) : isEventFull ? (
-              <Button label="活動已額滿" disabled={true} />
             ) : isJoined ? (
               <Button label="退出活動" onClick={leaveEvent} />
+            ) : isEventFull ? (
+              <Button label="活動已額滿" disabled={true} />
             ) : (
               <Button label="參加活動" onClick={joinEvent} />
             )}
@@ -269,8 +276,10 @@ export default function EventDetail() {
             </div>
             <div className="eparticipant-list">
               {participants.map((participant) => {
-                console.log(`User ID: ${participant.user_id}, Avatar: ${participant.avatar}`);
-                
+                console.log(
+                  `User ID: ${participant.user_id}, Avatar: ${participant.avatar}`
+                )
+
                 return (
                   <div key={participant.user_id} className="eparticipant-item">
                     <img
@@ -287,7 +296,7 @@ export default function EventDetail() {
                       <span className="organizer-tag">主辦人</span>
                     ) : null}
                   </div>
-                );
+                )
               })}
             </div>
 
@@ -331,5 +340,5 @@ export default function EventDetail() {
       </section>
       <Footer2 />
     </>
-  );
+  )
 }
