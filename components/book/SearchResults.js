@@ -32,7 +32,7 @@ const SearchResult = ({
           適合人數: 最多可容納{max_per}人
         </h5>
         <h5 className={styles.resultPrice}>
-          價格: <span className={styles.priceHighlight}>{price}/晚</span>
+          價格:  <span className={styles.priceHighlight}>NT$ {price}/晚</span>
         </h5>
         <h5 className={styles.resultFacilities}>床型: {bed_opt}</h5>
       </div>

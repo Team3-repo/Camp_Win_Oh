@@ -237,7 +237,7 @@ export default function CartPay({ setStep }) {
             ))}
             {/* 總金額計算 */}
             <h5>
-              總金額
+              小計
               <p>
                 NT$
                 {finalTotal}

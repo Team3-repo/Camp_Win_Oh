@@ -21,7 +21,7 @@
   gap: 10px;
   align-items: center;
   padding: 20px;
-  background-color: #ff5833;
+  background-color: #698d65;
   color: #fff;
 }
 
@@ -134,6 +134,13 @@
   max-width: 800px; /* 設定最大寬度，保持寬度平衡 */
 }
 
+.cartItems3 {
+  display: flex;
+  gap: 20px;
+  width: 100%; /* 讓項目寬度與 .offcanvasBody 一致 */
+  max-width: 800px; /* 設定最大寬度，保持寬度平衡 */
+}
+
 .cartItems ul {
   list-style: none;
   padding: 0;
@@ -149,6 +156,22 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* 調整寬度以保持整體平衡 */
+}
+.cartItem2 {
+  width: 100%;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px; /* 調整寬度以保持整體平衡 */
+}
+.cartItem3 {
+  width: 100%;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   max-width: 800px; /* 調整寬度以保持整體平衡 */
 }
 
@@ -178,8 +201,14 @@
   align-items: center;
 }
 
+.itemName2 {
+  font-size: 28px;
+  font-weight: bold;
+  border-left: 10px solid #fc9a84;
+  padding-left: 10px;
+}
 .itemName {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -194,7 +223,7 @@
 .itemPrice {
   color: #45A049;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 22px;
   text-align: right; /* 讓 itemPrice 右對齊 */
 }
 
@@ -233,17 +262,19 @@
   color: #ff5833;
   padding: 10px;
   border-top: 1px solid #ccc;
-  width: 100%; /* 讓總金額寬度與其他內容一致 */
   text-align: right; /* 總金額右對齊 */
-  max-width: 800px; /* 調整總金額的寬度，使其與其他內容保持一致 */
+  display: flex;
+ align-items: center;
+ justify-content: flex-end;
+ gap:10px;
+}
+.totalAmount h3{
+  width: 549px;
 }
 
 .checkoutButtonContainer {
-  margin-top: 20px;
   display: flex;
   justify-content: flex-end; /* 將按鈕容器靠右對齊 */
-  width: 100%; /* 讓按鈕容器寬度與外部內容一致 */
-  max-width: 800px; /* 限制最大寬度，與其他內容一致 */
 }
 
 .checkoutButton {
@@ -264,6 +295,25 @@
   color: #fff579;
 }
 
+.PeopleSection{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-bottom: 15px;
+  gap: 20px;
+}
 
+.imgSection{
+  background-color: #96d18e;
+  width: 250px;
+  height: 200px;
+  border-radius: 5%;
+  margin: 0 10px;
+  overflow: hidden;
+  object-fit: cover;
+}
 
+.imgSection img{
+  width: 100%;
+}
 

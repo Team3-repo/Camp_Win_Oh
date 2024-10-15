@@ -37,7 +37,7 @@ export default function Index() {
       <SuggestCard />
 
       {/* 懶人包 */}
-      <QuickBooking />
+      {/* <QuickBooking /> */}
 
       {/* 熱門推薦活動 */}
 
