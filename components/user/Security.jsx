@@ -1,121 +1,137 @@
-import React, { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
-import FormField from '@/components/form/FormField'
-import Button from '@/components/book/button'
+import React, { useState } from 'react';
+import FormField from '@/components/form/FormField';
+import { toast } from 'react-toastify';
 
-function Security() {
-  const [currentPassword, setCurrentPassword] = useState('123456')
-  const [newPassword, setNewPassword] = useState('')
-  const [confirmedPassword, setConfirmedPassword] = useState('')
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
-  const [showNewPassword, setShowNewPassword] = useState(false)
-  const [showConfirmedPassword, setShowConfirmedPassword] = useState(false)
+const Security = () => {
+  const initialData = JSON.parse(localStorage.getItem('user'));
 
-  // 表單驗證函數
-  const validateForm = () => {
-    return newPassword === confirmedPassword && newPassword.length > 0
-  }
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // 儲存變更按鈕的處理邏輯
-  const handleSaveChanges = (e) => {
-    e.preventDefault() // 防止表單的默認提交行為
-    if (validateForm()) {
-      console.log('密碼已更改')
-      toast.success('密碼已成功變更！') // 成功提示
-      // 在此處處理提交表單的邏輯，例如發送 API 請求等
-    } else {
-      console.log('新密碼和確認密碼不匹配')
-      toast.error('新密碼和確認密碼不匹配！') // 錯誤提示
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // 確認新密碼是否一致
+    if (newPassword !== confirmPassword) {
+      toast.error('新密碼與確認新密碼不一致！'); // 使用 toast 來顯示錯誤訊息
+      return;
     }
-  }
 
-  const handleCancel = () => {
-    setCurrentPassword('')
-    setNewPassword('')
-    setConfirmedPassword('')
-  }
+    // 驗證當前密碼
+    if (currentPassword !== initialData.password) {
+      toast.error('當前密碼不正確！'); // 當前密碼錯誤提示
+      return;
+    }
+
+    // 更新 localStorage 中的密碼
+    const updatedUser = {
+      ...initialData,
+      password: newPassword, // 更新密碼
+    };
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+
+    // 發送更新請求到後端
+    try {
+      const response = await fetch('http://localhost:3005/api/userPass/update/password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (!response.ok) {
+        throw new Error('更新用戶資料失敗');
+      }
+
+      toast.success('密碼已更新，並成功上傳用戶資料！'); // 使用 toast 來顯示成功訊息
+    } catch (error) {
+      toast.error(`發生錯誤：${error.message}`); // 錯誤提示
+    }
+
+    // 清空輸入框
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+  };
 
   return (
-    <div>
-      <h2>更改密碼</h2>
-      <form onSubmit={handleSaveChanges}>
-        {/* 當前密碼 */}
-        <FormField
-          label="當前密碼"
-          id="currentPassword"
-          type={showCurrentPassword ? 'text' : 'password'}
-          placeholder="請輸入當前密碼"
-          required={true}
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          width="80%"
-          backgroundColor="#fff"
-        />
-        <button
-          type="button"
-          onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-        >
-          {showCurrentPassword ? '隱藏' : '顯示'}
-        </button>
+    <form onSubmit={handleSubmit}>
+      <FormField
+        label="當前密碼"
+        id="current_password"
+        name="current_password"
+        type={showCurrentPassword ? 'text' : 'password'}
+        placeholder="請輸入當前密碼"
+        value={currentPassword}
+        onChange={(e) => setCurrentPassword(e.target.value)}
+      />
+      <button
+        type="button"
+        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+      >
+        {showCurrentPassword ? '隱藏' : '顯示'}
+      </button>
 
-        {/* 新密碼 */}
-        <FormField
-          label="新密碼"
-          id="newPassword"
-          type={showNewPassword ? 'text' : 'password'}
-          placeholder="請輸入新密碼"
-          required={true}
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          width="80%"
-          backgroundColor="#fff"
-        />
-        <button
-          type="button"
-          onClick={() => setShowNewPassword(!showNewPassword)}
-        >
-          {showNewPassword ? '隱藏' : '顯示'}
-        </button>
+      <FormField
+        label="新密碼"
+        id="new_password"
+        name="new_password"
+        type={showNewPassword ? 'text' : 'password'}
+        placeholder="請輸入新密碼"
+        value={newPassword}
+        onChange={(e) => setNewPassword(e.target.value)}
+      />
+      <button
+        type="button"
+        onClick={() => setShowNewPassword(!showNewPassword)}
+      >
+        {showNewPassword ? '隱藏' : '顯示'}
+      </button>
 
-        {/* 確認新密碼 */}
-        <FormField
-          label="確認新密碼"
-          id="confirmedPassword"
-          type={showConfirmedPassword ? 'text' : 'password'}
-          placeholder="請確認新密碼"
-          required={true}
-          value={confirmedPassword}
-          onChange={(e) => setConfirmedPassword(e.target.value)}
-          width="80%"
-          backgroundColor="#fff"
-        />
-        <button
-          type="button"
-          onClick={() => setShowConfirmedPassword(!showConfirmedPassword)}
-        >
-          {showConfirmedPassword ? '隱藏' : '顯示'}
-        </button>
+      <FormField
+        label="確認新密碼"
+        id="confirm_password"
+        name="confirm_password"
+        type={showConfirmPassword ? 'text' : 'password'}
+        placeholder="請確認新密碼"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+      />
+      <button
+        type="button"
+        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+      >
+        {showConfirmPassword ? '隱藏' : '顯示'}
+      </button>
 
-        {/* 按鈕區域 */}
-        <section
-          style={{
-            display: 'flex',
-            gap: '5px',
-            // justifyContent: 'flex-end',
-            margin: '20px 0',
-          }}
-        >
-          <Button label="取消" onClick={handleCancel} />
-          <Button
-            label="提交"
-            onClick={handleSaveChanges} // 呼叫儲存變更的處理邏輯
-            type="btn-reg"
-          />
-        </section>
-      </form>
-      <ToastContainer />
-    </div>
-  )
+      <br />
+      <button type="submit" style={{ marginTop: '20px' }}>
+        更新密碼
+      </button>
+
+      <style jsx>{`
+        button {
+          cursor: pointer;
+          background-color: #fc9a84; /* 按鈕背景顏色 */
+          color: white; /* 按鈕文字顏色 */
+          border: none; /* 去掉邊框 */
+          border-radius: 6px; /* 圓角邊框 */
+          padding: 5px; /* 按鈕內邊距 */
+          font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+          transition: background-color 0.3s ease;
+        }
+        button:hover {
+          background-color: #4282b7;
+          color: #fff579;
+        }
+      `}</style>
+    </form>
+  );
 }
 
-export default Security
+export default Security;

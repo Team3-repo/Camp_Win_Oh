@@ -1,6 +1,5 @@
-此專案的後端:
-- https://github.com/Team3-repo/Camp_server
 
-Eddy老師的 
-- https://github.com/mfee-react/next-bs5
-- https://github.com/mfee-react/express-base-esm
+<!-- 到myphpadmin執行 -->
+
+ALTER TABLE orderlist DROP FOREIGN KEY FK_user_name12;
+

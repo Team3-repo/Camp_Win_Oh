@@ -1,120 +1,120 @@
-// components/user/Profile.jsx
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import FormField from '@/components/form/FormField'
-import Button from '@/components/book/button'
-import styles from '@/styles/user/profile.module.css'
-import { ToastContainer,toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import Button from '../book/button'
 
 const Profile = () => {
-  // 定義 state 來控制表單值和錯誤訊息
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [address, setAddress] = useState('')
-  const [errors, setErrors] = useState({})
+  const initialData = JSON.parse(localStorage.getItem('user'))
 
-  // 填入localStorage內的資料
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user') || '{}'
-    const user = JSON.parse(storedUser)
+  const [formData, setFormData] = useState({
+    user_name: initialData?.user_name || '',
+    email: initialData?.email || '',
+    user_address: initialData?.user_address || '',
+    phone: initialData?.phone || '',
+    birthday: initialData?.birthday || '',
+    gender: initialData?.gender || 'male', // 預設為 male
+  })
 
-    setName(user.user_name || '') // 取得使用者名稱
-    setEmail(user.email || '') // 取得電子郵件
-    setAddress(user.user_address || '') // 取得地址
-  }, [])
-
-  // 處理儲存變更的邏輯
-  const handleSaveChanges = (e) => {
-    e.preventDefault() // 防止表單默認行為
-
-    const newErrors = {}
-    if (!name) newErrors.name = '姓名是必填的'
-    if (!email) newErrors.email = 'Email是必填的'
-    if (!address) newErrors.address = '地址是必填的'
-
-    setErrors(newErrors)
-
-    // 如果有錯誤，則不進行儲存
-    if (Object.keys(newErrors).length > 0) {
-      return
-    }
-
-    // 儲存變更的邏輯
-    const updatedUser = {
-      user_name: name,
-      email,
-      user_address: address,
-    }
-    localStorage.setItem('user', JSON.stringify(updatedUser))
-    toast.success('資料已成功儲存！')
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData({
+      ...formData,
+      [name]: value, // 使用 name 屬性來更新相應的狀態
+    })
   }
 
-  // 處理取消操作
-  const handleCancel = () => {
-    // 在這裡可以選擇重新載入資料或進行其他操作
-    setName('')
-    setEmail('')
-    setAddress('')
-    toast.info('已取消更改。')
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    // 更新 localStorage
+    const updatedData = { ...initialData, ...formData }
+    localStorage.setItem('user', JSON.stringify(updatedData))
+
+    // 上傳資料到後端
+    fetch('http://localhost:3005/api/user/update/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert('資料已成功更新！')
+        } else {
+          alert('更新失敗：' + data.message)
+        }
+      })
+      .catch((error) => {
+        console.error('錯誤：', error)
+        alert('更新失敗，請稍後再試。')
+      })
   }
 
   return (
-    <div className={styles.container}>
-      <form className="profile">
-
-        <section className="basic-details">
-          <h2>基本詳情</h2>
-          <FormField
-            label="姓名"
-            id="name"
-            type="text"
-            placeholder="請輸入姓名"
-            required={true}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            width="80%"
-          />
-          {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
-          <FormField
-            label="Email"
-            id="email"
-            type="email"
-            placeholder="請輸入email"
-            required={true}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            width="80%"
-          />
-          {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
-          <FormField
-            label="地址"
-            id="address"
-            type="text"
-            placeholder="請輸入地址"
-            required={true}
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            width="80%"
-          />
-          {errors.address && <p style={{ color: 'red' }}>{errors.address}</p>}
-        </section>
-
-        <section
-          style={{
-            display: 'flex',
-            gap: '5px',
-            margin: '20px 0',
-          }}
+    <form onSubmit={handleSubmit}>
+      <FormField
+        label="名字"
+        id="user_name"
+        name="user_name" // 傳入 name 屬性
+        type="text"
+        placeholder="請輸入名字"
+        value={formData.user_name}
+        onChange={handleChange}
+        required={true}
+      />
+      <FormField
+        label="電子郵件"
+        id="email"
+        name="email" // 傳入 name 屬性
+        type="email"
+        placeholder="請輸入電子郵件"
+        value={formData.email}
+        onChange={handleChange}
+        required={true}
+      />
+      <FormField
+        label="地址"
+        id="user_address"
+        name="user_address" // 傳入 name 屬性
+        type="text"
+        placeholder="請輸入地址"
+        value={formData.user_address}
+        onChange={handleChange}
+      />
+      <FormField
+        label="電話"
+        id="phone"
+        name="phone" // 傳入 name 屬性
+        type="text"
+        placeholder="請輸入電話"
+        value={formData.phone}
+        onChange={handleChange}
+      />
+      <FormField
+        label="生日"
+        id="birthday"
+        name="birthday" // 傳入 name 屬性
+        type="date"
+        placeholder="請選擇生日"
+        value={formData.birthday}
+        onChange={handleChange}
+      />
+      <div>
+        <h2 style={{ fontSize: '1.3rem' }}>性別</h2>
+        <select
+          name="gender"
+          value={formData.gender}
+          onChange={handleChange}
+          style={{ padding: '8px', width: '50%', borderRadius: '3.79px' }}
         >
-          <Button label="取消" onClick={handleCancel} />
-          <Button
-            label="提交"
-            onClick={handleSaveChanges} // 呼叫儲存變更的處理邏輯
-            type="btn-reg"
-          />
-        </section>
-      </form>
-    </div>
+          <option value="male">男性</option>
+          <option value="female">女性</option>
+        </select>
+      </div>
+      <br />
+      <Button type="submit" label="更新資料"></Button>
+    </form>
   )
 }
 

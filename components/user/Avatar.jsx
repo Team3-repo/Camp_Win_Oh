@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import styles from '@/styles/user/profile.module.css';
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import styles from '@/styles/user/profile.module.css';
 
 const Avatar = () => {
   const [avatar, setAvatar] = useState(null); // 儲存上傳的 avatar 檔案
@@ -60,9 +60,33 @@ const Avatar = () => {
       user.avatar = data.avatarUrl;
       localStorage.setItem('user', JSON.stringify(user));
 
+      // 呼叫更新用戶資料的 API
+      await updateUserProfile(user);
+
       toast.success('大頭照已成功更新');
     } catch (error) {
       toast.error('上傳過程中發生錯誤，請稍後再試');
+    }
+  };
+  // 更新用戶資料 API
+  const updateUserProfile = async (user) => {
+    try {
+      const response = await fetch('http://localhost:3005/api/userAvatar/update/avatar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user), // 傳送 user 資料
+      });
+
+      if (!response.ok) {
+        throw new Error('更新用戶資料失敗');
+      }
+
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      toast.error('更新用戶資料時發生錯誤');
     }
   };
 
@@ -91,6 +115,7 @@ const Avatar = () => {
           <p>支援png, jpeg, gif</p>
         </div>
       </section>
+      <ToastContainer />
     </div>
   );
 };

@@ -1916,6 +1916,7 @@ CREATE TABLE `orderlist` (
   primary key(`product_order_id`),
   CONSTRAINT `FK_user_name12` FOREIGN KEY (`user_name`) REFERENCES `user_data`(`user_name`) ON DELETE CASCADE
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ALTER TABLE orderlist DROP FOREIGN KEY FK_user_name12;
 
 --
 -- 傾印資料表的資料 `orderlist`

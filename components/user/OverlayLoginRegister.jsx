@@ -82,7 +82,7 @@ const OverlayLoginRegister = ({ onClose }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ username, email, password, confirmPassword }), // 傳送 username
+          body: JSON.stringify({ username, email, password }), // 更新請求體，移除 confirmPassword
         })
 
         const data = await response.json()
@@ -90,7 +90,7 @@ const OverlayLoginRegister = ({ onClose }) => {
           const user = data.user
           localStorage.setItem('user', JSON.stringify(user))
           localStorage.setItem('loginState', 'true')
-          alert('註冊成功！歡迎，' + user.username) // 使用 username
+          alert('註冊成功！歡迎，' + user.user_name) // 使用 user_name
           onClose()
         } else {
           setError(data.message || '註冊失敗，請稍後再試')
