@@ -264,7 +264,7 @@ export default function EventDetail() {
           <div className="eventMember">
             <div className="ectitle">
               <h3 className="ech3">
-                目前人數（{participants.length}/{eventDetail.event_people} 人）
+                目前參與（{participants.length}/{eventDetail.event_people} 人）
               </h3>
             </div>
             <div className="eparticipant-list">

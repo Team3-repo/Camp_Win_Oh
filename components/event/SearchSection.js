@@ -26,7 +26,7 @@ export default function SearchSection({ onFilter }) {
     })
   }, [])
 
-  // 處理搜尋邏輯
+  // 搜尋
   const handleSearch = () => {
     if (startDate && endDate) {
       onFilter(startDate, endDate)
@@ -35,12 +35,12 @@ export default function SearchSection({ onFilter }) {
     }
   }
 
-  // 新增的清除篩選功能
+  // 清除篩選
   const handleClear = () => {
     setStartDate(null)
     setEndDate(null)
 
-    // 清空日期輸入框
+    // 清空日期
     document.getElementById('start-date').value = ''
     document.getElementById('end-date').value = ''
 
@@ -90,8 +90,8 @@ export default function SearchSection({ onFilter }) {
 
           {/* 清除篩選按鈕 */}
           <Button
-            label="一鍵清除"
-            onClick={handleClear} // 新增的清除功能
+            label="清除篩選"
+            onClick={handleClear} 
           />
         </div>
       </div>

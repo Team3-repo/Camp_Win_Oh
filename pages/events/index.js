@@ -17,6 +17,7 @@ export default function EventList() {
   const [currentPage, setCurrentPage] = useState(0)
   const pageSize = 12
   const router = useRouter()
+  // const [sortAsc, setSortAsc] = useState(true) // 排序
 
   // 用來追蹤登入狀態
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -38,7 +39,7 @@ export default function EventList() {
       })
       // 延遲跳轉到登入頁面並附帶 redirect 參數
       setTimeout(() => {
-        window.location.href = '/user/modal?redirect=/events/eventCreate' 
+        window.location.href = '/user/modal?redirect=/events/eventCreate'
       }, 3000)
     } else {
       // 用戶已登入時，跳轉到創建活動頁面
@@ -54,12 +55,12 @@ export default function EventList() {
         setEvents(data)
         setFilteredEvents(data)
 
-        // 計算即將截止的活動 (7天內)
+        // 即將截止的活動<7天
         const upcomingEvents = data.filter((event) => {
           const deadline = new Date(event.deadline)
           const today = new Date()
           const diffDays = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24))
-          return diffDays <= 7 && diffDays >= 0 // 計算距離今天小於7天
+          return diffDays <= 7 && diffDays >= 0 // 計算距離今天<7天
         })
         setUpcomingDeadlineEvents(upcomingEvents)
       })
@@ -70,7 +71,7 @@ export default function EventList() {
   const currentEvents = filteredEvents.slice(startIndex, startIndex + pageSize)
   const totalSlides = Math.ceil(filteredEvents.length / pageSize) // total
 
-  // 依日期過濾活動
+  // 日期篩選
   const handleFilter = (startDate, endDate) => {
     const filtered = events.filter((event) => {
       const eventStartDate = new Date(event.start_date)
@@ -85,10 +86,22 @@ export default function EventList() {
     setCurrentPage(0) // 重設至第一頁
   }
 
-  // 點擊卡片跳轉至活動詳情頁面，並傳遞 event_id 作為 URL 參數
+  // 點擊卡片跳轉至活動詳情頁面( event_id)
   const handleCardClick = (eventId) => {
-    router.push(`/events/${eventId}`) // 使用 router.push 進行跳轉
+    router.push(`/events/${eventId}`) // 跳轉
   }
+
+  // 排序活動開始日期
+  // const handleSort = () => {
+  //   const sortedEvents = [...filteredEvents].sort((a, b) => {
+  //     const dateA = new Date(a.start_date)
+  //     const dateB = new Date(b.start_date)
+
+  //     return sortAsc ? dateA - dateB : dateB - dateA
+  //   })
+  //   setFilteredEvents(sortedEvents)
+  //   setSortAsc(!sortAsc) // 切換
+  // }
 
   return (
     <>
@@ -146,6 +159,12 @@ export default function EventList() {
       </section>
 
       <section className="ehilight-topics2">
+        {/* 排序按鈕 */}
+        {/* <Button
+          label={sortAsc ? '日期排序｜遠到近' : '日期排序｜近到遠'}
+          onClick={handleSort}
+          className="sort-btn"
+        /> */}
         <h3 className="esection-title">活動報名中</h3>
         <div className="ehilight-cards">
           {/* render篩選卡片 */}
