@@ -252,6 +252,7 @@ export default function EventDetail() {
             </div>
           </div>
 
+          {/* 活動按鈕 */}
           <div className="joinbtn">
             {isOrganizer ? (
               <Button label="刪除活動" onClick={deleteEvent} />
