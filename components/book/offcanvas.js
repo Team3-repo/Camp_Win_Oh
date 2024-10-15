@@ -47,8 +47,8 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
     if (!isLoggedIn) {
       // 用戶未登入時顯示提示，並跳轉至登入頁面
       toast.error('請先登入以進行付款！', {
-        duration: 3000,
-        position: 'top-center',
+        duration: 10000,
+        position: 'top-right',
       })
       setTimeout(() => {
         window.location.href = '/user/modal'
