@@ -156,9 +156,18 @@ export default function EventDetail() {
       const data = await response.json()
       if (data.success) {
         setIsJoined(false)
-        setParticipants(
-          participants.filter((participant) => participant.user_id !== userId)
+        const updatedParticipants = participants.filter(
+          (participant) => participant.user_id !== userId
         )
+        setParticipants(updatedParticipants)
+
+        // 檢查活動是否額滿並更新狀態
+        if (updatedParticipants.length >= eventDetail.event_people) {
+          setIsEventFull(true)
+        } else {
+          setIsEventFull(false)
+        }
+
         alert('已退出活動')
       }
     } catch (error) {
@@ -167,7 +176,7 @@ export default function EventDetail() {
   }
 
   const deleteEvent = async () => {
-    if (confirm('確定要刪除此活動嗎？這會影響所有參與者。')) {
+    if (confirm('確定要刪除此活動嗎？這會影響所有參與者')) {
       try {
         const response = await fetch(
           `http://localhost:3005/events/api/deleteEvent/${eventId}`,
