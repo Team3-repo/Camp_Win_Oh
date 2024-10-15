@@ -10,6 +10,7 @@ export default function SearchFilter({ onSearch }) {
   const [selectedRoomType, setSelectedRoomType] = useState('') // 房型選擇
   const [checkInOut, setCheckInOut] = useState('') // 入住和退房日期
   const [totalPersons, setTotalPersons] = useState('') // 總人數
+  const [sortAsc, setSortAsc] = useState(true) // 價格排序狀態，預設為升序
   const [data, setData] = useState([]) // 儲存篩選後的房型資料
 
   // 初次加載時顯示所有結果
@@ -36,28 +37,34 @@ export default function SearchFilter({ onSearch }) {
       dateFormat: 'm/d (D)', // 設置顯示的日期格式
       minDate: 'today', // 最小日期為今天
       onClose: function (selectedDates, dateStr, instance) {
-        if (selectedDates.length === 2) { // 當選取到兩個日期時
-          const startDate = selectedDates[0]; // 開始日期
-          const endDate = selectedDates[1]; // 結束日期
-  
+        if (selectedDates.length === 2) {
+          // 當選取到兩個日期時
+          const startDate = selectedDates[0] // 開始日期
+          const endDate = selectedDates[1] // 結束日期
+
           // 計算夜數
-          const nights = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
-  
+          const nights = Math.round(
+            (endDate - startDate) / (1000 * 60 * 60 * 24)
+          )
+
           // 格式化日期範圍顯示
-          const formattedDates = `${instance.formatDate(startDate, 'm/d (D)')} - ${instance.formatDate(endDate, 'm/d (D)')}, ${nights}夜`;
-          
+          const formattedDates = `${instance.formatDate(
+            startDate,
+            'm/d (D)'
+          )} - ${instance.formatDate(endDate, 'm/d (D)')}, ${nights}夜`
+
           // 更新輸入框的值
-          document.getElementById('check-in-out').value = formattedDates;
-          
+          document.getElementById('check-in-out').value = formattedDates
+
           // 更新狀態，供後續篩選使用
-          setCheckInOut(formattedDates);
-  
+          setCheckInOut(formattedDates)
+
           // 將選取的日期存入 localStorage 的 BookDate
-          localStorage.setItem('BookDate', formattedDates);
+          localStorage.setItem('BookDate', formattedDates)
         }
-      }
-    });
-  }, []);
+      },
+    })
+  }, [])
 
   // 發送篩選條件到後端 API 並進行人數篩選
   const handleSearch = async () => {
@@ -95,6 +102,14 @@ export default function SearchFilter({ onSearch }) {
 
       setData(filteredData) // 更新篩選後的結果
       onSearch(filteredData) // 傳遞結果給父組件
+
+      // 價格排序（升序或降序）
+      const sortedData = filteredData.sort((a, b) => {
+        return sortAsc ? a.price - b.price : b.price - a.price
+      })
+
+      setData(sortedData)
+      onSearch(sortedData) // 傳遞排序後的結果給父組件
     } catch (error) {
       console.error('發送篩選條件時發生錯誤:', error)
     }
@@ -111,6 +126,10 @@ export default function SearchFilter({ onSearch }) {
 
   const handlePersonsChange = (e) => {
     setTotalPersons(e.target.value)
+  }
+
+  const handlePriceSortChange = (isAsc) => {
+    setSortAsc(isAsc)
   }
 
   return (
@@ -166,7 +185,6 @@ export default function SearchFilter({ onSearch }) {
             <IoSearch />
             &nbsp;搜索
           </button>
-
         </div>
 
         {/* 房型選擇 */}
@@ -203,6 +221,42 @@ export default function SearchFilter({ onSearch }) {
                 onChange={() => handleRoomTypeChange('camper')}
               />
               露營車
+            </label>
+          </div>
+        </div>
+
+        {/* 價格排序 */}
+        <div className={styles.typeContainer}>
+          <h5
+            style={{
+              color: '#2c3e50',
+              paddingTop: '10px',
+              paddingRight: '38px',
+            }}
+          >
+            價位
+          </h5>
+
+          <div className={styles.typeSection2}>
+            <label>
+              <input
+                type="radio"
+                name="priceSort"
+                value="asc"
+                checked={sortAsc === true}
+                onChange={() => handlePriceSortChange(true)}
+              />
+              低價優先
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="priceSort"
+                value="desc"
+                checked={sortAsc === false}
+                onChange={() => handlePriceSortChange(false)}
+              />
+              高價優先
             </label>
           </div>
         </div>

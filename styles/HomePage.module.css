@@ -327,3 +327,23 @@
   display: flex;
   justify-content: center;
 }
+
+
+.typeSection2 {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+}
+.typeSection2 {
+  padding-top: 10px;
+  width: 25%;
+}
+
+.typeSection2 label{
+  font-size: 16px;
+  font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
+  font-weight: bold;
+  color: #2c3e50;
+  width: 70%;
+}
