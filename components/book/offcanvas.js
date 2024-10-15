@@ -114,105 +114,133 @@ export default function OffcanvasCart({ isOpen, toggleOffcanvas }) {
             <div className={styles.cartItems}>
               <ul>
                 {bookCart.map((item) => (
-                  <li key={item.id} className={styles.cartItem}>
+                  <li key={item.id} className={styles.cartItem2}>
                     <div className={styles.cartItemDetails}>
                       <div className={styles.detailsCtl}>
-                        <span className={styles.itemName}>{item.name}</span>
-                        <span className={styles.itemPrice}>${item.price}</span>
+                        <span className={styles.itemName2}>{item.name}</span>
+                        <span className={styles.itemPrice}>
+                          單價: NT${item.price}
+                        </span>
                       </div>
                     </div>
                     <div className={styles.cartItemActions}></div>
                   </li>
                 ))}
               </ul>
+              <div className={styles.cartItems}>
+                <div className={styles.detailsCtl}>
+                  <div className={styles.imgSection}>
+                    {bookCart.map((item) => (
+                      <div key={item.id}>
+                        <img
+                          src={item.photos || 'https://via.placeholder.com/150'} // 顯示圖片，若無則顯示佔位圖
+                          alt="Campsite Image"
+                        />
+                      </div>
+                    ))}
+                  </div>
 
-              {/* 大人 */}
-              <ul>
-                {bookCart.map((item) => (
-                  <li key={item.id} className={styles.cartItem}>
-                    <div className={styles.cartItemDetails}>
-                      <div className={styles.detailsCtl}>
-                        <span className={styles.itemName}>大人</span>
-                        <div className={styles.quantityCtl}>
-                          <button
-                            className={styles.quantityButton}
-                            onClick={() => handleDecreaseAdult(item)}
-                          >
-                            -
-                          </button>
-                          <span className={styles.itemQuantity}>
-                            {item.adult || 1}
-                          </span>
-                          <button
-                            className={styles.quantityButton}
-                            onClick={() => handleIncreaseAdult(item)}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.cartItemActions}></div>
-                  </li>
-                ))}
-              </ul>
-              {/* 小孩 */}
-              <ul>
-                {bookCart.map((item) => (
-                  <li key={item.id} className={styles.cartItem}>
-                    <div className={styles.cartItemDetails}>
-                      <div className={styles.detailsCtl}>
-                        <span className={styles.itemName}>小孩</span>
-                        <div className={styles.quantityCtl}>
-                          <button
-                            className={styles.quantityButton}
-                            onClick={() => handleDecreaseChild(item)}
-                          >
-                            -
-                          </button>
-                          <span className={styles.itemQuantity}>
-                            {item.child || 0}
-                          </span>
-                          <button
-                            className={styles.quantityButton}
-                            onClick={() => handleIncreaseChild(item)}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.cartItemActions}></div>
-                  </li>
-                ))}
-              </ul>
-
-              {/* 顯示總金額 */}
-              <div className={styles.totalAmount}>
-                <h3 className={styles.totalAmounth3}>總金額: ${BookTotal}</h3>
-                <Link
-                  href={{
-                    pathname: '/book/cart/',
-                    query: { BookAdult: BookAdult, BookChild: BookChild }, // 傳遞 BookAdult 作為參數
-                  }}
-                >
-                  
-                </Link>
+                  <div className={styles.PeopleSection}>
+                    {/* 大人 */}
+                    {bookCart.map((item) => (
+                      <h5
+                        key={item.id}
+                        className={styles.cartItem3}
+                        style={{ fontSize: '20px', paddingTop: '20px' }}
+                      >
+                        {item.InOutDate}
+                      </h5>
+                    ))}
+                    <ul>
+                      {bookCart.map((item) => (
+                        <li key={item.id} className={styles.cartItem}>
+                          <div className={styles.cartItemDetails}>
+                            <div className={styles.detailsCtl}>
+                              <span className={styles.itemName}>大人</span>
+                              <div className={styles.quantityCtl}>
+                                <button
+                                  className={styles.quantityButton}
+                                  onClick={() => handleDecreaseAdult(item)}
+                                >
+                                  -
+                                </button>
+                                <span className={styles.itemQuantity}>
+                                  {item.adult || 1}
+                                </span>
+                                <button
+                                  className={styles.quantityButton}
+                                  onClick={() => handleIncreaseAdult(item)}
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className={styles.cartItemActions}></div>
+                        </li>
+                      ))}
+                    </ul>
+                    {/* 小孩 */}
+                    <ul>
+                      {bookCart.map((item) => (
+                        <li key={item.id} className={styles.cartItem}>
+                          <div className={styles.cartItemDetails}>
+                            <div className={styles.detailsCtl}>
+                              <span className={styles.itemName}>小孩</span>
+                              <div className={styles.quantityCtl}>
+                                <button
+                                  className={styles.quantityButton}
+                                  onClick={() => handleDecreaseChild(item)}
+                                >
+                                  -
+                                </button>
+                                <span className={styles.itemQuantity}>
+                                  {item.child || 0}
+                                </span>
+                                <button
+                                  className={styles.quantityButton}
+                                  onClick={() => handleIncreaseChild(item)}
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className={styles.cartItemActions}></div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
+              <div className={styles.cartItems3}>
+                <div className={styles.cartItmDetails2}>
+                  {/* 顯示總金額 */}
+                  <div className={styles.totalAmount}>
+                    <h3>小計: NT${BookTotal}</h3>
+                    <Link
+                      href={{
+                        pathname: '/book/cart/',
+                        query: { BookAdult: BookAdult, BookChild: BookChild }, // 傳遞 BookAdult 作為參數
+                      }}
+                    ></Link>
 
-          {/* 當購物車不為空時顯示「前往付款」按鈕 */}
-          {bookCart.length > 0 && (
-            <div className={styles.checkoutButtonContainer}>
-              <Link href="/book/cart">
-                <button
-                  className={styles.checkoutButton}
-                  onClick={handleCheckout}
-                >
-                  前往付款
-                </button>
-              </Link>
+                    {/* 當購物車不為空時顯示「前往付款」按鈕 */}
+                    {bookCart.length > 0 && (
+                      <div className={styles.checkoutButtonContainer}>
+                        <Link href="/book/cart">
+                          <button
+                            className={styles.checkoutButton}
+                            onClick={handleCheckout}
+                          >
+                            前往付款
+                          </button>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>

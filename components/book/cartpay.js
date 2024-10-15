@@ -19,14 +19,75 @@ export default function CartPay({ setStep }) {
   const discountedTotal = Math.floor(finalTotal * discountAmount)
 
   // 導向ECPay
-  const goECPay = () => {
-    if (window.confirm('確認要導向至 ECPay 進行付款?')) {
-      // 先連到 Node 伺服器後，導向至 ECPay 付款頁面
-      window.location.href = `http://localhost:3005/ecpay/book?amount=${discountedTotal}`
+  const goECPay = async () => {
+    // 從 localStorage 中抓取購物車資料
+    const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || []
+
+    // 從 localStorage 中抓取會員資料
+    const storedUser = JSON.parse(localStorage.getItem('user')) || {}
+
+    // 確認是否有 user_id，若無則提示錯誤
+    if (!storedUser.user_id) {
+      alert('無法取得使用者資訊，請重新登入。')
+      return
+    }
+
+    // 過濾出需要的欄位
+    const filteredBookCart = storedBookCart.map((item) => ({
+      r_type_id: item.id || '未定義的 r_type_id',  // 如果是 undefined，打印出問題
+      username: item.username || '未定義的 username',
+      phone: item.phone || '未定義的 phone',
+      bookEmail: item.bookEmail || '未定義的 email',
+      quantity: item.quantity || 1,  // 預設值
+      price: item.price || 0,  // 預設值
+      total_price: item.totalAmount || (item.price * item.quantity) || '未定義的總價',  // 確保有值
+      adult: item.adult || 1,  // 預設值
+      children: item.child !== undefined ? item.child : 0,  // 避免 undefined
+      InOutDate: item.InOutDate || '未定義的日期',
+    }));
+    
+    console.log('filteredBookCart:', filteredBookCart); // 確認是否傳遞正確的資料
+    console.log('storedBookCart:', storedBookCart); // 檢查是否有問題
+
+    
+    console.log('User ID:', storedUser.user_id);
+    
+    // 將篩選過的資料傳送到後端儲存
+    try {
+      const response = await fetch(
+        'http://localhost:3005/book/api/saveBookOrder',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: storedUser.user_id,
+            bookCart: filteredBookCart,
+          }), // 傳送過濾後的資料
+        }
+      )
+
+      if (!response.ok) { // 檢查是否有錯誤狀態碼
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json()
+
+      if (result.success) {
+        // 資料成功儲存後，導向至 ECPay 的付款頁面
+        alert('訂單已成立，請前往付款!')
+        window.location.href = `http://localhost:3005/ecpay/book?amount=${discountedTotal}`
+      } else {
+        alert('資料儲存失敗，請重試。')
+      }
+    } catch (error) {
+      console.error('發送資料時發生錯誤:', error.message)
+      alert('發生錯誤，無法送出購物車。')
     }
   }
 
-  // 初始化購物車資料
+  // // 初始化購物車資料
   useEffect(() => {
     // 從 localStorage 中獲取購物車資料（假設已存在）
     const storedBookCart = JSON.parse(localStorage.getItem('bookCart')) || []
@@ -59,7 +120,6 @@ export default function CartPay({ setStep }) {
                     <p>姓名: {item.username}</p>
                     <p>手機號碼: {item.phone}</p>
                     <p>電子郵件: {item.bookEmail}</p>
-                    
                   </div>
                 </div>
               </div>
@@ -157,11 +217,11 @@ export default function CartPay({ setStep }) {
             {/* 顯示來自 cartItems 的摘要資料 */}
             {BookCartItems.map((item) => (
               <div key={item.id} className={styles.cartItem}>
-                <h5 style={{fontWeight:'bold',fontSize:'18px'}}>{item.name}</h5>
-                <h5>
-                  預訂日期
+                <h5 style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                  {item.name}
                 </h5>
-                <p style={{textAlign:'right'}}>{item.InOutDate}</p>
+                <h5>預訂日期</h5>
+                <p style={{ textAlign: 'right' }}>{item.InOutDate}</p>
                 <hr />
                 <h5>
                   大人 <p>{item.adult}人</p>
@@ -177,7 +237,7 @@ export default function CartPay({ setStep }) {
             ))}
             {/* 總金額計算 */}
             <h5>
-              總金額
+              小計
               <p>
                 NT$
                 {finalTotal}
