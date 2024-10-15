@@ -17,7 +17,7 @@ export default function EventList() {
   const [currentPage, setCurrentPage] = useState(0)
   const pageSize = 12
   const router = useRouter()
-  // const [sortAsc, setSortAsc] = useState(true) // 排序
+  const [sortAsc, setSortAsc] = useState(true) // 排序
 
   // 用來追蹤登入狀態
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -92,16 +92,16 @@ export default function EventList() {
   }
 
   // 排序活動開始日期
-  // const handleSort = () => {
-  //   const sortedEvents = [...filteredEvents].sort((a, b) => {
-  //     const dateA = new Date(a.start_date)
-  //     const dateB = new Date(b.start_date)
+  const handleSort = () => {
+    const sortedEvents = [...filteredEvents].sort((a, b) => {
+      const dateA = new Date(a.start_date)
+      const dateB = new Date(b.start_date)
 
-  //     return sortAsc ? dateA - dateB : dateB - dateA
-  //   })
-  //   setFilteredEvents(sortedEvents)
-  //   setSortAsc(!sortAsc) // 切換
-  // }
+      return sortAsc ? dateA - dateB : dateB - dateA
+    })
+    setFilteredEvents(sortedEvents)
+    setSortAsc(!sortAsc) // 切換
+  }
 
   return (
     <>
@@ -160,12 +160,13 @@ export default function EventList() {
 
       <section className="ehilight-topics2">
         {/* 排序按鈕 */}
-        {/* <Button
+        <Button
           label={sortAsc ? '日期排序｜遠到近' : '日期排序｜近到遠'}
           onClick={handleSort}
           className="sort-btn"
-        /> */}
+        />
         <h3 className="esection-title">活動報名中</h3>
+
         <div className="ehilight-cards">
           {/* render篩選卡片 */}
           {currentEvents.length > 0 ? (

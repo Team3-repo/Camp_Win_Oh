@@ -25,7 +25,7 @@ export default function EventCSuccess() {
       </section>
       <section className="ecsevent-list">
         <div className="ecsevent-card">
-          <h4 style={{ color: '#4c3a30' }}>活動資訊一覽</h4>
+          <h4 style={{ color: '#4c3a30' }}>－活動資訊一覽－</h4>
           <img
             src={createdEvent.imageUrl || 'https://via.placeholder.com/400x200'}
             alt="Event"
@@ -56,9 +56,12 @@ export default function EventCSuccess() {
           </div>
         </div>
       </section>
-      {/* <div className="entmorebtn">
-        <Button label="探索更多" onClick={() => alert('Button clicked!')} />
-      </div> */}
+      <div className="entmorebtn">
+        <Button
+          label="探索更多"
+          onClick={() => (window.location.href = '/events')}
+        />
+      </div>
       <Footer2 />
     </>
   )
