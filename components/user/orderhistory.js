@@ -98,71 +98,182 @@ const OrdersTableWithThemes = () => {
   }
 
   return (
-    <div className="order-page">
-      <div className="theme-buttons">
-        <button
-          onClick={() => handleThemeChange('訂單')}
-          className="btn btn-secondary"
-        >
-          <h3><GiCampingTent /></h3>
-        </button>
-        <button
-          onClick={() => handleThemeChange('活動')}
-          className="btn btn-primary"
-        >
-          <IoMdHappy />
-        </button>
+    <>
+      <div className="order-page">
+        <div className="theme-buttons">
+          <h4
+            onClick={() => handleThemeChange('訂單')}
+            style={{ cursor: 'pointer' }}
+          >
+            <GiCampingTent />
+            訂單資訊
+          </h4>
+          <h4
+            onClick={() => handleThemeChange('活動')}
+            style={{ cursor: 'pointer' }}
+          >
+            <IoMdHappy />
+            活動資訊
+          </h4>
+        </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <table className="event-table2">
+            <thead>
+              {selectedTheme === '訂單' ? (
+                <tr className="event-table-container">
+                  <th>房型方案ID</th>
+                  <th>預訂日期</th>
+                  <th>總金額</th>
+                  <th>訂單成立時間</th>
+                </tr>
+              ) : (
+                <tr className="event-table-container">
+                  <th>活動ID</th>
+                  <th>活動名稱</th>
+                  <th>開始日期</th>
+                  <th>結束日期</th>
+                  <th>是否為主辦人</th>
+                  <th>加入時間</th>
+                </tr>
+              )}
+            </thead>
+            <tbody>
+              {selectedTheme === '訂單'
+                ? bookOrderData.map((book, index) => (
+                    <tr key={index} className="event-table-container">
+                      <td>RT0{book.r_type_id}</td>
+                      <td>{book.InOutDate}</td>
+                      <td>{book.total_price}</td>
+                      <td style={{color:'#e74c3c',textAlign:'left'}}>{book.created_at}</td>
+                    </tr>
+                  ))
+                : eventOrderData.map((event, index) => (
+                    <tr key={index} className="event-table-container">
+                      <td>{event.event_id}</td>
+                      <td>{event.event_title}</td>
+                      <td>{event.start_date}</td>
+                      <td>{event.end_date}</td>
+                      <td>{event.is_organizer ? '主辦人' : ''}</td>
+                      <td>{event.join_date}</td>
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+        )}
       </div>
-      
+      <style jsx>{`
+        .event-table-container {
+          font-family: 'Poetsen One', 'Zen Maru Gothic', sans-serif;
 
-      <h3>{selectedTheme}資訊</h3>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <table>
-          <thead>
-            {selectedTheme === '訂單' ? (
-              <tr>
-                <th>房型ID</th>
-                <th>預訂日期</th>
-                <th>總金額</th>
-                <th>創建時間</th>
-              </tr>
-            ) : (
-              <tr>
-                <th>活動ID</th>
-                <th>活動名稱</th>
-                <th>開始日期</th>
-                <th>結束日期</th>
-                <th>是否為主辦人</th>
-                <th>加入時間</th>
-              </tr>
-            )}
-          </thead>
-          <tbody>
-            {selectedTheme === '訂單'
-              ? bookOrderData.map((book, index) => (
-                  <tr key={index}>
-                    <td>{book.r_type_id}</td>
-                    <td>{book.InOutDate}</td>
-                    <td>{book.total_price}</td>
-                    <td>{book.created_at}</td>
-                  </tr>
-                ))
-              : eventOrderData.map((event, index) => (
-                  <tr key={index}>
-                    <td>{event.event_id}</td>
-                    <td>{event.event_title}</td>
-                    <td>{event.start_date}</td>
-                    <td>{event.end_date}</td>
-                    <td>{event.is_organizer ? '主辦人' : ''}</td>
-                    <td>{event.join_date}</td>
-                  </tr>
-                ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+          margin: 40px auto;
+          padding: 30px;
+          max-width: 1000px;
+          border-radius: 4px;
+        }
+
+        /* 標題樣式 */
+        .event-table-container h2 {
+          text-align: center;
+          color: #4c3a30;
+          font-size: 32px;
+          margin-bottom: 30px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+        }
+
+        /* 表格樣式 */
+        .event-table2 {
+          width: 100%;
+          border-collapse: collapse;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        /* 表格頭部 */
+        .event-table2 th,
+        .event-table2 td {
+          padding: 10px 8px;
+          text-align: left;
+          border-bottom: 1px solid #eaeaea;
+          font-size: 14px;
+        }
+
+        .event-table2 th {
+          background-color: #98d293;
+          color: #fff;
+          font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        /* 表格行樣式 */
+        .event-table2 td {
+          background-color: #f9fbfd;
+          color: #4c3a30;
+          font-size: 12px;
+        }
+
+        .event-table2 tr:nth-child(even) {
+          background-color: #f4f6f8;
+        }
+
+        .event-table2 tr:hover {
+          background-color: #ecf5fc;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+        }
+
+        /* 特別的樣式：主辦人列 */
+        .event-table2 td:last-child {
+          text-align: center;
+          font-weight: bold;
+        }
+
+        /* 主辦人標示 */
+        .event-table2 td:nth-child(6) {
+          color: #e74c3c;
+          font-weight: bold;
+        }
+
+        .event-table2 td:nth-child(6):before {
+          content: '';
+        }
+
+        /* 無資料狀態 */
+        .event-table2 td[colspan='4'] {
+          text-align: center;
+          color: #7f8c8d;
+          font-size: 14px;
+          padding: 40px;
+        }
+
+        /* 載入中與未登入狀態 */
+        .loading-message,
+        .not-logged-message {
+          text-align: center;
+          font-size: 14px;
+          padding: 20px;
+          color: #2c3e50;
+          background-color: #ecf5fc;
+          border-radius: 8px;
+          margin: 30px 0;
+        }
+
+        .theme-buttons{
+          display:flex;
+          gap:20px;
+          margin-bottom:10px;
+        }
+
+        .theme-buttons h4:hover{
+          color: #4282b7;
+        }
+
+      `}</style>
+    </>
   )
 }
 

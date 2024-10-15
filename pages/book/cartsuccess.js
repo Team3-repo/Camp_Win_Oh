@@ -10,7 +10,7 @@ export default function CartSuccess() {
     // 10 秒後自動跳轉到首頁（或其他指定頁面）
     setTimeout(() => {
       window.location.href = '/' // 使用原生 window.location 進行跳轉
-    }, 10000)
+    }, 60000)
   }, [])
 
   return (
