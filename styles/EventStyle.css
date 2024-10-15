@@ -11,6 +11,7 @@
   color: #4c3a30;
   margin-top: 20px;
   margin-bottom: 10px;
+
 }
 
 .efilter-buttons {
@@ -796,7 +797,7 @@ option {
 }
 
 .ecsevent-list {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .ecsevent-list h2 {
