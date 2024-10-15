@@ -29,14 +29,6 @@ export default function BookNav() {
           </h4>
           <h4
             className={`${styles.breadcrumbItem} ${
-              activeItem === 'activity' ? styles.active : ''
-            }`}
-            onClick={() => handleItemClick('activity')}
-          >
-            活動
-          </h4>
-          <h4
-            className={`${styles.breadcrumbItem} ${
               activeItem === 'comment' ? styles.active : ''
             }`}
             onClick={() => handleItemClick('comment')}
