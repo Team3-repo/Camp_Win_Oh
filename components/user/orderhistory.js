@@ -125,6 +125,7 @@ const OrdersTableWithThemes = () => {
                     <th>房型方案ID</th>
                     <th>預訂日期</th>
                     <th>總金額</th>
+                    <th>付款狀態</th>
                     <th>訂單成立時間</th>
                   </tr>
                 </thead>
@@ -134,6 +135,7 @@ const OrdersTableWithThemes = () => {
                       <td>RT0{book.r_type_id}</td>
                       <td>{book.InOutDate}</td>
                       <td>{book.total_price}</td>
+                      <td>已付款</td>
                       <td style={{ color: '#e74c3c', textAlign: 'left' }}>
                         {book.created_at}
                       </td>
