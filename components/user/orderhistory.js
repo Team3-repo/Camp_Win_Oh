@@ -156,7 +156,7 @@ const OrdersTableWithThemes = () => {
                       <td>{event.start_date}</td>
                       <td>{event.end_date}</td>
                       <td>{event.is_organizer ? '主辦人' : ''}</td>
-                      <td>{event.join_date}</td>
+                      <td style={{textAlign:"left"}}>{event.join_date}</td>
                     </tr>
                   ))}
             </tbody>
