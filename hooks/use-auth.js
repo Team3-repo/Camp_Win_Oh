@@ -81,29 +81,29 @@ export const AuthProvider = ({ children }) => {
   // 檢查會員認証用
   // 每次重新到網站中，或重新整理，都會執行這個函式，用於向伺服器查詢取回原本登入會員的資料
   const handleCheckAuth = async () => {
-    const res = await checkAuth()
+    // const res = await checkAuth()
 
-    // 伺服器api成功的回應為 { status:'success', data:{ user } }
-    if (res.data.status === 'success') {
-      // 只需要initUserData的定義屬性值
-      const dbUser = res.data.data.user
-      const userData = { ...initUserData }
+    // // 伺服器api成功的回應為 { status:'success', data:{ user } }
+    // if (res.data.status === 'success') {
+    //   // 只需要initUserData的定義屬性值
+    //   const dbUser = res.data.data.user
+    //   const userData = { ...initUserData }
 
-      for (const key in userData) {
-        if (Object.hasOwn(dbUser, key)) {
-          userData[key] = dbUser[key] || ''
-        }
-      }
-      // 設到全域狀態中
-      setAuth({ isAuth: true, userData })
-    } else {
-      console.warn(res.data)
+    //   for (const key in userData) {
+    //     if (Object.hasOwn(dbUser, key)) {
+    //       userData[key] = dbUser[key] || ''
+    //     }
+    //   }
+    //   // 設到全域狀態中
+    //   setAuth({ isAuth: true, userData })
+    // } else {
+    //   console.warn(res.data)
 
-      // 在這裡實作隱私頁面路由的跳轉
-      if (protectedRoutes.includes(router.pathname)) {
-        router.push(loginRoute)
-      }
-    }
+    //   // 在這裡實作隱私頁面路由的跳轉
+    //   if (protectedRoutes.includes(router.pathname)) {
+    //     router.push(loginRoute)
+    //   }
+    // }
   }
 
   // didMount(初次渲染)後，向伺服器要求檢查會員是否登入中
