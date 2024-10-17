@@ -37,7 +37,7 @@ const Security = () => {
     // 發送更新請求到後端
     try {
       const response = await fetch(
-        'https://d6f368168f4d515f878d005e99cc14f5.serveo.net/api/userPass/update/password',
+        'http://localhost:3005/api/userPass/update/password',
         {
           method: 'POST',
           headers: {
