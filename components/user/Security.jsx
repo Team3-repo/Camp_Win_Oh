@@ -1,63 +1,66 @@
-import React, { useState } from 'react';
-import FormField from '@/components/form/FormField';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react'
+import FormField from '@/components/form/FormField'
+import { ToastContainer, toast } from 'react-toastify'
 
 const Security = () => {
-  const initialData = JSON.parse(localStorage.getItem('user'));
+  const initialData = JSON.parse(localStorage.getItem('user'))
 
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // 確認新密碼是否一致
     if (newPassword !== confirmPassword) {
-      toast.error('新密碼與確認新密碼不一致！'); // 使用 toast 來顯示錯誤訊息
-      return;
+      toast.error('新密碼與確認新密碼不一致！') // 使用 toast 來顯示錯誤訊息
+      return
     }
 
     // 驗證當前密碼
     if (currentPassword !== initialData.password) {
-      toast.error('當前密碼不正確！'); // 當前密碼錯誤提示
-      return;
+      toast.error('當前密碼不正確！') // 當前密碼錯誤提示
+      return
     }
 
     // 更新 localStorage 中的密碼
     const updatedUser = {
       ...initialData,
       password: newPassword, // 更新密碼
-    };
-    localStorage.setItem('user', JSON.stringify(updatedUser));
+    }
+    localStorage.setItem('user', JSON.stringify(updatedUser))
 
     // 發送更新請求到後端
     try {
-      const response = await fetch('http://localhost:3005/api/userPass/update/password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedUser),
-      });
+      const response = await fetch(
+        'https://d6f368168f4d515f878d005e99cc14f5.serveo.net/api/userPass/update/password',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedUser),
+        }
+      )
 
       if (!response.ok) {
-        throw new Error('更新用戶資料失敗');
+        throw new Error('更新用戶資料失敗')
       }
 
-      toast.success('密碼已更新，並成功上傳用戶資料！'); // 使用 toast 來顯示成功訊息
+      toast.success('密碼已更新，並成功上傳用戶資料！') // 使用 toast 來顯示成功訊息
     } catch (error) {
-      toast.error(`發生錯誤：${error.message}`); // 錯誤提示
+      toast.error(`發生錯誤：${error.message}`) // 錯誤提示
     }
 
     // 清空輸入框
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmPassword('');
-  };
+    setCurrentPassword('')
+    setNewPassword('')
+    setConfirmPassword('')
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -130,8 +133,9 @@ const Security = () => {
           color: #fff579;
         }
       `}</style>
+      <ToastContainer />
     </form>
-  );
+  )
 }
 
-export default Security;
+export default Security
